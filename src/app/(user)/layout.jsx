@@ -1,3 +1,3 @@
 export default function UserLayout({ children }) {
-  return <div className="">{children}</div>;
+  return <div>{children}</div>;
 }
