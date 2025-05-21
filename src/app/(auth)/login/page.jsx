@@ -5,7 +5,7 @@ import React from "react";
 function LoginPage() {
   return (
     <>
-      <section className=" h-screen bg-[url('/backgroundLogin.jpg')]  flex justify-center items-center bg-center bg-no-repeat object-cover">
+      <section className=" h-screen bg-[url('/backgroundLogin.jpg')] bg-primary flex justify-center items-center bg-center bg-no-repeat object-cover">
         <article>
           <h1>
             Ripple<span>Eco</span>
