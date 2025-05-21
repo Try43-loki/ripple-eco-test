@@ -28,7 +28,7 @@ function LoginPage() {
           <Link href="#" className="underline text-white text-md">
             Forgot your password?
           </Link>
-          <Button className="w-full text-primary text-center">Login</Button>
+          <Button className="w-full text text-center">Login</Button>
         </form>
       </section>
     </>
