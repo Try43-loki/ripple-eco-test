@@ -28,7 +28,7 @@ function OTPVerifyCopmponent() {
             </p>
           </article>
 
-          <section className="flex justify-center items-center flex-col gap-2 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
+          <section className="flex justify-center items-center flex-col gap-2 w-[400px] lg:w-[550px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
               action=""
@@ -39,19 +39,19 @@ function OTPVerifyCopmponent() {
                 {/* step */}
                 <div className="flex justify-between items-center gap-2 grow">
                   <span className="flex w-full justify-start items-start flex-col gap-[2px]">
-                    <p className="text-[12px] text-white font-light">
+                    <p className="text-sm text-white font-light">
                       1. Verify email
                     </p>
                     <span className="h-2 w-full rounded-2xl bg-primary"></span>
                   </span>
                   <span className="flex w-full justify-start items-start flex-col gap-[2px]">
-                    <p className="text-[12px] text-white font-light">
+                    <p className="text-sm text-white font-light">
                       2. Set Password
                     </p>
                     <span className="h-2 w-full rounded-2xl bg-primary"></span>
                   </span>
                   <span className="flex w-full justify-start items-start flex-col gap-[2px]">
-                    <p className="text-[12px] text-white font-light">
+                    <p className="text-sm text-white font-light">
                       3. Additional Info
                     </p>
                     <span className="h-2 w-full rounded-2xl bg-primary"></span>
@@ -67,18 +67,18 @@ function OTPVerifyCopmponent() {
                   >
                     Email
                   </Label>
-                  <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
-                    <Mail size={14} />|
+                  <span className="flex justify-center items-center gap-1 top-[40px] left-2.5 absolute text-gray-500">
+                    <Mail size={18} />|
                   </span>
-                  <Input
-                    className="text-gray-500 pl-9 text-[14px]  placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                  <input
+                    className="text-gray-500 pl-10 h-12 text-xl placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     required
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4">
+                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4 h-12">
                   Login
                 </Button>
                 <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
@@ -90,7 +90,7 @@ function OTPVerifyCopmponent() {
             </form>
             {/* login with google */}
 
-            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md  rounded-2xl p-4">
+            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md  rounded-2xl p-4 h-12 ">
               <img
                 src="/icons/flat-color-icons_google.png"
                 className="h-5 w-5"
