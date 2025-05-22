@@ -1,5 +1,5 @@
 import React from "react";
-import TagComponent from "./TagComponent";
+import TagComponent from "../../../../components/TagComponent";
 import Image from "next/image";
 
 const DiscussionCard = ({ image }) => {

@@ -1,10 +1,9 @@
-import SearchBarComponent from "./_component/SearchBarComponent";
 import DiscussionButton from "./_component/DiscussionButton";
 import HeroSection from "@/components/HeroSection";
 import { SearchCheck } from "lucide-react";
-import { MessageCircleQuestion } from "lucide-react";
 import PostComponent from "./_component/PostComponent";
 import DiscussionCard from "./_component/DiscussionCard";
+import SearchBarComponent from "@/components/SearchBarComponent";
 
 const DiscussionPage = () => {
   return (
@@ -27,9 +26,6 @@ const DiscussionPage = () => {
           <div className="w-full border-b py-2 border-stroke"></div>
           <DiscussionCard image={"tree-planting.png"} />
           <DiscussionCard />
-          <DiscussionCard image={"tree-planting.png"} />
-          <DiscussionCard />
-          <DiscussionCard image={"tree-planting.png"} />
         </div>
         {/* Centered Post Components */}
         <div className="flex justify-center mt-6 ml-7 h-fit">

@@ -1,6 +1,6 @@
 import { MessageCircleQuestion } from "lucide-react";
 import React from "react";
-import TagComponent from "./TagComponent";
+import TagComponent from "../../../../components/TagComponent";
 
 const PostComponent = () => {
   return (
