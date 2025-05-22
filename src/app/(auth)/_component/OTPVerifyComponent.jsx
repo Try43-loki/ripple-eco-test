@@ -2,17 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
+import { ChevronLeftCircleIcon, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-function LoginPage() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  // show password
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
+function OTPVerifyCopmponent() {
   return (
     <>
       {/* Container */}
@@ -25,25 +19,46 @@ function LoginPage() {
               Ripple<span className="text-finished">Eco</span>
             </h1>
             <h4 className="text-2xl lg:text-3xl  my-4 text-white font-medium">
-              Welcome to <br />
-              Ripple <span className="text-finished">Eco</span>
+              Almost there — keep <br />
+              the
+              <span className="text-red-custome"> ripple </span> going.
             </h4>
             <p className="w-full lg:w-full mt-2  lg:text-lg font-light text-light-gray">
-              When communities unite, change becomes possible — for people and
-              the planet. Awareness is the seed — collective action is the
-              growth.
+              Your impact starts here. Every ripple begins with one drop.
             </p>
           </article>
 
-          <section className="flex justify-center items-center flex-col gap-4 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
+          <section className="flex justify-center items-center flex-col gap-2 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
               action=""
-              className="flex justify-center items-center flex-col  w-full  "
+              className="flex justify-center items-start flex-col gap-4  w-full  "
             >
-              <h5 className="text-3xl text-white">Login</h5>
-
-              <section className="flex justify-between items-center flex-col gap-2 w-full">
+              <div className="flex justify-between items-center w-full gap-2">
+                <ChevronLeftCircleIcon size={18} color="white" />
+                {/* step */}
+                <div className="flex justify-between items-center gap-2 grow">
+                  <span className="flex w-full justify-start items-start flex-col gap-[2px]">
+                    <p className="text-[12px] text-white font-light">
+                      1. Verify email
+                    </p>
+                    <span className="h-2 w-full rounded-2xl bg-primary"></span>
+                  </span>
+                  <span className="flex w-full justify-start items-start flex-col gap-[2px]">
+                    <p className="text-[12px] text-white font-light">
+                      2. Set Password
+                    </p>
+                    <span className="h-2 w-full rounded-2xl bg-primary"></span>
+                  </span>
+                  <span className="flex w-full justify-start items-start flex-col gap-[2px]">
+                    <p className="text-[12px] text-white font-light">
+                      3. Additional Info
+                    </p>
+                    <span className="h-2 w-full rounded-2xl bg-primary"></span>
+                  </span>
+                </div>
+              </div>
+              <section className="flex justify-between items-center flex-col gap-3 w-full">
                 {/* input email */}
                 <div className="grid w-full items-center gap-1.5 relative ">
                   <Label
@@ -63,38 +78,6 @@ function LoginPage() {
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                {/* input password */}
-                <div className="grid w-full items-center gap-1.5 relative ">
-                  <Label
-                    htmlFor="password"
-                    className="text-white text-[14px] font-light"
-                  >
-                    Password
-                  </Label>
-                  <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
-                    <Lock size={14} />|
-                  </span>
-                  <span
-                    onClick={handleShowPassword}
-                    className="flex justify-center items-center text-[14px] gap-1 top-[37px] right-2.5 absolute text-gray-500 cursor-pointer"
-                  >
-                    {showPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
-                  </span>
-                  <Input
-                    required
-                    className="text-gray-500 pl-9 text-[14px]  placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    placeholder="123"
-                  />
-                </div>
-
-                <Link
-                  href="#"
-                  className="underline text-end w-full my-2 font-light  text-white text-[12px] "
-                >
-                  Forgot your password?
-                </Link>
                 <Button className="w-full text text-center cursor-pointer rounded-2xl p-4">
                   Login
                 </Button>
@@ -128,4 +111,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default OTPVerifyCopmponent;

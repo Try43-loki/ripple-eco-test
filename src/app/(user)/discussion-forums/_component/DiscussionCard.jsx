@@ -1,0 +1,54 @@
+import React from "react";
+import TagComponent from "../../../../components/TagComponent";
+import Image from "next/image";
+
+const DiscussionCard = ({ image }) => {
+  return (
+    <article className="w-full mt-8">
+      <div className="flex flex-col items-start gap-4">
+        <div className="flex gap-4">
+          {/* Avatar */}
+          <div className="w-12 h-12 rounded-full bg-gray-300"></div>
+
+          {/* User Info */}
+          <div className="flex flex-col justify-start">
+            <h2 className="text-sm md:text-base lg:text-lg font-semibold text-title">
+              Sochetra
+            </h2>
+            <p className="text-xs md:text-sm lg:text-base text-[#848E9B]">
+              8:00 PM
+            </p>
+          </div>
+        </div>
+        {/* Card Details */}
+        <div className="w-full">
+          <h2 className="text-base md:text-lg lg:text-xl font-semibold text-title">
+            Have you participated in river-cleanup efforts or citizen-science
+            water testing?
+          </h2>
+          <p className="text-xs md:text-sm lg:text-base text-[#848E9B] mt-2">
+            These hands-on initiatives empower locals to remove debris, monitor
+            pollution levels, and contribute valuable data to guide river
+            conservation.
+          </p>
+
+          {/* Image */}
+          {image && (
+            <img
+              src={image}
+              alt="discussion visual"
+              className="w-full mt-4 rounded-xl object-cover"
+            />
+          )}
+          {/* <Image src={`${image}`} width={100} height={100}></Image> */}
+          {/* Tag */}
+          <div className="mt-4">
+            <TagComponent />
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default DiscussionCard;
