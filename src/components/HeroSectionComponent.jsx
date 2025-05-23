@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
+import SearchBarComponent from "./SearchBarComponent";
 
-const HeroSection = ({ text, description }) => {
+const HeroSectionComponent = ({ text, description, showSearchBar }) => {
   return (
     <section className="relative flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center">
       <Image
@@ -10,16 +11,21 @@ const HeroSection = ({ text, description }) => {
         fill
         className="object-cover"
       />
-      <div className="absolute flex flex-col items-center text-white px-4 text-center">
+      <div className="absolute w-full max-w-5xl px-4 md:px-20 text-white text-center flex flex-col items-center">
         <h2 className="font-bold text-lg md:text-2xl lg:text-4xl">
           {text || "Title"}
         </h2>
         <p className="text-sm md:text-base lg:text-xl max-w-xl">
           {description || "Description"}
         </p>
+        {showSearchBar && (
+          <div className="w-full">
+            <SearchBarComponent />
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-export default HeroSection;
+export default HeroSectionComponent;

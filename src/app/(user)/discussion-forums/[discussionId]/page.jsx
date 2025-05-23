@@ -1,6 +1,4 @@
-import HeroSection from "@/components/HeroSection";
 import React from "react";
-import { ChevronRight } from "lucide-react";
 import DiscussionCard from "../_component/DiscussionCardComponent";
 import {
   Breadcrumb,
@@ -10,12 +8,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import CommentSectionComponent from "./_component/CommentSectionComponent";
+import HeroSectionComponent from "@/components/HeroSectionComponent";
 
 const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
   const heroSectionText = {
     title: "DISCUSSION FORUMS",
     description:
       "Share ideas, explore solutions, and connect with others driving environmental change.",
+    search: false,
   };
   const img = "/sub-banner.jpg";
   const { discussionId } = await ParamsPromise;
@@ -24,9 +24,10 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
       {/* <div>DiscussionPageDetails id : {discussionId}</div> */}
 
       {/* Hero Section */}
-      <HeroSection
+      <HeroSectionComponent
         text={heroSectionText.title}
         description={heroSectionText.description}
+        showSearchBar={heroSectionText.search}
       />
       {/* Breadcamp */}
       <div className="w-full my-6 px-6 md:px-20 lg:px-[150px]">

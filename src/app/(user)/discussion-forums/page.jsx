@@ -1,14 +1,15 @@
-import HeroSection from "@/components/HeroSection";
 import PostComponent from "./_component/PostComponent";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import Link from "next/link";
 import DiscussionButtonComponent from "./_component/DiscussionButtonComponent";
 import DiscussionCardComponent from "./_component/DiscussionCardComponent";
+import HeroSectionComponent from "@/components/HeroSectionComponent";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
   description:
     "Share ideas, explore solutions, and connect with others driving environmental change.",
+  search: false,
 };
 
 const buttonText = "Create Discussion";
@@ -17,9 +18,10 @@ const DiscussionPage = () => {
   return (
     <main className="w-full h-full flex flex-col">
       {/* Hero Section */}
-      <HeroSection
+      <HeroSectionComponent
         text={heroSectionText.title}
         description={heroSectionText.description}
+        showSearchBar={heroSectionText.search}
       />
       {/* Search */}
       <article className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-6 md:px-20 lg:px-[150px] my-6 w-full">
