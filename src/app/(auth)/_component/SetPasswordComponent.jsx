@@ -26,7 +26,7 @@ function SetPasswordComponent() {
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
         <article className="w-1/4 lg:w-[300px]">
           <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
-            Ripple<span className="text-finished">Eco</span>
+            Ripple<span className="text-meduim-green">Eco</span>
           </h1>
           <h4 className="text-2xl lg:text-3xl my-4 text-white font-medium">
             Join us. Together for a greener future.
@@ -38,7 +38,7 @@ function SetPasswordComponent() {
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
           <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon size={20} color="white" />
+            <ChevronLeftCircleIcon size={18} color="white" />
             <div className="flex gap-2 grow">
               {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
                 (step, index) => (
@@ -51,7 +51,7 @@ function SetPasswordComponent() {
                     </p>
                     <span
                       className={`h-2 w-full rounded-2xl ${
-                        index < 2 ? "bg-primary" : "bg-light-gray"
+                        index < 2 ? "bg-green" : "bg-light-gray"
                       }`}
                     ></span>
                   </span>
@@ -77,7 +77,7 @@ function SetPasswordComponent() {
                 <div className="relative">
                   <input
                     required
-                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="123"
@@ -105,7 +105,7 @@ function SetPasswordComponent() {
                 <div className="relative">
                   <input
                     required
-                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type={showCfPassword ? "text" : "password"}
                     id="cfpassword"
                     placeholder="123"
@@ -165,7 +165,7 @@ function SetPasswordComponent() {
               </ul>
             </article>
             {/* Button submit */}
-            <Button className="w-full bg-green rounded-xl mt-4 h-11  text-md">
+            <Button className="w-full bg-green hover:bg-green rounded-xl mt-4 h-11  text-md">
               Next
             </Button>
           </form>
