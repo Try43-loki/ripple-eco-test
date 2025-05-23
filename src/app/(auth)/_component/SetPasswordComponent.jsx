@@ -7,9 +7,13 @@ import { useState } from "react";
 
 function SetPasswordComponent() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showCfPassword, setShowCfPassword] = useState(false);
   // show password
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+  const handleShowCfPassword = () => {
+    setShowCfPassword(!showPassword);
   };
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
@@ -56,8 +60,6 @@ function SetPasswordComponent() {
             action=""
             className="flex justify-center items-center flex-col  w-full  "
           >
-            <h5 className="text-3xl text-white">Login</h5>
-
             <section className="flex justify-between items-center flex-col gap-2 w-full">
               {/* input password */}
               <div className="grid w-full items-center gap-1.5 relative ">
@@ -67,37 +69,47 @@ function SetPasswordComponent() {
                 >
                   Password
                 </Label>
-                <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
+                <span className="flex justify-center items-center text-[14px] gap-1 top-[38px] left-2.5 absolute text-gray-500">
                   <Lock size={14} />|
                 </span>
                 <span
                   onClick={handleShowPassword}
-                  className="flex justify-center items-center text-[14px] gap-1 top-[37px] right-2.5 absolute text-gray-500 cursor-pointer"
+                  className="flex justify-center items-center text-[14px] gap-1 top-[42px] right-2.5 absolute text-gray-500 cursor-pointer"
                 >
                   {showPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
                 </span>
                 <input
                   required
-                  className="text-gray-500 pl-9 text-[14px]   placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                  className="text-gray-500 pl-9 text-[14px] h-11   placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="123"
                 />
               </div>
-
-              <Link
-                href="#"
-                className="underline text-end w-full my-2 font-light  text-white text-[12px] "
-              >
-                Forgot your password?
-              </Link>
-              <Button className="w-full text text-center cursor-pointer rounded-2xl p-4">
-                Login
-              </Button>
-              <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
-                <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
-                <span className="text-sm text-white">OR</span>
-                <span className="w-full h-[1.5px] grow bg-light-gray opacity-50  rounded-3xl"></span>
+              {/* Confirm password */}
+              <div className="grid w-full items-center gap-1.5 relative ">
+                <Label
+                  htmlFor="cfpassword"
+                  className="text-white text-[14px] font-light"
+                >
+                  Confirm Password
+                </Label>
+                <span className="flex justify-center items-center text-[14px] gap-1 top-[38px] left-2.5 absolute text-gray-500">
+                  <Lock size={14} />|
+                </span>
+                <span
+                  onClick={handleShowCfPassword}
+                  className="flex justify-center items-center text-[14px] gap-1 top-[42px] right-2.5 absolute text-gray-500 cursor-pointer"
+                >
+                  {showCfPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
+                </span>
+                <input
+                  required
+                  className="text-gray-500 pl-9 text-[14px] h-11   placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                  type={showCfPassword ? "text" : "password"}
+                  id="cfpassword"
+                  placeholder="123"
+                />
               </div>
             </section>
           </form>
