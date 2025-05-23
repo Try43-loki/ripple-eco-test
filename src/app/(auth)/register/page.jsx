@@ -1,12 +1,11 @@
 import React from "react";
-import RegisterCopmponent from "../_component/RegisterComponent";
 import OTPVerifyCopmponent from "../_component/OTPVerifyComponent";
-import UserNavbarComponent from "@/components/NavbarComponent";
+import SetPasswordComponent from "../_component/SetPasswordComponent";
 
 function RegisterPage() {
   return (
     <div className="bg-black">
-      <OTPVerifyCopmponent />
+      <SetPasswordComponent />
     </div>
   );
 }

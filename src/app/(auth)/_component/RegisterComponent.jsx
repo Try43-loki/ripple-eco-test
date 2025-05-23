@@ -26,15 +26,16 @@ function RegisterCopmponent() {
             </p>
           </article>
 
-          <section className="flex justify-center items-center flex-col gap-2 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
+          <section className="flex justify-center items-center flex-col gap-3 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
               action=""
-              className="flex justify-center items-center flex-col gap-4  w-full  "
+              className="flex justify-center items-center flex-col gap-3  w-full  "
             >
-              <h5 className="text-3xl text-white">Sign up</h5>
-
-              <section className="flex justify-between items-center flex-col gap-3 w-full">
+              <h1 className="text-3xl font-semibold text-white text-center">
+                Sing up
+              </h1>
+              <section className="flex justify-between items-center flex-col gap-5 w-full">
                 {/* input email */}
                 <div className="grid w-full items-center gap-1.5 relative ">
                   <Label
@@ -43,30 +44,30 @@ function RegisterCopmponent() {
                   >
                     Email
                   </Label>
-                  <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
-                    <Mail size={14} />|
+                  <span className="flex justify-center items-center gap-1.5 top-[38px] left-3 absolute text-strong-gray">
+                    <Mail size={18} className="text-strong-gray" />|
                   </span>
-                  <Input
-                    className="text-gray-500 pl-9 text-[14px]  placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                  <input
+                    className="text-strong-gray pl-12 h-11 text-lg font-normal placeholder:text-200-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     required
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4">
+                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg">
                   Login
                 </Button>
-                <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
-                  <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
-                  <span className="text-sm text-white">OR</span>
-                  <span className="w-full h-[1.5px] grow bg-light-gray opacity-50  rounded-3xl"></span>
-                </div>
               </section>
             </form>
+            <div className="flex justify-center items-center gap-x-2 w-full px-2 ">
+              <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
+              <span className="text-sm text-white">OR</span>
+              <span className="w-full h-[1.5px] grow bg-light-gray opacity-50  rounded-3xl"></span>
+            </div>
             {/* login with google */}
 
-            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md  rounded-2xl p-4">
+            <Button className="w-full  text-center cursor-pointer text-lg hover:bg-light-gray text-title bg-input backdrop-blur-md  rounded-2xl p-4 h-11 ">
               <img
                 src="/icons/flat-color-icons_google.png"
                 className="h-5 w-5"
@@ -74,9 +75,9 @@ function RegisterCopmponent() {
               />
               Login with Google
             </Button>
-            <p className="text-[12px] text-light-gray font-light">
+            <p className="text-sm text-light-gray font-light">
               Are you new here?{" "}
-              <Link className="underline text-[12px] font-medium" href="#">
+              <Link className="underline text-sm font-medium" href="#">
                 Sign up
               </Link>{" "}
             </p>
