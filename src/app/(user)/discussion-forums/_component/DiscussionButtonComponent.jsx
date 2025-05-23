@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 
-const DiscussionButton = ({ text }) => {
+const DiscussionButtonComponent = ({ text }) => {
   return (
     <Button className="bg-primary text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5">
       {text || "Button"}
@@ -10,4 +10,4 @@ const DiscussionButton = ({ text }) => {
   );
 };
 
-export default DiscussionButton;
+export default DiscussionButtonComponent;

@@ -1,14 +1,13 @@
 import React from "react";
 import TagComponent from "../../../../components/TagComponent";
-import Image from "next/image";
 
-const DiscussionCard = ({ image }) => {
+const DiscussionCardComponent = ({ image }) => {
   return (
     <article className="w-full mt-8">
       <div className="flex flex-col items-start gap-4">
         <div className="flex gap-4">
           {/* Avatar */}
-          <div className="w-12 h-12 rounded-full bg-gray-300"></div>
+          <div className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full bg-gray-300"></div>
 
           {/* User Info */}
           <div className="flex flex-col justify-start">
@@ -42,7 +41,7 @@ const DiscussionCard = ({ image }) => {
           )}
           {/* <Image src={`${image}`} width={100} height={100}></Image> */}
           {/* Tag */}
-          <div className="mt-4">
+          <div className="flex justify-between mt-4">
             <TagComponent />
           </div>
         </div>
@@ -51,4 +50,4 @@ const DiscussionCard = ({ image }) => {
   );
 };
 
-export default DiscussionCard;
+export default DiscussionCardComponent;
