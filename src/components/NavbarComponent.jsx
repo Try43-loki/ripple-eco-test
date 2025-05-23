@@ -16,7 +16,7 @@ import {
   Wind,
 } from "lucide-react";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
-const UserNavbarComponent = () => {
+const NavBarComponent = () => {
   return (
     <>
       <div className="px-[180px] pt-[28px]">
@@ -110,4 +110,4 @@ const UserNavbarComponent = () => {
   );
 };
 
-export default UserNavbarComponent;
+export default NavBarComponent;
