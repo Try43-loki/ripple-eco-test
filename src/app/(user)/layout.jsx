@@ -1,4 +1,12 @@
+import NavBarComponent from "@/components/NavbarComponent";
 import "../globals.css";
+import FooterComponent from "@/components/FooterComponent";
 export default function UserLayout({ children }) {
-  return <div>{children}</div>;
+  return (
+    <main>
+      <NavBarComponent />
+      {children}
+      <FooterComponent />
+    </main>
+  );
 }
