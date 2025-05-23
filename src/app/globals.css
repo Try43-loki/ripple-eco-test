@@ -74,6 +74,7 @@
   --color-strong-orange-color: var(--strong-orange-color);
   --color-light-orange-color: var(--light-orange-color);
   --color-strong-red-color: var(--strong-red-color);
+  --color-input-color: var(--bg-input-color);
 }
 
 :root {
@@ -143,6 +144,7 @@
   --strong-orange-color: #ff6d10;
   --light-orange-color: #ffac33;
   --strong-red-color: #fb0530;
+  --bg-input-color: #f2f2f2;
 }
 
 .dark {

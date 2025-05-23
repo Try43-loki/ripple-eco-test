@@ -34,7 +34,7 @@ const NavBarComponent = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={"bg-[#e3dfdf00]"}>
+                  <NavigationMenuTrigger className="bg-[#e3dfdf00] text-md  ">
                     Community
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -61,11 +61,11 @@ const NavBarComponent = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={"bg-[#e3dfdf00]"}>
+                  <NavigationMenuTrigger className="hover:underline text-black bg-none text-md ">
                     Environment Monitor
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[180px] px-2 py-2 space-y-2 text-[#697D74]">
+                    <div className="w-[180px] px-2 py-2 space-y-2 text-description">
                       <NavigationMenuLink
                         href=""
                         className="w-full flex flex-row items-center gap-x-2"
