@@ -1,4 +1,6 @@
 "use client";
+import { DollarSign,Mail } from 'lucide-react';
+import UserNavbarComponent from "@/components/NavbarComponent";
 import React from "react";
 
 function HomePage() {
@@ -15,6 +17,10 @@ function HomePage() {
     <main className="w-full h-[2000px] bg-black">
       {/* Hero Section */}
       <section className="relative">
+        <div className="top-0 absolute w-full">
+          <UserNavbarComponent />
+        </div>
+
         <img src="/banner.jpg" alt="banner" />
         <h3 className="text-[#3BAA2C] absolute top-80 left-49 text-2xl">
           NATURAL ENVIRONMENT
@@ -87,36 +93,94 @@ function HomePage() {
 
               <div className="flex gap-25 pt-2">
                 <p className="text-description text-xl font-light ">
-                Main pollutant:{" "}
-                <span className="text-[#4A5057] font-medium">PM2.5 </span>
-              </p>
-              <p className="text-[#4A5057] font-medium text-xl">14.5 µg/m³</p>
+                  Main pollutant:{" "}
+                  <span className="text-[#4A5057] font-medium">PM2.5 </span>
+                </p>
+                <p className="text-[#4A5057] font-medium text-xl">14.5 µg/m³</p>
               </div>
-              
+
               <div className="flex gap-16">
-              <div className="flex gap-2 pt-3">
-                <img src="air.png" alt="air" width={30}/>
-                <p className="text-description text-xl ">5.5 km/h</p>
-              </div>
+                <div className="flex gap-2 pt-3">
+                  <img src="air.png" alt="air" width={30} />
+                  <p className="text-description text-xl ">5.5 km/h</p>
+                </div>
 
-             <div className="flex gap-2 pt-3">
-                <img src="cloud.png" alt="cloud" className="h-5 w-5 items-center mt-1"/>
-                <p className="text-description text-xl ">33o</p>
-              </div>
+                <div className="flex gap-2 pt-3">
+                  <img
+                    src="cloud.png"
+                    alt="cloud"
+                    className="h-5 w-5 items-center mt-1"
+                  />
+                  <p className="text-description text-xl ">33o</p>
+                </div>
 
-              <div className="flex gap-2 pt-3">
-                <img src="weather.png" alt="weather" width={30}/>
-                <p className="text-description text-xl ">62 %</p>
+                <div className="flex gap-2 pt-3">
+                  <img src="weather.png" alt="weather" width={30} />
+                  <p className="text-description text-xl ">62 %</p>
+                </div>
               </div>
-
-             </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Eco Event Section */}
-      <section></section>
+      <section className="w-full bg-[#F6F6EE] py-20 px-49">
+        <p className="items-center justify-center flex text-xl text-[#3BAA2C] pb-2">
+          ECO EVENT
+        </p>
+        <h2 className="text-title text-3xl/10 font-bold text-center">
+          Join Our EcoEvent{" "}
+          <span className="block">
+            Share, Connect, and Act for a Greener Future
+          </span>
+        </h2>
+
+        <div className="overflow-x-auto scroll-smooth snap-x snap-mandatory px-6 [&::-webkit-scrollbar]:hidden scrollbar-none">
+          <div className="flex gap-8 pt-6 w-max">
+            {Array(5)
+              .fill()
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className="w-[310px] h-full pb-6 bg-white rounded-2xl snap-start shrink-0"
+                >
+                  <img
+                    src="eventImage.png"
+                    alt="Event Image"
+                    className="rounded-t-2xl "
+                    width={310}
+                    height={110}
+                  />
+                  <div className="px-5">
+                  <p className="text-ongoing text-sm pt-2">. Ongoing</p>
+                  <p className="text-status-volunteer text-md">Mon, 12 May at 8 AM</p>
+                  <h3 className="text-title text-2xl/7 font-bold">Green Oasis going <span className="block">Miyawaki</span> </h3>
+                  <p className="text-cancel text-sm pt-1">Phnom Penh, Cambodia</p>
+                  <p className="text-description text-sm pt-1">100 going</p>
+
+                  <div className="pt-4 flex gap-2">
+                    <button className='py-2 px-10 bg-light-gray rounded-md flex gap-2'>
+                      <img src="tick-circle.png" alt="tick-circle" className='fill-current h-5 pt-1'/>
+                      <p className='text-md text-title font-bold'>Going</p>
+                    </button>
+
+                    <button className='py-2 px-4 bg-light-gray rounded-md'>
+                      <DollarSign />
+                    </button>
+
+                    <button className='py-2 px-4 bg-light-gray rounded-md'>
+                      <Mail />
+                    </button>
+                        
+
+                  </div>
+                </div>
+              </div>
+              ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
