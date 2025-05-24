@@ -8,6 +8,8 @@ import {
   EyeClosed,
   Lock,
 } from "lucide-react";
+import { DatePickerComponent } from "./DatePickerComponent";
+import { SelectGenderComponent } from "./SelectGenderComponent";
 
 function AdditonalInfoComponent() {
   return (
@@ -51,7 +53,7 @@ function AdditonalInfoComponent() {
           {/* Form */}
           <form
             action=""
-            className="flex justify-center items-center flex-col  w-full  "
+            className="flex justify-center items-center flex-col gap-y-4  w-full  "
           >
             <section className="flex justify-center items-center w-full flex-col gap-y-3">
               <div className="w-full flex justify-center items-center gap-x-3">
@@ -65,7 +67,7 @@ function AdditonalInfoComponent() {
 
                   <input
                     required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type="text"
                     id="firstName"
                     placeholder="Kim"
@@ -81,7 +83,7 @@ function AdditonalInfoComponent() {
 
                   <input
                     required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type="text"
                     id="lastName"
                     placeholder="Hout"
@@ -96,14 +98,7 @@ function AdditonalInfoComponent() {
                   >
                     Date of Birth
                   </Label>
-
-                  <input
-                    required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
-                    id="firstName"
-                    placeholder="Kim"
-                  />
+                  <DatePickerComponent />
                 </div>
                 <div className="grid w-full items-center gap-1.5  ">
                   <Label
@@ -113,13 +108,7 @@ function AdditonalInfoComponent() {
                     Gender
                   </Label>
 
-                  <input
-                    required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
-                    id="lastName"
-                    placeholder="Hout"
-                  />
+                  <SelectGenderComponent />
                 </div>
               </div>
               <div className="w-full flex justify-center items-center gap-x-3">
@@ -133,7 +122,7 @@ function AdditonalInfoComponent() {
 
                   <input
                     required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type="text"
                     id="address"
                     placeholder="PP"
@@ -149,7 +138,7 @@ function AdditonalInfoComponent() {
 
                   <input
                     required
-                    className="text-gray-500 px-3 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type="text"
                     id="lastName"
                     placeholder="012-345-678"
@@ -158,7 +147,7 @@ function AdditonalInfoComponent() {
               </div>
               {/* pick role */}
               <div className="flex justify-center items-center flex-col gap-y-1 w-full ">
-                <p className="self-start text-label text-light-white font-light">
+                <p className="self-start text-sub-info text-light-white font-light">
                   Pick your role
                 </p>
                 <div className="flex justify-center items-center w-full gap-x-4">
@@ -172,7 +161,7 @@ function AdditonalInfoComponent() {
                 </div>
               </div>
             </section>
-            <Button className="w-full bg-green hover:bg-green rounded-xl mt-4 h-11  text-md">
+            <Button className="w-full bg-green hover:bg-green rounded-xlsubtext-sub-info h-9  text-md">
               Register
             </Button>
           </form>
