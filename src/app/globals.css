@@ -75,6 +75,10 @@
   --color-light-orange-color: var(--light-orange-color);
   --color-strong-red-color: var(--strong-red-color);
   --color-input-color: var(--bg-input-color);
+
+  /* Air Quality */
+  --color-lighter-yellow: var(--level-bg-lighter-yellow-color);
+  --color-yellow: var(--level-text-strong-yellow-color);
 }
 
 :root {
@@ -139,17 +143,20 @@
   --strong-gray-color: #848e9b;
   --light-gray-color: #edf0f3;
   --light-yellow-color: #e4b200;
-  --strong-yellow-color: #f9c300;
   --stronger-yellow-color: #f9c300;
   --strong-orange-color: #ff6d10;
   --light-orange-color: #ffac33;
   --strong-red-color: #fb0530;
   --bg-input-color: #f2f2f2;
+
+  /* Air-Quality */
+  --level-bg-lighter-yellow-color: #FAF0CC;
+  --level-text-strong-yellow-color: #f9c300;
 }
 
 .dark {
   --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --foreground: oklch(0.985 0 0); 
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
