@@ -1,7 +1,4 @@
-import FooterComponent from "@/components/FooterComponent";
-import HeroSection from "@/components/HeroSection";
-import UserNavbarComponent from "@/components/NavbarComponent";
-
+import "../globals.css";
 export default function UserLayout({ children }) {
   return (
     <main>
