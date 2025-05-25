@@ -4,6 +4,7 @@ import Link from "next/link";
 import DiscussionButtonComponent from "./_component/DiscussionButtonComponent";
 import DiscussionCardComponent from "./_component/DiscussionCardComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
+import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -38,8 +39,7 @@ const DiscussionPage = () => {
           </h2>
           <div className="w-full border-b py-2 border-stroke"></div>
           <Link href={`/discussion-forums/${1}`}>
-            <DiscussionCardComponent image={"tree-planting.png"} />
-            <DiscussionCardComponent />
+            <CardDiscussionComponent image={"/assets/tree-planting.png"} />
           </Link>
         </div>
         {/* Centered Post Components */}

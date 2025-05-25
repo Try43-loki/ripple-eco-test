@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import CommentSectionComponent from "./_component/CommentSectionComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
+import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 
 const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
   const heroSectionText = {
@@ -17,7 +18,7 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
       "Share ideas, explore solutions, and connect with others driving environmental change.",
     search: false,
   };
-  const img = "/sub-banner.jpg";
+  const img = "/assets/tree-planting.png";
   const { discussionId } = await ParamsPromise;
   return (
     <main className="w-full h-full flex flex-col ">
@@ -52,7 +53,7 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
 
       {/* Card Discussion */}
       <div className="w-full px-6 md:px-20 lg:px-[150px]">
-        <DiscussionCard image={img || ""} />
+        <CardDiscussionComponent image={img || ""} />
         <CommentSectionComponent />
       </div>
     </main>
