@@ -3,6 +3,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import {
   Form,
   FormControl,
@@ -10,14 +11,11 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
+import { BadgeCheck } from 'lucide-react'
+import { Toast } from 'primereact/toast'
+import { useRef } from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { Download } from 'lucide-react'
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-  } from "@/components/ui/popover"
-import TakeActionSuccessSubmit from './TakeActionSuccessSubmit'
 
 const TakeActionForm = () => {
   const form = useForm({
@@ -25,6 +23,48 @@ const TakeActionForm = () => {
       description: "",
     },
   })
+  const router = useRouter()
+  const toastCenter = useRef(null)
+
+  const showCustomCenterToast = (content) => {
+    toastCenter.current.show({
+      severity: 'success',
+      life: 3000,
+      content
+    });
+  }
+
+  const handleDownloadClick = () => {
+    showCustomCenterToast(
+      <div className='w-auto'>
+        <article className='flex flex-col gap-y-4 w-[500px] rounded-[20px] p-[20px] items-center justify-center bg-white shadow-lg'>
+            <BadgeCheck className='w-[170px] h-[170px] text-[#50C878]' />
+            <h4 className='text-[35px] font-semibold'>Download Successfully!</h4>
+            <p className='text-[24px] text-[#666666]'>Your Take Action has been downloaded</p>
+        </article>
+      </div>
+      
+    )
+    setTimeout(() => {
+        router.push('/take-action');
+    }, 1000);
+  }
+
+  const handleSubmitClick = () => {
+    showCustomCenterToast(
+      <div className='w-auto'>
+        <article className='flex flex-col gap-y-4 w-[500px] rounded-[20px] p-[20px] items-center justify-center bg-white shadow-lg'>
+            <BadgeCheck className='w-[170px] h-[170px] text-[#50C878]' />
+            <h4 className='text-[35px] font-semibold'>Submit Successfully!</h4>
+            <p className='text-[24px] text-[#666666]'>Your Take Action has been created</p>
+        </article>
+      </div>
+      
+    )
+    setTimeout(() => {
+        router.push('/take-action')  // ✅ Navigate to target page
+    }, 1000)
+  }
 
   const onSubmit = (data) => {
     console.log("Form submitted:", data)
@@ -52,43 +92,26 @@ const TakeActionForm = () => {
               </FormItem>
             )}
           />
+          <Toast ref={toastCenter} position="center" closable={false}/>
           <div className='flex items-center justify-between'>
-            <Popover>
-                <PopoverTrigger asChild>
-                    <Button type="submit" className='w-auto flex gap-x-[11px] bg-#F2F3F6 hover:bg-[#F2F3F6] text-[#384C63] border-1 border-[#F2F3F6] text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'>
-                        <Download className='w-[24px] h-[24px]'/>
-                        <p>Download PDF</p>
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                className="w-[700px]"
-                >
-                <div className="grid gap-4">
-                    <TakeActionSuccessSubmit 
-                    title={"Download Successfully!"}
-                    desc={"Your Take Action has been downloaded"}
-                    />
-                </div>
-                </PopoverContent>
-            </Popover>
             
-            <Popover>
-                <PopoverTrigger asChild>
-                  <Button type="submit" className='w-[120px] bg-primary hover:bg-[#1da761] text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'>
-                    Submit
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                className="w-[700px]"
-                >
-                <div className="grid gap-4">
-                    <TakeActionSuccessSubmit 
-                    title={"Submit Successfully!"}
-                    desc={"Your Take Action has been created "}
-                    />
-                </div>
-                </PopoverContent>
-            </Popover>
+
+            <Button
+              type="button"
+              onClick={handleDownloadClick}
+              className='w-auto flex gap-x-[11px] bg-[#F2F3F6] hover:bg-[#F2F3F6] text-[#384C63] border border-[#F2F3F6] text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+            >
+              <Download className='w-[24px] h-[24px]' />
+              <p>Download PDF</p>
+            </Button>
+
+            <Button
+              type="submit"
+              onClick={handleSubmitClick}
+              className='w-[120px] bg-primary hover:bg-[#1da761] text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+            >
+              Submit
+            </Button>
           </div>
         </form>
       </Form>
