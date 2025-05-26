@@ -21,15 +21,15 @@ function OTPVerifyComponent() {
   };
 
   return (
-    <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
+    <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20">
-        <article className="w-[400px] lg:w-[300px]">
+        <article className="w-1/4 lg:w-[300px]">
           <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
-            Ripple<span className="text-finished">Eco</span>
+            Ripple<span className="text-green">Eco</span>
           </h1>
           <h4 className="text-2xl lg:text-3xl my-4 text-white font-medium">
             Almost there — keep <br />
-            the <span className="text-light-orange-color">ripple</span> going.
+            the <span className="text-orange">ripple</span> going.
           </h4>
           <p className="mt-2 lg:text-lg font-light text-light-gray">
             Your impact starts here. Every ripple begins with one drop.
@@ -52,7 +52,7 @@ function OTPVerifyComponent() {
                     </p>
                     <span
                       className={`h-2 w-full rounded-2xl ${
-                        index === 0 ? "bg-primary" : "bg-light-gray"
+                        index === 0 ? "bg-green" : "bg-light-gray"
                       }`}
                     ></span>
                   </span>
@@ -80,7 +80,7 @@ function OTPVerifyComponent() {
                     <InputOTPSlot
                       key={idx}
                       index={idx}
-                      className="border border-light-gray rounded-md"
+                      className="border caret-white text-lg text-white border-light-gray rounded-md"
                     />
                   ))}
                 </InputOTPGroup>
@@ -90,7 +90,7 @@ function OTPVerifyComponent() {
             <div className="flex flex-col gap-y-3 w-full">
               <Button
                 type="submit"
-                className="w-full rounded-2xl p-4 h-11 text-lg cursor-pointer"
+                className="w-full  bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-11 text-lg cursor-pointer"
               >
                 Verify
               </Button>

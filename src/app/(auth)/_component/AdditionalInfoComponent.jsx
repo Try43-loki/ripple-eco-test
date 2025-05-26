@@ -100,7 +100,7 @@ function AdditonalInfoComponent() {
                   </Label>
                   <DatePickerComponent />
                 </div>
-                <div className="grid w-full items-center gap-1.5  ">
+                <div className="grid w-full  items-center gap-1.5  ">
                   <Label
                     htmlFor="gender"
                     className=" text-label text-light-gray font-light"
@@ -161,7 +161,7 @@ function AdditonalInfoComponent() {
                 </div>
               </div>
             </section>
-            <Button className="w-full bg-green hover:bg-green rounded-xlsubtext-sub-info h-9  text-md">
+            <Button className="w-full bg-green hover:bg-green-800 rounded-xlsubtext-sub-info h-9  text-md">
               Register
             </Button>
           </form>
