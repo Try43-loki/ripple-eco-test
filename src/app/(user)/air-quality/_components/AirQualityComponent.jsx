@@ -5,7 +5,7 @@ const iconColor = "#f9c300";
 
 const AirQualityComponent = () => {
   return (
-    <article className="w-full flex flex-col gap-7 bg-white rounded-3xl p-6 shadow-2xl">
+    <article className="w-full flex flex-col gap-7 bg-white/50 rounded-3xl p-6 shadow-2xl">
       {/* Title */}
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Air Quality</h2>

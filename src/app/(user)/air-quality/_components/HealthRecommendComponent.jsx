@@ -1,4 +1,4 @@
-import { Wind } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 const HealthRecommendComponent = () => {
@@ -12,6 +12,53 @@ const HealthRecommendComponent = () => {
         <p className="text-darker-gray text-lg">
           What is the current air quality in Phnom Penh?
         </p>
+      </div>
+      {/* Warning Icon and Guideline */}
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-3.5">
+          <Image
+            alt="Bike-Yellow"
+            width={36}
+            height={36}
+            src="/assets/air_quality_images/Bike-Yellow.svg"
+          />
+          <span className="text-dark-gray text-lg">
+            Sensitive group should reduce outdoor exercise
+          </span>
+        </div>
+        <div className="flex items-center gap-3.5">
+          <Image
+            alt="Bike-Yellow"
+            width={36}
+            height={36}
+            src="/assets/air_quality_images/Mask-Yellow.svg"
+          />
+          <span className="text-dark-gray text-lg">
+            Sensitive group should wear a mask outdoors
+          </span>
+        </div>
+        <div className="flex items-center gap-3.5">
+          <Image
+            alt="Bike-Yellow"
+            width={36}
+            height={36}
+            src="/assets/air_quality_images/Fan-Yellow.svg"
+          />
+          <span className="text-dark-gray text-lg">
+            Sensitive group should run an air purifier
+          </span>
+        </div>
+        <div className="flex items-center gap-3.5">
+          <Image
+            alt="Bike-Yellow"
+            width={36}
+            height={36}
+            src="/assets/air_quality_images/Windows-Yellow.svg"
+          />
+          <span className="text-dark-gray text-lg">
+            Close your windows to avoid dirty outdoors
+          </span>
+        </div>
       </div>
     </article>
   );

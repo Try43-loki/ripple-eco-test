@@ -39,7 +39,7 @@ const DailyValueAQIComponent = ({ day, isActive }) => {
           <p className="text-center font-medium text-white">12</p>
         </div>
       </div>
-      <LineVertical />
+      {day == "Sunday" || <LineVertical />}
     </>
   );
 };
