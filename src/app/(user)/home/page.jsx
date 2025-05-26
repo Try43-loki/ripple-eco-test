@@ -28,9 +28,6 @@ function HomePage() {
 
       {/* Take action Section */}
       <TakeActionSectionComponent/>
-
-      {/* Footer Section */}
-      <FooterComponent/>
     </main>
   );
 }

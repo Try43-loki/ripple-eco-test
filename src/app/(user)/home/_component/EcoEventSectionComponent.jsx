@@ -1,17 +1,18 @@
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import React from "react";
 
+
 const EcoEventSectionComponent = () => {
-  const events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Replace with real data later
+  const events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Replace with fetch data later
 
   return (
     <div>
       <section className="w-full bg-[#F6F6EE] py-20">
         <div className="max-w-full mx-auto text-center px-6 md:px-20 lg:px-45">
-          <p className="text-[#3BAA2C] text-base md:text-lg pb-2 font-medium">
+          <p className="text-green text-base md:text-xl lg:text-2xl pb-2 font-medium">
             ECO EVENT
           </p>
-          <h2 className="text-title text-2xl md:text-3xl lg:text-4xl font-bold">
+          <h2 className="text-dark-green text-2xl md:text-3xl lg:text-4xl font-bold">
             Join Our EcoEvent
             <span className="block">
               Share, Connect, and Act for a Greener Future

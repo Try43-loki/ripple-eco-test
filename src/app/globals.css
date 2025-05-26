@@ -74,6 +74,7 @@
   --color-light-yellow: var(--light-yellow-color);
   --color-strong-orange: var(--strong-orange-color);
   --color-light-orange: var(--light-orange-color);
+  --color-footer: var(--footer-color);
   /* font size */
   --text-label: var(--text-label-input);
   --text-sub-info: var(--text-sub-info);
@@ -113,6 +114,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
+
   /* Custom owner */
 
   --main-color: oklch(0.5648 0.1427 153.56);
@@ -146,6 +148,7 @@
   --light-orange-color: #oklch(0.8068 0.158557 70.9556);
   --strong-red-color: oklch(0.6238 0.2511 24.16);
   --bg-input-color: oklch(0.9612 0 0);
+  --footer-color: oklch(0.246 0.033 259.66);
   /* font-size */
 
   --text-label-input: 16px;

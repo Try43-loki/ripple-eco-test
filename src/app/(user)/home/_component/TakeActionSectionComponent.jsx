@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import DiscussionButtonComponent from "../../discussion-forums/_component/DiscussionButtonComponent";
 
 const TakeActionSectionComponent = () => {
@@ -8,28 +9,30 @@ const TakeActionSectionComponent = () => {
       <section className="w-full py-16 px-6 md:px-20 lg:px-45 flex flex-col lg:flex-row bg-white">
         {/* Left Side Vertical Bar (only on large screens) */}
         <div className="hidden lg:block w-[100px] bg-white">
-          <div className="w-full h-[140px] bg-primary"></div>
+          <div className="w-full h-[180px] bg-green"></div>
         </div>
 
         {/* Content Wrapper */}
-        <div className="w-full flex flex-col lg:flex-row flex-wrap items-center lg:items-start bg-[#F6F6EE] pb-8 px-0 rounded-2xl">
-          <img
+        <div className="w-full flex flex-col lg:flex-col xl:flex-row items-center lg:items-start bg-[#F6F6EE] pb-8 px-0 rounded-2xl">
+          <Image
             src="/assets/TakeActionSection.jpg"
             alt="Take action image"
-            className="w-full max-w-full lg:w-[50%] object-cover rounded-tr-2xl rounded-br-2xl"
-          />
-          <div className="flex flex-col w-full lg:w-[50%] mt-8 px-4 md:px-8 lg:pl-10 z-10 text-center lg:text-left">
-            <p className="text-primary text-base md:text-lg lg:text-xl">
+            width={500}
+            height={500}
+            className="w-full max-w-full xl:w-[50%] object-cover rounded-tr-2xl rounded-br-2xl"
+          ></Image>
+          <div className="flex flex-col w-full xl:w-[50%] mt-8 px-4 md:px-8 lg:pl-10 z-10 text-left">
+            <p className="text-green text-base md:text-xl lg:text-2xl mb-2">
               TAKE ACTION
             </p>
-            <h2 className="text-title text-2xl md:text-3xl lg:text-4xl font-bold">
+            <h2 className="text-dark-green text-2xl md:text-3xl lg:text-4xl font-bold">
               Change Starts With You Take the First Green Step
             </h2>
-            <p className="text-description text-xs md:text-sm lg:text-base mt-2">
+            <p className="text-light-green text-sm md:text-base lg:text-lg mb-4 lg:mb-6 mt-2">
               Every pledge adds up. Commit to eco-action and help build a
               sustainable tomorrow.
             </p>
-            <div className="mt-6">
+            <div className="">
               <DiscussionButtonComponent text={btnTakeAction} />
             </div>
           </div>
@@ -37,7 +40,7 @@ const TakeActionSectionComponent = () => {
 
         {/* Right Side Vertical Bar (only on large screens) */}
         <div className="hidden lg:block w-[100px] bg-white">
-          <div className="w-full h-[140px] bg-primary"></div>
+          <div className="w-full h-[180px] bg-green"></div>
         </div>
       </section>
     </div>
