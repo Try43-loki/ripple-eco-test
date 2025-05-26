@@ -2,10 +2,13 @@ import HeroSectionComponent from "@/components/HeroSectionComponent";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { TabsContent } from "@radix-ui/react-tabs";
 import { ClipboardList, Clock, Mail, MapPin, MessageCircleQuestion, MessagesSquare, Phone, Sparkles, SquarePen } from "lucide-react";
 import React from "react";
+import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
+import DisccusionComponent from "./_component/DisccusionComponent";
 
-function ProfilePage() {
+const ProfilePage = () => {
   return (
     <main>
       <HeroSectionComponent
@@ -48,14 +51,13 @@ function ProfilePage() {
           </div>
         </Button>
       </article>
-      <section className="mt-10 mb-10 mx-[150px]">
+      <section className="mt-12 mx-[150px]">
         <Tabs defaultValue="events" className="w-full ">
           <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-[#D8E2DD]">
             <TabsTrigger
               value="event-history"
               className={cn(
-                "text-[16px] py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
-                "hover:bg-[#EDF0F3]",
+                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
@@ -65,8 +67,7 @@ function ProfilePage() {
             <TabsTrigger
               value="own-feedback"
               className={cn(
-                "text-[16px] py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
-                "hover:bg-[#EDF0F3]",
+                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
@@ -74,10 +75,9 @@ function ProfilePage() {
               <p>Own Feedback</p>
             </TabsTrigger>
             <TabsTrigger
-              value="Discussion"
+              value="discussion"
               className={cn(
-                "text-[16px] py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
-                "hover:bg-[#EDF0F3]",
+                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
@@ -87,8 +87,7 @@ function ProfilePage() {
             <TabsTrigger
               value="take-action"
               className={cn(
-                "text-[16px] py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
-                "hover:bg-[#EDF0F3]",
+                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
@@ -98,8 +97,7 @@ function ProfilePage() {
             <TabsTrigger
               value="Earned Badge"
               className={cn(
-                "text-[16px] py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
-                "hover:bg-[#EDF0F3]",
+                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
@@ -107,6 +105,13 @@ function ProfilePage() {
               <p>Earn Badge</p>
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="own-feedback" className="w-full mt-5 mb-10">
+            <OwnFeedBackComponent/>
+          </TabsContent>
+          <TabsContent value="discussion" className="w-full mt-5 mb-10">
+            <DisccusionComponent/>
+          </TabsContent>
         </Tabs>
       </section>
     </main>

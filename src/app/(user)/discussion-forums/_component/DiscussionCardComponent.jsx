@@ -36,7 +36,7 @@ const DiscussionCardComponent = ({ image }) => {
             <img
               src={image}
               alt="discussion visual"
-              className="w-full mt-4 rounded-xl object-cover"
+              className="w-full h-[200px] mt-4 rounded-xl object-cover"
             />
           )}
           {/* <Image src={`${image}`} width={100} height={100}></Image> */}
