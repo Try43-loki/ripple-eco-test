@@ -3,6 +3,9 @@ import CardInformationAQI from "./_components/CardInformationAQIComponent";
 import Image from "next/image";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import HourlyForecastComponent from "./_components/HourlyForecastComponent";
+import DailyForecastComponent from "./_components/DailyForecastComponent";
+import AirQualityComponent from "./_components/AirQualityComponent";
+import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 
 const api = {
   province: "Phnom Penh",
@@ -43,6 +46,15 @@ const AirQualityPage = () => {
       {/* Section 2*/}
       <section className="flex justify-center px-6 py-10 bg-gray-500 text-white lg:px-[150px]">
         <HourlyForecastComponent />
+      </section>
+
+      {/* Section 3 */}
+      <section className="flex justify-center gap-10 px-6 py-10 bg-gray-500 text-white lg:px-[150px]">
+        <DailyForecastComponent />
+        <div className="flex flex-col w-full gap-10">
+          <AirQualityComponent />
+          <HealthRecommendComponent />
+        </div>
       </section>
     </>
   );
