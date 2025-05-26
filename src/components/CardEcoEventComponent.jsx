@@ -1,45 +1,71 @@
-import React from 'react'
-import { DollarSign,Mail } from 'lucide-react';
+import React from "react";
+import { DollarSign, Mail } from "lucide-react";
+
 const CardEcoEventComponent = () => {
   return (
-            <div className="overflow-x-auto scroll-smooth snap-x snap-mandatory px-6 [&::-webkit-scrollbar]:hidden scrollbar-none">
-          <div className="flex gap-8 pt-6 w-max">
-                <div
-                  className="w-[310px] h-full pb-6 bg-white rounded-2xl snap-start shrink-0"
-                >
-                  <img
-                    src="eventImage.png"
-                    alt="Event Image"
-                    className="rounded-t-2xl "
-                    width={310}
-                    height={110}
-                  />
-                  <div className="px-5">
-                  <p className="text-ongoing text-sm pt-2">. Ongoing</p>
-                  <p className="text-status-volunteer text-md">Mon, 12 May at 8 AM</p>
-                  <h3 className="text-title text-2xl/7 font-bold">Green Oasis going <span className="block">Miyawaki</span> </h3>
-                  <p className="text-cancel text-sm pt-1">Phnom Penh, Cambodia</p>
-                  <p className="text-description text-sm pt-1">100 going</p>
+    <div className="flex gap-8 pt-6 w-full ">
+      <div className="w-[300px] pb-6 bg-white rounded-2xl shadow-md ">
+        {/* Image Section */}
+        <div className="relative w-full h-[150px]">
+          {/* Background Image */}
+          <img
+            src="/assets/eventImage.png"
+            alt="Event"
+            className="w-full h-full object-cover rounded-t-2xl"
+          />
+  
+          {/* Soft black overlay */}
+          <div className="absolute inset-0 bg-black/20 rounded-t-2xl z-0"></div>
 
-                  <div className="pt-4 flex gap-2">
-                    <button className='py-2 px-10 bg-light-gray rounded-md flex gap-2'>
-                      <img src="tick-circle.png" alt="tick-circle" className='fill-current h-5 pt-1'/>
-                      <p className='text-md text-title font-bold'>Going</p>
-                    </button>
-
-                    <button className='py-2 px-4 bg-light-gray rounded-md'>
-                      <DollarSign />
-                    </button>
-
-                    <button className='py-2 px-4 bg-light-gray rounded-md'>
-                      <Mail />
-                    </button>
-                  </div>
-                </div>
-              </div>
+          {/* Overlay content */}
+          <div className="absolute top-2 left-2 flex gap-2 flex-wrap z-10">
+            <span className="bg-white/80 text-xs text-status-volunteer px-2 py-1 rounded-2xl shadow">
+              Seminar | Tree Planting
+            </span>
           </div>
         </div>
-  )
-}
+
+        {/* Info Section */}
+        <div className="px-5 text-left">
+          {/* Status */}
+          <div className="flex items-center gap-2 pt-2 pb-1">
+            <span className="w-2 h-2 bg-ongoing rounded-full inline-block"></span>
+            <p className="text-ongoing text-sm font-semibold">Ongoing</p>
+          </div>
+
+          {/* Date */}
+          <p className="text-status-volunteer text-sm">Mon, 12 May at 8 AM</p>
+
+          {/* Title */}
+          <h3 className="text-title text-lg font-bold leading-tight mt-1">
+            Green Oasis going <span className="block">Miyawaki</span>
+          </h3>
+
+          {/* Location & Going Info */}
+          <p className="text-cancel text-sm mt-1">Phnom Penh, Cambodia</p>
+          <p className="text-description text-sm mt-1 mb-3">100 going</p>
+
+          {/* Action Buttons */}
+          <div className="flex pt-2 justify-between">
+            <button className="py-2 px-14 bg-light-gray rounded-md flex items-center gap-2">
+              <img
+                src="/assets/tick-circle.png"
+                alt="tick-circle"
+                className="h-5"
+              />
+              <p className="text-sm text-title font-bold">Going</p>
+            </button>
+            <button className="p-2 bg-light-gray rounded-md">
+              <DollarSign size={18} />
+            </button>
+            <button className="p-2 bg-light-gray rounded-md">
+              <Mail size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default CardEcoEventComponent;
