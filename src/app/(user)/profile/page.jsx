@@ -95,7 +95,7 @@ const ProfilePage = () => {
               <p>Take Action</p>
             </TabsTrigger>
             <TabsTrigger
-              value="Earned Badge"
+              value="earned Badge"
               className={cn(
                 "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
@@ -111,6 +111,10 @@ const ProfilePage = () => {
           </TabsContent>
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
             <DisccusionComponent/>
+          </TabsContent>
+          <TabsContent value="earned Badge" className="w-full mt-5 mb-10">
+            <div>
+            </div>
           </TabsContent>
         </Tabs>
       </section>

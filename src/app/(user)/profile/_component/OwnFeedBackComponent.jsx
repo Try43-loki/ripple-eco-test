@@ -5,7 +5,7 @@ const link = "https://img.freepik.com/premium-photo/eco-concept-with-group-volun
 const OwnFeedBackComponent = () => {
   return (
     <main>
-        <section className='flex flex-col gap-y-10 items-center w-full'>
+        <section className='flex flex-col gap-y-5 items-center w-full'>
             <div className='w-full'>
                 <OwnFeedBackCardComponent link={link} desc={desc}/>
             </div>

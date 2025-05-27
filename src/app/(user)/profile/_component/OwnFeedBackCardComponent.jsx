@@ -30,7 +30,7 @@ const OwnFeedBackCardComponent = ({link , desc}) => {
                 <img
                   src="https://i.pinimg.com/736x/e3/cc/19/e3cc196b34603811d13323ee70c31c42.jpg"
                   alt="{user.name}"
-                  className="h-[50px] w-[50px] rounded-full object-cover"
+                  className="h-[50px] w-[50px] rounded-full object-fit"
                 />
                 <div className="flex flex-col gap-y-0">
                   <p className="text-[20px] font-medium text-[#4A5057]">
