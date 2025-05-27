@@ -31,14 +31,14 @@ const CardInformationAQI = () => {
       aria-label="Air Quality Information Card"
     >
       {/* AQI Value */}
-      <div className="flex flex-col gap-2 px-6 items-center">
+      <div className="flex flex-col gap-2 px-3 items-center">
         <h2 className="text-7xl font-bold text-yellow">{aqiData.value}</h2>
-        <p className="text-base text-darker-gray">{aqiData.unit}</p>
+        <p className="text-base text-darker-gray ">{aqiData.unit}</p>
       </div>
 
       {/* AQI Details */}
       <div className="flex flex-col w-full gap-3">
-        <h2 className="text-2xl font-semibold text-darker-gray">
+        <h2 className="text-2xl font-semibold text-darker-gray flex justify-start">
           {aqiData.level}
         </h2>
         <div className="flex justify-between min-w-sm">
@@ -48,7 +48,9 @@ const CardInformationAQI = () => {
               {aqiData.pollutant}
             </span>
           </p>
-          <p className="text-darker-gray text-lg">{aqiData.pollutantValue}</p>
+          <p className="text-darker-gray text-lg font-medium">
+            {aqiData.pollutantValue}
+          </p>
         </div>
 
         {/* Icons Row */}

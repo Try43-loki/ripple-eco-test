@@ -4,7 +4,7 @@ import SearchBarComponent from "./SearchBarComponent";
 
 const HeroSectionComponent = ({ text, description, showSearchBar }) => {
   return (
-    <section className="relative flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center">
+    <article>
       <Image
         src="/sub-banner.jpg"
         alt="sub-banner"
@@ -24,7 +24,7 @@ const HeroSectionComponent = ({ text, description, showSearchBar }) => {
           </div>
         )}
       </div>
-    </section>
+    </article>
   );
 };
 
