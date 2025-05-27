@@ -1,52 +1,39 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import React from "react";
+import HeaderComponent from "./_component/headerComponent";
+import CurrentDayComponent from "./_component/CurrentDayComponent";
+import TotalStatisticComponent from "./_component/TotalStatisticComponent";
+import UpcomingEventComponent from "./_component/UpcomingEventComponent";
+import { ChartComponent } from "./_component/ChartComponent";
+import ProgressComponent from "./_component/ProgressComponent";
+import ListVolunteerComponent from "./_component/ListVolunteerComponent";
 
-export default function OverviewPage() {
+function OverviewPage() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    <>
+      <section className="flex justify-center  items-start gap-x-5">
+        {/* content */}
+        <section className="grow">
+          <HeaderComponent />
+          {/* total statistic */}
+          <TotalStatisticComponent />
+          <section className="flex justify-center items-start gap-x-5 mt-5">
+            {/* chart */}
+            <ChartComponent className="h-full" />
+            {/*progress bar  */}
+            <ProgressComponent className="h-full" />
+          </section>
+          {/* list volunteer */}
+          <ListVolunteerComponent />
+        </section>
+        {/* side right content */}
+        <section className="w-2/7">
+          <CurrentDayComponent />
+          {/* up comming event */}
+          <UpcomingEventComponent />
+        </section>
+      </section>
+    </>
   );
 }
+
+export default OverviewPage;
