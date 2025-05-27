@@ -1,7 +1,7 @@
 import PostComponent from "./_component/PostComponent";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import Link from "next/link";
-import DiscussionButtonComponent from "./_component/DiscussionButtonComponent";
+import DiscussionButtonComponent from "../../../components/DiscussionButtonComponent";
 import DiscussionCardComponent from "./_component/DiscussionCardComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
@@ -43,8 +43,8 @@ const DiscussionPage = () => {
           </Link>
         </div>
         {/* Centered Post Components */}
-        <div className="flex justify-center mt-6 ml-7 h-fit">
-          <div className="w-[300px] md:w-[350px] lg:w-[400px] p-6 border border-stroke bg-white rounded-[20px]">
+        <div className="flex justify-center mt-6 h-fit md:ml-7 lg:ml-7">
+          <div className="w-full md:w-[350px] lg:w-[400px] p-6 border border-stroke bg-white rounded-[20px]">
             <PostComponent />
             <PostComponent />
             <PostComponent />

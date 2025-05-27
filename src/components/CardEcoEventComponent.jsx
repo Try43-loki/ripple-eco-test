@@ -1,45 +1,45 @@
-import React from 'react'
-import { DollarSign,Mail } from 'lucide-react';
+import { DollarSign, Mail } from "lucide-react";
+
 const CardEcoEventComponent = () => {
   return (
-            <div className="overflow-x-auto scroll-smooth snap-x snap-mandatory px-6 [&::-webkit-scrollbar]:hidden scrollbar-none">
-          <div className="flex gap-8 pt-6 w-max">
-                <div
-                  className="w-[310px] h-full pb-6 bg-white rounded-2xl snap-start shrink-0"
-                >
-                  <img
-                    src="eventImage.png"
-                    alt="Event Image"
-                    className="rounded-t-2xl "
-                    width={310}
-                    height={110}
-                  />
-                  <div className="px-5">
-                  <p className="text-ongoing text-sm pt-2">. Ongoing</p>
-                  <p className="text-status-volunteer text-md">Mon, 12 May at 8 AM</p>
-                  <h3 className="text-title text-2xl/7 font-bold">Green Oasis going <span className="block">Miyawaki</span> </h3>
-                  <p className="text-cancel text-sm pt-1">Phnom Penh, Cambodia</p>
-                  <p className="text-description text-sm pt-1">100 going</p>
+    <div className="bg-white rounded-2xl shadow-sm w-full max-w-[265px] lg:w-full flex-shrink-0 pb-6">
+      {/* Event Image */}
+      <img
+        src="/assets/eventImage.png"
+        alt="Green Oasis going Miyawaki event"
+        className="rounded-t-2xl w-full h-[150px] object-cover"
+      />
 
-                  <div className="pt-4 flex gap-2">
-                    <button className='py-2 px-10 bg-light-gray rounded-md flex gap-2'>
-                      <img src="tick-circle.png" alt="tick-circle" className='fill-current h-5 pt-1'/>
-                      <p className='text-md text-title font-bold'>Going</p>
-                    </button>
+      {/* Event Content */}
+      <div className="px-5 pt-3">
+        <p className="text-blue-600 text-sm font-medium">• Ongoing</p>
+        <p className="text-gray-500 text-sm mt-1">Mon, 12 May at 8 AM</p>
+        <h3 className="text-gray-900 text-xl font-bold leading-snug mt-1">
+          Green Oasis going <span className="block">Miyawaki</span>
+        </h3>
+        <p className="text-gray-600 text-sm mt-1">Phnom Penh, Cambodia</p>
+        <p className="text-gray-400 text-sm mt-1">100 going</p>
 
-                    <button className='py-2 px-4 bg-light-gray rounded-md'>
-                      <DollarSign />
-                    </button>
-
-                    <button className='py-2 px-4 bg-light-gray rounded-md'>
-                      <Mail />
-                    </button>
-                  </div>
-                </div>
-              </div>
-          </div>
+        {/* Action Buttons */}
+        <div className="flex gap-2 mt-4">
+          <button className="flex w-full justify-center items-center gap-2 bg-light-gray py-2 px-4 rounded-md text-gray-900 font-medium">
+            <img
+              src="/assets/tick-circle.png"
+              alt="Going"
+              className="h-5 w-5"
+            />
+            <span>Going</span>
+          </button>
+          <button className="bg-light-gray p-2 rounded-md">
+            <DollarSign className="h-5 w-5 text-gray-700" />
+          </button>
+          <button className="bg-light-gray p-2 rounded-md">
+            <Mail className="h-5 w-5 text-gray-700" />
+          </button>
         </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
 export default CardEcoEventComponent;
