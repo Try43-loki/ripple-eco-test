@@ -9,21 +9,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  categories,
+  certificates,
+  contributeType,
+  eventTypes,
+  locations,
+} from "@/data";
+export function SelectComponent({ operator }) {
+  let data = [];
+  switch (operator) {
+    case "Event_type":
+      data = eventTypes;
+      break;
+    case "Categories":
+      data = categories;
 
-export function SelectDemo() {
+      break;
+    case "Certificate":
+      data = certificates;
+      break;
+    case "Location":
+      data = locations;
+
+      break;
+    case "Contribute_type":
+      data = contributeType;
+
+      break;
+    default:
+      break;
+  }
   return (
     <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+      <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
+        <SelectValue placeholder={`Choose ${operator}`} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white  border border-light-strok text-gray-600">
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          {data?.map((item, index) => (
+            <SelectItem key={index} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>

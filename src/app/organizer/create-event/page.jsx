@@ -1,10 +1,35 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import CreateEventComponent from "./_component/CreateEventComponent";
+import CreateAgendaComponent from "./_component/CreateAgendaComponent";
 
 function CreateEcoEventPage() {
+  const [currentComponent, setCurrentComponent] = useState(1);
+  const [formData, setFormData] = useState({});
+  const goToNext = () => {
+    setCurrentComponent(2);
+  };
+
+  const goToPrevious = () => {
+    setCurrentComponent(1);
+  };
+
   return (
     <>
-      <CreateEventComponent />
+      {currentComponent === 1 && (
+        <CreateEventComponent
+          onNext={goToNext}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
+      {currentComponent === 2 && (
+        <CreateAgendaComponent
+          onBack={goToPrevious}
+          setFormData={setFormData}
+          formData={formData}
+        />
+      )}
     </>
   );
 }
