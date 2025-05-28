@@ -4,12 +4,9 @@ import Image from "next/image";
 import React from "react";
 import CardInformationAQI from "./CardInformationAQIComponent";
 
-const api = {
-  province: "Phnom Penh",
-  pollution: "PM2.5",
-};
+const HeroSectionAirDisasterComponent = (props) => {
+  const { province, pollution } = props.dataSearch;
 
-const HeroSectionAirDisasterComponent = () => {
   return (
     <>
       <Image
@@ -18,16 +15,16 @@ const HeroSectionAirDisasterComponent = () => {
         fill
         className="object-cover"
       />
-      <div className="absolute w-full max-w-5xl px-4 md:px-20 text-white text-center flex flex-col items-center">
+      <div className="absolute w-full px-6 lg:px-[150px]  text-white text-center lg:flex-row lg:justify-between ">
         <article className="flex flex-col-reverse gap-10 lg:flex-row    ">
           <div className="flex flex-col gap-8 w-full">
             <div className="flex flex-col gap-1 items-start">
               <h2 className="font-bold  text-2xl lg:text-4xl">
-                Air Quality In {api.province}
+                Air Quality In {province}
               </h2>
               <p className="text-sm lg:text-xl max-w-xl">
-                Air quality index (AQI*) and {api.pollution} air pollution in{" "}
-                {api.province}
+                Air quality index (AQI*) and {pollution} air pollution in
+                {province}
               </p>
             </div>
             <div className="w-2xl text-dark-gray">
@@ -38,7 +35,10 @@ const HeroSectionAirDisasterComponent = () => {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <CardInformationAQI />
+            <CardInformationAQI
+              dataCard={props.dataCard}
+              levelColor={props.levelColor}
+            />
           </div>
         </article>
       </div>

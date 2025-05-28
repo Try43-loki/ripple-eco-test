@@ -81,6 +81,15 @@
   /* Air Quality */
   --color-lighter-yellow: var(--level-bg-lighter-yellow-color);
   --color-yellow: var(--level-text-strong-yellow-color);
+
+  --color-lighter-orange: var(--level-bg-lighter-orange-color);
+  --color-orange: var(--level-text-strong-orange-color);
+
+  --color-lighter-green: var(--level-bg-lighter-green-color);
+  --color-green: var(--level-text-strong-green-color);
+
+  --color-lighter-red: var(--level-bg-lighter-red-color);
+  --color-red: var(--level-text-strong-red-color);
 }
 
 :root {
@@ -159,6 +168,17 @@
   /* Air-Quality */
   --level-bg-lighter-yellow-color: #FAF0CC;
   --level-text-strong-yellow-color: #f9c300;
+
+  --level-bg-lighter-orange-color: #FFE2CF;
+  --level-text-strong-orange-color: #FF6D10;
+
+  --level-bg-lighter-green-color: #CDE8DB;
+  --level-text-strong-green-color: #048D4C;
+
+  --level-bg-lighter-red-color: #FECDD6;
+  --level-text-strong-red-color: #FB0530;
+
+  
 }
 
 .dark {
