@@ -154,7 +154,7 @@ export function AppSidebar() {
                         <SidebarMenuSub>
                           {item.items?.map((subItem) => {
                             const subItemIsActive = isActive(subItem.url);
-                            console.log(subItemIsActive);
+
                             return (
                               <SidebarMenuSubItem key={subItem.title}>
                                 <SidebarMenuSubButton

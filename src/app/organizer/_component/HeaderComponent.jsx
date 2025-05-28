@@ -3,7 +3,6 @@ import { usePathname } from "next/navigation";
 import React from "react";
 function HeaderComponent() {
   const currentPath = usePathname();
-  console.log(currentPath);
 
   return (
     <>
