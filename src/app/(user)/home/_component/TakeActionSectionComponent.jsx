@@ -15,7 +15,7 @@ const TakeActionSectionComponent = () => {
         {/* Content Wrapper */}
         <div className="w-full flex flex-col lg:flex-col xl:flex-row items-center lg:items-start bg-[#F6F6EE] pb-8 px-0 rounded-2xl">
           <Image
-            src="/assets/TakeActionSection.jpg"
+            src="/assets/homepage/TakeActionSection.jpg"
             alt="Take action image"
             width={500}
             height={500}

@@ -25,7 +25,7 @@ const DiscussionSectionComponent = () => {
           </div>
           <div className="mt-5">
             <Image
-              src="/assets/DiscussionSection.jpg"
+              src="/assets/homepage/DiscussionSection.jpg"
               alt="Discussion Image"
               width={1000}
               height={500}
