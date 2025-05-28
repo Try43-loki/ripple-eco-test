@@ -18,7 +18,7 @@ export function DatePickerComponent() {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="bg-lighter-white">
         <Button
           variant={"outline"}
           className={cn(

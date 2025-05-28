@@ -8,6 +8,7 @@ import {
   EyeClosed,
   Lock,
 } from "lucide-react";
+import Image from "next/image";
 
 function LoginSuccessComponent() {
   return (
@@ -24,7 +25,25 @@ function LoginSuccessComponent() {
             Your impact starts here. Every ripple begins with one drop.
           </p>
         </article>
-        <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8"></section>
+        <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
+          <div>
+            <Image
+              src="/icons/tick-circle.png"
+              className="rounded-full"
+              width={50}
+              height={50}
+            ></Image>
+          </div>
+          <h1 className="text-white text-2xl">Registration Successful</h1>
+          <p className="text-light-gray text-sm text-center">
+            Your account has been created successfully. You’re now part of the
+            Ripple<span className="text-strong-green">Eco</span>
+            community.{" "}
+          </p>
+          <Button className="bg-strong-green rounded-3xl w-full hover:bg-green-800">
+            Go to Homepage
+          </Button>
+        </section>
       </section>
     </section>
   );

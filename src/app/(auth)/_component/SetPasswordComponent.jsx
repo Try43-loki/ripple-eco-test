@@ -165,7 +165,7 @@ function SetPasswordComponent() {
               </ul>
             </article>
             {/* Button submit */}
-            <Button className="w-full bg-green hover:bg-green rounded-xl mt-4 h-11  text-md">
+            <Button className="w-full bg-strong-green hover:bg-green-800 rounded-xl mt-4 h-11  text-md">
               Next
             </Button>
           </form>

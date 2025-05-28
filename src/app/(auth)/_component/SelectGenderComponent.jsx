@@ -13,17 +13,13 @@ import {
 export function SelectGenderComponent() {
   return (
     <Select>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a fruit" />
+      <SelectTrigger className="w-full focus-visible:ring-[0px] hover:text-gray-800 text-gray-500 ring-0 bg-lighter-white">
+        <SelectValue placeholder="Select a gender" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectItem value="female">Female</SelectItem>
+          <SelectItem value="male">Male</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
