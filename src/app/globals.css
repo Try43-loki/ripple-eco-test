@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -44,7 +45,14 @@
 
   /* Custom owner */
   --color-dark-green: var(--title-color);
+  --color-dark-green: var(--title-color);
   --color-strong-green: var(--strong-green-color);
+  --color-green: var(--main-color);
+  --color-meduim-green: var(--finished-color);
+  --color-light-green: var(--subtitle-color);
+  --color-lighter-green: var(--description-color);
+  --color-verylight-green: var(--finished-bg);
+  --color-lightest-green: var(--light-green-custome-background);
   --color-green: var(--main-color);
   --color-meduim-green: var(--finished-color);
   --color-light-green: var(--subtitle-color);
@@ -65,6 +73,12 @@
   --color-strong-gray: var(--strong-gray-color);
   --color-meduim-gray: var(--cancel-bg);
   --color-light-gray: var(--light-gray-color);
+  --color-meduim-white: var(--dropdown-bg);
+  --color-light-white: var(--stroke-color);
+  --color-lighter-white: var(--bg-input-color);
+  --color-lightes-white: var(--stroke-custome-color);
+  --color-strong-red: var(--strong-red-color);
+  --color-red: var(--red-custome-color);
   --color-meduim-white: var(--dropdown-bg);
   --color-light-white: var(--stroke-color);
   --color-lighter-white: var(--bg-input-color);
@@ -250,4 +264,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.p-toast .p-toast-message .p-toast-icon-close {
+  display: none !important;
+}
+.p-toast .p-toast-message {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
