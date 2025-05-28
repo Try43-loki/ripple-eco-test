@@ -7,6 +7,9 @@ import { ClipboardList, Clock, Mail, MapPin, MessageCircleQuestion, MessagesSqua
 import React from "react";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
+import TakeActionComponent from "./_component/TakeActionComponent";
+import Image from "next/image";
+import EventHistoryComponent from "./_component/EventHistoryComponent";
 
 const ProfilePage = () => {
   return (
@@ -95,7 +98,7 @@ const ProfilePage = () => {
               <p>Take Action</p>
             </TabsTrigger>
             <TabsTrigger
-              value="earned Badge"
+              value="earned-badge"
               className={cn(
                 "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
@@ -112,9 +115,41 @@ const ProfilePage = () => {
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
             <DisccusionComponent/>
           </TabsContent>
-          <TabsContent value="earned Badge" className="w-full mt-5 mb-10">
-            <div>
-            </div>
+          <TabsContent value="take-action" className="w-full mt-5 mb-10">
+              <TakeActionComponent/>
+          </TabsContent>
+          <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
+            <section className="flex items-center gap-5">
+              <Image src='/badges/Green Helper.png' 
+                alt="badge"
+                width={100}
+                height={100}
+                className="w-[100px] h-[100px] rounded-[14px]"
+              />
+              <Image src='/badges/Eco Hero.png' 
+                alt="badge"
+                width={100}
+                height={100}
+                className="w-[100px] h-[100px] rounded-[14px]"
+              />
+              <Image src='/badges/Eco Volunteer.png' 
+                alt="badge"
+                width={100}
+                height={100}
+                className="w-[100px] h-[100px] rounded-[14px]"
+              />
+              <Image src='/badges/Nature Steward.png' 
+                alt="badge"
+                width={100}
+                height={100}
+                className="w-[100px] h-[100px] rounded-[14px]"
+              />
+            </section>
+          </TabsContent>
+          <TabsContent value="event-history" className="w-full mt-5 mb-10">
+              <section>
+                <EventHistoryComponent/>
+              </section>
           </TabsContent>
         </Tabs>
       </section>
