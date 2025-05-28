@@ -7,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import DonationComponent from "./_component/DonateComponent";
+import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
 
 const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
   const { eventid } = await ParamsPromise;
@@ -124,7 +125,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               since the 1500s...
             </p>
             <div className="w-full md:hidden">
-              <DiscussionButtonComponent text="Join Event" />
+              <JoinEventButtonComponent text={"Join Event"} />
             </div>
 
             {/* Image section */}
