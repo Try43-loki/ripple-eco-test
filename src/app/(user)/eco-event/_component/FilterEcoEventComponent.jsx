@@ -30,7 +30,7 @@ const FilterEcoEventComponent = () => {
             <SelectTrigger className="bg-light-gray border-none focus-visible:ring-0 text-lighter-green font-medium min-w-[162px]">
               <SelectValue placeholder={filter.placeholder} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border-lightes-white">
               <SelectItem value="all">All</SelectItem>
               <SelectItem value="recycling">Recycling</SelectItem>
               <SelectItem value="cleanup">Clean-up</SelectItem>

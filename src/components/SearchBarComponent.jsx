@@ -11,8 +11,8 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null }) => {
     <form
       // onSubmit={handleSubmit}
       className="flex w-full items-center
-             border border-stroke rounded-lg md:rounded-2xl 
-             bg-lighter-white px-3 py-2.5 md:py-3
+             border border-lightes-white rounded-lg md:rounded-2xl 
+             bg-light-gray px-3 py-1 md:py-2
              focus-within:ring-2 focus-within:ring-green
                  "
     >
