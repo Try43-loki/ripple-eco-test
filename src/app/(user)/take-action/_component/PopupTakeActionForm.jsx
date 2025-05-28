@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ImagePlus } from "lucide-react";
 import {
-    DialogClose,
+  DialogClose,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -38,17 +38,16 @@ const PopupTakeActionForm = () => {
 
   return (
     <main>
-    <form onSubmit={handleSubmit}>
-      
+      <form onSubmit={handleSubmit}>
         <DialogHeader>
-          <DialogTitle className="text-[24px] text-primary">
+          <DialogTitle className="text-2xl text-primary">
             Create Take Action
           </DialogTitle>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
-          <div className="flex flex-col gap-y-[11px] items-start">
-            <Label htmlFor="title" className="text-[18px]">
+          <div className="flex flex-col gap-3 items-start">
+            <Label htmlFor="title" className="text-lg">
               Title
             </Label>
             <Input
@@ -58,12 +57,12 @@ const PopupTakeActionForm = () => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="px-[20px] py-[15px] h-[50px] bg-[#F2F2F2] rounded-[10px] placeholder:text-[14px] placeholder:text-[#848E9B] focus-visible:ring-[1px] focus-visible:ring-[#1da761]"
+              className="px-5 py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
-          <div className="flex flex-col gap-y-[11px] items-start">
-            <Label htmlFor="send-to" className="text-[18px]">
+          <div className="flex flex-col gap-3 items-start">
+            <Label htmlFor="send-to" className="text-lg">
               Send To
             </Label>
             <Input
@@ -73,12 +72,12 @@ const PopupTakeActionForm = () => {
               required
               value={sendTo}
               onChange={(e) => setSendTo(e.target.value)}
-              className="px-[20px] py-[15px] h-[50px] bg-[#F2F2F2] rounded-[10px] placeholder:text-[14px] placeholder:text-[#848E9B] focus-visible:ring-[1px] focus-visible:ring-[#1da761]"
+              className="px-5 py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
-          <div className="flex flex-col gap-y-[11px] items-start">
-            <Label htmlFor="description" className="text-[18px]">
+          <div className="flex flex-col gap-3 items-start">
+            <Label htmlFor="description" className="text-lg">
               Description
             </Label>
             <Textarea
@@ -87,13 +86,13 @@ const PopupTakeActionForm = () => {
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="h-[100px] px-[20px] py-[15px] bg-[#F2F2F2] rounded-[10px] placeholder:text-[14px] placeholder:text-[#848E9B] focus-visible:ring-[1px] focus-visible:ring-[#1da761]"
+              className="h-24 px-5 py-3 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
-          <h4 className="text-[18px] ">
-              Image
-          </h4>
-          <div className="flex flex-col gap-y-[11px] items-center">
+
+          <h4 className="text-lg">Image</h4>
+
+          <div className="flex flex-col gap-3 items-center">
             <Input
               type="file"
               id="file"
@@ -104,18 +103,18 @@ const PopupTakeActionForm = () => {
             />
             <Label
               htmlFor="file"
-              className="h-[200px] w-[200px] border-dashed border-[#F97316] border-[1px] flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+              className="h-52 w-52 border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
             >
               {imagePreview ? (
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className=" object-cover h-full w-full"
+                  className="object-cover h-full w-full"
                 />
               ) : (
                 <>
-                  <ImagePlus className="mb-2 text-description w-[24px] h-[24px]" />
-                  <span className="text-description text-[14px]">
+                  <ImagePlus className="mb-2 text-description w-6 h-6" />
+                  <span className="text-description text-sm">
                     Upload Image
                   </span>
                 </>
@@ -124,27 +123,26 @@ const PopupTakeActionForm = () => {
           </div>
         </div>
 
-        <DialogFooter className='mt-2.5'>
+        <DialogFooter className="mt-2.5">
           <DialogClose asChild>
-          <Button
-            type="button"
-            variant="outline"
-            className="w-auto bg-[#FF3F34] hover:bg-[#FF3F34] text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
-          >
-            Cancel
-          </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-auto bg-red hover:bg-red text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
+            >
+              Cancel
+            </Button>
           </DialogClose>
-          
+
           <Button
             type="submit"
             variant="outline"
-            className="w-auto bg-primary hover:bg-[#1da761] text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
+            className="w-auto bg-meduim-green hover:bg-green hover:text-white text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
           >
             Create Take Action
           </Button>
         </DialogFooter>
-      
-    </form>
+      </form>
     </main>
   );
 };

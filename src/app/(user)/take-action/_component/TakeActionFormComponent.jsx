@@ -17,7 +17,7 @@ import { useRef } from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { Download } from 'lucide-react'
 
-const TakeActionForm = () => {
+const TakeActionFormComponent = () => {
   const form = useForm({
     defaultValues: {
       description: "",
@@ -37,10 +37,10 @@ const TakeActionForm = () => {
   const handleDownloadClick = () => {
     showCustomCenterToast(
       <div className='w-auto'>
-        <article className='flex flex-col gap-y-4 w-[500px] rounded-[20px] p-[20px] items-center justify-center bg-white shadow-lg'>
-            <BadgeCheck className='w-[170px] h-[170px] text-[#50C878]' />
+        <article className='flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg'>
+            <BadgeCheck className='w-42.5 h-42.5 text-green' />
             <h4 className='text-[35px] font-semibold'>Download Successfully!</h4>
-            <p className='text-[24px] text-[#666666]'>Your Take Action has been downloaded</p>
+            <p className='text-base text-muted-foreground'>Your Take Action has been downloaded</p>
         </article>
       </div>
       
@@ -53,25 +53,25 @@ const TakeActionForm = () => {
   const handleSubmitClick = () => {
     showCustomCenterToast(
       <div className='w-auto'>
-        <article className='flex flex-col gap-y-4 w-[500px] rounded-[20px] p-[20px] items-center justify-center bg-white shadow-lg'>
-            <BadgeCheck className='w-[170px] h-[170px] text-[#50C878]' />
-            <h4 className='text-[35px] font-semibold'>Submit Successfully!</h4>
-            <p className='text-[24px] text-[#666666]'>Your Take Action has been created</p>
+        <article className='flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg'>
+            <BadgeCheck className='w-42.5 h-42.5 text-green' />
+            <h4 className='text-4xl font-semibold'>Submit Successfully!</h4>
+            <p className='text-base text-muted-foreground'>Your Take Action has been created</p>
         </article>
       </div>
       
     )
     setTimeout(() => {
-        router.push('/take-action')  // ✅ Navigate to target page
+        router.push('/take-action')  
     }, 1000)
   }
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data)
+    
   }
 
   return (
-    <main className='p-[20px] rounded-[20px] border-1 border-[#E3E7EC] relative'>
+    <main className='p-5 rounded-2xl border-1 border-border relative'>
       {/* form data */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -79,15 +79,15 @@ const TakeActionForm = () => {
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormItem className="flex flex-col gap-y-[11px] items-start">
-                <FormLabel className="text-[26px]">Sign the Pledge</FormLabel>
+              <FormItem className="flex flex-col gap-y-2.75 items-start">
+                <FormLabel className="text-2xl">Sign the Pledge</FormLabel>
                 <FormControl className='mt-2'>
                   <Textarea
                     {...field}
                     id="description"
                     placeholder="Share your ideas here ..."
                     required
-                    className="h-[353px] px-[20px] py-[15px] bg-[#F2F2F2] rounded-[10px] placeholder:text-[18px] placeholder:text-[#848E9B] focus-visible:ring-[1px] focus-visible:ring-[#1da761]"
+                    className="h-88.25 px-5 py-3.75 bg-light-gray rounded-xl placeholder:text-lg placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
                   />
                 </FormControl>
               </FormItem>
@@ -100,16 +100,16 @@ const TakeActionForm = () => {
             <Button
               type="button"
               onClick={handleDownloadClick}
-              className='w-auto flex gap-x-[11px] bg-[#F2F3F6] hover:bg-[#F2F3F6] text-[#384C63] border border-[#F2F3F6] text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+              className='w-auto flex gap-x-2.75 bg-light-gray hover:bg-light-gray text-sub-info border border-border text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
             >
-              <Download className='w-[24px] h-[24px]' />
+              <Download className='w-6 h-6' />
               <p>Download PDF</p>
             </Button>
 
             <Button
               type="submit"
               onClick={handleSubmitClick}
-              className='w-[120px] bg-primary hover:bg-[#1da761] text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+              className='w-30 bg-red hover:bg-strong-red text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
             >
               Submit
             </Button>
@@ -120,4 +120,4 @@ const TakeActionForm = () => {
   )
 }
 
-export default TakeActionForm
+export default TakeActionFormComponent
