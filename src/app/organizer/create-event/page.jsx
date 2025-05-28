@@ -4,7 +4,6 @@ import CreateEventComponent from "./_component/CreateEventComponent";
 function CreateEcoEventPage() {
   return (
     <>
-      <h1>Create Eco Event Page</h1>
       <CreateEventComponent />
     </>
   );

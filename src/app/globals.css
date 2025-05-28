@@ -61,6 +61,7 @@
   --color-lighter-blue: var(--ongoing-bg);
   --color-darker-gray: var(--status-volunteer-color);
   --color-dark-gray: var(--cancel-color);
+  --color-hight-gray: var(--placeholder-color);
   --color-strong-gray: var(--strong-gray-color);
   --color-meduim-gray: var(--cancel-bg);
   --color-light-gray: var(--light-gray-color);
@@ -75,7 +76,9 @@
   --color-strong-orange: var(--strong-orange-color);
   --color-light-orange: var(--light-orange-color);
   --color-light-strok: var(--strok-color);
- --color-line-table: var(--line-table-color);
+  --color-line-table: var(--line-table-color);
+  --color-gray-label: var(--lable-input-color);
+
   /* font size */
   --text-label: var(--text-label-input);
   --text-sub-info: var(--text-sub-info);
@@ -157,7 +160,7 @@
   --finished-color: oklch(0.6427 0.1527 154.48);
   --finished-bg: oklch(0.976 0.0345 164.18);
   --cancel-color: oklch(0.5278 0 0);
-  --cancel-bg: oklch(0.7564 0.0279 257.04);
+  --cancel-bg:  oklch(0.6997 0.0261 259.82);
   --stroke-color: oklch(0.9038 0.0127 164.77);
   --dropdown-bg: oklch(0.9294 0.008 253.86);
   --event-type-bg: oklch(0.4097 0.0462 252.4);
@@ -174,6 +177,8 @@
   --bg-input-color: oklch(0.9612 0 0);
   --strok-color: oklch(0.9038 0.0127 164.77);
   --line-table-color: oklch(0 0 0 / 12.55%)
+  --lable-input-color: oklch(0.3624 0.0117 258.37);
+ 
   /* font-size */
 
   --text-label-input: 16px;

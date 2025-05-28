@@ -7,6 +7,9 @@ import React from "react";
 function CreateEventComponent() {
   return (
     <>
+      <h1 className="text-lg text-dark-green font-semibold mb-5">
+        Event details
+      </h1>
       <form
         action=""
         className="flex justify-center items-center flex-col gap-y-5"
@@ -14,16 +17,37 @@ function CreateEventComponent() {
         {/* section one */}
         <div className="flex justify-center items-center w-full gap-x-5">
           <div className="grid w-full max-w-sm items-center gap-1.5 ">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="Email" />
+            <Label htmlFor="email" className="text-gray-label">
+              Title
+            </Label>
+            <Input
+              type="email"
+              id="email"
+              placeholder="Tree planting"
+              className="bg-lighter-white text-sub-info text-gray-400 border-none h-10"
+            />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="Email" />
+          <div className="grid w-full max-w-sm items-center gap-1.5 ">
+            <Label htmlFor="email" className="text-gray-label">
+              Title
+            </Label>
+            <Input
+              type="email"
+              id="email"
+              placeholder="Tree planting"
+              className="bg-lighter-white text-sub-info text-gray-400 border-none h-10"
+            />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="Email" />
+          <div className="grid w-full max-w-sm items-center gap-1.5 ">
+            <Label htmlFor="email" className="text-gray-label">
+              Title
+            </Label>
+            <Input
+              type="email"
+              id="email"
+              placeholder="Tree planting"
+              className="bg-lighter-white text-sub-info text-gray-400 border-none h-10"
+            />
           </div>
         </div>
         {/* section two */}
