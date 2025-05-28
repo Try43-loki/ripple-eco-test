@@ -1,3 +1,4 @@
+import React from "react";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,12 +15,11 @@ import {
   Sparkles,
   SquarePen,
 } from "lucide-react";
-import React from "react";
-import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
-import DisccusionComponent from "./_component/DisccusionComponent";
-import TakeActionComponent from "./_component/TakeActionComponent";
 import Image from "next/image";
 import EventHistoryComponent from "./_component/EventHistoryComponent";
+import TakeActionComponent from "./_component/TakeActionComponent";
+import DisccusionComponent from "./_component/DiscussionComponent";
+import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 
 const ProfilePage = () => {
   return (
@@ -62,27 +62,58 @@ const ProfilePage = () => {
       </article>
 
       <section className="mt-12 mx-36">
-        <Tabs defaultValue="events" className="w-full">
-          <TabsList className="flex gap-2 bg-white rounded-xl p-2 border border-border">
-            {[
-              { value: "event-history", icon: <Clock />, label: "Event History" },
-              { value: "own-feedback", icon: <MessagesSquare />, label: "Own Feedback" },
-              { value: "discussion", icon: <MessageCircleQuestion />, label: "Discussion" },
-              { value: "take-action", icon: <ClipboardList />, label: "Take Action" },
-              { value: "earned-badge", icon: <Sparkles />, label: "Earn Badge" },
-            ].map(({ value, icon, label }) => (
-              <TabsTrigger
-                key={value}
-                value={value}
-                className={cn(
-                  "text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-2 items-center transition-colors",
-                  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
-                )}
-              >
-                {React.cloneElement(icon, { className: "w-4.5 h-4.5" })}
-                <p>{label}</p>
-              </TabsTrigger>
-            ))}
+        <Tabs defaultValue="event-history" className="w-full">
+        <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
+            <TabsTrigger
+              value="event-history"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+              )}
+            >
+              <Clock className="w-4.5 h-4.5" />
+              <p>Event History</p>
+            </TabsTrigger>
+            <TabsTrigger
+              value="own-feedback"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+              )}
+            >
+              <MessagesSquare className="w-4.5 h-4.5"/>
+              <p>Own Feedback</p>
+            </TabsTrigger>
+            <TabsTrigger
+              value="discussion"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+              )}
+            >
+              <MessageCircleQuestion className="w-4.5 h-4.5" />
+              <p>Discussion</p>
+            </TabsTrigger>
+            <TabsTrigger
+              value="take-action"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+              )}
+            >
+              <ClipboardList className="w-4.5 h-4.5" />
+              <p>Take Action</p>
+            </TabsTrigger>
+            <TabsTrigger
+              value="earned-badge"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+              )}
+            >
+              <Sparkles className="w-4.5 h-4.5" />
+              <p>Earn Badge</p>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="own-feedback" className="w-full mt-5 mb-10">
@@ -106,7 +137,7 @@ const ProfilePage = () => {
                   alt="badge"
                   width={100}
                   height={100}
-                  className="w-[100px] h-[100px] rounded-xl"
+                  className="w-25 h-25 rounded-xl"
                 />
               ))}
             </section>

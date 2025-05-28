@@ -10,10 +10,10 @@ const OwnFeedBackCardComponent = ({ link, desc }) => {
   let paddingY;
 
   if (image === "") {
-    paddingY = "py-6"; // py-[24px] -> py-6
+    paddingY = "py-6"; 
     isHasImage = false;
   } else {
-    paddingY = ""; // No padding override if image exists
+    paddingY = ""; 
   }
 
   return (
