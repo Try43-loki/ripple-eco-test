@@ -5,7 +5,7 @@ import TopRankingComponent from './_component/TopRankingComponent'
 
 const LeaderboardPage = () => {
   return (
-    <div className='bg-black'>
+    <div>
       {/* Hero Section */}
       <LeaderboardHeroSectionComponent/>
 

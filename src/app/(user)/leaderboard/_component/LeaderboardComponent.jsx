@@ -3,104 +3,147 @@ import Image from "next/image";
 
 const ChampionsLeaderboardComponent = () => {
   return (
-    <div className="w-[2260px] pr-12 md:pr-40 lg:pr-90 pt-80 ">
-      <section className="relative px-6 md:px-20 lg:px-45 ">
-        <article className="bg-white rounded-3xl shadow-md overflow-visible flex justify-between items-start px-8 py-6 md:px-12 md:py-8 lg:px-16 lg:py-10">
-          {/* Left side: toggle + text */}
-          <div className="max-w-xl">
-            {/* Toggle */}
-            <div className="flex gap-3 mb-4 justify-start">
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 text-gray-800 shadow-sm">
-                <Image
-                  src="/assets/building.png"
-                  alt="building"
-                  width={20}
-                  height={20}
-                />
-                <span className="font-medium text-sm md:text-base lg:text-lg">
-                  Organizer
-                </span>
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green text-white shadow-inner">
-                <Image
-                  src="/assets/profile2user.png"
-                  alt="user"
-                  width={20}
-                  height={20}
-                />
-                <span className="font-medium text-sm md:text-base lg:text-lg">
-                  User
-                </span>
-              </button>
-            </div>
-
-            {/* Title & description */}
-            <h1 className="text-green text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Green Champions Leaderboard
-            </h1>
-            <p className="text-dark-green text-sm md:text-base lg:text-lg mt-2">
-              Share more, do more—earn your spot and motivate others to join in.
-            </p>
+    <div className="w-full px-6 sm:px-6 md:px-6 lg:px-45 xl:px-45 pt-32 sm:pt-40 md:pt-48 lg:pt-56">
+      <article className="relative bg-white rounded-3xl shadow-md overflow-visible flex flex-col md:flex-row lg:flex-row justify-between items-start p-6 sm:p-8 md:p-10 lg:p-12 ">
+        {/* ----- Left side: toggle + text ----- */}
+        <div className="max-w-full md:max-w-lg mb-20 md:mb-0">
+          <div className="flex gap-3 mb-4">
+            <button className="flex items-center gap-1 md:gap-2 lg:gap-2 px-2 py-1 lg:px-3 lg:py-2 rounded-xl border border-gray-300 text-dark-green shadow-sm text-xs md:text-base lg:text-lg">
+              <Image
+                src="/assets/building.png"
+                alt="building"
+                width={20}
+                height={20}
+              />
+              Organizer
+            </button>
+            <button className="flex items-center gap-1 md:gap-2 lg:gap-2 px-2 py-1 lg:px-3 lg:py-2 rounded-xl bg-green text-white shadow-inner text-xs md:text-base lg:text-lg">
+              <Image
+                src="/assets/profile2user.png"
+                alt="user"
+                width={20}
+                height={20}
+              />
+              User
+            </button>
           </div>
 
-          {/* Right side: podiums */}
-          <div className="flex items-end gap-6 relative -mr-0">
+          {/* Title & description */}
+          <h1 className="text-green text-xl md:text-2xl lg:text-4xl font-bold leading-tight">
+            Green Champions Leaderboard
+          </h1>
+          <p className="text-dark-green text-xs md:text-md lg:text-xl mt-2">
+            Share more, do more—earn your spot and motivate others to join in.
+          </p>
+        </div>
+
+        {/* No responsive yet */}
+
+        {/* ----- Right side: podiums ----- */}
+        <div className="relative flex-1">
+          {/* Podium container pinned to bottom-right */}
+          <div className="absolute top-3 right-0 flex items-end ">
             {/* 2nd place */}
-            <div className="flex flex-col items-center">
-              <div className="relative">
-                <div className="rounded-t-3xl flex justify-center items-end">
-                  {/* <span className="text-white text-2xl font-bold mb-3">2</span> */}
-                  <Image src="/assets/board-2.png" alt="board" width={130} height={60} className=""></Image>
-                </div>
+            <div className="flex flex-col items-center relative z-0">
+              {/* Profile + wreath */}
+              <div className="absolute -top-8 sm:-top-10 md:-top-12 flex items-center gap-1">
                 <Image
-                  src="/assets/profile.png"
+                  src="/assets/leaderboard/laurel-wreath-left-02.png"
+                  alt=""
+                  width={20}
+                  height={64}
+                />
+                <Image
+                  src="/assets/image.jpg"
                   alt="2nd"
                   width={64}
                   height={64}
-                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white"
+                  className="rounded-full "
+                />
+                <Image
+                  src="/assets/leaderboard/laurel-wreath-right-02.png"
+                  alt=""
+                  width={20}
+                  height={64}
                 />
               </div>
-              {/* <span className="text-gray-600 text-sm mt-2">2nd</span> */}
+              {/* Podium block */}
+              <Image
+                src="/assets/board-2.png"
+                alt="2nd"
+                width={130}
+                height={60}
+              />
             </div>
 
             {/* 1st place */}
-            <div className="flex flex-col items-center z-10">
-              <div className="relative">
-                <div className=" rounded-t-3xl flex justify-center items-end">
-                  <Image src="/assets/board.png" alt="board" width={130} height={100} className=""></Image>
-                  {/* <span className="text-white text-2xl font-bold mb-3">1</span> */}
-                </div>
+            <div className="flex flex-col items-center relative z-10">
+              {/* Profile + wreath */}
+              <div className="absolute -top-10 sm:-top-12 md:-top-14 flex items-center gap-1">
                 <Image
-                  src="/assets/profile.png"
+                  src="/assets/laurel-wreath-left-01.png"
+                  alt=""
+                  width={20}
+                  height={64}
+                />
+                <Image
+                  src="/assets/image.jpg"
                   alt="1st"
                   width={64}
                   height={64}
-                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white"
+                  className="rounded-full "
+                />
+                <Image
+                  src="/assets/laurel-wreath-right-01.png"
+                  alt=""
+                  width={20}
+                  height={64}
                 />
               </div>
-              {/* <span className="text-gray-600 text-sm mt-2">1st</span> */}
+              {/* Podium block */}
+              <Image
+                src="/assets/board.png"
+                alt="1st"
+                width={130}
+                height={100}
+              />
             </div>
 
             {/* 3rd place */}
-            <div className="flex flex-col items-center">
-              <div className="relative">
-                <div className="rounded-t-3xl flex justify-center items-end">
-                  <Image src="/assets/board-3.png" alt="board" width={130} height={60} className=""></Image>
-                  {/* <span className="text-white text-2xl font-bold mb-3">3</span> */}
-                </div>
+            <div className="flex flex-col items-center relative z-0">
+              {/* Profile + wreath */}
+              <div className="absolute -top-8 sm:-top-10 md:-top-12 flex items-center gap-1">
                 <Image
-                  src="/assets/image.png"
+                  src="/assets/leaderboard/laurel-wreath-left-03.png"
+                  alt=""
+                  width={20}
+                  height={64}
+                />
+                <Image
+                  src="/assets/image.jpg"
                   alt="3rd"
                   width={64}
                   height={64}
-                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white"
+                  className="rounded-full"
+                />
+                <Image
+                  src="/assets/leaderboard/laurel-wreath-right03.png"
+                  alt=""
+                  width={20}
+                  height={64}
                 />
               </div>
-              {/* <span className="text-gray-600 text-sm mt-2">3rd</span> */}
+              {/* Podium block */}
+              <Image
+                src="/assets/board-3.png"
+                alt="3rd"
+                width={130}
+                height={60}
+              />
             </div>
           </div>
-        </article>
-      </section>
+        </div>
+      </article>
     </div>
   );
 };

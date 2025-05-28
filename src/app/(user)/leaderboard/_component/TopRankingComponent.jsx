@@ -7,29 +7,30 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { SunDim } from "lucide-react";
+import { Recycle, TreeDeciduous, HandHeart } from "lucide-react";
 import Image from "next/image";
 
 const TopRankingComponent = () => {
   return (
     <div>
       <section className="flex gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white px-6 md:px-20 lg:px-45 pt-45 md:pt-35 lg:pt-35 pb-10">
+        {/* Top  */}
         <div>
-          <h2 className="text-lg md:text-2xl lg:text-3xl text-dark-green font-bold">
-            Top Organizer Ranking
+          <h2 className="text-xl lg:text-2xl xl:text-3xl text-dark-green font-bold">
+            Top User Ranking
           </h2>
         </div>
 
-        <article className="flex gap-2 text-md md:text-lg lg:text-xl">
+        <article className="flex gap-3 text-md md:text-lg lg:text-xl items-center justify-start ">
           <div>
-            <p className="pt-1 lg:pt-2 text-lighter-green">Filter by:</p>
+            <p className=" text-lighter-green ">Filter by:</p>
           </div>
           {/* province */}
-          <div className="pt-0 lg:pt-1">
+          <div className="">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-lighter-white text-lighter-green hover:text-lighter-green text-sm md:text-md lg:text-lg lg:px-7">
+                  <NavigationMenuTrigger className="bg-lighter-white text-lighter-green hover:text-lighter-green text-sm md:text-md lg:text-lg px-7">
                     Province
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -192,11 +193,11 @@ const TopRankingComponent = () => {
           </div>
 
           {/* category type */}
-          <div className="pt-0 lg:pt-1">
+          <div className="">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-lighter-white text-lighter-green hover:text-lighter-green text-sm md:text-md lg:text-lg lg:px-7">
+                  <NavigationMenuTrigger className="bg-lighter-white text-lighter-green hover:text-lighter-green text-sm md:text-md lg:text-lg px-7">
                     Category Type
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -205,21 +206,21 @@ const TopRankingComponent = () => {
                         href=""
                         className="w-full flex flex-row items-center gap-x-2 text-sm md:text-md lg:text-lg"
                       >
-                        <SunDim />
+                        <Recycle />
                         Enviroment Cleaning
                       </NavigationMenuLink>
                       <NavigationMenuLink
                         href=""
                         className="w-full flex flex-row items-center gap-x-2 text-sm md:text-md lg:text-lg"
                       >
-                        <SunDim />
+                        <TreeDeciduous />
                         Tree Planting
                       </NavigationMenuLink>
                       <NavigationMenuLink
                         href=""
                         className="w-full flex flex-row items-center gap-x-2 text-sm md:text-md lg:text-lg"
                       >
-                        <SunDim />
+                        <HandHeart />
                         Donation
                       </NavigationMenuLink>
                     </div>
@@ -266,14 +267,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -313,14 +314,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -358,14 +359,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -389,14 +390,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -420,14 +421,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -451,14 +452,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -482,14 +483,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -513,14 +514,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -544,14 +545,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
@@ -575,14 +576,14 @@ const TopRankingComponent = () => {
                   height={80}
                   className="rounded-full"
                 ></Image>
-                <h2 className="text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+                <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                   Username
                 </h2>
               </div>
 
-              <div className="flex gap-45 items-center text-md md:text-lg lg:text-2xl mt-1 text-dark-green">
+              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                 <p className=" font-bold">12</p>
-                <p className=" bg-meduim-white px-5 py-2 rounded-full">
+                <p className=" bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                   #RiverCleanup
                 </p>
               </div>
