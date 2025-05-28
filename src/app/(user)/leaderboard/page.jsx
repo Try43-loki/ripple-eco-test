@@ -1,6 +1,6 @@
 import React from 'react'
 import LeaderboardHeroSectionComponent from './_component/LeaderboardHeroSectionComponent'
-import ChampionsLeaderboardComponent from './_component/ChampionsLeaderboardComponent'
+import ChampionsLeaderboardComponent from './_component/LeaderboardComponent'
 import TopRankingComponent from './_component/TopRankingComponent'
 
 const LeaderboardPage = () => {

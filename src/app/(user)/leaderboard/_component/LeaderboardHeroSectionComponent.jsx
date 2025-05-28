@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import ChampionsLeaderboardComponent from "./ChampionsLeaderboardComponent";
+import ChampionsLeaderboardComponent from "./LeaderboardComponent";
 const LeaderboardHeroSectionComponent = () => {
   return (
     <div>
