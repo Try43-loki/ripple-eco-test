@@ -5,7 +5,7 @@ import React from 'react'
 const FooterComponent = () => {
   return (
     <>
-        <footer className="py-12 bg-black text-white">
+        <footer className="py-12 bg-footer text-white">
             <div className='flex items-start justify-between px-40'>
                 <aside className='flex flex-col items-start gap-y-[20px]'>
                     <h2 className='text-[24px]'>ripple<span className='text-[#048d4c]'>Eco</span></h2> 
