@@ -4,9 +4,9 @@ import FooterComponent from "@/components/FooterComponent";
 export default function UserLayout({ children }) {
   return (
     <main>
-      <NavBarComponent />
+      {/* <NavBarComponent /> */}
       {children}
-      <FooterComponent />
+      {/* <FooterComponent /> */}
     </main>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import DiscussionButtonComponent from "@/app/(user)/discussion-forums/_component/DiscussionButtonComponent";
+import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
