@@ -21,9 +21,6 @@ function VolunteerPage() {
             </p>
             <div className="h-[500px]">
               <CardEcoEventComponent />
-              <CardEcoEventComponent />
-              <CardEcoEventComponent />
-              <CardEcoEventComponent />
             </div>
           </div>
 
