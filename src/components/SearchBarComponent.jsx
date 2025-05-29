@@ -21,7 +21,7 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null }) => {
         placeholder={placeholder}
         className="flex-1 outline-none bg-transparent text-green 
              text-xs md:text-sm lg:text-base ml-3 
-             placeholder:text-dark-green"
+             placeholder:text-lighters-green"
         aria-label="Search input"
       />
       <div className="ml-2">

@@ -1,11 +1,11 @@
-import CommentComponent from "@/app/(user)/discussion-forums/[discussionId]/_component/CommentComponent";
 import CommentSectionComponent from "@/app/(user)/discussion-forums/[discussionId]/_component/CommentSectionComponent";
-import CommentButtonComponent from "@/app/(user)/discussion-forums/_component/CommentButtonComponent";
 import DiscussionCardComponent from "@/app/(user)/discussion-forums/_component/DiscussionCardComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
+import { getAllDiscussionsService } from "@/service/discussionService";
 import React from "react";
 
 const DiscussioForumsDetailPage = async ({ params: ParamsPromise }) => {
+  const discussions = await getAllDiscussionsService();
   const { discussionid } = await ParamsPromise;
 
   // Hero Section param data
@@ -36,7 +36,7 @@ const DiscussioForumsDetailPage = async ({ params: ParamsPromise }) => {
         <DiscussionCardComponent fullWidth />
 
         {/* Comment Section */}
-        <CommentSectionComponent />
+        <CommentSectionComponent discussions={discussions} />
       </article>
     </main>
   );

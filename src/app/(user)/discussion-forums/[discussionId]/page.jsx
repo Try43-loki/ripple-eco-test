@@ -3,8 +3,12 @@ import CommentSectionComponent from "./_component/CommentSectionComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
+import { getAllDiscussionsService } from "@/service/discussionService";
 
 const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
+  const discussions = await getAllDiscussionsService();
+  const discussionId = discussions.data.discussionId;
+
   const heroSectionText = {
     title: "DISCUSSION FORUMS",
     description:
@@ -18,7 +22,7 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
     current: "Recycling",
     link: "/discussion-forums",
   };
-  const { discussionId } = await ParamsPromise;
+  // const { discussionId } = await ParamsPromise;
   return (
     <main className="w-full h-full flex flex-col ">
       {/* <div>DiscussionPageDetails id : {discussionId}</div> */}
@@ -40,8 +44,8 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
 
       {/* Card Discussion */}
       <div className="w-full px-6 md:px-20 lg:px-[150px]">
-        <CardDiscussionComponent image={img || ""} />
-        <CommentSectionComponent />
+        <CardDiscussionComponent discussions={discussions} image={img || ""} />
+        <CommentSectionComponent discussions={discussions} />
       </div>
     </main>
   );

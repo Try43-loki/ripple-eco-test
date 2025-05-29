@@ -6,7 +6,7 @@ const PostComponent = () => {
   return (
     <article className="flex flex-col w-full max-w-sm md:max-w-md lg:max-w-lg mt-3">
       {/* Subtext */}
-      <p className="text-xs md:text-sm lg:text-base text-lighter-green">
+      <p className="text-xs md:text-sm lg:text-base text-lighters-green">
         10 Discussions found
       </p>
 
