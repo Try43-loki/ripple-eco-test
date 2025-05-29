@@ -1,3 +1,5 @@
+
+// import HeroSection from "@/components/HeroSection";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import React from "react";
 import TakeActionCard from "./_component/TakeActionCard";
@@ -14,14 +16,9 @@ const TakeActionPage = () => {
     search: false,
   };
   return (
-    <section className="w-full">
-      {/* Hero Secition */}
-      <HeroSectionComponent
-        text={heroSectionText.title}
-        description={heroSectionText.description}
-        showSearchBar={heroSectionText.search}
-      />
-      <section className="mt-12 flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-4 md:px-12 lg:px-32 my-6 w-full">
+    <main>
+      {/* <HeroSection title={"Take Action"} /> */}
+      <section className="mt-[48px] flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-4 md:px-12 lg:px-32 my-6 w-full">
         {/* Search bar */}
         <SearchBarComponent placeholder={"Search Discussion"} />
 

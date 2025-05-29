@@ -1,7 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Star } from 'lucide-react';
-import React from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Star } from "lucide-react";
+import React from "react";
 
 const OwnFeedBackCardComponent = ({ link, desc }) => {
   const isLoading = false;
@@ -10,15 +15,17 @@ const OwnFeedBackCardComponent = ({ link, desc }) => {
   let paddingY;
 
   if (image === "") {
-    paddingY = "py-6"; 
+    paddingY = "py-6";
     isHasImage = false;
   } else {
-    paddingY = ""; 
+    paddingY = "";
   }
 
   return (
     <main>
-      <Card className={`w-full rounded-2xl flex flex-col items-center gap-y-5 border border-border ${paddingY}`}>
+      <Card
+        className={`w-full rounded-2xl flex flex-col items-center gap-y-5 border border-border ${paddingY}`}
+      >
         <CardContent className="flex items-center justify-between w-full">
           <div>
             {isLoading ? (

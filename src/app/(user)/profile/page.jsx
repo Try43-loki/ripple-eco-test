@@ -16,11 +16,11 @@ import {
   SquarePen,
 } from "lucide-react";
 import Image from "next/image";
-import EventHistoryComponent from "./_component/EventHistoryComponent";
-import TakeActionComponent from "./_component/TakeActionComponent";
-import DisccusionComponent from "./_component/DiscussionComponent";
-import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 
+import TakeActionComponent from "./_component/TakeActionComponent";
+import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
+import DisccusionComponent from "./_component/DisccusionComponent";
+import EventHistoryComponent from "./_component/EventHistoryComponent";
 const ProfilePage = () => {
   return (
     <main>
@@ -133,27 +133,40 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
-            <section className="flex items-center gap-5">
-              {[
-                "Green Helper",
-                "Eco Hero",
-                "Eco Volunteer",
-                "Nature Steward",
-              ].map((badge) => (
-                <Image
-                  key={badge}
-                  src={`/badges/${badge}.png`}
-                  alt="badge"
-                  width={100}
-                  height={100}
-                  className="w-25 h-25 rounded-xl"
-                />
-              ))}
+            <section className="flex">
+              <Image
+                src="/badges/Eco Hero.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
+              />
+              <Image
+                src="/badges/Eco Volunteer.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
+              />
+              <Image
+                src="/badges/Green Helper.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
+              />
+              <Image
+                src="/badges/Nature Steward.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
+              />
             </section>
           </TabsContent>
 
           <TabsContent value="event-history" className="w-full mt-5 mb-10">
-            <EventHistoryComponent />
+            {/* <EventHistoryComponent/> */}
           </TabsContent>
         </Tabs>
       </section>
