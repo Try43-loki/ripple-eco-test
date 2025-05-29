@@ -13,7 +13,7 @@ import React from "react";
 const TakeActionCard = ({ image, title, description, support, layout }) => {
   return (
     <main>
-      <Card className="p-0 pb-4 w-full rounded-2xl">
+      <Card className="p-0 pb-4 w-full rounded-2xl border border-light-strok">
         <CardContent className="px-1.75 py-[5px] h-[155px] relative">
           <Image
             src={image}
@@ -68,7 +68,6 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
           </div>
         )}
       </Card>
-      00
     </main>
   );
 };

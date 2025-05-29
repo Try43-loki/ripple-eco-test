@@ -19,6 +19,8 @@ import {
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
+import NotificationItem from "./NotificationComponent";
+import { KnockProvider } from "@knocklabs/react";
 const NavBarComponent = () => {
   const currentPath = usePathname();
 
@@ -142,7 +144,12 @@ const NavBarComponent = () => {
                 Leaderbord
               </Link>
               <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
-                <Bell className="text-[#048d4c]" />
+                <KnockProvider
+                  apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
+                  userId={3}
+                >
+                  <NotificationItem />
+                </KnockProvider>
                 <div className="flex items-center">
                   <Popover>
                     <PopoverTrigger>

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BookOpenCheck, Ellipsis, LibraryBig, NotebookPen } from "lucide-react";
 
-export function NotificationManageComponent() {
+export function NotificationManageComponent({ markRead }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="border-0 p-0 m-0 shadow-none">
@@ -16,7 +16,7 @@ export function NotificationManageComponent() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-white border border-light-strok p-2 space-y-1">
         <p className="text-sm text-light-green hover:text-strong-green cursor-pointer flex justify-start gap-x-2 items-center">
-          <NotebookPen size={15} className="inline-block " />
+          <NotebookPen size={15} className="inline-block " onClick={markRead} />
           Read
         </p>
         <p className="text-sm text-light-green hover:text-strong-green cursor-pointer flex justify-start gap-x-2 items-center">

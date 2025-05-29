@@ -11,6 +11,7 @@ import {
 } from "@knocklabs/react";
 import { useEffect } from "react";
 import NotificationTabs from "./NotificationTabComponent";
+import { Bell } from "lucide-react";
 
 const NotificationItem = () => {
   const knockClient = useKnockClient();
@@ -31,23 +32,29 @@ const NotificationItem = () => {
   const MarkReadAll = () => {
     feedClient.markAllAsRead();
   };
-
+  const Archived = (item) => {
+    feedClient.markAllAsArchived(item);
+  };
   const MarkRead = (item) => {
     feedClient.markAsRead(item);
   };
-
   {
-    items?.map((item) => (
-      <div key={item.id}>
-        <div dangerouslySetInnerHTML={{ __html: item.blocks[0].rendered }} />
-      </div>
-    ));
+    /* {items?.map((item) => (
+              <div key={item.id}>
+                <div
+                  onClick={Archived}
+                  dangerouslySetInnerHTML={{ __html: item.blocks[0].rendered }}
+                />
+              </div>
+            ))} */
   }
   return (
     <div className="notifications">
       <Popover>
-        <PopoverTrigger>Open</PopoverTrigger>
-        <PopoverContent className="w-96 border border-light-strok">
+        <PopoverTrigger>
+          <Bell className="text-[#048d4c]" />
+        </PopoverTrigger>
+        <PopoverContent className="w-96 border border-light-strok bg-white">
           You have {metadata?.total_count} unread items
           <section className="w-full">
             <div className="flex justify-between items-center">
@@ -58,7 +65,7 @@ const NotificationItem = () => {
                 Mark all as read
               </p>
             </div>
-            <NotificationTabs messages={items} />
+            <NotificationTabs messages={items} markRead={MarkRead} />
           </section>
         </PopoverContent>
       </Popover>

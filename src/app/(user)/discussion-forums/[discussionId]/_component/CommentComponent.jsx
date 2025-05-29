@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { MessageCircle, Trash2, User2, SendHorizonal, X } from "lucide-react";
 import UserCommentComponent from "./UserCommentComponent";
 import { useCommentSocket } from "../../../../../../socket/socket";
+import { sendCommentAction } from "@/action/NotificationAction";
 
 const CommentComponent = ({ discussions }) => {
   const [commentInputs, setCommentInputs] = useState("");
@@ -35,6 +36,7 @@ const CommentComponent = ({ discussions }) => {
       addComment(commentDetail);
       setCommentInputs("");
       setReplyTarget(null);
+      sendCommentAction("add");
     }
   };
 
