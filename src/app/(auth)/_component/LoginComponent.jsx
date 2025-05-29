@@ -90,14 +90,14 @@ function LoginComponent({ onNext }) {
                 </div>
 
                 <Link
-                  href="#"
+                  href="/forget-password"
                   className="underline text-end w-full my-2 font-light  text-white text-sub-info "
                 >
                   Forgot your password?
                 </Link>
                 <Button
                   onClick={onNext}
-                  className="w-full h-10 bg-green text-white text-md text text-center cursor-pointer rounded-2xl p-4"
+                  className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
                 >
                   Login
                 </Button>
@@ -120,7 +120,10 @@ function LoginComponent({ onNext }) {
             </Button>
             <p className="text-[12px] text-light-gray font-light">
               Are you new here?{" "}
-              <Link className="underline text-[12px] font-medium" href="#">
+              <Link
+                className="underline text-[12px] font-medium"
+                href="/register"
+              >
                 Sign up
               </Link>{" "}
             </p>

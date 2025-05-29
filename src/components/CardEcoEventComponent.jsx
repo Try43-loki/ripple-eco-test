@@ -45,10 +45,10 @@ const CardEcoEventComponent = () => {
 
           {/* Location & Going Info */}
           <p className="text-light-green text-sm mt-1">Phnom Penh, Cambodia</p>
-          <p className="text-lighter-green text-sm mt-1 mb-3">100 going</p>
+          <p className="text-green text-sm mt-1 mb-3">100 going</p>
 
           {/* Action Buttons */}
-          <div className="flex pt-2 justify-between">
+          <div className="flex pt-2 justify-between gap-x-2 w-full">
             <button className="py-2 px-8 md:px-11 lg:px-14 bg-light-gray rounded-md flex items-center gap-2">
               <Image
                 src="/assets/tick-circle.png"

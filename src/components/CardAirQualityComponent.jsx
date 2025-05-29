@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-
 const CardAirQualityComponent = () => {
   return (
     <div className="bg-[#FFF6D4] w-fit max-w-full md:w-[500px] lg:w-[520px] rounded-3xl p-5 sm:p-6 lg:p-8 shadow-md">
@@ -24,7 +23,7 @@ const CardAirQualityComponent = () => {
 
           {/* Pollutant Info */}
           <div className="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-6 lg:gap-12 pt-2 text-left">
-            <p className="text-lighter-green text-sm sm:text-base lg:text-lg font-light">
+            <p className="text-light-green text-sm sm:text-base lg:text-lg font-light">
               Main pollutant:{" "}
               <span className="text-dark-green font-medium">PM2.5</span>
             </p>
@@ -43,7 +42,7 @@ const CardAirQualityComponent = () => {
                 height={20}
                 className="w-4 h-4 lg:w-5 lg:h-5"
               ></Image>
-              <p className="text-lighter-green text-sm sm:text-base lg:text-lg">
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
                 5.5 km/h
               </p>
             </div>
@@ -56,7 +55,7 @@ const CardAirQualityComponent = () => {
                 height={10}
                 className="w-4 h-4 lg:w-5 lg:h-5"
               ></Image>
-              <p className="text-lighter-green text-sm sm:text-base lg:text-lg">
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
                 33°
               </p>
             </div>
@@ -69,7 +68,7 @@ const CardAirQualityComponent = () => {
                 height={20}
                 className="w-4 h-4 lg:w-5 lg:h-5"
               ></Image>
-              <p className="text-lighter-green text-sm sm:text-base lg:text-lg">
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
                 62%
               </p>
             </div>

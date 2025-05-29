@@ -33,6 +33,7 @@ function LoginSuccessComponent() {
               className="rounded-full"
               width={50}
               height={50}
+              alt="tick-circle"
             ></Image>
           </div>
           <h1 className="text-white text-2xl">Registration Successful</h1>
