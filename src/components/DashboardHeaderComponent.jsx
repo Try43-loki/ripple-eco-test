@@ -24,7 +24,7 @@ const DashboardHeaderComponent = ({
           {/* Dynamic Button */}
           {buttonAction === "create-discussion" ? (
             // Button to open the Create Discussion Modal
-            <div>
+            <div className="">
               <CreateDiscussionComponent />
             </div>
           ) : buttonAction === "create-event" ? (

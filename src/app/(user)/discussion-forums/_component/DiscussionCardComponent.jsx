@@ -14,7 +14,7 @@ const DiscussionCardComponent = ({ image, fullWidth }) => {
             <h2 className="text-sm md:text-base lg:text-lg font-semibold text-dark-green">
               Sochetra
             </h2>
-            <p className="text-xs md:text-sm lg:text-base text-lighter-green">
+            <p className="text-xs md:text-sm lg:text-base text-lighters-green">
               8:00 PM
             </p>
           </div>
@@ -26,7 +26,7 @@ const DiscussionCardComponent = ({ image, fullWidth }) => {
             Have you participated in river-cleanup efforts or citizen-science
             water testing?
           </h2>
-          <p className="text-xs md:text-sm lg:text-base text-lighter-green mt-2">
+          <p className="text-xs md:text-sm lg:text-base text-lighters-green mt-2">
             These hands-on initiatives empower locals to remove debris, monitor
             pollution levels, and contribute valuable data to guide river
             conservation.
