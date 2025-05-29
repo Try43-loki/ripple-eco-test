@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
+import Link from "next/link";
 
 const DiscussionSectionComponent = () => {
   const btnDiscussion = "Start Discussion";
@@ -15,13 +16,13 @@ const DiscussionSectionComponent = () => {
             <h2 className="text-dark-green text-2xl md:text-3xl lg:text-4xl font-bold">
               Green Conversations For a Cleaner Tomorrow
             </h2>
-            <p className="text-light-green text-sm md:text-base lg:text-lg mt-2 ">
+            <p className="text-light-green text-sm md:text-base lg:text-lg mt-2 mb-6">
               Share ideas, explore solutions, and connect with others driving
               environmental change.
             </p>
-            <div className="my-6">
+            <Link href="/discussion-forums">
               <DiscussionButtonComponent text={btnDiscussion} />
-            </div>
+            </Link>
           </div>
           <div className="mt-5">
             <Image

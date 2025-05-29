@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import NavBarComponent from "@/components/NavbarComponent";
+import Link from "next/link";
 
 const HomeHeroSectionComponent = () => {
   return (
@@ -30,9 +30,11 @@ const HomeHeroSectionComponent = () => {
           Join events, share ideas, and lead initiatives that motivate your
           community to create lasting, positive change.
         </h2>
-        <button className="text-base md:text-lg lg:text-xl bg-green px-5 md:px-8 lg:px-12 py-3 rounded-xl hover:bg-[#339622] transition">
-          Explore
-        </button>
+        <Link href="/eco-event">
+          <button className="text-base cursor-pointer md:text-lg lg:text-xl bg-green px-5 md:px-8 lg:px-12 py-3 rounded-xl hover:bg-[#339622] transition">
+            Explore
+          </button>
+        </Link>
       </div>
     </section>
   );

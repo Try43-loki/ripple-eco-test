@@ -1,6 +1,7 @@
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
-import React from "react";
 
+import React from "react";
+import Link from "next/link";
 
 const EcoEventSectionComponent = () => {
   const events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Replace with fetch data later

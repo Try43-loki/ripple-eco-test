@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
+import Link from "next/link";
 
 const TakeActionSectionComponent = () => {
   const btnTakeAction = "Call to Action";
@@ -32,9 +33,9 @@ const TakeActionSectionComponent = () => {
               Every pledge adds up. Commit to eco-action and help build a
               sustainable tomorrow.
             </p>
-            <div className="">
+            <Link href="/take-action">
               <DiscussionButtonComponent text={btnTakeAction} />
-            </div>
+            </Link>
           </div>
         </div>
 

@@ -7,7 +7,7 @@ export default function VolunteerComponent() {
       id: 1,
       profile: "/assets/profileVolunteer.png",
       username: "Zain",
-      gender: "Male",
+      gender: "Female",
       age: "24",
       dateOfBirth: "01 - 01 - 2000",
       address: "Khan Toul Kork, Phnom Penh",

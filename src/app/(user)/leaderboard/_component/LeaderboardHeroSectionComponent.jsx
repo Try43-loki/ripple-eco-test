@@ -17,7 +17,7 @@ const LeaderboardHeroSectionComponent = () => {
       </div>
 
       {/* Overlay leaderboard */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full pt-45 md:pt-25 lg:pt-55 px-6 md:px-20 lg:px-45">
         <ChampionsLeaderboardComponent />
       </div>
     </section>
