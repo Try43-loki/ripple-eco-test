@@ -23,7 +23,7 @@ const CardInformationAQI = (props) => {
     humidity,
   } = props.dataCard;
 
-  const { bg, label, text } = props.levelColor;
+  const { bg, label, text, bgRaw } = props.levelColor;
 
   const bgGreen = "#CDE8DB";
   const bgYellow = "#FAF0CC";
@@ -32,9 +32,7 @@ const CardInformationAQI = (props) => {
 
   return (
     <article
-      className={clsx(
-        "flex h-full w-fit gap-5 px-10 py-7 rounded-3xl bg-white/90 backdrop-blur-xs"
-      )}
+      className={clsx("flex h-full w-fit gap-5 p-7 rounded-3xl ", bg)}
       aria-label="Air Quality Information Card"
     >
       {/* AQI Value */}
@@ -51,10 +49,13 @@ const CardInformationAQI = (props) => {
         <div className="flex justify-between min-w-sm">
           <p className="text-lg text-darker-gray">
             Main pollutant:
-            <span className="text-darker-gray pl-[5px]">{pollutant}</span>
+            <span className="text-darker-gray pl-[5px]">{pollutant} </span>
           </p>
-          <p className="text-darker-gray text-lg font-medium">
+          <p className="text-darker-gray text-lg font-medium flex gap-1.5">
             {pollutantValue}
+            <span className="text-lg font-medium">
+              µg/m<sup>3</sup>
+            </span>
           </p>
         </div>
 
@@ -62,7 +63,7 @@ const CardInformationAQI = (props) => {
         <div className="flex justify-between">
           <span className="flex items-center gap-1.5 text-darker-gray text-lg">
             <Wind color={label} />
-            <p>{windSpeed}</p>
+            <p>{windSpeed} km/h</p>
           </span>
           <IconLabel
             icon={Cloud}
@@ -74,7 +75,7 @@ const CardInformationAQI = (props) => {
               </>
             }
           />
-          <IconLabel icon={Droplet} color={label} label={humidity} />
+          <IconLabel icon={Droplet} color={label} label={<>{humidity}%</>} />
         </div>
       </div>
     </article>

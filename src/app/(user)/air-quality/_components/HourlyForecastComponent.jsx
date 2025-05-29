@@ -3,7 +3,7 @@ import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
 
 const HourlyForecastComponent = () => {
   return (
-    <article className="w-full flex flex-col gap-7 bg-white/50 rounded-3xl p-6 shadow-2xl">
+    <article className="w-full flex flex-col gap-7 bg-white/50 rounded-3xl p-6 border-2 text-light-gray ">
       {/* Title Of Hourly Forecast */}
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Hourly Forecast</h2>
