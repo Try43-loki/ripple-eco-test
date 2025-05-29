@@ -8,12 +8,12 @@ const NaturalDisasterPage = () => {
   return (
     <div className="relative flex flex-col gap-9">
       {/* Full-page background */}
-      {/* <div
+      <div
         className={clsx(
           "absolute bottom-0 -z-1 left-0 right-0 top-0",
-          `bg-[radial-gradient(circle_1500px_at_100%_200px,#CDE8DB,transparent)]`
+          `bg-[radial-gradient(circle_1500px_at_100%_200px,#FAF0CC,transparent)]`
         )}
-      ></div> */}
+      ></div>
 
       {/* Hero Section */}
       <section className="relative flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center">

@@ -1,4 +1,4 @@
-"use client"; // only needed for App Router (not pages dir)
+"use client";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -24,7 +24,7 @@ export default function MapView() {
       zoom={7}
       scrollWheelZoom={true}
       style={{ height: "500px", width: "100%" }}
-      className="rounded-3xl"
+      className="rounded-3xl "
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

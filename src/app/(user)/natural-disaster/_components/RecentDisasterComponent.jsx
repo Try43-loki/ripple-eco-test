@@ -86,11 +86,11 @@ function getSeverityVariant(severity) {
 function getSeverityColor(severity) {
   switch (severity) {
     case "High":
-      return "bg-red-500 hover:bg-red-600";
+      return "bg-red hover:bg-red-600";
     case "Medium":
-      return "bg-orange-500 hover:bg-orange-600";
+      return "bg-orange hover:bg-orange-600";
     case "Low":
-      return "bg-green-500 hover:bg-green-600";
+      return "bg-green hover:bg-green-600";
     default:
       return "bg-gray-500";
   }
