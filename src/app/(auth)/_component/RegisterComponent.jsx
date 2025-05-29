@@ -59,7 +59,7 @@ function RegisterCopmponent({ onNext }) {
                   onClick={onNext}
                   className="w-full text-white bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg"
                 >
-                  Login
+                  Sent OTP
                 </Button>
               </section>
             </form>

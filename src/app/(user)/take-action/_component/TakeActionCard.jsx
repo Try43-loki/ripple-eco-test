@@ -43,6 +43,7 @@ const TakeActionCard = ({ image, title, description, support }) => {
           <p className="text-[10px] font-semibold text-black">SUPPORTERS</p>
         </CardFooter>
       </Card>
+      00
     </main>
   );
 };
