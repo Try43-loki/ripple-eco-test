@@ -1,3 +1,8 @@
+"use client";
+import { Client } from "@stomp/stompjs";
+import { useEffect, useRef, useState } from "react";
+import SockJS from "sockjs-client";
+
 export const useCommentSocket = (postId) => {
   const [comments, setComments] = useState([]);
   const clientRef = useRef(null);
@@ -7,7 +12,7 @@ export const useCommentSocket = (postId) => {
 
     const client = new Client({
       brokerURL: undefined, // SockJS fallback
-      webSocketFactory: () => new SockJS("http://192.168.42.239:8080/comment"),
+      webSocketFactory: () => new SockJS("http://34.101.52.71:8888/comment"),
       reconnectDelay: 5000, // auto reconnect
       connectHeaders: {
         discussionId: postId, // The discussion you're viewing
@@ -17,6 +22,8 @@ export const useCommentSocket = (postId) => {
       onConnect: () => {
         client.subscribe("/topic/comments/" + postId, (message) => {
           const parsed = JSON.parse(message.body);
+          console.log("comment ", parsed);
+
           if (Array.isArray(parsed)) {
             // Initial fetch
             setComments(parsed);
@@ -29,6 +36,8 @@ export const useCommentSocket = (postId) => {
                 // 🔁 Replace existing comment
                 const updated = [...prev];
                 updated[index] = parsed;
+                console.log("update ", updated);
+
                 return updated;
               } else {
                 // ➕ Add as new comment
@@ -57,15 +66,13 @@ export const useCommentSocket = (postId) => {
   }, [postId]);
 
   const addComment = (content) => {
+    console.log(content);
+
     const client = clientRef.current;
-    if (client && client.connected && content.trim()) {
-      const comment = {
-        content,
-        userId: "0323694b-27a6-4833-bd49-f3d96d800abc",
-      };
+    if (client && client.connected && content) {
       client.publish({
         destination: `/app/${postId}.comment.add`,
-        body: JSON.stringify(comment),
+        body: JSON.stringify(content),
       });
     }
   };
@@ -86,3 +93,24 @@ export const useCommentSocket = (postId) => {
 
   return { comments, addComment, updateComment };
 };
+
+function insertCommentInTree(comments, newComment) {
+  return comments.map((comment) => {
+    if (comment.commentId === newComment.commentRepliedToId) {
+      // Found parent, insert reply
+      return {
+        ...comment,
+        commentResponses: [...(comment.commentResponses || []), newComment],
+      };
+    }
+
+    // Recurse into replies
+    return {
+      ...comment,
+      commentResponses: insertCommentInTree(
+        comment.commentResponses || [],
+        newComment
+      ),
+    };
+  });
+}

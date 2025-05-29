@@ -1,13 +1,13 @@
 import React from "react";
 import CommentComponent from "./CommentComponent";
 
-const CommentSectionComponent = () => {
+const CommentSectionComponent = ({ discussions }) => {
   const img = "/assets/tree-planting.png";
   return (
     <main className="w-full mt-3">
       <article className="flex flex-col">
         <h2 className="text-dark-gray font-semibold">7 Comments</h2>
-        <CommentComponent image={img} />
+        <CommentComponent discussions={discussions} image={img} />
       </article>
     </main>
   );

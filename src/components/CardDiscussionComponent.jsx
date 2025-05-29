@@ -1,7 +1,9 @@
 import React from "react";
 import TagComponent from "./TagComponent";
 
-const CardDiscussionComponent = ({ image }) => {
+const CardDiscussionComponent = ({ discussions, image }) => {
+  const data = discussions.data;
+
   return (
     <article className="w-full mt-8">
       <div className="flex flex-col items-start gap-4">
@@ -12,23 +14,20 @@ const CardDiscussionComponent = ({ image }) => {
           {/* User Info */}
           <div className="flex flex-col justify-start">
             <h2 className="text-sm md:text-base lg:text-lg font-semibold text-dark-green">
-              Sochetra
+              {data.appUser?.firstName} {data.appUser?.lastName}
             </h2>
             <p className="text-xs md:text-sm lg:text-base text-lighters-green">
-              8:00 PM
+              {data.createdAt}
             </p>
           </div>
         </div>
         {/* Card Details */}
         <div className="w-full">
           <h2 className="text-base md:text-lg lg:text-xl font-semibold text-dark-green">
-            Have you participated in river-cleanup efforts or citizen-science
-            water testing?
+            {data.title}
           </h2>
           <p className="text-xs md:text-sm lg:text-base text-lighters-green mt-2">
-            These hands-on initiatives empower locals to remove debris, monitor
-            pollution levels, and contribute valuable data to guide river
-            conservation.
+            {data.description}
           </p>
 
           {/* Image */}

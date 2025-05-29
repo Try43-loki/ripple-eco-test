@@ -6,6 +6,7 @@ import DiscussionCardComponent from "./_component/DiscussionCardComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 import { MessageCircleQuestion } from "lucide-react";
+import { getAllDiscussionsService } from "@/service/discussionService";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -16,7 +17,8 @@ const heroSectionText = {
 
 const buttonText = "Create Discussion";
 
-const DiscussionPage = () => {
+const DiscussionPage = async () => {
+  const discussions = await getAllDiscussionsService();
   return (
     <main className="w-full h-full flex flex-col">
       {/* Hero Section */}
@@ -37,7 +39,10 @@ const DiscussionPage = () => {
           </h2>
           <div className="w-full border-b py-2 border-lighter-white"></div>
           <Link href={`/discussion-forums/${1}`}>
-            <CardDiscussionComponent image={"/assets/tree-planting.png"} />
+            <CardDiscussionComponent
+              discussions={discussions}
+              image={"/assets/tree-planting.png"}
+            />
           </Link>
         </div>
         {/* Centered Post Components */}
