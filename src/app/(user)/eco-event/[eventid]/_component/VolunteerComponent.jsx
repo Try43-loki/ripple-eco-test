@@ -1,5 +1,6 @@
 import { MoreVertical } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function VolunteerComponent() {
   const users = [
@@ -129,14 +130,16 @@ export default function VolunteerComponent() {
                   {index + 1}
                 </td>
                 <td className="py-3 px-2">
-                  <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden">
-                    <Image
-                      src={user.profile}
-                      alt={user.username}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Link href={`/profile/${user.id}`}>
+                    <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden">
+                      <Image
+                        src={user.profile}
+                        alt={user.username}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </Link>
                 </td>
                 <td className="py-3 px-2 text-sm font-medium text-teal-600 whitespace-nowrap">
                   {user.username}

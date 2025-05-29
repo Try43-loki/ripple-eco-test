@@ -1,9 +1,12 @@
 import React from "react";
-import SearchComponent from "./SearchComponent";
-import { SelectComponent } from "./SelectComponent";
-import Image from "next/image";
+import { Star } from "lucide-react";
 
-const TopRankingComponent = () => {
+// import SearchComponent from "./SearchComponent";
+import Image from "next/image";
+import SearchComponent from "@/app/(user)/leaderboard/_component/SearchComponent";
+import { SelectComponent } from "../../create-event/_component/SelectComponent";
+
+export const TopRankingOrgComponent = () => {
   return (
     <>
       <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
@@ -67,7 +70,16 @@ const TopRankingComponent = () => {
               </div>
 
               <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <p className=" font-bold">12</p>
+                <div className="flex flex-col">
+                  <p className="mx-auto font-bold">12</p>
+                  <div className="flex gap-2">
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                  </div>
+                </div>
                 <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
                   #RiverCleanup
                 </p>
@@ -114,7 +126,16 @@ const TopRankingComponent = () => {
               </div>
 
               <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <p className=" font-bold">12</p>
+                <div className="flex flex-col">
+                  <p className="mx-auto font-bold">12</p>
+                  <div className="flex gap-2">
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                  </div>
+                </div>
                 <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
                   #RiverCleanup
                 </p>
@@ -159,7 +180,16 @@ const TopRankingComponent = () => {
               </div>
 
               <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <p className=" font-bold">12</p>
+                <div className="flex flex-col">
+                  <p className="mx-auto font-bold">12</p>
+                  <div className="flex gap-2">
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                  </div>
+                </div>
                 <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
                   #RiverCleanup
                 </p>
@@ -190,7 +220,16 @@ const TopRankingComponent = () => {
               </div>
 
               <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <p className=" font-bold">12</p>
+                <div className="flex flex-col">
+                  <p className="mx-auto font-bold">12</p>
+                  <div className="flex gap-2">
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                  </div>
+                </div>
                 <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
                   #RiverCleanup
                 </p>
@@ -202,5 +241,3 @@ const TopRankingComponent = () => {
     </>
   );
 };
-
-export default TopRankingComponent;
