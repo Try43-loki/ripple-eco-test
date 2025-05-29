@@ -96,9 +96,13 @@ function getSeverityColor(severity) {
   }
 }
 
-const RecentDisasterComponent = () => {
+const RecentDisasterComponent = ({ isDashboard }) => {
   return (
-    <article className="px-6 lg:px-[150px] flex gap-8 text-white lg:flex-col  ">
+    <article
+      className={clsx("px-6  flex gap-8 text-white lg:flex-col  ", {
+        "lg:px-[150px]": !isDashboard,
+      })}
+    >
       <Card>
         <CardHeader>
           <CardTitle className="text-xl pl-6 text-dark-gray font-semibold">
