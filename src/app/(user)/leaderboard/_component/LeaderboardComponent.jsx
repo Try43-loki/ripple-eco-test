@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Building, User2, Users2 } from "lucide-react";
 
 const ChampionsLeaderboardComponent = () => {
   return (
@@ -9,30 +10,20 @@ const ChampionsLeaderboardComponent = () => {
         <div className="max-w-full md:max-w-lg mb-20 md:mb-0">
           <div className="flex gap-3 mb-4">
             <button className="flex items-center gap-1 md:gap-2 lg:gap-2 px-2 py-1 lg:px-3 lg:py-2 rounded-xl border border-gray-300 text-dark-green shadow-sm text-xs md:text-base lg:text-lg">
-              <Image
-                src="/assets/building.png"
-                alt="building"
-                width={20}
-                height={20}
-              />
+              <Building size={15} />
               Organizer
             </button>
             <button className="flex items-center gap-1 md:gap-2 lg:gap-2 px-2 py-1 lg:px-3 lg:py-2 rounded-xl bg-green text-white shadow-inner text-xs md:text-base lg:text-lg">
-              <Image
-                src="/assets/profile2user.png"
-                alt="user"
-                width={20}
-                height={20}
-              />
-              User
+              <Users2 size={15} />
+              Volunteer
             </button>
           </div>
 
           {/* Title & description */}
-          <h1 className="text-green text-xl md:text-2xl lg:text-4xl font-bold leading-tight">
+          <h1 className="text-green text-xl md:text-2xl lg:text-3xl font-bold leading-tight">
             Green Champions Leaderboard
           </h1>
-          <p className="text-dark-green text-xs md:text-md lg:text-xl mt-2">
+          <p className="text-dark-green text-xs md:text-md lg:text-lg mt-2 max-w-80">
             Share more, do more—earn your spot and motivate others to join in.
           </p>
         </div>
@@ -54,7 +45,7 @@ const ChampionsLeaderboardComponent = () => {
                   height={64}
                 />
                 <Image
-                  src="/assets/image.jpg"
+                  src="/assets/leaderboard/image.jpg"
                   alt="2nd"
                   width={64}
                   height={64}
@@ -69,7 +60,7 @@ const ChampionsLeaderboardComponent = () => {
               </div>
               {/* Podium block */}
               <Image
-                src="/assets/board-2.png"
+                src="/assets/leaderboard/board-2.png"
                 alt="2nd"
                 width={130}
                 height={60}
@@ -81,20 +72,20 @@ const ChampionsLeaderboardComponent = () => {
               {/* Profile + wreath */}
               <div className="absolute -top-10 sm:-top-12 md:-top-14 flex items-center gap-1">
                 <Image
-                  src="/assets/laurel-wreath-left-01.png"
+                  src="/assets/leaderboard/laurel-wreath-right-01.png"
                   alt=""
                   width={20}
                   height={64}
                 />
                 <Image
-                  src="/assets/image.jpg"
+                  src="/assets/leaderboard/image.jpg"
                   alt="1st"
                   width={64}
                   height={64}
                   className="rounded-full "
                 />
                 <Image
-                  src="/assets/laurel-wreath-right-01.png"
+                  src="/assets/leaderboard/laurel-wreath-right-01.png"
                   alt=""
                   width={20}
                   height={64}
@@ -102,7 +93,7 @@ const ChampionsLeaderboardComponent = () => {
               </div>
               {/* Podium block */}
               <Image
-                src="/assets/board.png"
+                src="/assets/leaderboard/board.png"
                 alt="1st"
                 width={130}
                 height={100}
@@ -120,7 +111,7 @@ const ChampionsLeaderboardComponent = () => {
                   height={64}
                 />
                 <Image
-                  src="/assets/image.jpg"
+                  src="/assets/leaderboard/image.jpg"
                   alt="3rd"
                   width={64}
                   height={64}
@@ -135,7 +126,7 @@ const ChampionsLeaderboardComponent = () => {
               </div>
               {/* Podium block */}
               <Image
-                src="/assets/board-3.png"
+                src="/assets/leaderboard/board-3.png"
                 alt="3rd"
                 width={130}
                 height={60}

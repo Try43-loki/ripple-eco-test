@@ -37,7 +37,7 @@ const PopupTakeActionForm = () => {
   };
 
   return (
-    <main>
+    <main className="">
       <form onSubmit={handleSubmit}>
         <DialogHeader>
           <DialogTitle className="text-2xl text-primary">
@@ -114,9 +114,7 @@ const PopupTakeActionForm = () => {
               ) : (
                 <>
                   <ImagePlus className="mb-2 text-description w-6 h-6" />
-                  <span className="text-description text-sm">
-                    Upload Image
-                  </span>
+                  <span className="text-description text-sm">Upload Image</span>
                 </>
               )}
             </Label>

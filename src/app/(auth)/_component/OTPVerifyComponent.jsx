@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/input-otp";
 import React, { useState } from "react";
 
-function OTPVerifyComponent() {
+function OTPVerifyComponent({ onNext }) {
   const [otpCode, setOtpCode] = useState("");
 
   const handleOTPChange = (value) => {
@@ -90,13 +90,14 @@ function OTPVerifyComponent() {
             <div className="flex flex-col gap-y-3 w-full">
               <Button
                 type="submit"
-                className="w-full  bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-11 text-lg cursor-pointer"
+                onClick={onNext}
+                className="w-full text-white  bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-10 text-md cursor-pointer"
               >
                 Verify
               </Button>
               <Button
                 type="button"
-                className="w-full cursor-pointer bg-transparent hover:bg-transparent border border-light-gray rounded-2xl p-4 h-11 text-lg"
+                className="w-full text-white cursor-pointer bg-transparent hover:bg-transparent border border-light-gray rounded-2xl p-4 h-10 text-md"
               >
                 Resend Code
               </Button>

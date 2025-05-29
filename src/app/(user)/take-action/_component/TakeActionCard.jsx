@@ -5,15 +5,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Play } from 'lucide-react'
-import Image from 'next/image'
-import React from 'react'
+} from "@/components/ui/card";
+import { Play } from "lucide-react";
+import Image from "next/image";
+import React from "react";
 
 const TakeActionCard = ({ image, title, description, support }) => {
   return (
     <main>
-      <Card className="p-0 pb-4 w-72 rounded-2xl">
+      <Card className="p-0 pb-4 w-72 rounded-2xl border border-light-strok">
         <CardContent className="px-2 py-1.5 h-40 relative">
           <Image
             src={image}
@@ -27,13 +27,13 @@ const TakeActionCard = ({ image, title, description, support }) => {
           </div>
         </CardContent>
 
-        <CardHeader>
+        <CardHeader className="px-3">
           <CardTitle className="text-lg">{title}</CardTitle>
           <CardDescription className="line-clamp-3 text-sm">
             {description}
           </CardDescription>
           <article className="flex items-center gap-2 text-green text-base">
-            <h1>ACTNOW</h1>
+            <h1 className="cursor-pointer">ACTNOW</h1>
             <Play className="w-3.5 h-3.5 fill-meduim-green" />
           </article>
         </CardHeader>
@@ -44,7 +44,7 @@ const TakeActionCard = ({ image, title, description, support }) => {
         </CardFooter>
       </Card>
     </main>
-  )
-}
+  );
+};
 
-export default TakeActionCard
+export default TakeActionCard;

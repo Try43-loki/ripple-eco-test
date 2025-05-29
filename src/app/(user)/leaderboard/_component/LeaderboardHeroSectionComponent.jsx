@@ -5,11 +5,11 @@ import ChampionsLeaderboardComponent from "./LeaderboardComponent";
 
 const LeaderboardHeroSectionComponent = () => {
   return (
-    <section className="relative w-full h-60 sm:h-72 md:h-80 lg:h-96">
+    <section className="relative w-full h-60 sm:h-72 md:h-80 lg:h-96 ">
       {/* Background banner */}
       <div className="absolute inset-0">
         <Image
-          src="/sub-banner.jpg"
+          src="/assets/sub-banner.jpg"
           alt="sub-banner"
           fill
           className="object-cover"

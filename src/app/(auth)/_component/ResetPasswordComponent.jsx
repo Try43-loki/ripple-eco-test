@@ -55,7 +55,7 @@ function ResetPasswordCopmponent() {
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                <Button className="w-full text text-center cursor-pointer bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-11 text-lg">
+                <Button className="w-full text-white text text-center cursor-pointer bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-11 text-lg">
                   Reset Password
                 </Button>
               </section>

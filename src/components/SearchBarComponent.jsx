@@ -10,22 +10,22 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null }) => {
   return (
     <form
       // onSubmit={handleSubmit}
-      className="flex w-full items-center mt-5
+      className="flex w-full items-center
              border border-stroke rounded-lg md:rounded-2xl 
-             bg-[#f6f7f9] px-3 py-2.5 md:py-3 
-             focus-within:ring-2 focus-within:ring-primary
+             bg-lighter-white px-3 py-2.5 md:py-3
+             focus-within:ring-2 focus-within:ring-green
                  "
     >
       <input
         type="text"
         placeholder={placeholder}
-        className="flex-1 outline-none bg-transparent 
+        className="flex-1 outline-none bg-transparent text-green 
              text-xs md:text-sm lg:text-base ml-3 
-             placeholder:text-description"
+             placeholder:text-dark-green"
         aria-label="Search input"
       />
       <div className="ml-2">
-        {icon || <Search className="h-4 w-4 md:h-5 md:w-5 text-description" />}
+        {icon || <Search className="h-4 w-4 md:h-5 md:w-5 text-meduim-gray" />}
       </div>
     </form>
   );

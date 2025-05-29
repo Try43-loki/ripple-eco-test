@@ -9,6 +9,7 @@ import {
   Lock,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 function LoginSuccessComponent() {
   return (
@@ -37,12 +38,15 @@ function LoginSuccessComponent() {
           <h1 className="text-white text-2xl">Registration Successful</h1>
           <p className="text-light-gray text-sm text-center">
             Your account has been created successfully. You’re now part of the
-            Ripple<span className="text-strong-green">Eco</span>
+            Ripple<span className="text-strong-green">Eco </span>
             community.{" "}
           </p>
-          <Button className="bg-strong-green rounded-3xl w-full hover:bg-green-800">
+          <Link
+            href="/home"
+            className="bg-strong-green rounded-3xl h-10 text-center flex items-center justify-center text-white w-full hover:bg-green-800"
+          >
             Go to Homepage
-          </Button>
+          </Link>
         </section>
       </section>
     </section>

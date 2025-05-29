@@ -24,7 +24,11 @@ import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 const ProfilePage = () => {
   return (
     <main>
-      <HeroSectionComponent text={" "} description={" "} showSearchBar={false} />
+      <HeroSectionComponent
+        text={" "}
+        description={" "}
+        showSearchBar={false}
+      />
 
       <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
         <img
@@ -63,12 +67,12 @@ const ProfilePage = () => {
 
       <section className="mt-12 mx-36">
         <Tabs defaultValue="event-history" className="w-full">
-        <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
+          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
             <TabsTrigger
               value="event-history"
               className={cn(
                 "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
               <Clock className="w-4.5 h-4.5" />
@@ -78,17 +82,17 @@ const ProfilePage = () => {
               value="own-feedback"
               className={cn(
                 "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <MessagesSquare className="w-4.5 h-4.5"/>
+              <MessagesSquare className="w-4.5 h-4.5" />
               <p>Own Feedback</p>
             </TabsTrigger>
             <TabsTrigger
               value="discussion"
               className={cn(
                 "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
               <MessageCircleQuestion className="w-4.5 h-4.5" />
@@ -98,7 +102,7 @@ const ProfilePage = () => {
               value="take-action"
               className={cn(
                 "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
               <ClipboardList className="w-4.5 h-4.5" />
@@ -108,7 +112,7 @@ const ProfilePage = () => {
               value="earned-badge"
               className={cn(
                 "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
               <Sparkles className="w-4.5 h-4.5" />
@@ -130,7 +134,12 @@ const ProfilePage = () => {
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
             <section className="flex items-center gap-5">
-              {["Green Helper", "Eco Hero", "Eco Volunteer", "Nature Steward"].map((badge) => (
+              {[
+                "Green Helper",
+                "Eco Hero",
+                "Eco Volunteer",
+                "Nature Steward",
+              ].map((badge) => (
                 <Image
                   key={badge}
                   src={`/badges/${badge}.png`}

@@ -6,7 +6,7 @@ import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-function LoginComponent() {
+function LoginComponent({ onNext }) {
   const [showPassword, setShowPassword] = React.useState(false);
   // show password
   const handleShowPassword = () => {
@@ -16,17 +16,17 @@ function LoginComponent() {
   return (
     <>
       {/* Container */}
-      <section className=" h-screen w-full flex justify-center items-center bg-[url('/assets/bg-login.jpg')] bg-cover bg-no-repeat object-contain bg-center ">
-        <section className=" w-full h-screen bg-[#00000054]  gap-15 flex justify-center items-center   p-10 lg:p-20">
+      <section className=" h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat object-contain bg-center ">
+        <section className=" w-full h-screen bg-[#00000054]  gap-15 flex justify-center items-center p-10 lg:p-20">
           {/* article */}
 
-          <article className="w-[400px] lg:w-[500px]">
+          <article className="w-[400px] ">
             <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
-              Ripple<span className="text-finished">Eco</span>
+              Ripple<span className="text-meduim-green">Eco</span>
             </h1>
             <h4 className="text-2xl lg:text-3xl  my-4 text-white font-medium">
               Welcome to <br />
-              Ripple <span className="text-finished">Eco</span>
+              Ripple <span className="text-meduim-green">Eco</span>
             </h4>
             <p className="w-full lg:w-full mt-2  lg:text-lg font-light text-light-gray">
               When communities unite, change becomes possible — for people and
@@ -35,7 +35,7 @@ function LoginComponent() {
             </p>
           </article>
 
-          <section className="flex justify-center items-center flex-col gap-4 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
+          <section className="flex justify-center items-center flex-col gap-4 w-[400px]   bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
               action=""
@@ -52,11 +52,11 @@ function LoginComponent() {
                   >
                     Email
                   </Label>
-                  <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
+                  <span className="flex justify-center items-center text-label gap-1 top-[36px] left-2.5 absolute text-gray-500">
                     <Mail size={14} />|
                   </span>
                   <Input
-                    className="text-gray-500 pl-9 text-[14px]  placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-600 bg-lighter-white pl-9 text-label  placeholder:text-strong-gray placeholder:font-light h-10 focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     required
                     type="email"
                     id="email"
@@ -71,8 +71,8 @@ function LoginComponent() {
                   >
                     Password
                   </Label>
-                  <span className="flex justify-center items-center text-[14px] gap-1 top-[34px] left-2.5 absolute text-gray-500">
-                    <Lock size={14} />|
+                  <span className=" flex justify-center items-center text-[14px] gap-1 top-[37px] left-2.5 absolute text-gray-500">
+                    <Lock size={14} className="mb-1" />|
                   </span>
                   <span
                     onClick={handleShowPassword}
@@ -82,7 +82,7 @@ function LoginComponent() {
                   </span>
                   <Input
                     required
-                    className="text-gray-500 pl-9 text-[14px]  placeholder:text-strong-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-gray-600 pl-9 text-[14px] bg-lighter-white h-10 placeholder:text-strong-gray placeholder:font-light  focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="123"
@@ -91,11 +91,14 @@ function LoginComponent() {
 
                 <Link
                   href="#"
-                  className="underline text-end w-full my-2 font-light  text-white text-[12px] "
+                  className="underline text-end w-full my-2 font-light  text-white text-sub-info "
                 >
                   Forgot your password?
                 </Link>
-                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4">
+                <Button
+                  onClick={onNext}
+                  className="w-full h-10 bg-green text-white text-md text text-center cursor-pointer rounded-2xl p-4"
+                >
                   Login
                 </Button>
                 <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
@@ -107,7 +110,7 @@ function LoginComponent() {
             </form>
             {/* login with google */}
 
-            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md  rounded-2xl p-4">
+            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md hover:bg-white  rounded-2xl p-4">
               <img
                 src="/icons/flat-color-icons_google.png"
                 className="h-5 w-5"

@@ -10,8 +10,10 @@ import {
 } from "lucide-react";
 import { DatePickerComponent } from "./DatePickerComponent";
 import { SelectGenderComponent } from "./SelectGenderComponent";
+import { useState } from "react";
 
-function AdditonalInfoComponent() {
+function AdditonalInfoComponent({ onNext }) {
+  const [isOrganizer, setIsOrganizer] = useState(false);
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
@@ -151,17 +153,50 @@ function AdditonalInfoComponent() {
                   Pick your role
                 </p>
                 <div className="flex justify-center items-center w-full gap-x-4">
-                  <p className="text-strong-green text-center py-1.5 rounded-3xl bg-white text-sub-info grow">
-                    {" "}
-                    I'm a Organizer
+                  <p
+                    onClick={() => setIsOrganizer(true)}
+                    className={`cursor-pointer text-center py-1.5 rounded-3xl text-sub-info grow ${
+                      isOrganizer
+                        ? "bg-green text-white"
+                        : "bg-lighter-white text-strong-green"
+                    }`}
+                  >
+                    I'm an Organizer
                   </p>
-                  <p className="text-white text-center py-1.5 bg-green text-sub-info rounded-3xl grow">
+                  <p
+                    onClick={() => setIsOrganizer(false)}
+                    className={`cursor-pointer text-center py-1.5 text-sub-info rounded-3xl grow ${
+                      isOrganizer
+                        ? "bg-lighter-white text-strong-green"
+                        : "bg-green text-white"
+                    }`}
+                  >
                     I'm a Volunteer
                   </p>
                 </div>
               </div>
+              {isOrganizer && (
+                <div className="grid w-full items-center gap-1.5">
+                  <Label
+                    htmlFor="organizerName"
+                    className="text-label text-light-gray font-light"
+                  >
+                    Organizer's name
+                  </Label>
+                  <input
+                    required
+                    className="text-gray-500 px-3 text-sub-info h-9 placeholder:text-strong-gray placeholder:font-light bg-lighter-white focus-visible:ring-0 border-none rounded-md w-full outline-none"
+                    type="text"
+                    id="organizerName"
+                    placeholder="United Nations"
+                  />
+                </div>
+              )}
             </section>
-            <Button className="w-full bg-green hover:bg-green-800 rounded-xlsubtext-sub-info h-9  text-md">
+            <Button
+              onClick={onNext}
+              className="w-full bg-green hover:bg-green-800 text-white rounded-xl subtext-sub-info h-9  text-md"
+            >
               Register
             </Button>
           </form>

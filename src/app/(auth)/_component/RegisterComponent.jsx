@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-function RegisterCopmponent() {
+function RegisterCopmponent({ onNext }) {
   return (
     <>
       {/* Container */}
@@ -55,7 +55,10 @@ function RegisterCopmponent() {
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                <Button className="w-full bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg">
+                <Button
+                  onClick={onNext}
+                  className="w-full text-white bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg"
+                >
                   Login
                 </Button>
               </section>
@@ -67,7 +70,7 @@ function RegisterCopmponent() {
             </div>
             {/* login with google */}
 
-            <Button className="w-full  text-center cursor-pointer text-dark-green text-lg hover:bg-light-gray  bg-input backdrop-blur-md  rounded-2xl p-4 h-11 ">
+            <Button className="w-full  text-center cursor-pointer text-dark-green text-lg hover:bg-light-gray  bg-lighter-white backdrop-blur-md  rounded-2xl p-4 h-11 ">
               <img
                 src="/icons/flat-color-icons_google.png"
                 className="h-5 w-5"
