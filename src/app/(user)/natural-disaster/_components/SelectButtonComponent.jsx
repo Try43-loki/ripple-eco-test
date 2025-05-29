@@ -26,10 +26,10 @@ import {
 export function BtnSelectType() {
   return (
     <Select>
-      <SelectTrigger className="w-[180px] bg-light-gray !text-dark-gray border">
+      <SelectTrigger className="w-[180px] !text-dark-gray border bg-white">
         <SelectValue placeholder="Select Type" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className={"bg-white"}>
         <SelectGroup>
           {/* <SelectLabel>Fruits</SelectLabel> */}
           <SelectItem value="earthquakes">Earthquakes</SelectItem>
@@ -45,10 +45,10 @@ export function BtnSelectType() {
 export function BtnSelectSeverity() {
   return (
     <Select>
-      <SelectTrigger className="w-[180px] bg-light-gray !text-dark-gray border">
+      <SelectTrigger className="w-[180px] !text-dark-gray border bg-white">
         <SelectValue placeholder="Severity" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className={"bg-white"}>
         <SelectGroup>
           {/* <SelectLabel>Fruits</SelectLabel> */}
           <SelectItem value="low">Low</SelectItem>
@@ -60,7 +60,7 @@ export function BtnSelectSeverity() {
   );
 }
 
-export function DatePickerDemo() {
+export function DatePickerDemo({ order }) {
   const [date, setDate] = React.useState();
 
   return (
@@ -69,15 +69,19 @@ export function DatePickerDemo() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[280px] justify-start text-left font-normal bg-light-gray !text-dark-gray border",
+            "w-[280px] justify-start text-left font-normal  !text-dark-gray border bg-white",
             !date && "text-muted-foreground"
           )}
         >
           <CalendarIcon />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {date ? (
+            format(date, "PPP")
+          ) : (
+            <span> {order === 1 ? "Start Date" : "End Date"}</span>
+          )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
+      <PopoverContent className="w-auto p-0 bg-white">
         <Calendar
           mode="single"
           selected={date}

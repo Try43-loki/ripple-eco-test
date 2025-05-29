@@ -19,7 +19,7 @@ const provinces = {
   Kandal: ["Phnom Penh", "Battambang", "Kandal"],
 };
 
-export default function SingleSelectDropdown() {
+export default function MultiSelectDropdown() {
   const [selected, setSelected] = useState(null);
 
   return (

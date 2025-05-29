@@ -21,13 +21,13 @@ const HeroSectionNaturalDisasterComponent = () => {
       id: 3,
       type: "Typhoons",
       icon: Wind,
-      active: 3,
+      active: 2,
     },
     {
       id: 4,
       type: "Wildfires",
       icon: Flame,
-      active: 3,
+      active: 2,
     },
   ];
 

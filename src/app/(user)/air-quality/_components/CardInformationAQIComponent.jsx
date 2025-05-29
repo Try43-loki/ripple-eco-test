@@ -32,7 +32,7 @@ const CardInformationAQI = (props) => {
 
   return (
     <article
-      className={clsx("flex h-full w-fit gap-5 p-7 rounded-3xl ", bg)}
+      className={clsx("flex h-[150px] w-fit gap-5 p-5 rounded-3xl ", bg)}
       aria-label="Air Quality Information Card"
     >
       {/* AQI Value */}

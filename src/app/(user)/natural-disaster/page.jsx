@@ -14,7 +14,6 @@ const NaturalDisasterPage = () => {
           `bg-[radial-gradient(circle_1500px_at_100%_200px,#FAF0CC,transparent)]`
         )}
       ></div>
-
       {/* Hero Section */}
       <section className="relative flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center">
         <HeroSectionNaturalDisasterComponent />
@@ -25,7 +24,7 @@ const NaturalDisasterPage = () => {
       </section>
 
       {/* Section Recently */}
-      <section className="flex flex-col w-full h-[200px] md:h-[300px] lg:h-[400px]">
+      <section className="flex flex-col w-full">
         <RecentDisasterComponent />
       </section>
     </div>
