@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import DiscussionButtonComponent from "../../discussion-forums/_component/DiscussionButtonComponent";
+import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 
 const DiscussionSectionComponent = () => {
   const btnDiscussion = "Start Discussion";

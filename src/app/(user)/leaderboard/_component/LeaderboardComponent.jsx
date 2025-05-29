@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ChampionsLeaderboardComponent = () => {
   return (
-    <div className="w-full px-6 sm:px-6 md:px-6 lg:px-45 xl:px-45 pt-32 sm:pt-40 md:pt-48 lg:pt-56">
+    <div className="w-full ">
       <article className="relative bg-white rounded-3xl shadow-md overflow-visible flex flex-col md:flex-row lg:flex-row justify-between items-start p-6 sm:p-8 md:p-10 lg:p-12 ">
         {/* ----- Left side: toggle + text ----- */}
         <div className="max-w-full md:max-w-lg mb-20 md:mb-0">
