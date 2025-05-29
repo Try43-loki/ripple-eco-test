@@ -20,10 +20,7 @@ function VolunteerPage() {
               Upcoming Event
             </p>
             <div className="h-[500px]">
-              <CardEcoEventComponent />
-              <CardEcoEventComponent />
-              <CardEcoEventComponent />
-              <CardEcoEventComponent />
+              <CardEcoEventComponent href={""} />
             </div>
           </div>
 
