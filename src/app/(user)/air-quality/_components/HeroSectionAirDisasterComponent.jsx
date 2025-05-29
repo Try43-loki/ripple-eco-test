@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import CardInformationAQI from "./CardInformationAQIComponent";
+import MultiSelectDropdown from "./MultiSelectDropdownComponent";
 
 const HeroSectionAirDisasterComponent = (props) => {
   const { province, pollution } = props.dataSearch;
@@ -17,7 +18,7 @@ const HeroSectionAirDisasterComponent = (props) => {
       />
       <div className="absolute w-full px-6 lg:px-[150px]  text-white text-center lg:flex-row lg:justify-between ">
         <article className="flex flex-col-reverse gap-10 lg:flex-row    ">
-          <div className="flex flex-col gap-8 w-full">
+          <div className="flex flex-col gap-8 w-full justify-between">
             <div className="flex flex-col gap-1 items-start">
               <h2 className="font-bold  text-2xl lg:text-4xl">
                 Air Quality In {province}
@@ -27,11 +28,8 @@ const HeroSectionAirDisasterComponent = (props) => {
                 {province}
               </p>
             </div>
-            <div className="w-2xl text-dark-gray">
-              <SearchBarComponent
-                placeholder={"Select Provinces"}
-                icon={<ChevronDown />}
-              />
+            <div className="w-2xl text-dark-gray ">
+              <MultiSelectDropdown />
             </div>
           </div>
           <div className="flex-shrink-0">
