@@ -18,11 +18,14 @@ export function DatePickerComponent() {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger
+        asChild
+        className="bg-white  border border-light-strok text-gray-600"
+      >
         <Button
           variant={"outline"}
           className={cn(
-            " justify-between text-left font-normal",
+            " justify-between bg-lighter-white   !text-gray-600 text-left font-normal border border-light-strok  hover:bg-lighter-white hover:text-gray-600 ",
             !date && "text-muted-foreground"
           )}
         >

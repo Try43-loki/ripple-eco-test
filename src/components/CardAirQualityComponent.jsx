@@ -1,49 +1,82 @@
-import React from 'react'
+import React from "react";
+import Image from "next/image";
 
 const CardAirQualityComponent = () => {
   return (
-        <div className="bg-[#FFF6D4] w-[585px] h-[200px] absolute right-49 top-13 rounded-3xl">
-          <div className="flex gap-5">
-            <div className="absolute left-10 top-12">
-              <h2 className="text-[#F9C300] text-7xl font-bold">73</h2>
-              <p className="text-[#4A5057] text-xl">US AQI⁺</p>
+    <div className="bg-[#FFF6D4] w-fit max-w-full md:w-[500px] lg:w-[520px] rounded-3xl p-5 sm:p-6 lg:p-8 shadow-md">
+      <div className="flex flex-col md:flex-row lg:flex-row gap-6">
+        {/* AQI Number */}
+        <div className=" w-1/2 md:w-1/5 lg:w-1/5 flex flex-row md:flex-col lg:flex-col lg:gap-2 items-start text-left">
+          <h2 className="text-strong-yellow text-5xl sm:text-6xl lg:text-7xl font-bold">
+            73
+          </h2>
+          <p className="text-dark-green text-sm sm:text-lg lg:text-xl">
+            US AQI⁺
+          </p>
+        </div>
+
+        {/* AQI Details */}
+        <div className="">
+          <h4 className="text-dark-green text-lg sm:text-xl lg:text-2xl font-bold text-left">
+            Moderate
+          </h4>
+
+          {/* Pollutant Info */}
+          <div className="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-6 lg:gap-12 pt-2 text-left">
+            <p className="text-light-green text-sm sm:text-base lg:text-lg font-light">
+              Main pollutant:{" "}
+              <span className="text-dark-green font-medium">PM2.5</span>
+            </p>
+            <p className="text-dark-green font-medium text-sm sm:text-base lg:text-lg">
+              14.5 µg/m³
+            </p>
+          </div>
+
+          {/* Weather Info */}
+          <div className="flex justify-start lg:justify-between flex-col md:flex-row lg:flex-row gap-4 pt-4">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/assets/air.png"
+                alt="air"
+                width={20}
+                height={20}
+                className="w-4 h-4 lg:w-5 lg:h-5"
+              ></Image>
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
+                5.5 km/h
+              </p>
             </div>
 
-            <div className="absolute top-10 left-40">
-              <h4 className="text-[#4A5057] text-2xl font-bold ">Moderate</h4>
+            <div className="flex items-center gap-2">
+              <Image
+                src="/assets/cloud.png"
+                alt="cloud"
+                width={10}
+                height={10}
+                className="w-4 h-4 lg:w-5 lg:h-5"
+              ></Image>
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
+                33°
+              </p>
+            </div>
 
-              <div className="flex gap-25 pt-2">
-                <p className="text-description text-xl font-light ">
-                  Main pollutant:{" "}
-                  <span className="text-[#4A5057] font-medium">PM2.5 </span>
-                </p>
-                <p className="text-[#4A5057] font-medium text-xl">14.5 µg/m³</p>
-              </div>
-
-              <div className="flex gap-16">
-                <div className="flex gap-2 pt-3">
-                  <img src="air.png" alt="air" width={30} />
-                  <p className="text-description text-xl ">5.5 km/h</p>
-                </div>
-
-                <div className="flex gap-2 pt-3">
-                  <img
-                    src="cloud.png"
-                    alt="cloud"
-                    className="h-5 w-5 items-center mt-1"
-                  />
-                  <p className="text-description text-xl ">33o</p>
-                </div>
-
-                <div className="flex gap-2 pt-3">
-                  <img src="weather.png" alt="weather" width={30} />
-                  <p className="text-description text-xl ">62 %</p>
-                </div>
-              </div>
+            <div className="flex items-center gap-2">
+              <Image
+                src="/assets/weather.png"
+                alt="weather"
+                width={20}
+                height={20}
+                className="w-4 h-4 lg:w-5 lg:h-5"
+              ></Image>
+              <p className="text-light-green text-sm sm:text-base lg:text-lg">
+                62%
+              </p>
             </div>
           </div>
         </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default CardAirQualityComponent
+export default CardAirQualityComponent;

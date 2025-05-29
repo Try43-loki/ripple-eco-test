@@ -6,17 +6,17 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-function RegisterCopmponent() {
+function RegisterCopmponent({ onNext }) {
   return (
     <>
       {/* Container */}
-      <section className=" h-screen w-full flex justify-center items-center bg-[url('/assets/bg-login.jpg')] bg-cover bg-no-repeat object-contain bg-center ">
+      <section className=" h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat object-contain bg-center ">
         <section className=" w-full h-screen bg-[#00000054]  gap-15 flex justify-center items-center   p-10 lg:p-20">
           {/* article */}
 
-          <article className="w-[400px] lg:w-[500px]">
+          <article className="w-1/4 lg:w-[300px]">
             <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
-              Ripple<span className="text-finished">Eco</span>
+              Ripple<span className="text-green">Eco</span>
             </h1>
             <h4 className="text-2xl lg:text-3xl  my-4 text-white font-medium">
               Join us. Together for a greener future.
@@ -26,7 +26,7 @@ function RegisterCopmponent() {
             </p>
           </article>
 
-          <section className="flex justify-center items-center flex-col gap-3 w-[400px] lg:w-[500px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
+          <section className="flex justify-center items-center flex-col gap-3 w-[400px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
               action=""
@@ -48,14 +48,17 @@ function RegisterCopmponent() {
                     <Mail size={18} className="text-strong-gray" />|
                   </span>
                   <input
-                    className="text-strong-gray pl-12 h-11 text-lg font-normal placeholder:text-200-gray placeholder:font-light  bg-input-color focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className="text-strong-gray pl-12 h-11 text-lg font-normal placeholder:text-200-gray placeholder:font-light bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
                     required
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
                   />
                 </div>
-                <Button className="w-full text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg">
+                <Button
+                  onClick={onNext}
+                  className="w-full text-white bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg"
+                >
                   Login
                 </Button>
               </section>
@@ -67,7 +70,7 @@ function RegisterCopmponent() {
             </div>
             {/* login with google */}
 
-            <Button className="w-full  text-center cursor-pointer text-lg hover:bg-light-gray text-title bg-input backdrop-blur-md  rounded-2xl p-4 h-11 ">
+            <Button className="w-full  text-center cursor-pointer text-dark-green text-lg hover:bg-light-gray  bg-lighter-white backdrop-blur-md  rounded-2xl p-4 h-11 ">
               <img
                 src="/icons/flat-color-icons_google.png"
                 className="h-5 w-5"

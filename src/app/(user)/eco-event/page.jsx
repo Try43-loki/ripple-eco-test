@@ -29,7 +29,7 @@ const EcoEventPage = () => {
         <section className="px-4 md:px-20 lg:px-[150px] pb-12">
           <Link
             href={`/eco-event/${2}`}
-            className="flex flex-wrap gap-5 lg:gap-9 justify-center"
+            className="flex flex-wrap gap-5 lg:gap-16 justify-center"
           >
             <CardEcoEventComponent />
             <CardEcoEventComponent />

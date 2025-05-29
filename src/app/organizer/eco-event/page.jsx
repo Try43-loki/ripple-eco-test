@@ -25,12 +25,9 @@ function EcoEventPage() {
 
         <EcoeventFilterComponent />
 
-        <div className="flex flex-wrap justify-start gap-6 mt-6">
+        <div className="flex flex-wrap justify-center gap-8 mt-6">
           {[...Array(8)].map((_, index) => (
-            <div
-              key={index}
-              className="w-full sm:w-[48%] lg:w-[23%] min-w-[200px] flex-grow"
-            >
+            <div key={index}>
               <Link href={`/organizer/eco-event/${2}`}>
                 <CardEcoEventComponent />
               </Link>

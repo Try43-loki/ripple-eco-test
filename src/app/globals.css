@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -44,7 +45,14 @@
 
   /* Custom owner */
   --color-dark-green: var(--title-color);
+  --color-dark-green: var(--title-color);
   --color-strong-green: var(--strong-green-color);
+  --color-green: var(--main-color);
+  --color-meduim-green: var(--finished-color);
+  --color-light-green: var(--subtitle-color);
+  --color-lighter-green: var(--description-color);
+  --color-verylight-green: var(--finished-bg);
+  --color-lightest-green: var(--light-green-custome-background);
   --color-green: var(--main-color);
   --color-meduim-green: var(--finished-color);
   --color-light-green: var(--subtitle-color);
@@ -71,10 +79,18 @@
   --color-lightes-white: var(--stroke-custome-color);
   --color-strong-red: var(--strong-red-color);
   --color-red: var(--red-custome-color);
+  --color-meduim-white: var(--dropdown-bg);
+  --color-light-white: var(--stroke-color);
+  --color-lighter-white: var(--bg-input-color);
+  --color-lightes-white: var(--stroke-custome-color);
+  --color-strong-red: var(--strong-red-color);
+  --color-red: var(--red-custome-color);
   --color-strong-yellow: var(--strong-yellow-color);
   --color-light-yellow: var(--light-yellow-color);
   --color-strong-orange: var(--strong-orange-color);
   --color-light-orange: var(--light-orange-color);
+  --color-footer: var(--footer-color);
+  --color-footer: var(--footer-color);
   --color-light-strok: var(--strok-color);
   --color-line-table: var(--line-table-color);
   --color-gray-label: var(--lable-input-color);
@@ -82,6 +98,19 @@
   /* font size */
   --text-label: var(--text-label-input);
   --text-sub-info: var(--text-sub-info);
+
+  /* Air Quality */
+  --color-lighter-yellow: var(--level-bg-lighter-yellow-color);
+  --color-yellow: var(--level-text-strong-yellow-color);
+
+  --color-lighter-orange: var(--level-bg-lighter-orange-color);
+  --color-orange: var(--level-text-strong-orange-color);
+
+  --color-lighter-green: var(--level-bg-lighter-green-color);
+  --color-green: var(--level-text-strong-green-color);
+
+  --color-lighter-red: var(--level-bg-lighter-red-color);
+  --color-red: var(--level-text-strong-red-color);
 }
 
 :root {
@@ -175,6 +204,8 @@
   --light-orange-color: #oklch(0.8068 0.158557 70.9556);
   --strong-red-color: oklch(0.6238 0.2511 24.16);
   --bg-input-color: oklch(0.9612 0 0);
+  --footer-color: oklch(0.246 0.033 259.66);
+  --bg-input-color: oklch(0.9537 0.0052 247.88); 
   --strok-color: oklch(0.9038 0.0127 164.77);
   --line-table-color: oklch(0 0 0 / 12.55%)
   --lable-input-color: oklch(0.3624 0.0117 258.37);
@@ -183,11 +214,27 @@
 
   --text-label-input: 16px;
   --text-sub-info: 14px;
+  
+
+  /* Air-Quality */
+  --level-bg-lighter-yellow-color: #FAF0CC;
+  --level-text-strong-yellow-color: #f9c300;
+
+  --level-bg-lighter-orange-color: #FFE2CF;
+  --level-text-strong-orange-color: #FF6D10;
+
+  --level-bg-lighter-green-color: #CDE8DB;
+  --level-text-strong-green-color: #048D4C;
+
+  --level-bg-lighter-red-color: #FECDD6;
+  --level-text-strong-red-color: #FB0530;
+
+  
 }
 
 .dark {
   --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --foreground: oklch(0.985 0 0); 
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -250,4 +297,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.p-toast .p-toast-message .p-toast-icon-close {
+  display: none !important;
+}
+.p-toast .p-toast-message {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }

@@ -19,9 +19,9 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null }) => {
       <input
         type="text"
         placeholder={placeholder}
-        className="flex-1 outline-none bg-transparent 
+        className="flex-1 outline-none bg-transparent text-green 
              text-xs md:text-sm lg:text-base ml-3 
-             placeholder:text-meduim-gray"
+             placeholder:text-dark-green"
         aria-label="Search input"
       />
       <div className="ml-2">

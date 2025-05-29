@@ -1,5 +1,4 @@
 "use client";
-import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {
@@ -11,7 +10,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-function SetPasswordComponent() {
+function SetPasswordComponent({ onNext }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showCfPassword, setShowCfPassword] = useState(false);
   // show password
@@ -165,7 +164,10 @@ function SetPasswordComponent() {
               </ul>
             </article>
             {/* Button submit */}
-            <Button className="w-full bg-green hover:bg-green rounded-xl mt-4 h-11  text-md">
+            <Button
+              onClick={onNext}
+              className="w-full text-white bg-strong-green hover:bg-green-800 rounded-xl mt-4 h-11  text-md"
+            >
               Next
             </Button>
           </form>

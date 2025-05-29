@@ -1,41 +1,73 @@
+import React from "react";
+import Image from "next/image";
 import { DollarSign, Mail } from "lucide-react";
 
 const CardEcoEventComponent = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm w-full max-w-[265px] lg:w-full flex-shrink-0 pb-6">
-      {/* Event Image */}
-      <img
-        src="/assets/eventImage.png"
-        alt="Green Oasis going Miyawaki event"
-        className="rounded-t-2xl w-full h-[150px] object-cover"
-      />
+    <div className="">
+      <div className=" w-[250px] md:w-[270px] lg:w-[270px] pb-6 bg-white rounded-2xl shadow-md ">
+        {/* Image Section */}
+        <div className="relative w-full h-[150px]">
+          {/* Background Image */}
+          <Image
+            src="/assets/eventImage.png"
+            alt="Event"
+            fill
+            className="w-full h-full object-cover rounded-t-2xl"
+          ></Image>
 
-      {/* Event Content */}
-      <div className="px-5 pt-3">
-        <p className="text-blue-600 text-sm font-medium">• Ongoing</p>
-        <p className="text-gray-500 text-sm mt-1">Mon, 12 May at 8 AM</p>
-        <h3 className="text-gray-900 text-xl font-bold leading-snug mt-1">
-          Green Oasis going <span className="block">Miyawaki</span>
-        </h3>
-        <p className="text-gray-600 text-sm mt-1">Phnom Penh, Cambodia</p>
-        <p className="text-gray-400 text-sm mt-1">100 going</p>
+          {/* Soft black overlay */}
+          <div className="absolute inset-0 bg-black/20 rounded-t-2xl z-0"></div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-2 mt-4">
-          <button className="flex w-full justify-center items-center gap-2 bg-light-gray py-2 px-4 rounded-md text-gray-900 font-medium">
-            <img
-              src="/assets/tick-circle.png"
-              alt="Going"
-              className="h-5 w-5"
-            />
-            <span>Going</span>
-          </button>
-          <button className="bg-light-gray p-2 rounded-md">
-            <DollarSign className="h-5 w-5 text-gray-700" />
-          </button>
-          <button className="bg-light-gray p-2 rounded-md">
-            <Mail className="h-5 w-5 text-gray-700" />
-          </button>
+          {/* Overlay content */}
+          <div className="absolute top-2 left-2 flex gap-2 flex-wrap z-10">
+            <span className="bg-white/90 text-xs text-darker-gray px-2 py-1 rounded-2xl shadow">
+              Seminar | Tree Planting
+            </span>
+          </div>
+        </div>
+
+        {/* Info Section */}
+        <div className="px-5 text-left">
+          {/* Status */}
+          <div className="flex items-center gap-2 pt-2 pb-1">
+            <span className="w-2 h-2 bg-blue rounded-full inline-block"></span>
+            <p className="text-blue text-sm font-semibold">Ongoing</p>
+          </div>
+
+          {/* Date */}
+          <p className="text-dark-green text-sm">Mon, 12 May at 8 AM</p>
+
+          {/* Title */}
+          <h3 className="text-dark-green text-lg font-bold leading-tight mt-1">
+            Green Oasis going <span className="block">Miyawaki</span>
+          </h3>
+
+          {/* Location & Going Info */}
+          <p className="text-light-green text-sm mt-1">Phnom Penh, Cambodia</p>
+          <p className="text-green text-sm mt-1 mb-3">100 going</p>
+
+          {/* Action Buttons */}
+          <div className="flex pt-2 justify-between gap-x-2 w-full">
+            <button className="py-2 px-8 md:px-11 lg:px-14 bg-light-gray rounded-md flex items-center gap-2">
+              <Image
+                src="/assets/tick-circle.png"
+                alt="tick-circle"
+                width={20}
+                height={10}
+                className="h-5"
+              ></Image>
+              <p className="text-sm text-dark-green font-bold">Going</p>
+            </button>
+
+            <button className="p-2 bg-light-gray rounded-md">
+              <DollarSign size={18} />
+            </button>
+
+            <button className="p-2 bg-light-gray rounded-md">
+              <Mail size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
