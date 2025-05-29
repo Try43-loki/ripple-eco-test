@@ -1,7 +1,14 @@
 import React from "react";
+import OrganizerProfileComponent from "./_component/OrganizerProfileComponent";
 
 function ProfilePage() {
-  return <div>ProfilePage</div>;
+  return (
+    <>
+      <section>
+        <OrganizerProfileComponent/>
+      </section>
+    </>
+  )
 }
 
 export default ProfilePage;
