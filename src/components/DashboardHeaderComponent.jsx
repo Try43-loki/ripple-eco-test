@@ -1,9 +1,7 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function HeaderComponent({ title, text, link }) {
+const DashboardHeaderComponent = ({ title, text, link }) => {
   return (
     <>
       <section>
@@ -25,6 +23,6 @@ function HeaderComponent({ title, text, link }) {
       </section>
     </>
   );
-}
+};
 
-export default HeaderComponent;
+export default DashboardHeaderComponent;

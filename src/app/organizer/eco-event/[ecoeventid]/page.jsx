@@ -1,30 +1,22 @@
+import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_component/JoinEventButtonComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import StatusButtonComponent from "@/components/StatusButtonComponent";
+import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import { CalendarDays, MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import TabEcoeventComponent from "@/components/TabEcoeventComponent";
-import DonationComponent from "./_component/DonateComponent";
-import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
+import PostActivityComponent from "./_component/PostActivityComponent";
 
 const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
-  const { eventid } = await ParamsPromise;
-
-  // Hero Section param data
-  const heroSectionText = {
-    title: "ECO EVENT",
-    description:
-      "Join our EcoEvent to share ideas, connect, and act for a healthier planet.",
-    search: false,
-  };
+  const { ecoeventid } = await ParamsPromise;
 
   // Breadcrumb Section param data
   const breadcrumbSection = {
     back: "Eco Event",
     current: "Green Oasis going Miyawaki",
-    link: "/eco-event",
+    link: "/organizer/eco-event",
   };
 
   // Button Status Events
@@ -48,18 +40,11 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
       textColor: "text-orange",
     },
   ];
-
   return (
     <main className="w-full">
       <article className="flex flex-col">
-        {/* Hero Section */}
-        <HeroSectionComponent
-          text={heroSectionText.title}
-          description={heroSectionText.description}
-        />
-
         {/* Breadcrumb Section */}
-        <div className="w-full my-6 px-6 md:px-20 lg:px-[150px]">
+        <div className="py-5">
           <BreadcrumbComponent
             back={breadcrumbSection.back}
             current={breadcrumbSection.current}
@@ -68,7 +53,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
         </div>
 
         {/* Detail Section */}
-        <article className="flex w-full px-6 md:px-20 lg:px-[150px] py-2">
+        <article className="flex w-full py-2">
           <div className="w-full flex flex-col h-auto bg-light-gray rounded-3xl p-5 md:p-8 lg:p-10 relative">
             {/* Top Section: Organizer Info + Join Button */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
@@ -159,8 +144,8 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </div>
             {/* Tab */}
             <TabEcoeventComponent />
-            {/* Donate Section */}
-            <DonationComponent />
+            {/* Post Activity Section */}
+            <PostActivityComponent />
           </div>
         </article>
       </article>

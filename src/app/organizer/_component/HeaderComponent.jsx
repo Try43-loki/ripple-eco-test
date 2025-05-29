@@ -1,13 +1,27 @@
 "use client";
-import { usePathname } from "next/navigation";
 import React from "react";
-function HeaderComponent() {
-  const currentPath = usePathname();
+import { Bell, ChevronDown } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ProfileDropdownComponent } from "@/components/ProfileDropdownComponent";
+import { usePathname } from "next/navigation";
 
+// Format route path into readable title
+const formatRouteTitle = (path) => {
+  const segments = path.split("/").filter(Boolean);
+  const lastSegment = segments[1];
+  // regex
+  return lastSegment
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (l) => l.toUpperCase());
+};
+
+function HeaderComponent() {
+  const pathname = usePathname();
+  const dynamicTitle = formatRouteTitle(pathname);
   return (
     <>
       <div className="flex justify-between items-center mb-5">
-        <h1 className="text-2xl font-bold text-green">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-green">{dynamicTitle}</h1>
         <article className="flex justify-center items-center gap-x-4">
           <div className="p-2 rounded-xl h-10 w-10  bg-lighter-white flex justify-center items-center">
             <Bell className="text-light-green" size={20} />

@@ -30,11 +30,13 @@ const DiscussionPageDetails = async ({ params: ParamsPromise }) => {
         showSearchBar={heroSectionText.search}
       />
       {/* Breadcamp */}
-      <BreadcrumbComponent
-        back={breadcrumbSection.back}
-        current={breadcrumbSection.current}
-        Link={breadcrumbSection.link}
-      />
+      <div className="w-full my-6 px-6 md:px-20 lg:px-[150px]">
+        <BreadcrumbComponent
+          back={breadcrumbSection.back}
+          current={breadcrumbSection.current}
+          Link={breadcrumbSection.link}
+        />
+      </div>
 
       {/* Card Discussion */}
       <div className="w-full px-6 md:px-20 lg:px-[150px]">

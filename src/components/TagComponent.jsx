@@ -11,7 +11,7 @@ const TagComponent = () => {
         {/* Comment Button */}
         <CommentButtonComponent />
       </article>
-      <div className="w-full border-b border-stroke py-2"></div>
+      <div className="w-full border-b border-lightes-white py-2"></div>
     </main>
   );
 };
