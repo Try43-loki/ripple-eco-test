@@ -24,7 +24,7 @@ const EcoEventSectionComponent = () => {
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
               {events.map((event, index) => (
-                <CardEcoEventComponent key={index} />
+                <CardEcoEventComponent key={index} href={`/eco-event`} />
               ))}
             </div>
           </div>

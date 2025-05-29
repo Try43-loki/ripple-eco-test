@@ -28,9 +28,7 @@ function EcoEventPage() {
         <div className="flex flex-wrap justify-center gap-8 mt-6">
           {[...Array(8)].map((_, index) => (
             <div key={index}>
-              <Link href={`/organizer/eco-event/${2}`}>
-                <CardEcoEventComponent />
-              </Link>
+              <CardEcoEventComponent href={`/organizer/eco-event/${2}`} />
             </div>
           ))}
         </div>
