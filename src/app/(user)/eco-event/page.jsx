@@ -27,21 +27,13 @@ const EcoEventPage = () => {
 
         {/* Card Eco-Event Section */}
         <section className="px-4 md:px-20 lg:px-[150px] pb-12">
-          <Link
-            href={`/eco-event/${2}`}
-            className="flex flex-wrap gap-5 lg:gap-12 justify-center"
-          >
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-            <CardEcoEventComponent />
-          </Link>
+          <div className="flex flex-wrap gap-5 lg:gap-12 justify-center">
+            {[...Array(8)].map((_, index) => (
+              <div key={index}>
+                <CardEcoEventComponent href={`/eco-event/${2}`} />
+              </div>
+            ))}
+          </div>
         </section>
       </article>
     </main>
