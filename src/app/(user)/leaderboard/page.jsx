@@ -10,7 +10,7 @@ const LeaderboardPage = () => {
       <LeaderboardHeroSectionComponent />
 
       {/* Top Ranking Section */}
-      <div className="px-6 md:px-20 lg:px-45 pt-45 md:pt-25 lg:pt-35">
+      <div className="px-6 md:px-20 lg:px-45 pt-45 md:pt-25 lg:pt-35 pb-15">
         <TopRankingComponent />
       </div>
     </div>

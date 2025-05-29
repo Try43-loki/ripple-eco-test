@@ -33,7 +33,7 @@ const ChampionsLeaderboardComponent = () => {
         {/* ----- Right side: podiums ----- */}
         <div className="relative flex-1">
           {/* Podium container pinned to bottom-right */}
-          <div className="absolute top-3 right-0 flex items-end ">
+          <div className="absolute top-1.5 right-0 flex items-end ">
             {/* 2nd place */}
             <div className="flex flex-col items-center relative z-0">
               {/* Profile + wreath */}
