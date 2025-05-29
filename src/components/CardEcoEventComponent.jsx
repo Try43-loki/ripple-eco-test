@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { DollarSign, Mail } from "lucide-react";
 
+import { DollarSign, Mail } from "lucide-react";
+
 const CardEcoEventComponent = () => {
   return (
     <div className="flex gap-8 pt-6 w-full ">

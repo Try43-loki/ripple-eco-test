@@ -1,19 +1,17 @@
-
-import HeroSection from "@/components/HeroSection";
 import SearchBarComponent from "@/components/SearchBarComponent";
-import { ImagePlus, SearchCheck} from "lucide-react";
+import { ImagePlus, SearchCheck } from "lucide-react";
 import React from "react";
 import DiscussionButton from "../discussion-forums/_component/DiscussionButton";
 import TakeActionCard from "./_component/TakeActionCard";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-  } from "@/components/ui/dialog"  
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,17 +27,19 @@ const TakeActionPage = () => {
 
         {/* Create Discussion Button */}
         <Dialog>
-          <DialogTrigger asChild className='bg-amber-400 w-[300px]'>
+          <DialogTrigger asChild className="bg-amber-400 w-[300px]">
             <Button
               variant="outline"
               className="w-auto bg-primary hover:bg-[#1da761] text-white hover:text-white  text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
             >
               Create Take Action
-           </Button>
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[567px] p-[35px] rounded-[20px]">
             <DialogHeader>
-              <DialogTitle className='text-[24px] text-primary'>Create Take Action</DialogTitle>
+              <DialogTitle className="text-[24px] text-primary">
+                Create Take Action
+              </DialogTitle>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="flex flex-col gap-y-[11px] items-start">
@@ -80,34 +80,31 @@ const TakeActionPage = () => {
                 <Label htmlFor="file" className="text-right text-[18px]">
                   Image
                 </Label>
-                <Input
-                  type={"file"}
-                  id="file"
-                  className="h-[97px] hidden"
-                />
+                <Input type={"file"} id="file" className="h-[97px] hidden" />
                 <Label
                   htmlFor="file"
                   className="h-[97px] w-full border-dashed border-[#F97316] border-1 flex flex-col justify-center items-center cursor-pointer rounded-md"
                 >
-                  <ImagePlus className='mb-2 text-description w-[24px] h-[24px]'/>
-                  <span className="text-description text-[14px]">Upload Image</span>
+                  <ImagePlus className="mb-2 text-description w-[24px] h-[24px]" />
+                  <span className="text-description text-[14px]">
+                    Upload Image
+                  </span>
                 </Label>
               </div>
             </div>
             <DialogFooter>
-            <Button
-              variant="outline"
-              className="w-auto bg-[#FF3F34] hover:bg-[#FF3F34] text-white hover:text-white  text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="outline"
-              className="w-auto bg-primary hover:bg-[#1da761] text-white hover:text-white  text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
-            >
-              Create Take Action
-            </Button>
-            
+              <Button
+                variant="outline"
+                className="w-auto bg-[#FF3F34] hover:bg-[#FF3F34] text-white hover:text-white  text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="outline"
+                className="w-auto bg-primary hover:bg-[#1da761] text-white hover:text-white  text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
+              >
+                Create Take Action
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -130,7 +127,7 @@ const TakeActionPage = () => {
           }
           support={"11,376"}
         />
-       <TakeActionCard
+        <TakeActionCard
           image={"/sub-banner.jpg"}
           title={"Stand Up to Plastic Pollution"}
           description={
@@ -147,7 +144,6 @@ const TakeActionPage = () => {
           support={"11,376"}
         />
       </section>
-      
     </main>
   );
 };
