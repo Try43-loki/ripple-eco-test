@@ -1,27 +1,37 @@
+"use client";
+
 import React from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
-const CreateDiscussionComponent = ({ showModal, onClose }) => {
-  if (!showModal) return null;
-
+const CreateDiscussionComponent = () => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
-      <div
-        className="bg-white p-6 rounded-lg shadow-md max-w-md w-full"
-        style={{ maxWidth: "400px" }}
-      >
-        {/* Close button */}
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-          onClick={onClose}
+    <Dialog>
+      {/* Trigger Button */}
+      <DialogTrigger asChild>
+        <Button
+          variant="default"
+          className="py-4 px-5 bg-green text-white rounded-2xl hover:bg-green/80"
         >
-          ×
-        </button>
+          Start the Discussion
+        </Button>
+      </DialogTrigger>
 
-        {/* Form Title */}
-        <h2 className="text-xl font-bold text-dark-green mb-4">
-          Create Discussion
-        </h2>
+      {/* Dialog Content */}
+      <DialogContent className="w-full bg-white border border-lightes-white">
+        <DialogHeader>
+          <DialogTitle>Create Discussion</DialogTitle>
+          <DialogDescription></DialogDescription>
+        </DialogHeader>
 
         {/* Form Fields */}
         <form>
@@ -43,14 +53,14 @@ const CreateDiscussionComponent = ({ showModal, onClose }) => {
           </div>
 
           {/* Tags Input */}
-          <div className="mb-4 flex gap-2">
+          <div className="mb-4 flex flex-col gap-2">
             <label
               htmlFor="tags"
               className="block text-sm font-medium text-gray-700"
             >
               Tags
             </label>
-            <div className="flex-grow">
+            <div className="flex gap-2">
               <input
                 type="text"
                 id="tags"
@@ -58,13 +68,13 @@ const CreateDiscussionComponent = ({ showModal, onClose }) => {
                 placeholder="Add tags"
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
               />
+              <button
+                type="button"
+                className="bg-green text-white px-4 py-1 rounded-md hover:bg-green/80 transition"
+              >
+                +
+              </button>
             </div>
-            <button
-              type="button"
-              className="bg-green text-white px-4 py-2 rounded-md hover:bg-green/80 transition"
-            >
-              +
-            </button>
           </div>
 
           {/* Description Input */}
@@ -108,23 +118,20 @@ const CreateDiscussionComponent = ({ showModal, onClose }) => {
           </div>
 
           {/* Submit Buttons */}
-          <div className="flex justify-end gap-2">
-            <button
-              type="button"
-              className="bg-red text-white px-4 py-2 rounded-md hover:bg-red/80 transition"
-            >
+          <DialogFooter>
+            <Button type="submit" className="bg-lighter-white">
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="bg-green text-white px-4 py-2 rounded-md hover:bg-green/80 transition"
+              className="bg-green text-white hover:bg-green/80"
             >
               Create Discussion
-            </button>
-          </div>
+            </Button>
+          </DialogFooter>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
