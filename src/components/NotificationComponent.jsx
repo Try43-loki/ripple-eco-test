@@ -48,7 +48,7 @@ const NotificationItem = () => {
       <Popover>
         <PopoverTrigger>Open</PopoverTrigger>
         <PopoverContent className="w-96 border border-light-strok">
-          You have {metadata.total_count} unread items
+          You have {metadata?.total_count} unread items
           <section className="w-full">
             <div className="flex justify-between items-center">
               <h1 className="text-meduim-green text-xl font-semibold">

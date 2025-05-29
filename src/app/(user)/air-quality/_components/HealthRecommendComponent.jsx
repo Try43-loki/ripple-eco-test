@@ -20,7 +20,7 @@ const HealthRecommendComponent = ({ levelColor }) => {
             alt="Bike-Yellow"
             width={36}
             height={36}
-            src={`/assets/air_quality_images/Bike-${levelColor.title}.svg`}
+            src={`/assets/air_quality_images/Bike-${levelColor?.title}.svg`}
           />
           <span className="text-dark-gray text-lg">
             Sensitive group should reduce outdoor exercise
@@ -31,7 +31,7 @@ const HealthRecommendComponent = ({ levelColor }) => {
             alt="Bike-Yellow"
             width={36}
             height={36}
-            src={`/assets/air_quality_images/Mask-${levelColor.title}.svg`}
+            src={`/assets/air_quality_images/Mask-${levelColor?.title}.svg`}
           />
           <span className="text-dark-gray text-lg">
             Sensitive group should wear a mask outdoors
@@ -42,7 +42,7 @@ const HealthRecommendComponent = ({ levelColor }) => {
             alt="Bike-Yellow"
             width={36}
             height={36}
-            src={`/assets/air_quality_images/Fan-${levelColor.title}.svg`}
+            src={`/assets/air_quality_images/Fan-${levelColor?.title}.svg`}
           />
           <span className="text-dark-gray text-lg">
             Sensitive group should run an air purifier
@@ -53,7 +53,7 @@ const HealthRecommendComponent = ({ levelColor }) => {
             alt="Bike-Yellow"
             width={36}
             height={36}
-            src={`/assets/air_quality_images/Windows-${levelColor.title}.svg`}
+            src={`/assets/air_quality_images/Windows-${levelColor?.title}.svg`}
           />
           <span className="text-dark-gray text-lg">
             Close your windows to avoid dirty outdoors

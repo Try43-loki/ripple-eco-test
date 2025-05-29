@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
+import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 const NavBarComponent = () => {
   const currentPath = usePathname();
 
@@ -145,14 +146,9 @@ const NavBarComponent = () => {
                 <div className="flex items-center">
                   <Popover>
                     <PopoverTrigger>
-                      <Link href="/profile">
-                        <img
-                          src="https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg"
-                          alt="avatar"
-                          className="w-[30px] h-[30px] rounded-full"
-                        />
-                        {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
-                      </Link>
+                      <ProfileDropdownComponent operator={"user"} />
+
+                      {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
                     </PopoverTrigger>
                   </Popover>
                 </div>

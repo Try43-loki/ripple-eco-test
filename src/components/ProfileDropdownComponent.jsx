@@ -9,20 +9,28 @@ import {
 import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
-export function ProfileDropdownComponent() {
+export function ProfileDropdownComponent({ operator }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ChevronDown
-          variant="outline"
-          size={20}
-          className=" text-light-green"
-        />
+        {operator == "organizer" ? (
+          <ChevronDown
+            variant="outline"
+            size={20}
+            className=" text-light-green"
+          />
+        ) : (
+          <img
+            src="https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg"
+            alt="avatar"
+            className="w-[30px] h-[30px] rounded-full cursor-pointer"
+          />
+        )}
       </PopoverTrigger>
-      <PopoverContent className="w-55 mr-10 p-0 mt-3 rounded-2xl px-2 py-2 bg-white border border-light-strok">
+      <PopoverContent className="w-50 mr-10 p-0 mt-3 rounded-2xl px-2 py-2 bg-white border border-light-strok">
         <div className="flex justify-center items-start flex-col w-full rounded-xl">
           <Link
-            href="/organizer/profile"
+            href={operator == "organizer" ? "/organizer/profile" : "/profile"}
             className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <User className="text-lighter-green" />

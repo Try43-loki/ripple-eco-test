@@ -35,7 +35,7 @@ function HeaderComponent() {
               United Nations Environment Program (UNEP)
             </h2>
 
-            <ProfileDropdownComponent />
+            <ProfileDropdownComponent operator={"organizer"} />
           </div>
         </article>
       </div>
