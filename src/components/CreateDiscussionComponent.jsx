@@ -88,7 +88,7 @@ const CreateDiscussionComponent = () => {
             <textarea
               id="description"
               name="description"
-              placeholder="Enter discussion description"
+              placeholder="Enter discussion"
               rows={4}
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
             ></textarea>

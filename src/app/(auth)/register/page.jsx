@@ -6,6 +6,7 @@ import { OTPInputContext } from "input-otp";
 import OTPVerifyComponent from "../_component/OTPVerifyComponent";
 import SetPasswordComponent from "../_component/SetPasswordComponent";
 import LoginSuccessComponent from "../_component/LoginSuccessComponent";
+import AdditonalInfoComponent from "../_component/AdditionalInfoComponent";
 
 function RegisterPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -22,9 +23,9 @@ function RegisterPage() {
         <SetPasswordComponent onNext={nextStep} onPrev={prevStep} />
       )}
       {currentStep === 4 && (
-        <LoginSuccessComponent onNext={nextStep} onPrev={prevStep} />
+        <AdditonalInfoComponent onNext={nextStep} onPrev={prevStep} />
       )}
-      {currentStep === 5 && <Step5 onPrev={prevStep} />}
+      {currentStep === 5 && <LoginSuccessComponent onPrev={prevStep} />}
     </>
   );
 }

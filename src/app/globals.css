@@ -51,6 +51,7 @@
   --color-meduim-green: var(--finished-color);
   --color-light-green: var(--subtitle-color);
   --color-lighters-green: var(--description-color);
+  --color-lighter-green: var(--description-color);
   --color-verylight-green: var(--finished-bg);
   --color-lightest-green: var(--light-green-custome-background);
   --color-green: var(--main-color);
@@ -100,17 +101,17 @@
   --text-sub-info: var(--text-sub-info);
 
   /* Air Quality */
-  --color-lighter-yellow: var(--level-bg-lighter-yellow-color);
-  --color-yellow: var(--level-text-strong-yellow-color);
+  --color-air-lighter-yellow: var(--level-bg-lighter-yellow-color);
+  --color-air-yellow: var(--level-text-strong-yellow-color);
 
-  --color-lighter-orange: var(--level-bg-lighter-orange-color);
-  --color-orange: var(--level-text-strong-orange-color);
+  --color-air-lighter-orange: var(--level-bg-lighter-orange-color);
+  --color-air-orange: var(--level-text-strong-orange-color);
 
-  --color-lighter-green: var(--level-bg-lighter-green-color);
-  --color-green: var(--level-text-strong-green-color);
+  --color-air-lighter-green: var(--level-bg-lighter-green-color);
+  --color-air-green: var(--level-text-strong-green-color);
 
-  --color-lighter-red: var(--level-bg-lighter-red-color);
-  --color-red: var(--level-text-strong-red-color);
+  --color-air-lighter-red: var(--level-bg-lighter-red-color);
+  --color-air-red: var(--level-text-strong-red-color);
 }
 
 :root {
