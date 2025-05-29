@@ -5,7 +5,7 @@ import { DollarSign, Mail } from "lucide-react";
 const CardEcoEventComponent = () => {
   return (
     <div className="">
-      <div className=" w-[250px] md:w-[270px] lg:w-[300px] pb-6 bg-white rounded-2xl shadow-md ">
+      <div className=" w-[250px] md:w-[270px] lg:w-[270px] pb-6 bg-white rounded-2xl shadow-md ">
         {/* Image Section */}
         <div className="relative w-full h-[150px]">
           {/* Background Image */}

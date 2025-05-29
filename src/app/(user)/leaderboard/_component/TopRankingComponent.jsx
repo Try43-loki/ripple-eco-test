@@ -8,14 +8,15 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Recycle, TreeDeciduous, HandHeart } from "lucide-react";
-import Image from "next/image";
-import { SelectComponent } from "./SelectComponent";
+import DetailTopRankComponent from "./DetailTopRankComponent";
 import SearchComponent from "./SearchComponent";
+import { SelectComponent } from "./SelectComponent";
+import Image from "next/image";
 
 const TopRankingComponent = () => {
   return (
-    <div>
-      <section className="flex gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white px-6 md:px-20 lg:px-45 pt-45 md:pt-35 lg:pt-35 pb-10">
+    <>
+      <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
         {/* Top  */}
         <div>
           <h2 className="text-lg lg:text-xl xl:text-2xl text-dark-green font-bold">
@@ -35,7 +36,7 @@ const TopRankingComponent = () => {
         </article>
       </section>
 
-      <section className="px-6 md:px-20 lg:px-45 h-full bg-white mb-15">
+      <section className="  h-full bg-white  mt-10">
         <div className="">
           <article className="flex gap-4 ">
             {/* image rank 1 */}
@@ -208,7 +209,7 @@ const TopRankingComponent = () => {
           </article>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

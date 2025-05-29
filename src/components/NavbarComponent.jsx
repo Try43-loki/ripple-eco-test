@@ -78,9 +78,9 @@ const NavBarComponent = () => {
                         Take Action
                       </NavigationMenuLink>
                       <NavigationMenuLink
-                        href="/discussion-forum"
+                        href="/discussion-forums"
                         className={`w-32 flex flex-row items-center gap-x-2 ${
-                          currentPath == "/discussion-forum"
+                          currentPath == "/discussion-forums"
                             ? "bg-light-gray"
                             : ""
                         }`}
