@@ -17,7 +17,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import TakeActionComponent from "./_component/TakeActionComponent";import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
+import TakeActionComponent from "./_component/TakeActionComponent";
+import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
 import EventHistoryComponent from "./_component/EventHistoryComponent";
 const ProfilePage = () => {
@@ -166,7 +167,7 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="event-history" className="w-full mt-5 mb-10">
-            
+            {/* <EventHistoryComponent/> */}
           </TabsContent>
         </Tabs>
       </section>

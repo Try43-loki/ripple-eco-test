@@ -1,9 +1,8 @@
 
-import HeroSection from "@/components/HeroSection";
+// import HeroSection from "@/components/HeroSection";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import { ImagePlus, SearchCheck} from "lucide-react";
 import React from "react";
-import DiscussionButton from "../discussion-forums/_component/DiscussionButton";
 import TakeActionCard from "./_component/TakeActionCard";
 import {
     Dialog,
@@ -22,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 const TakeActionPage = () => {
   return (
     <main>
-      <HeroSection title={"Take Action"} />
+      {/* <HeroSection title={"Take Action"} /> */}
       <section className="mt-[48px] flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-4 md:px-12 lg:px-32 my-6 w-full">
         {/* Search bar */}
         <SearchBarComponent placeholder={"Search Discussion"} />
