@@ -35,7 +35,7 @@ const disaster = [
 const HeroSectionNaturalDisasterDashboardComponent = () => {
   return (
     <>
-      <div className="rounded-2xl relative flex items-center justify-start bg-linear-to-r bg-light-brown p-10 h-42.5 mt-8">
+      <div className="rounded-2xl relative flex items-center justify-start bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9] p-10 h-42.5 mt-8">
         <article className="flex flex-col-reverse gap-10 lg:flex-row w-full">
           <div className="flex flex-col gap-5 justify-center items-start w-full">
             <div className="flex flex-col gap-1 items-start justify-center">

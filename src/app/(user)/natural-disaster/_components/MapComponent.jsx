@@ -15,15 +15,15 @@ const MapView = dynamic(() => import("../_components/MapView"), {
 const MapComponent = ({ isDashboard }) => {
   return (
     <article
-      className={clsx(" flex gap-8 text-white text-center lg:flex-col", {
+      className={clsx(" flex gap-8 text-white text-center lg:flex-col ", {
         "lg:px-[150px]": !isDashboard,
       })}
     >
-      <div className="flex gap-3 items-center z-20">
+      <div className="flex gap-3 items-center z-20 ">
         <span className="font-medium text-base text-dark-gray">Filter by:</span>
         <BtnSelectType />
         <BtnSelectSeverity />
-        <DatePickerDemo />
+        <DatePickerDemo order={1} />
         <DatePickerDemo />
       </div>
       <div className=" h-[500px] z-10 ">

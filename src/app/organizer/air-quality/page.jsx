@@ -6,14 +6,14 @@ import AirQualityComponent from "@/app/(user)/air-quality/_components/AirQuality
 import HealthRecommendComponent from "@/app/(user)/air-quality/_components/HealthRecommendComponent";
 
 const aqiData = {
-  value: 10,
-  unit: "US AQI*",
+  value: 89,
+  unit: "PP AQI*",
   level: "Moderate",
   pollutant: "PM2.5",
-  pollutantValue: "14.5 ug/m3",
-  windSpeed: "5.5 Km/h",
+  pollutantValue: "14.5",
+  windSpeed: "5.5",
   temperature: "33",
-  humidity: "62%",
+  humidity: "62",
 };
 
 const api = {
@@ -24,57 +24,62 @@ const api = {
 const switchColor = (value) => {
   if (value < 50)
     return {
-      bg: "bg-lighter-green",
-      text: "text-green",
+      title: "Green",
+      bg: "bg-air-lighter-green",
+      text: "text-air-green",
       label: "#048D4C",
       bgRaw: "#CDE8DB",
     };
   if (value < 100)
     return {
-      bg: "bg-lighter-yellow",
-      text: "text-yellow",
+      title: "Yellow",
+      bg: "bg-air-lighter-yellow",
+      text: "text-air-yellow",
       label: "#f9c300",
       bgRaw: "#FAF0CC",
     };
   if (value < 150)
     return {
-      bg: "bg-lighter-orange",
-      text: "text-orange",
+      title: "Orange",
+      bg: "bg-air-lighter-orange",
+      text: "text-air-orange",
       label: "#FF6D10",
       bgRaw: "#FFE2CF",
     };
   if (value >= 150)
     return {
-      bg: "bg-lighter-red",
-      text: "text-red",
+      title: "Red",
+      bg: "bg-air-lighter-red",
+      text: "text-air-red",
       label: "#FB0530",
       bgRaw: "#FECDD6",
     };
 };
 
 function AirQualityDashboardPage() {
-  const finalColor = switchColor(aqiData.value);
+  const dynamicColor = switchColor(aqiData.value);
   return (
     <section className="flex flex-col gap-9">
+      {/* Hero Section */}
       <section className="w-full">
         <HeroSectionAirQualityDashboardComponent
           dataSearch={api}
           dataCard={aqiData}
-          levelColor={finalColor}
+          levelColor={dynamicColor}
         />
       </section>
 
       {/* Section 2 */}
-      <section className="w-[1396px] ">
+      <section className="w-[1393px]">
         <HourlyForecastComponent />
       </section>
 
       {/* Section 3 */}
-      <section className="flex justify-center gap-10 px-6 py-10 text-white ">
+      <section className="flex justify-center gap-10  py-10 text-white">
         <DailyForecastComponent />
         <div className="flex flex-col w-full gap-10">
-          <AirQualityComponent />
-          <HealthRecommendComponent />
+          <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />
+          <HealthRecommendComponent levelColor={dynamicColor} />
         </div>
       </section>
     </section>
@@ -82,3 +87,29 @@ function AirQualityDashboardPage() {
 }
 
 export default AirQualityDashboardPage;
+
+//  return (
+//     <section className="flex flex-col gap-9">
+//       <section className="w-full">
+//         <HeroSectionAirQualityDashboardComponent
+//           dataSearch={api}
+//           dataCard={aqiData}
+//           levelColor={finalColor}
+//         />
+//       </section>
+
+//       {/* Section 2 */}
+//       <section className="w-[1396px] ">
+//         <HourlyForecastComponent />
+//       </section>
+
+//       {/* Section 3 */}
+//       <section className="flex justify-center gap-10 px-6 py-10 text-white ">
+//         <DailyForecastComponent />
+//         <div className="flex flex-col w-full gap-10">
+//           <AirQualityComponent />
+//           <HealthRecommendComponent />
+//         </div>
+//       </section>
+//     </section>
+//   );

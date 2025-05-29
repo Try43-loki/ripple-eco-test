@@ -4,7 +4,6 @@ import DailyForecastComponent from "./_components/DailyForecastComponent";
 import AirQualityComponent from "./_components/AirQualityComponent";
 import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 import HeroSectionAirDisasterComponent from "./_components/HeroSectionAirDisasterComponent";
-import clsx from "clsx";
 
 const bgGreen = "#CDE8DB";
 const bgYellow = "#FAF0CC";
@@ -12,8 +11,8 @@ const bgOrange = "#FFE2CF";
 const bgRed = "#FECDD6";
 
 const aqiData = {
-  value: 150,
-  unit: "US AQI*",
+  value: 89,
+  unit: "PP AQI*",
   level: "Moderate",
   pollutant: "PM2.5",
   pollutantValue: "14.5",
