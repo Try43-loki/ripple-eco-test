@@ -58,7 +58,7 @@ const subItems = [
       },
       {
         title: "Discussion",
-        url: "/organizer/discussion",
+        url: "/organizer/discussion-forums",
       },
       {
         title: "Leaderboard",

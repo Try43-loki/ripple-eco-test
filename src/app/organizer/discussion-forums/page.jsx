@@ -20,9 +20,6 @@ function DiscussioForumsPage() {
           link={headerSection.link}
         />
         <div className="flex justify-between py-5">
-          <h2 className="text-sm md:text-base lg:text-xl font-bold text-dark-green">
-            10,200 Discussions
-          </h2>
           <DiscussionTabComponent />
           <div className="flex-col w-1/3 pl-5">
             <SearchBarComponent />
