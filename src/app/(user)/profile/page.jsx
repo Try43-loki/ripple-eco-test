@@ -1,16 +1,25 @@
+import React from "react";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { TabsContent } from "@radix-ui/react-tabs";
-import { ClipboardList, Clock, Mail, MapPin, MessageCircleQuestion, MessagesSquare, Phone, Sparkles, SquarePen } from "lucide-react";
-import React from "react";
-import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
-import DisccusionComponent from "./_component/DisccusionComponent";
-import TakeActionComponent from "./_component/TakeActionComponent";
+import {
+  ClipboardList,
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircleQuestion,
+  MessagesSquare,
+  Phone,
+  Sparkles,
+  SquarePen,
+} from "lucide-react";
 import Image from "next/image";
-import EventHistoryComponent from "./_component/EventHistoryComponent";
 
+import TakeActionComponent from "./_component/TakeActionComponent";import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
+import DisccusionComponent from "./_component/DisccusionComponent";
+import EventHistoryComponent from "./_component/EventHistoryComponent";
 const ProfilePage = () => {
   return (
     <main>
@@ -20,7 +29,7 @@ const ProfilePage = () => {
         showSearchBar={false}
       />
 
-      <article className="flex items-end gap-x-10 rounded-[28px] mx-[150px] justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
+      <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
         <img
           src="https://i.pinimg.com/736x/35/48/35/3548357337902e2d9d7a79b1a6a166bc.jpg"
           alt="sakuke"
@@ -32,79 +41,80 @@ const ProfilePage = () => {
             Passionate about protecting the Earth and encouraging eco-friendly
             habits.
           </p>
-          <div className="flex items-center gap-x-[38px]">
-            <div className="flex items-center text-sub-info text-[#83948D] gap-x-[6px]">
-              <Phone className="w-[18px] h-[18px]" />
+          <div className="flex items-center gap-10">
+            <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
+              <Phone className="w-4.5 h-4.5" />
               <p>012-333-334</p>
             </div>
-            <div className="flex items-center text-sub-info text-[#83948D] gap-x-[6px]">
-              <MapPin className="w-[18px] h-[18px]" />
+            <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
+              <MapPin className="w-4.5 h-4.5" />
               <p>Phnom Penh</p>
             </div>
-            <div className="flex items-center text-sub-info text-[#83948D] gap-x-[6px]">
-              <Mail className="w-[18px] h-[18px]" />
+            <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
+              <Mail className="w-4.5 h-4.5" />
               <p>UNEP@gmail.com</p>
             </div>
           </div>
         </div>
-        <Button className="bg-meduim-green hover:bg-green text-white px-[20px] py-[15px] rounded-[16px] text-[16px]">
-          <div className="flex gap-x-[6px] items-center">
-            <SquarePen className="w-[16px] h-[16px]" />
+        <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
+          <div className="flex gap-1.5 items-center">
+            <SquarePen className="w-4 h-4" />
             <p>Edit Profile</p>
           </div>
         </Button>
       </article>
-      <section className="mt-12 mx-[150px]">
-        <Tabs defaultValue="events" className="w-full ">
-          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-[#D8E2DD]">
+
+      <section className="mt-12 mx-36">
+        <Tabs defaultValue="event-history" className="w-full">
+          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
             <TabsTrigger
               value="event-history"
               className={cn(
-                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <Clock className="w-[18px] h-[18px]" />
+              <Clock className="w-4.5 h-4.5" />
               <p>Event History</p>
             </TabsTrigger>
             <TabsTrigger
               value="own-feedback"
               className={cn(
-                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <MessagesSquare className="w-[18px] h-[18px]"/>
+              <MessagesSquare className="w-4.5 h-4.5" />
               <p>Own Feedback</p>
             </TabsTrigger>
             <TabsTrigger
               value="discussion"
               className={cn(
-                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <MessageCircleQuestion className="w-[18px] h-[18px]" />
+              <MessageCircleQuestion className="w-4.5 h-4.5" />
               <p>Discussion</p>
             </TabsTrigger>
             <TabsTrigger
               value="take-action"
               className={cn(
-                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <ClipboardList className="w-[18px] h-[18px]" />
+              <ClipboardList className="w-4.5 h-4.5" />
               <p>Take Action</p>
             </TabsTrigger>
             <TabsTrigger
               value="earned-badge"
               className={cn(
-                "sm:text-sm md:text-base lg:text-lg py-[10px] px-[16px] rounded-[14px] flex gap-x-[8px] items-center transition-colors",
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2.5 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
                 "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
               )}
             >
-              <Sparkles className="w-[18px] h-[18px]" />
+              <Sparkles className="w-4.5 h-4.5" />
               <p>Earn Badge</p>
             </TabsTrigger>
           </TabsList>
@@ -112,49 +122,56 @@ const ProfilePage = () => {
           <TabsContent value="own-feedback" className="w-full mt-5 mb-10">
             <OwnFeedBackComponent/>
           </TabsContent>
+
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
             <DisccusionComponent/>
           </TabsContent>
+
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-              <TakeActionComponent/>
+            <TakeActionComponent/>
           </TabsContent>
+
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
-            <section className="flex items-center gap-5">
-              <Image src='/badges/Green Helper.png' 
-                alt="badge"
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] rounded-[14px]"
+            <section className="flex">
+              <Image
+                src="/badges/Eco Hero.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
               />
-              <Image src='/badges/Eco Hero.png' 
-                alt="badge"
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] rounded-[14px]"
+              <Image
+                src="/badges/Eco Volunteer.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
               />
-              <Image src='/badges/Eco Volunteer.png' 
-                alt="badge"
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] rounded-[14px]"
+              <Image
+                src="/badges/Green Helper.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
               />
-              <Image src='/badges/Nature Steward.png' 
-                alt="badge"
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] rounded-[14px]"
+              <Image
+                src="/badges/Nature Steward.png"
+                alt="badges"
+                width={200}
+                height={200}
+                className=""
               />
+
             </section>
           </TabsContent>
+
           <TabsContent value="event-history" className="w-full mt-5 mb-10">
-              <section>
-                <EventHistoryComponent/>
-              </section>
+            
           </TabsContent>
         </Tabs>
       </section>
     </main>
   );
-}
+};
 
 export default ProfilePage;

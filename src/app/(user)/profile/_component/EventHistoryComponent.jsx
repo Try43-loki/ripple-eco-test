@@ -1,35 +1,52 @@
-"use client"
-import React from 'react'
+"use client";
+import React, { useState } from "react";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Armchair, BadgeDollarSign, Ban, ChevronDown, Gift, Hammer, HandHeart, Handshake, HeartHandshake, NotebookPen, Recycle, TreeDeciduous } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
-import CardEndedEcoEvent from './CardEndedEcoEvent';
-  
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Armchair,
+  BadgeDollarSign,
+  Ban,
+  ChevronDown,
+  Gift,
+  Hammer,
+  HandHeart,
+  Handshake,
+  HeartHandshake,
+  NotebookPen,
+  Recycle,
+  TreeDeciduous,
+} from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import CardEndedEcoEvent from "./EventHistoryComponent";
+
 const EventHistoryComponent = () => {
-    const [dates, setDates] = React.useState([]);
+  const [date, setDate] = useState(null);
+
   return (
     <main>
       <section className="flex gap-x-7 items-center">
-        <h2 className="text-[20px]">Filter:</h2>
-        <div className="flex items-center gap-x-[15px]">
+        <h2 className="text-5">Filter:</h2>
+        <div className="flex items-center gap-x-4">
           <Select>
-            <SelectTrigger className="w-auto rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-              <SelectValue placeholder="Province" className="placeholder:text-[20px] placeholder:text-[#697D74]"/>
+            <SelectTrigger className="w-auto rounded-xl h-10.5 px-6 py-5 bg-light-gray border-none">
+              <SelectValue
+                placeholder="Province"
+                className="placeholder:text-5 placeholder:text-light-gray"
+              />
             </SelectTrigger>
-            <SelectContent className="rounded-[20px] border-1 border-[#D8E2DD] px-[15px] py-[5px] text-[#697D74] text-[18px] h-[290px]">
+            <SelectContent className="rounded-2xl border border-border px-4 py-1 text-strong-gray text-[18px] max-h-[290px]">
               <SelectGroup>
                 <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
                 <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
@@ -49,110 +66,109 @@ const EventHistoryComponent = () => {
           </Select>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-auto flex items-center gap-x-[8px] rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-                <h3 className="text-[#697D74]">Event Type</h3> 
-                <ChevronDown className="w-[14px] h-[14px] text-[#697D74]"/>
+            <DropdownMenuTrigger className="w-auto flex items-center gap-x-2 rounded-xl h-10.5 px-6 py-5 bg-light-gray border-none">
+              <h3 className="text-strong-gray">Event Type</h3>
+              <ChevronDown className="w-3.5 h-3.5 text-strong-gray" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-[16px] border-1 border-[#D8E2DD]">
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <NotebookPen className="w-[19px] h-[19px] text-[#697D74]" />
-                    Seminar
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Hammer className='w-[19px] h-[19px] text-[#697D74]' />
-                    Hand-on Event
-                </DropdownMenuItem>
+            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-xl border border-border">
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <NotebookPen className="w-5 h-5 text-strong-gray" />
+                Seminar
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Hammer className="w-5 h-5 text-strong-gray" />
+                Hand-on Event
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-auto flex items-center gap-x-[8px] rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-                <h3 className="text-[#697D74]">Contribute Type</h3> 
-                <ChevronDown className="w-[14px] h-[14px] text-[#697D74]"/>
+            <DropdownMenuTrigger className="w-auto flex items-center gap-x-2 rounded-xl h-10.5 px-6 py-5 bg-light-gray border-none">
+              <h3 className="text-strong-gray">Contribute Type</h3>
+              <ChevronDown className="w-3.5 h-3.5 text-strong-gray" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-[16px] border-1 border-[#D8E2DD]">
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <HandHeart className="w-[19px] h-[19px] text-[#697D74]" />
-                    Donation
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Handshake className='w-[19px] h-[19px] text-[#697D74]' />
-                    Volunteer
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <HeartHandshake className='w-[19px] h-[19px] text-[#697D74]' />
-                    Volunteer and Donation
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Gift className='w-[19px] h-[19px] text-[#697D74]' />
-                    Free
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <BadgeDollarSign className='w-[19px] h-[19px] text-[#697D74]' />
-                    Fees
-                </DropdownMenuItem>
+            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-xl border border-border">
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <HandHeart className="w-5 h-5 text-strong-gray" />
+                Donation
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Handshake className="w-5 h-5 text-strong-gray" />
+                Volunteer
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <HeartHandshake className="w-5 h-5 text-strong-gray" />
+                Volunteer and Donation
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Gift className="w-5 h-5 text-strong-gray" />
+                Free
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <BadgeDollarSign className="w-5 h-5 text-strong-gray" />
+                Fees
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-auto flex items-center gap-x-[8px] rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-                <h3 className="text-[#697D74]">Category Type</h3> 
-                <ChevronDown className="w-[14px] h-[14px] text-[#697D74]"/>
+            <DropdownMenuTrigger className="w-auto flex items-center gap-x-2 rounded-xl h-10.5 px-6 py-5 bg-light-gray border-none">
+              <h3 className="text-strong-gray">Category Type</h3>
+              <ChevronDown className="w-3.5 h-3.5 text-strong-gray" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-[16px] border-1 border-[#D8E2DD]">
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Recycle  className="w-[19px] h-[19px] text-[#697D74]" />
-                    Environment Cleaning
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <TreeDeciduous className='w-[19px] h-[19px] text-[#697D74]' />
-                    Tree Planting
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <HandHeart className="w-[19px] h-[19px] text-[#697D74]" />
-                    Donation
-                </DropdownMenuItem>
+            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-xl border border-border">
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Recycle className="w-5 h-5 text-strong-gray" />
+                Environment Cleaning
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <TreeDeciduous className="w-5 h-5 text-strong-gray" />
+                Tree Planting
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <HandHeart className="w-5 h-5 text-strong-gray" />
+                Donation
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-auto flex items-center gap-x-[8px] rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-                <h3 className="text-[#697D74]">Slot</h3> 
-                <ChevronDown className="w-[14px] h-[14px] text-[#697D74]"/>
+            <DropdownMenuTrigger className="w-auto flex items-center gap-x-2 rounded-xl h-10.5 px-6 py-5 bg-light-gray border-none">
+              <h3 className="text-strong-gray">Slot</h3>
+              <ChevronDown className="w-3.5 h-3.5 text-strong-gray" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-[16px] border-1 border-[#D8E2DD]">
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Armchair className="w-[19px] h-[19px] text-[#697D74]" />
-                    Available
-                </DropdownMenuItem>
-                <DropdownMenuItem className="w-full flex flex-row items-center gap-x-[10px] text-[#697D74] pl-[20px] p-[10px] rounded-[10px]">
-                    <Ban className='w-[19px] h-[19px] text-[#697D74]' />
-                    Unavailable
-                </DropdownMenuItem>
+            <DropdownMenuContent className="w-auto p-4 space-y-1 rounded-xl border border-border">
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Armchair className="w-5 h-5 text-strong-gray" />
+                Available
+              </DropdownMenuItem>
+              <DropdownMenuItem className="w-full flex flex-row items-center gap-x-2.5 text-strong-gray pl-5 p-2.5 rounded-lg">
+                <Ban className="w-5 h-5 text-strong-gray" />
+                Unavailable
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="w-auto flex items-center gap-x-[8px] rounded-[16px] h-[42px] px-[25px] py-[20px] bg-[#F6F7F9] border-none">
-                <h3 className="text-[#697D74]">Date Rang</h3> 
-                <ChevronDown className="w-[14px] h-[14px] text-[#697D74]"/>
+            <DropdownMenuTrigger className="w-auto flex items-center gap-x-2 rounded-2xl h-10.5 px-6.25 py-5 bg-light-gray border-none">
+              <h3 className="text-strong-gray">Date</h3>
+              <ChevronDown className="w-[14px] h-[14px] text-strong-gray" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="p-4 rounded-[16px] border border-[#D8E2DD] shadow-lg w-auto">
-                <h1>
-                  Date
-                </h1>
+            <DropdownMenuContent className="p-4 rounded-2xl border-1 border-border shadow-lg w-auto">
+                <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </section>
+
       <section className="mt-10 flex items-center justify-between">
-        <CardEndedEcoEvent/>
-        <CardEndedEcoEvent/>
-        <CardEndedEcoEvent/>
-        <CardEndedEcoEvent/>
+        <CardEndedEcoEvent />
+        <CardEndedEcoEvent />
+        <CardEndedEcoEvent />
+        <CardEndedEcoEvent />
       </section>
     </main>
   );
-}
+};
 
-export default EventHistoryComponent
+export default EventHistoryComponent;

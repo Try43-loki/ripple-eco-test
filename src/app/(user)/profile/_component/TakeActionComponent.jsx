@@ -1,5 +1,5 @@
 import React from 'react'
-import Temporarycard from './Temporarycard';
+import TakeActionCard from '../../take-action/_component/TakeActionCard';
 
 
 const TakeActionComponent = () => {
@@ -7,8 +7,8 @@ const TakeActionComponent = () => {
     <main>
       <section className="w-full flex flex-row flex-wrap justify-between items-center">
         
-        <div className='w-[280px]'>
-          <Temporarycard
+        <div className='w-70'>
+          <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
             description={
@@ -18,8 +18,8 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-[280px]'>
-          <Temporarycard
+        <div className='w-70'>
+          <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
             description={
@@ -29,8 +29,8 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-[280px]'>
-          <Temporarycard
+        <div className='w-70'>
+          <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
             description={
@@ -40,8 +40,8 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-[280px]'>
-          <Temporarycard
+        <div className='w-70'>
+          <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
             description={
