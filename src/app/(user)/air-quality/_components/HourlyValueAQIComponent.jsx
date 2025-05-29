@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const LineVertical = () => (
-  <div className="flex justify-center items-center">
+  <div className="flex justify-center text-light-gray items-center">
     <hr className="w-px h-36 border-1 " />
   </div>
 );

@@ -16,7 +16,7 @@ const AirQualityComponent = () => {
       {/* Row Of Card */}
       <div className="flex justify-between">
         {/* Card */}
-        <div className="flex flex-col w-3/12 gap-2  rounded-md px-4 py-5 border-2">
+        <div className="flex flex-col w-3/12 gap-2  rounded-md px-4 py-5 border-2 text-light-gray">
           <div className="flex w-full gap-1.5 justify-end items-center">
             <Wind color={iconColor} size={32} />
             <h3 className="text-dark-gray text-lg">Wind Status</h3>
@@ -26,7 +26,7 @@ const AirQualityComponent = () => {
           </p>
         </div>
         {/* Card 2 */}
-        <div className="flex flex-col w-3/12 gap-2  rounded-md px-4 py-5 border-2">
+        <div className="flex flex-col w-3/12 gap-2  rounded-md px-4 py-5 border-2 text-light-gray">
           <div className="flex w-full gap-1.5 justify-end items-center">
             <Droplet color={iconColor} fill={iconColor} size={32} />
             <h3 className="text-dark-gray text-lg">Humidity</h3>
@@ -36,7 +36,7 @@ const AirQualityComponent = () => {
           </p>
         </div>
         {/* Card 3 */}
-        <div className="flex flex-col w-3/12 gap-2 rounded-md px-4 py-5 border-2">
+        <div className="flex flex-col w-3/12 gap-2 rounded-md px-4 py-5 border-2 text-light-gray">
           <div className="flex w-full gap-1.5 justify-end items-center">
             <Cloud color={iconColor} fill={iconColor} size={32} />
             <h3 className="text-dark-gray text-lg">Weather</h3>
@@ -48,7 +48,7 @@ const AirQualityComponent = () => {
       </div>
 
       {/* Air Pollutants Card */}
-      <div className="flex flex-col p-4 gap-5 border-2 rounded-xl">
+      <div className="flex flex-col p-4 gap-5 border-2 rounded-xl text-light-gray">
         {/* Card Top */}
         <div className="flex justify-between">
           {/* Left Side */}
