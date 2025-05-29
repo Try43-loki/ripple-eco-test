@@ -9,13 +9,6 @@ const DashboardHeaderComponent = ({
   link,
   buttonAction, // New prop to specify button behavior
 }) => {
-  const [showModal, setShowModal] = useState(false);
-
-  // Function to toggle the modal
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   return (
     <>
       <section>
@@ -31,13 +24,9 @@ const DashboardHeaderComponent = ({
           {/* Dynamic Button */}
           {buttonAction === "create-discussion" ? (
             // Button to open the Create Discussion Modal
-            <button
-              type="button"
-              className="text-white flex justify-center items-center rounded-2xl hover:bg-green text-label py-2 bg-green px-4 font-light w-fit "
-              onClick={toggleModal}
-            >
-              {link || "Start the Discussion"}
-            </button>
+            <div>
+              <CreateDiscussionComponent />
+            </div>
           ) : buttonAction === "create-event" ? (
             // Button to navigate to create event page
             <Link
@@ -51,7 +40,6 @@ const DashboardHeaderComponent = ({
       </section>
 
       {/* Discussion form */}
-      <CreateDiscussionComponent showModal={showModal} onClose={toggleModal} />
     </>
   );
 };
