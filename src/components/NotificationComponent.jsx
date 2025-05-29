@@ -35,6 +35,7 @@ const NotificationItem = () => {
   const MarkRead = (item) => {
     feedClient.markAsRead(item);
   };
+
   {
     items?.map((item) => (
       <div key={item.id}>
@@ -53,9 +54,11 @@ const NotificationItem = () => {
               <h1 className="text-meduim-green text-xl font-semibold">
                 Notification
               </h1>
-              <p>Mark all as read</p>
+              <p className="cursor-pointer" onClick={MarkReadAll}>
+                Mark all as read
+              </p>
             </div>
-            <NotificationTabs />
+            <NotificationTabs messages={items} />
           </section>
         </PopoverContent>
       </Popover>

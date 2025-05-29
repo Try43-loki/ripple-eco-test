@@ -9,7 +9,7 @@ export const sendCommentAction = async (_, FormData) => {
 
   try {
     // The key of the workflow (from Knock dashboard)
-    await knock.workflows.trigger("notificaton", {
+    await knock.workflows.trigger("on-invited", {
       data: {
         message: "A Notification just sent to you!",
       },
