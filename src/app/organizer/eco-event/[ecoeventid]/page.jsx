@@ -71,11 +71,6 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
                   United Nations Environment Program (UNEP)
                 </h3>
               </div>
-
-              {/* Join Event Button */}
-              <div className="mt-3 md:mt-0 hidden md:block">
-                <DiscussionButtonComponent text="Join Event" />
-              </div>
             </div>
 
             {/* Title */}

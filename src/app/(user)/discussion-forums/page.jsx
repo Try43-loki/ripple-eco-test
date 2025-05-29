@@ -5,6 +5,7 @@ import DiscussionButtonComponent from "../../../components/DiscussionButtonCompo
 import DiscussionCardComponent from "./_component/DiscussionCardComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
+import { MessageCircleQuestion } from "lucide-react";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -42,6 +43,13 @@ const DiscussionPage = () => {
         {/* Centered Post Components */}
         <div className="flex justify-center mt-6 h-fit md:ml-7 lg:ml-7">
           <div className="w-full md:w-[350px] lg:w-[400px] p-6 border border-lighter-white bg-white rounded-[20px]">
+            {/* Title + Icon */}
+            <div className="flex items-center gap-2 md:gap-3">
+              <h2 className="text-base md:text-lg lg:text-xl font-bold text-dark-green">
+                Popular Discussion
+              </h2>
+              <MessageCircleQuestion className="h-4 w-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-green" />
+            </div>
             <PostComponent />
             <PostComponent />
             <PostComponent />

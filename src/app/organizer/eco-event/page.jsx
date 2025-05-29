@@ -18,6 +18,7 @@ function EcoEventPage() {
           title={headerSection.title}
           text={headerSection.text}
           link={headerSection.link}
+          buttonAction={"create-event"}
         />
 
         <div className="w-full border-b border-lightes-white mt-5" />

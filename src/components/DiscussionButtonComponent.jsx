@@ -4,7 +4,7 @@ import React from "react";
 
 const DiscussionButtonComponent = ({ text }) => {
   return (
-    <Button className="bg-green text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-6 py-5 md:py-6.5 hover:bg-[#339622] transition">
+    <Button className="bg-green text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-4 md:py-6 lg:py-6 text-white hover:bg-green">
       {text || "Button"}
     </Button>
   );
