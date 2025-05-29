@@ -1,6 +1,7 @@
 import ChampionsLeaderboardComponent from "@/app/(user)/leaderboard/_component/LeaderboardComponent";
-import TopRankingComponent from "@/app/(user)/leaderboard/_component/TopRankingComponent";
+// import TopRankingOrgComponent
 import React from "react";
+import { TopRankingOrgComponent } from "./_component/TopRankingOrgComponent";
 
 function LeaderboardPage() {
   return (
@@ -12,7 +13,7 @@ function LeaderboardPage() {
 
       {/* Top Ranking Section */}
       <div className="pt-10">
-        <TopRankingComponent />
+        <TopRankingOrgComponent />
       </div>
     </div>
   );
