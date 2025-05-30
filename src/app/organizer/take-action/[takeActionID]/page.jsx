@@ -1,8 +1,8 @@
 import React from "react";
 import HeroSectionDashboarComponent from "../_component/HeroSectionDashboarComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import TakeActionDetailBodyComponent from "../_component/TakeActionDetailBodyComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
+import TakeActionDetailBodyComponent from "../_component/TakeActionDetailBodyComponent";
 
 const TakeActionDetailPage = () => {
   return (

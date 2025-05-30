@@ -31,7 +31,7 @@ const TakeActionCardDetail = ({ view }) => {
               </div>
             ) : (
               <div className="flex items-center gap-x-4">
-                <Link href=""></Link>
+                {/* <Link href=""></Link> */}
                 <img
                   src="https://i.pinimg.com/736x/e3/cc/19/e3cc196b34603811d13323ee70c31c42.jpg"
                   alt="user"
