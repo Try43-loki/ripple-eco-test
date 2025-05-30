@@ -17,6 +17,7 @@ export default function DonationComponent({ operator }) {
           <div className="flex-shrink-0">
             <h3 className="text-sm md:text-base lg:text-lg font-semibold text-dark-green">
               Donation
+              {/* <DonationFormComponent />  */}
             </h3>
             <p className="text-xs md:text-sm lg:text-base text-lighter-green">
               Support financially

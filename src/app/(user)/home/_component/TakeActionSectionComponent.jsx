@@ -8,12 +8,12 @@ const TakeActionSectionComponent = () => {
   return (
     <div>
       <section className="w-full py-16 px-6 md:px-20 lg:px-45 flex flex-col lg:flex-row bg-white">
-        {/* Left Side Vertical Bar (only on large screens) */}
+        {/* Left Side Vertical Bar */}
         <div className="hidden lg:block w-[100px] bg-white">
           <div className="w-full h-[180px] bg-green"></div>
         </div>
 
-        {/* Content Wrapper */}
+        {/* Content */}
         <div className="w-full flex flex-col lg:flex-col xl:flex-row items-center lg:items-start bg-[#F6F6EE] pb-8 px-0 rounded-2xl">
           <Image
             src="/assets/homepage/TakeActionSection.jpg"

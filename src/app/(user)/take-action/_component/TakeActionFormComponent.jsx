@@ -94,15 +94,15 @@ const TakeActionFormComponent = () => {
             )}
           />
           <Toast ref={toastCenter} position="center" closable={false} />
-          <div className="flex items-center justify-between">
-            <Button
+          <div className="flex justify-end">
+            {/* <Button
               type="button"
               onClick={handleDownloadClick}
               className="w-auto flex gap-x-2.75 bg-light-gray hover:bg-light-gray text-sub-info border border-light-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
             >
               <Download className="w-6 h-6 " />
               <p>Download PDF</p>
-            </Button>
+            </Button> */}
 
             <Button
               type="submit"

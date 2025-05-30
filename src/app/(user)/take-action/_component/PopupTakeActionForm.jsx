@@ -37,7 +37,7 @@ const PopupTakeActionForm = () => {
   };
 
   return (
-    <main>
+    <main className="">
       <form onSubmit={handleSubmit} className="w-full">
         <DialogHeader>
           <DialogTitle className="text-lg text-primary">
