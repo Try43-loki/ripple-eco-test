@@ -9,7 +9,7 @@ function DiscussioForumsPage() {
   const headerSection = {
     title: "Share your perspective",
     text: "Join the RippleEco community discussion to share insights, spark action, and protect our planet—together, in real time",
-    link: "Start the Discussion",
+    buttonAction: "create-discussion",
   };
   return (
     <main className="w-full">
@@ -17,8 +17,7 @@ function DiscussioForumsPage() {
         <DashboardHeaderComponent
           title={headerSection.title}
           text={headerSection.text}
-          link={headerSection.link}
-          buttonAction="create-discussion"
+          buttonAction={headerSection.buttonAction}
         />
         <div className="flex justify-between py-5">
           <DiscussionTabComponent />

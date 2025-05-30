@@ -13,10 +13,10 @@ import React from "react";
 const TakeActionCard = ({ image, title, description, support, layout }) => {
   return (
     <main>
-      <Card className="p-0 pb-4 w-full rounded-2xl">
+      <Card className="p-0 pb-4 w-full rounded-2xl border border-lightes-white">
         <CardContent className="px-1.75 py-[5px] h-[155px] relative">
           <Image
-            src={image}
+            src={`/assets/${image}` || `/${image}`}
             alt="sub-banner"
             width={298}
             height={155}
@@ -30,7 +30,9 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
         {layout === "col" ? (
           <div>
             <CardHeader className="px-2">
-              <CardTitle className={"text-[18px]"}>{title}</CardTitle>
+              <CardTitle className={"text-[18px] text-dark-green"}>
+                {title}
+              </CardTitle>
               <CardDescription className={"line-clamp-3 text-[14px]"}>
                 {description}
               </CardDescription>
@@ -51,7 +53,9 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
           <div>
             <CardHeader className="px-2">
               <CardTitle className={"text-[18px]"}>{title}</CardTitle>
-              <CardDescription className={"line-clamp-3 text-[14px]"}>
+              <CardDescription
+                className={"line-clamp-3 text-[14px] text-lighter-green"}
+              >
                 {description}
               </CardDescription>
             </CardHeader>
@@ -61,14 +65,17 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
                 <Play className="w-[14px] h-[14px] fill-green" />
               </article>
               <div>
-                <p className="text-[18px] font-700 text-green">{support}</p>
-                <p className="text-[10px] font-600 text-black">SUPPORTERS</p>
+                <p className="text-[18px] font-semibold text-green">
+                  {support}
+                </p>
+                <p className="text-[10px] font-medium text-lighter-green">
+                  SUPPORTERS
+                </p>
               </div>
             </CardFooter>
           </div>
         )}
       </Card>
-      00
     </main>
   );
 };
