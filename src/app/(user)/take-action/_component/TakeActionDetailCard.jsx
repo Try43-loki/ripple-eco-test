@@ -7,10 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CalendarDays, Send } from "lucide-react";
+import { CalendarDays, Download, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
-const TakeActionDetailCard = () => {
+const TakeActionDetailCard = ({ view }) => {
   const isLoading = false;
 
   return (
@@ -46,6 +47,14 @@ const TakeActionDetailCard = () => {
           <CardTitle className="text-2xl lg:text-3xl text-lighter-green">
             Reclaim Empty Spaces for Community Gardens
           </CardTitle>
+
+          {view == "private" && (
+            <article className="flex justify-between items-center">
+              <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
+                <p>Anonymous</p>
+              </div>
+            </article>
+          )}
 
           <article className="flex justify-between items-center">
             <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
@@ -104,9 +113,18 @@ const TakeActionDetailCard = () => {
           </CardDescription>
         </CardHeader>
 
-        <CardFooter className="flex flex-col items-start">
-          <p className="text-3xl font-bold text-green">16,000</p>
-          <p className="text-xl font-semibold text-foreground">SUPPORTERS</p>
+        <CardFooter className="flex  items-start gap-5 justify-between">
+          <div className="flex flex-col gap-3.5">
+            <p className="text-3xl font-bold text-green">16,000</p>
+            <p className="text-xl font-semibold text-foreground">SUPPORTERS</p>
+          </div>
+          <Button
+            type="button"
+            className="w-[300px] flex gap-x-2.75 bg-green hover:bg-green-600 border-light-gray text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl  py-5 md:py-6.5"
+          >
+            <Download className="w-6 h-6 text-white" />
+            <p className="text-white">Download PDF</p>
+          </Button>
         </CardFooter>
       </Card>
     </main>

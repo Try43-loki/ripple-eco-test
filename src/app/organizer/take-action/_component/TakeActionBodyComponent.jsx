@@ -39,7 +39,77 @@ const TakeActionBodyComponent = () => {
             value="all"
             className="flex flex-wrap justify-start gap-x-8"
           >
-            {[...Array(7)].map((_, index) => (
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={false}
+                isOrganizer={true}
+                isPublic={true}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={false}
+                isOrganizer={true}
+                isPublic={true}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={false}
+                isOrganizer={true}
+                isPublic={false}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={false}
+                isOrganizer={true}
+                isPublic={false}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={false}
+                isOrganizer={true}
+                isPublic={false}
+              />
+            </div>
+            {/* {[...Array(6)].map((_, index) => (
               <div key={index} className="py-5">
                 <TakeActionCard
                   image={"/sub-banner.jpg"}
@@ -50,15 +120,89 @@ const TakeActionBodyComponent = () => {
                   support={"11,376"}
                   layout={"col"}
                   isOwner={false}
+                  isOrganizer={true}
+                  isPublic={true}
                 />
               </div>
-            ))}
+            ))} */}
           </TabsContent>
+
+          {/* Own */}
           <TabsContent
             value="own-post"
             className="flex flex-wrap justify-start gap-x-8"
           >
-            {[...Array(7)].map((_, index) => (
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={true}
+                isOrganizer={true}
+                isPublic={true}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={true}
+                isOrganizer={true}
+                isPublic={true}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={true}
+                isOrganizer={true}
+                isPublic={false}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={true}
+                isOrganizer={true}
+                isPublic={false}
+              />
+            </div>
+            <div className="py-5">
+              <TakeActionCard
+                image={"/sub-banner.jpg"}
+                title={"Stand Up to Plastic Pollution"}
+                description={
+                  "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+                }
+                support={"11,376"}
+                layout={"col"}
+                isOwner={true}
+                isOrganizer={true}
+                isPublic={true}
+              />
+            </div>
+            {/* {[...Array(6)].map((_, index) => (
               <div key={index} className="py-5">
                 <TakeActionCard
                   image={"/sub-banner.jpg"}
@@ -69,9 +213,11 @@ const TakeActionBodyComponent = () => {
                   support={"11,376"}
                   layout={"col"}
                   isOwner={true}
+                  isOrganizer={true}
+                  isPublic={false}
                 />
               </div>
-            ))}
+            ))} */}
           </TabsContent>
         </Tabs>
       </section>

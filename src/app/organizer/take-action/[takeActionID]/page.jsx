@@ -4,8 +4,7 @@ import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import TakeActionDetailBodyComponent from "../_component/TakeActionDetailBodyComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 
-const TakeActionDetailPage = async ({ searchParams }) => {
-  const type = searchParams?.type;
+const TakeActionDetailPage = () => {
   return (
     <>
       <section className="w-full">
@@ -20,7 +19,7 @@ const TakeActionDetailPage = async ({ searchParams }) => {
           />
         </section>
 
-        <TakeActionDetailBodyComponent type={type} />
+        <TakeActionDetailBodyComponent />
       </section>
     </>
   );

@@ -6,11 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Play } from "lucide-react";
+import { Download, Play } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { DeleteComponent } from "../app/(user)/take-action/_component/DeleteComponent";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 const TakeActionCard = ({
   image,
@@ -19,6 +20,8 @@ const TakeActionCard = ({
   support,
   layout,
   isOwner,
+  isOrganizer,
+  isPublic,
 }) => {
   return (
     <main>
@@ -26,8 +29,11 @@ const TakeActionCard = ({
         <CardContent className="p-2  h-[155px] relative">
           <Link
             href={{
-              pathname: `/organizer/take-action/${1}`,
-              query: { type: "view" },
+              pathname: `${isOrganizer ? "/organizer" : ""}/take-action/${1}`,
+              query: {
+                view: isPublic ? "public" : "private",
+                owner: isOwner ? "true" : "false",
+              },
             }}
           >
             <Image

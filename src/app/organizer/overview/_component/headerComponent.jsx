@@ -38,7 +38,7 @@ function HeaderComponent({ title, text, buttonAction }) {
                   ? "Create Discussion"
                   : buttonAction === "create-event"
                   ? "Create Eco-Event"
-                  : "Create Take Action"
+                  : "Create Survey"
               }
               buttonAction={handleVerificationSuccess}
             />
