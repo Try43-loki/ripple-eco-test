@@ -118,13 +118,13 @@ const TakeActionDetailCard = ({ view }) => {
             <p className="text-3xl font-bold text-green">16,000</p>
             <p className="text-xl font-semibold text-foreground">SUPPORTERS</p>
           </div>
-          <Button
+          {/* <Button
             type="button"
             className="w-[300px] flex gap-x-2.75 bg-green hover:bg-green-600 border-light-gray text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl  py-5 md:py-6.5"
           >
             <Download className="w-6 h-6 text-white" />
             <p className="text-white">Download PDF</p>
-          </Button>
+          </Button> */}
         </CardFooter>
       </Card>
     </main>
