@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import Link from "next/link";
 import TakeActionCard from "@/components/TakeActionCard";
+import CreateTakeActionFormComponent from "@/components/CreateTakeActionFormComponent";
 
 const TakeActionPage = () => {
   const [openForm, setOpenForm] = useState(false);
