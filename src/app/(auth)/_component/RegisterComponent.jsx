@@ -33,7 +33,7 @@ function RegisterCopmponent({ onNext }) {
               className="flex justify-center items-center flex-col gap-3  w-full  "
             >
               <h1 className="text-3xl font-semibold text-white text-center">
-                Sing up
+                Sign up
               </h1>
               <section className="flex justify-between items-center flex-col gap-5 w-full">
                 {/* input email */}
@@ -52,7 +52,7 @@ function RegisterCopmponent({ onNext }) {
                     required
                     type="email"
                     id="email"
-                    placeholder="exaple@gmaill.com"
+                    placeholder="example@gmaill.com"
                   />
                 </div>
                 <Button
@@ -78,12 +78,17 @@ function RegisterCopmponent({ onNext }) {
               />
               Login with Google
             </Button>
-            <p className="text-sm text-light-gray font-light">
-              Are you new here?{" "}
-              <Link className="underline text-sm font-medium" href="#">
-                Sign up
-              </Link>{" "}
-            </p>
+            <div className="flex justify-center items-center gap-2">
+              <p className="text-sm text-light-gray font-light">
+                Already have an account?
+              </p>
+              <Link
+                className="underline text-sm font-medium text-white"
+                href="/login"
+              >
+                Sign in
+              </Link>
+            </div>
           </section>
         </section>
       </section>
