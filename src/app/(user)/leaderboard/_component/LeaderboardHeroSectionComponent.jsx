@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import ChampionsLeaderboardComponent from "./LeaderboardComponent";
-// import ChampionsLeaderboardComponent from "./ChampionsLeaderboardComponent";
 
 const LeaderboardHeroSectionComponent = () => {
   return (
@@ -18,7 +17,7 @@ const LeaderboardHeroSectionComponent = () => {
 
       {/* Overlay leaderboard */}
       <div className="relative z-10 w-full pt-45 md:pt-25 lg:pt-55 px-6 md:px-20 lg:px-45">
-        <ChampionsLeaderboardComponent />
+        {/* <ChampionsLeaderboardComponent /> */}
       </div>
     </section>
   );

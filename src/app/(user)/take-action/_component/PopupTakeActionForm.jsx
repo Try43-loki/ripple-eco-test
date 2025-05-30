@@ -57,7 +57,7 @@ const PopupTakeActionForm = () => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="px-5 py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className="px-5 border-none py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
@@ -72,7 +72,7 @@ const PopupTakeActionForm = () => {
               required
               value={sendTo}
               onChange={(e) => setSendTo(e.target.value)}
-              className="px-5 py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className="px-5 border-none py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
@@ -86,7 +86,7 @@ const PopupTakeActionForm = () => {
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="h-24 px-5 py-3 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className="h-24 border-none px-5 py-3 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
