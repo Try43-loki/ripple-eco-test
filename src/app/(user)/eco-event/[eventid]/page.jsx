@@ -8,6 +8,7 @@ import React from "react";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import DonationComponent from "./_component/DonateComponent";
 import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
+import EventActivityComponent from "@/components/EventActivityComponent";
 
 const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
   const { eventid } = await ParamsPromise;

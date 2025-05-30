@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function DonationComponent() {
   return (
-    <div className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 md:p-5 lg:p-7 mt-8 md:mt-12 lg:mt-16">
+    <div className="w-full bg-white border border-gray-200 rounded-2xl p-4 md:p-5 lg:p-7 mt-8 md:mt-12 lg:mt-16">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6 lg:gap-8">
         {/* Left section with icon and text */}
         <div className="flex items-center gap-3 md:gap-4 lg:gap-6 flex-1">
