@@ -31,12 +31,18 @@ const DonationFormComponent = () => {
             </DialogDescription>
             <hr className="text-meduim-gray my-2" />
 
-            <DialogDescription className="flex items-center justify-center my-10">
+            <DialogDescription className="flex flex-col gap-7 items-center justify-center my-10">
               <Image
                 src="/assets/donation_form/qr.jpg"
                 alt="qr"
                 width={250}
                 height={200}
+              ></Image>
+              <Image
+                src="/assets/donation_form/WeBill365.jpg"
+                alt="Webill365"
+                width={200}
+                height={15}
               ></Image>
             </DialogDescription>
           </DialogHeader>

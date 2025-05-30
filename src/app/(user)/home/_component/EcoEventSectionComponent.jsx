@@ -21,7 +21,6 @@ const EcoEventSectionComponent = () => {
             </span>
           </h2>
 
-          {/* Scrollable card list with hidden scrollbar */}
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
               {data?.map((event, index) => (
