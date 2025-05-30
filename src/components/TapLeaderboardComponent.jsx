@@ -10,7 +10,7 @@ export const TapLeaderboardComponent = () => {
   return (
     <Tabs defaultValue="user" className="w-full">
       {/* Tab Buttons */}
-      <TabsList className="relative h-auto bg-white rounded-3xl shadow-md/30 overflow-visible flex flex-col w-full md:flex-row lg:flex-col p-6 sm:p-8 md:p-10 lg:p-12">
+      <TabsList className="relative h-auto bg-white rounded-3xl border border-light-gray  shadow-sm overflow-visible flex flex-col w-full md:flex-row lg:flex-col p-6 sm:p-8 md:p-10 lg:p-12">
         <div className="w-full mb-20 md:mb-0 flex flex-col ">
           <div className="flex gap-3 mb-4">
             <TabsTrigger
@@ -84,7 +84,7 @@ export const TapLeaderboardComponent = () => {
             <div className="flex flex-col items-center relative z-10">
               <div className="absolute -top-10 sm:-top-12 md:-top-14 flex items-center gap-1">
                 <Image
-                  src="/assets/leaderboard/laurel-wreath-right-01.png"
+                  src="/assets/leaderboard/laurel-wreath-left-01.png"
                   alt=""
                   width={20}
                   height={64}

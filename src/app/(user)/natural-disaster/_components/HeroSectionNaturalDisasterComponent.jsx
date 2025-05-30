@@ -39,7 +39,7 @@ const HeroSectionNaturalDisasterComponent = () => {
         fill
         className="object-cover"
       />
-      <div className="absolute w-full mt-20 px-6 lg:px-[150px]  text-white text-center lg:flex-row lg:justify-between ">
+      <div className="absolute w-full mt-20 px-6 lg:px-[180px]  text-white text-center lg:flex-row lg:justify-between ">
         <article className="flex flex-col-reverse gap-10 lg:flex-row ">
           <div className="flex flex-col  justify-center items-start gap-8 w-full">
             <div className="flex flex-col gap-1 items-start">

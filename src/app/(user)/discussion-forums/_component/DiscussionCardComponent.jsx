@@ -1,6 +1,7 @@
 import React from "react";
 import TagComponent from "../../../../components/TagComponent";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 const DiscussionCardComponent = ({ image, fullWidth }) => {
   return (
     <article
@@ -9,7 +10,13 @@ const DiscussionCardComponent = ({ image, fullWidth }) => {
       <div className="flex flex-col items-start gap-4">
         {/* User Info */}
         <div className="flex gap-4">
-          <div className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full bg-gray-300"></div>
+          <Image
+            alt="business_main"
+            src="/assets/overivew_images/business_main.jpg"
+            width={100}
+            height={100}
+            className="object-cover object-top md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full bg-gray-300"
+          ></Image>
           <div className="flex flex-col justify-start">
             <h2 className="text-sm md:text-base lg:text-lg font-semibold text-dark-green">
               Sochetra

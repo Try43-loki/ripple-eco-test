@@ -16,7 +16,7 @@ const MapComponent = ({ isDashboard }) => {
   return (
     <article
       className={clsx(" flex gap-8 text-white text-center lg:flex-col ", {
-        "lg:px-[150px]": !isDashboard,
+        "lg:px-[180px]": !isDashboard,
       })}
     >
       <div className="flex gap-3 items-center z-20 ">

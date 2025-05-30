@@ -21,6 +21,7 @@ function CreateEcoEventPage() {
           onNext={goToNext}
           formData={formData}
           setFormData={setFormData}
+          className="w-full"
         />
       )}
       {currentComponent === 2 && (

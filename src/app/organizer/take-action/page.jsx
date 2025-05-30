@@ -11,7 +11,7 @@ function TakeActionPage() {
   };
   return (
     <>
-      <section>
+      <section className="w-full">
         <DashboardHeaderComponent
           title={headerSection.title}
           text={headerSection.text}

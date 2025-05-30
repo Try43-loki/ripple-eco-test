@@ -5,7 +5,7 @@ import { date } from "zod";
 
 const LineVertical = () => (
   <div className="flex flex-col justify-center text-light-gray items-center">
-    <span className="text-dark-gray">Tue</span>
+    {/* <span className="text-dark-gray">Tue</span> */}
     <hr className="w-px h-36 border-1 " />
   </div>
 );
@@ -30,19 +30,16 @@ const formatTime = (time) => {
 };
 
 const HourlyValueAQIComponent = ({ data }) => {
-  // const hour =
-  //   formatTime(data.timestamp) == new Date().getHours() + ":00"
-  //     ? "Now"
-  //     : formatTime(data.timestamp);
-  // const isActive = hour === "Now";
   console.log(data);
-  const isSameHour = data.timestamp.getHours() === now.getHours();
+  const isSameHour =
+    new Date(data.timestamp).getHours() === new Date().getHours();
   const isSameDay =
-    timestampDate.getDate() === now.getDate() &&
-    timestampDate.getMonth() === now.getMonth() &&
-    timestampDate.getFullYear() === now.getFullYear();
+    new Date(data.timestamp).getDate() === new Date().getDate() &&
+    new Date(data.timestamp).getMonth() === new Date().getMonth() &&
+    new Date(data.timestamp).getFullYear() === new Date().getFullYear();
 
   const hour = isSameHour && isSameDay ? "Now" : formatTime(data.timestamp);
+  const isActive = hour === "Now";
 
   return (
     <>

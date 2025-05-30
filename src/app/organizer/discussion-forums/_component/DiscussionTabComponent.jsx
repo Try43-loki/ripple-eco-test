@@ -15,7 +15,7 @@ const DiscussionTabComponent = () => {
           <TabsTrigger
             value="allpost"
             className={cn(
-              "flex items-center px-4 py-2 gap-2 rounded-md text-xs md:text-sm lg:text-sm",
+              "flex cursor-pointer  items-center px-4 py-2 gap-2 rounded-md text-xs md:text-sm lg:text-sm",
               "data-[state=active]:bg-green data-[state=active]:text-white"
             )}
           >
@@ -24,7 +24,7 @@ const DiscussionTabComponent = () => {
           <TabsTrigger
             value="ownpost"
             className={cn(
-              "flex items-center px-4 py-2 gap-2 rounded-md text-xs md:text-sm lg:text-sm",
+              "flex cursor-pointer  items-center px-4 py-2 gap-2 rounded-md text-xs md:text-sm lg:text-sm",
               "data-[state=active]:bg-green data-[state=active]:text-white"
             )}
           >

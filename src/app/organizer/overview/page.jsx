@@ -15,7 +15,7 @@ function OverviewPage() {
   };
   return (
     <>
-      <section className="flex justify-center  items-start gap-x-5">
+      <section className="flex w-full justify-center  items-start gap-x-5">
         {/* content */}
         <section className="grow">
           <HeaderComponent
@@ -35,7 +35,7 @@ function OverviewPage() {
           <ListVolunteerComponent />
         </section>
         {/* side right content */}
-        <section className="w-2/7">
+        <section className="w-2/9">
           <CurrentDayComponent />
           {/* up comming event */}
           <UpcomingEventComponent />

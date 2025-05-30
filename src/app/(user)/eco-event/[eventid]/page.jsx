@@ -8,6 +8,8 @@ import React from "react";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import DonationComponent from "./_component/DonateComponent";
 import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
+import Link from "next/link";
+import { RequestFormComponent } from "@/components/RequesFormComponent";
 
 const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
   const { eventid } = await ParamsPromise;
@@ -75,12 +77,14 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               {/* Organizer Info */}
               <div className="flex items-center text-xs md:text-sm lg:text-base text-light-green font-semibold">
                 <div className="w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center">
-                  <Image
-                    src={"/assets/Organizer.png"}
-                    width={40}
-                    height={40}
-                    alt="Organizer profile"
-                  />
+                  <Link href={"/view-profile/organizer/1"}>
+                    <Image
+                      src={"/assets/Organizer.png"}
+                      width={40}
+                      height={40}
+                      alt="Organizer profile"
+                    />
+                  </Link>
                 </div>
                 <h3 className="px-3">
                   United Nations Environment Program (UNEP)
@@ -88,8 +92,8 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               </div>
 
               {/* Join Event Button */}
-              <div className="mt-3 md:mt-0 hidden md:block">
-                <DiscussionButtonComponent text="Join Event" />
+              <div className="mt-3 md:mt-0 text-green  hidden md:block">
+                <RequestFormComponent />
               </div>
             </div>
 
@@ -160,7 +164,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             {/* Tab */}
             <TabEcoeventComponent />
             {/* Donate Section */}
-            <DonationComponent />
+            <DonationComponent operator={"detail"} />
           </div>
         </article>
       </article>

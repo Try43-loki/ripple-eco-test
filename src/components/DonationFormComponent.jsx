@@ -11,12 +11,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const DonationFormComponent = () => {
+const DonationFormComponent = ({ operator }) => {
   return (
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <DollarSign size={18} />
+          {operator == "detail" ? (
+            <button className="text-white bg-green px-3 py-1 rounded-xl cursor-pointer">
+              Donate
+            </button>
+          ) : (
+            <DollarSign size={18} />
+          )}
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-md bg-white">

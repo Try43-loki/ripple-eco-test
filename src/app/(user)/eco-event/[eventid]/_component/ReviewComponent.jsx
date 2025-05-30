@@ -1,6 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ReviewComponent = () => {
   const renderStars = (rating) => {
@@ -76,9 +77,11 @@ const ReviewComponent = () => {
         <div className="flex flex-col mb-6 border p-4 rounded-2xl border-lightes-white">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-orange-800">L</span>
-              </div>
+              <Link href={"/view-profile/volunteer/1"}>
+                <div className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center">
+                  <span className="text-sm font-medium text-orange-800">L</span>
+                </div>
+              </Link>
               <div>
                 <div className="font-medium text-dark-green text-sm md:text-base lg:text-lg">
                   Lucifer MorningStar
@@ -109,9 +112,11 @@ const ReviewComponent = () => {
         <div className="border p-4 rounded-2xl border-lightes-white">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-orange-800">L</span>
-              </div>
+              <Link href={"/view-profile/volunteer/1"}>
+                <div className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center">
+                  <span className="text-sm font-medium text-orange-800">L</span>
+                </div>
+              </Link>
               <div>
                 <div className="font-medium text-dark-green text-sm md:text-base lg:text-lg">
                   Lucifer MorningStar

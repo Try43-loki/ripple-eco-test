@@ -31,7 +31,9 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
       {/* Dialog Content */}
       <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white">
         <DialogHeader>
-          <DialogTitle>Create Discussion</DialogTitle>
+          <DialogTitle className="cursor-pointer">
+            Create Discussion
+          </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
 

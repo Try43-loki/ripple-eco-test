@@ -10,18 +10,18 @@ export const TopRankingOrgComponent = () => {
   const rankData = [
     {
       rank: 1,
-      username: "Lala",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      username: "Username",
+      score: 100,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-01.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-01.png",
       textColor: "text-strong-yellow",
     },
     {
       rank: 2,
-      username: "Fafa",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      username: "Username",
+      score: 90,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-02.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-02.png",
       textColor: "text-darker-gray",
@@ -29,8 +29,8 @@ export const TopRankingOrgComponent = () => {
     {
       rank: 3,
       username: "Mama",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      score: 60,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-03.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right03.png",
       textColor: "text-red",
@@ -38,8 +38,8 @@ export const TopRankingOrgComponent = () => {
     ...Array.from({ length: 6 }, (_, i) => ({
       rank: i + 4,
       username: "Username",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      score: 50 - i * 4,
+      hashtag: "#Tree plating",
       leftIcon: null,
       rightIcon: null,
       textColor: "text-dark-green",
@@ -115,8 +115,8 @@ export const TopRankingOrgComponent = () => {
                 </div>
 
                 <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                  <div>
-                    <p className="font-bold pl-15">{user.score}</p>
+                  <div className="flex justify-center items-center flex-col">
+                    <p className="font-bold">{user.score}</p>
                     <div className="flex gap-1 text-orange">
                       <Star />
                       <Star />
@@ -125,7 +125,7 @@ export const TopRankingOrgComponent = () => {
                       <Star />
                     </div>
                   </div>
-                  <p className="bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
+                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                     {user.hashtag}
                   </p>
                 </div>

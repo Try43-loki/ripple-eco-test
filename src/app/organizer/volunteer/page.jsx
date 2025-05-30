@@ -2,8 +2,10 @@ import React from "react";
 import TotalVolunteerComponent from "./_component/TotalVolunteerComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import VolunteerRequestComponent from "./_component/VolunteerRequestComponent";
+import { events } from "@/service/mockData";
 
 function VolunteerPage() {
+  const data = events;
   return (
     <main className="w-full">
       <section className="flex flex-col">
@@ -20,10 +22,22 @@ function VolunteerPage() {
               Upcoming Event
             </p>
             <div className="h-[500px] overflow-y-scroll">
-              {[...Array(8)].map((_, index) => (
-                <div key={index} className="py-2">
-                  <CardEcoEventComponent href={""} />
-                </div>
+              {data?.map((event, index) => (
+                <CardEcoEventComponent
+                  operator={"organizer"}
+                  key={index}
+                  href={"/eco-event/1"}
+                  type={event?.eventTypes?.eventType}
+                  contribute={
+                    event?.contributeTypesResponse?.contributeTypeName
+                  }
+                  category={event?.category?.categoryName}
+                  status={event?.eventStatus}
+                  date={event?.startDate}
+                  participats={event?.maxSlot}
+                  title={event?.title}
+                  location={event?.provinces?.provinceName}
+                />
               ))}
             </div>
           </div>

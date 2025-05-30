@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const generateUniqueId = () => Math.random().toString(36).substring(2, 11);
@@ -114,7 +115,7 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
   console.log("Data", formData);
 
   return (
-    <section className=" ">
+    <section className="w-full ">
       <div className="w-full  ">
         <h1 className="text-lg text-dark-green font-semibold mb-5">
           Event details
@@ -275,13 +276,15 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
           >
             Previous
           </button>
-          <button
-            type="submit"
-            onClick={handleSubmit} // Call handleSubmit when this button is clicked
-            className="flex justify-center items-center gap-x-1 text-lg text-white bg-green rounded-xl h-10 w-28 self-end mt-5"
-          >
-            Submit
-          </button>
+          <Link href={"/organizer/eco-event"}>
+            <button
+              type="submit"
+              // Call handleSubmit when this button is clicked
+              className="flex cursor-pointer justify-center items-center gap-x-1 text-lg text-white bg-green rounded-xl h-10 w-28 self-end mt-5"
+            >
+              Submit
+            </button>
+          </Link>
         </div>
       </div>
     </section>

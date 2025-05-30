@@ -43,13 +43,13 @@ const TakeActionCardDetail = () => {
             )}
           </div>
 
-          <CardTitle className="text-2xl lg:text-3xl">
+          <CardTitle className="text-2xl lg:text-3xl text-meduim-green">
             Reclaim Empty Spaces for Community Gardens
           </CardTitle>
 
           <article className="flex justify-between items-center">
             <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
-              <p>@MekongRiver</p>
+              <p className="text-blue ">@MekongRiver</p>
             </div>
           </article>
 

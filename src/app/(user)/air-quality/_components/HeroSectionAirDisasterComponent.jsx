@@ -16,7 +16,7 @@ const HeroSectionAirDisasterComponent = (props) => {
         fill
         className="object-cover"
       />
-      <div className="absolute w-full px-6 lg:px-[150px] mt-20 text-white text-center lg:flex-row lg:justify-between ">
+      <div className="absolute w-full px-6 lg:px-[180px] mt-20 text-white text-center lg:flex-row lg:justify-between ">
         <article className="flex flex-col-reverse gap-10 lg:flex-row    ">
           <div className="flex flex-col gap-8 w-full justify-between">
             <div className="flex flex-col gap-1 items-start">

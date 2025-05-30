@@ -15,8 +15,8 @@ const HourlyForecastComponent = () => {
       </div>
       {/* Row Of Hourly */}
       <div className="flex justify-between gap-3 overflow-x-scroll">
-        {data.map((value, index) => (
-          <HourlyValueAQIComponent key={index} data={value} />
+        {data.map((value) => (
+          <HourlyValueAQIComponent key={value} data={value} />
         ))}
       </div>
     </article>

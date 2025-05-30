@@ -16,7 +16,7 @@ export function RequestFormComponent({ contribute }) {
   return (
     <Dialog classNam="w-full">
       <DialogTrigger asChild>
-        <div className="py-2 px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center items-center gap-2">
+        <div className="py-2 cursor-pointer px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center items-center gap-2">
           <Image
             src="/assets/tick-circle.png"
             alt="tick-circle"
@@ -25,7 +25,7 @@ export function RequestFormComponent({ contribute }) {
             className="h-5"
           ></Image>
 
-          <p className="text-sm text-dark-green font-bold">
+          <p className="text-sm text-dark-green font-bold cursor-pointer">
             {contribute == "Donation" ? "Donation" : "Going"}
           </p>
         </div>

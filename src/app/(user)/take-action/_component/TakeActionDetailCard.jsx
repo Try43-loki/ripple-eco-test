@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
@@ -6,9 +6,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { CalendarDays, Send } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+} from "@/components/ui/card";
+import { CalendarDays, Send } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TakeActionDetailCard = () => {
   const isLoading = false;
@@ -43,7 +43,7 @@ const TakeActionDetailCard = () => {
             )}
           </div>
 
-          <CardTitle className="text-2xl lg:text-3xl">
+          <CardTitle className="text-2xl lg:text-3xl text-lighter-green">
             Reclaim Empty Spaces for Community Gardens
           </CardTitle>
 

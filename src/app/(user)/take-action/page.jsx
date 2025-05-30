@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import SearchBarComponent from "@/components/SearchBarComponent";
-import TakeActionCard from "./_component/TakeActionCard";
+
+import TakeActionCard from "../../../components/TakeActionCard";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import Link from "next/link";
@@ -40,26 +42,57 @@ const TakeActionPage = () => {
         </Button>
       </section>
 
-      {/* 🧠 Create Take Action Modal */}
-      <CreateTakeActionFormComponent
-        open={openForm}
-        onOpenChange={setOpenForm}
-      />
-
-      <section className="mt-[48px] mb-[48px] flex flex-row flex-wrap px-4 md:px-12 lg:px-32 my-6 md:gap-y-10 gap-[10px] justify-center md:justify-evenly lg:justify-evenly">
-        {/* Example Take Action Cards */}
-        {[...Array(5)].map((_, i) => (
-          <Link href="take-action/1" key={i}>
-            <TakeActionCard
-              image={"/assets/sub-banner.jpg"}
-              title={"Stand Up to Plastic Pollution"}
-              description={
-                "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
-              }
-              support={"11,376"}
-            />
-          </Link>
-        ))}
+      <section className="mt-lg mb-[48px] w-full  lg:px-32  flex flex-wrap md:px-20  md:gap-y-10 gap-[20px] justify-center md:justify-evenly lg:justify-between">
+        <Link href="take-action/1">
+          <TakeActionCard
+            image={"/assets/sub-banner.jpg"}
+            title={"Stand Up to Plastic Pollution"}
+            description={
+              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+            }
+            support={"11,376"}
+          />
+        </Link>
+        <Link href="take-action/1">
+          <TakeActionCard
+            image={"/assets/sub-banner.jpg"}
+            title={"Stand Up to Plastic Pollution"}
+            description={
+              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+            }
+            support={"11,376"}
+          />
+        </Link>
+        <Link href="take-action/1">
+          <TakeActionCard
+            image={"/assets/sub-banner.jpg"}
+            title={"Stand Up to Plastic Pollution"}
+            description={
+              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+            }
+            support={"11,376"}
+          />
+        </Link>
+        <Link href="take-action/1">
+          <TakeActionCard
+            image={"/assets/sub-banner.jpg"}
+            title={"Stand Up to Plastic Pollution"}
+            description={
+              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+            }
+            support={"11,376"}
+          />
+        </Link>
+        <Link href="take-action/1">
+          <TakeActionCard
+            image={"/assets/sub-banner.jpg"}
+            title={"Stand Up to Plastic Pollution"}
+            description={
+              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+            }
+            support={"11,376"}
+          />
+        </Link>
       </section>
     </main>
   );
