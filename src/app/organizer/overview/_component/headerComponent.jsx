@@ -1,28 +1,65 @@
-import { Button } from "@/components/ui/button";
+"use client";
+import CreateDiscussionComponent from "@/components/CreateDiscussionComponent";
+import VerifyOrganizerComponent from "@/components/VerifyOrganizerComponent";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
-function HeaderComponent({ title, text, link }) {
+function HeaderComponent({ title, text, buttonAction }) {
+  const [showDiscussionModal, setShowDiscussionModal] = useState(false);
+  const router = useRouter();
+
+  const handleVerificationSuccess = () => {
+    if (buttonAction === "create-discussion") {
+      setShowDiscussionModal(true);
+    } else if (buttonAction === "create-event") {
+      router.push("/organizer/create-event");
+    } else if (buttonAction === "create-take_action") {
+      router.push("/organizer/create-take-action");
+    }
+  };
+
   return (
     <>
       <section>
-        <article className="text flex flex-col gap-y-3 relative p-4 rounded-3xl bg-gradient-to-tr   from-[#dfc7ac66] to-[#d7e4d7d9]">
+        <article className="text flex flex-col gap-y-3 relative p-4 rounded-3xl bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9]">
           <h1 className="text-xl text-dark-green font-semibold opacity-90">
             {title || "Welcome back, Earth Hero!"} 🌿🌍
           </h1>
-          <p className=" text-light-green w-xl">
+          <p className="text-light-green w-xl">
             {text ||
               `The Earth is lucky to have you. Let’s keep making choices that lead to a brighter, cleaner future.`}
           </p>
-          <Link
-            href="/organizer/create-event"
-            className="text-white flex justify-center items-center rounded-2xl hover:bg-green text-label  py-2 bg-green px-4 font-light w-fit "
-          >
-            {link || "Create Eco-Event"}
-          </Link>
+
+          <div>
+            <VerifyOrganizerComponent
+              text={
+                buttonAction === "create-discussion"
+                  ? "Create Discussion"
+                  : buttonAction === "create-event"
+                  ? "Create Eco-Event"
+                  : "Create Take Action"
+              }
+              buttonAction={handleVerificationSuccess}
+            />
+          </div>
+          <Image
+            src="/badges/hero-section-dashboard.png"
+            alt="hero section dashboard"
+            width={338}
+            height={160}
+            objectFit="cover"
+            className="absolute rounded-2xl right-0 bottom-0"
+          />
         </article>
       </section>
+
+      {showDiscussionModal && (
+        <CreateDiscussionComponent
+          open={showDiscussionModal}
+          onOpenChange={setShowDiscussionModal}
+        />
+      )}
     </>
   );
 }

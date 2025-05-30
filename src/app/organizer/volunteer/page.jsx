@@ -19,8 +19,12 @@ function VolunteerPage() {
             <p className="text-base text-dark-green pb-5 font-medium">
               Upcoming Event
             </p>
-            <div className="h-[500px]">
-              <CardEcoEventComponent href={""} />
+            <div className="h-[500px] overflow-y-scroll">
+              {[...Array(8)].map((_, index) => (
+                <div key={index} className="py-2">
+                  <CardEcoEventComponent href={""} />
+                </div>
+              ))}
             </div>
           </div>
 

@@ -1,10 +1,28 @@
 "use client";
+
 import React, { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import CreateDiscussionComponent from "./CreateDiscussionComponent";
 import VerifyOrganizerComponent from "./VerifyOrganizerComponent";
+import Image from "next/image";
+import FormTakeActionComponent from "@/app/organizer/take-action/_component/FormTakeActionComponent";
+import CreateTakeActionFormComponent from "./CreateTakeActionFormComponent";
 
-const DashboardHeaderComponent = ({ title, text, link, buttonAction }) => {
+const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
+  const [showDiscussionModal, setShowDiscussionModal] = useState(false);
+  const [showTakeActionModal, setShowTakeActionModal] = useState(false);
+  const router = useRouter();
+
+  const handleVerificationSuccess = () => {
+    if (buttonAction === "create-discussion") {
+      setShowDiscussionModal(true);
+    } else if (buttonAction === "create-event") {
+      router.push("/organizer/create-event");
+    } else if (buttonAction === "create-take_action") {
+      setShowTakeActionModal(true);
+    }
+  };
+
   return (
     <>
       <section>
@@ -17,23 +35,44 @@ const DashboardHeaderComponent = ({ title, text, link, buttonAction }) => {
               `The Earth is lucky to have you. Let’s keep making choices that lead to a brighter, cleaner future.`}
           </p>
 
-          {/* Dynamic Button */}
-          {buttonAction === "create-discussion" ? (
-            // Button to open the Create Discussion Modal
-            <div className="">
-              {/* <CreateDiscussionComponent /> */}
-              <VerifyOrganizerComponent text={"Create Discussion"} />
-            </div>
-          ) : buttonAction === "create-event" ? (
-            // Button to navigate to create event page
-            <div>
-              <VerifyOrganizerComponent text={"Create Eco-Event"} />
-            </div>
-          ) : null}
+          <div>
+            <VerifyOrganizerComponent
+              text={
+                buttonAction === "create-discussion"
+                  ? "Create Discussion"
+                  : buttonAction === "create-event"
+                  ? "Create Eco-Event"
+                  : "Create Take Action"
+              }
+              buttonAction={handleVerificationSuccess}
+            />
+          </div>
+          <Image
+            src="/badges/hero-section-dashboard.png"
+            alt="hero section dashboard"
+            width={338}
+            height={160}
+            objectFit="cover"
+            className="absolute rounded-2xl right-0 bottom-0"
+          />
         </article>
       </section>
 
-      {/* Discussion form */}
+      {/* Modal for Create Discussion */}
+      {showDiscussionModal && (
+        <CreateDiscussionComponent
+          open={showDiscussionModal}
+          onOpenChange={setShowDiscussionModal}
+        />
+      )}
+
+      {/* Modal for take action */}
+      {showTakeActionModal && (
+        <CreateTakeActionFormComponent
+          open={showTakeActionModal}
+          onOpenChange={setShowTakeActionModal}
+        />
+      )}
     </>
   );
 };

@@ -13,18 +13,19 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-const CreateDiscussionComponent = () => {
+const CreateDiscussionComponent = ({ open, onOpenChange }) => {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Trigger Button */}
-      <DialogTrigger asChild>
+      {/* <DialogTrigger asChild>
         <Button
           variant="default"
+
           className="py-4 px-5 bg-green text-white rounded-2xl hover:bg-green/80"
         >
           Start the Discussion
         </Button>
-      </DialogTrigger>
+      </DialogTrigger> */}
 
       {/* Dialog Content */}
       <DialogContent className="w-full bg-white border border-lightes-white">

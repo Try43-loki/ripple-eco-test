@@ -11,12 +11,25 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { User } from "lucide-react";
+import { useState } from "react";
 
-const VerifyOrganizerComponent = ({ text }) => {
+const VerifyOrganizerComponent = ({ text, buttonAction }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleVerify = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    if (typeof buttonAction === "function") {
+      buttonAction();
+    }
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-green text-white rounded-xl px-6 py-3 hover:bg-green/80">
+        <Button
+          onClick={() => setOpen(true)}
+          className="bg-green text-white rounded-xl px-6 py-3 hover:bg-green/80"
+        >
           {text || "Verify Organizer"}
         </Button>
       </DialogTrigger>
@@ -28,7 +41,7 @@ const VerifyOrganizerComponent = ({ text }) => {
           </DialogTitle>
         </DialogHeader>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleVerify}>
           {/* National ID */}
           <div>
             <label className="block font-semibold text-sm mb-1 text-dark-green">
@@ -87,7 +100,8 @@ const VerifyOrganizerComponent = ({ text }) => {
           {/* Buttons */}
           <DialogFooter className="pt-4 flex justify-end gap-3">
             <Button
-              type="submit"
+              type="button"
+              onClick={() => setOpen(false)}
               className="bg-red text-white hover:bg-red/80 rounded-lg"
             >
               Cancel
