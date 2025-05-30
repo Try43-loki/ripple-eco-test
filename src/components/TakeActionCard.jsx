@@ -9,21 +9,40 @@ import {
 import { Play } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { DeleteComponent } from "../app/(user)/take-action/_component/DeleteComponent";
+import Link from "next/link";
 
-const TakeActionCard = ({ image, title, description, support, layout }) => {
+const TakeActionCard = ({
+  image,
+  title,
+  description,
+  support,
+  layout,
+  isOwner,
+}) => {
   return (
     <main>
-      <Card className="p-0 pb-4 w-full rounded-2xl border border-lightes-white border border-light-strok">
-        <CardContent className="px-1.75 py-[5px] h-[155px] relative">
-          <Image
-            src={`/assets/${image}` || `/${image}`}
-            alt="sub-banner"
-            width={298}
-            height={155}
-            className="rounded-t-xl h-40 object-cover"
-          />
-          <div className="absolute top-4 px-1.5 right-4.5 w-[47px] text-[12px] rounded-[10px] bg-white text-center">
-            Action
+      <Card className="p-0 pb-4 w-full rounded-2xl  border border-light-strok">
+        <CardContent className="p-2  h-[155px] relative">
+          <Link
+            href={{
+              pathname: `/organizer/take-action/${1}`,
+              query: { type: "view" },
+            }}
+          >
+            <Image
+              src="/assets/leaderboard/save_world.jpg"
+              alt="sub-banner"
+              width={270}
+              height={150}
+              className="rounded-t-xl h-40 object-cover"
+            />
+          </Link>
+          <div className="absolute top-0 left-0 flex justify-between items-center p-3 w-full">
+            <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
+              Action
+            </p>
+            {isOwner ? <DeleteComponent /> : null}
           </div>
         </CardContent>
 
@@ -33,7 +52,9 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
               <CardTitle className={"text-[18px] text-dark-green"}>
                 {title}
               </CardTitle>
-              <CardDescription className={"line-clamp-3 text-[14px]"}>
+              <CardDescription
+                className={"line-clamp-3 text-[14px] text-lighter-green"}
+              >
                 {description}
               </CardDescription>
               <article className="flex gap-x-2 items-center text-green text-[16px]">
@@ -59,9 +80,9 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
                 {description}
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex flex-row items-center p-2 justify-between mt-5">
-              <article className="flex gap-x-2 items-center text-green text-[16px]">
-                <h1>ACTNOW</h1>
+            <CardFooter className="flex flex-col justify-start items-start p-2  mt-5">
+              <article className="flex  gap-x-2 items-center text-green text-[16px]">
+                <h1>ACT NOW</h1>
                 <Play className="w-[14px] h-[14px] fill-green" />
               </article>
               <div>

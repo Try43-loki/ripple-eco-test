@@ -16,7 +16,9 @@ const FooterComponent = () => {
               <br />
               through community action and awareness.
             </p>
-            <Send />
+            <Link href={"https://t.me/ripple_eco_alert"}>
+              <Send />
+            </Link>
           </aside>
           <div className="flex items-center gap-x-16">
             <nav className="flex flex-col items-start gap-y-3">

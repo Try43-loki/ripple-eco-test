@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import CreateDiscussionComponent from "./CreateDiscussionComponent";
 import VerifyOrganizerComponent from "./VerifyOrganizerComponent";
 import Image from "next/image";
-import FormTakeActionComponent from "@/app/organizer/take-action/_component/FormTakeActionComponent";
+
 import CreateTakeActionFormComponent from "./CreateTakeActionFormComponent";
 
 const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
@@ -25,8 +25,8 @@ const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
 
   return (
     <>
-      <section>
-        <article className="text flex flex-col gap-y-3 relative p-4 rounded-3xl bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9]">
+      <section className="w-full">
+        <article className="text w-full flex flex-col gap-y-3 relative p-4 rounded-3xl bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9]">
           <h1 className="text-xl text-dark-green font-semibold opacity-90">
             {title || "Welcome back, Earth Hero!"} 🌿🌍
           </h1>

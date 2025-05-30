@@ -17,7 +17,7 @@ export function ProfileDropdownComponent({ operator, onLogout }) {
           <ChevronDown
             variant="outline"
             size={20}
-            className=" text-light-green"
+            className="cursor-pointer text-light-green"
           />
         ) : (
           <img

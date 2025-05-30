@@ -28,7 +28,7 @@ const VerifyOrganizerComponent = ({ text, buttonAction }) => {
       <DialogTrigger asChild>
         <Button
           onClick={() => setOpen(true)}
-          className="bg-green text-white rounded-xl px-6 py-3 hover:bg-green/80"
+          className="bg-green cursor-pointer text-white rounded-xl px-6 py-3 hover:bg-green/80"
         >
           {text || "Verify Organizer"}
         </Button>
@@ -102,13 +102,13 @@ const VerifyOrganizerComponent = ({ text, buttonAction }) => {
             <Button
               type="button"
               onClick={() => setOpen(false)}
-              className="bg-red text-white hover:bg-red/80 rounded-lg"
+              className="bg-red cursor-pointer text-white hover:bg-red/80 rounded-lg"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-green text-white hover:bg-green/80 rounded-lg"
+              className="bg-green text-white cursor-pointer hover:bg-green/80 rounded-lg"
             >
               Verify Organizer
             </Button>

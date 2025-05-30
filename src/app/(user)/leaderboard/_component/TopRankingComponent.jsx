@@ -7,27 +7,27 @@ const TopRankingComponent = () => {
   const rankData = [
     {
       rank: 1,
-      username: "Koko",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      username: "Username",
+      score: 100,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-01.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-01.png",
       textColor: "text-strong-yellow",
     },
     {
       rank: 2,
-      username: "Kaka",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      username: "Username",
+      score: 90,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-02.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-02.png",
       textColor: "text-darker-gray",
     },
     {
       rank: 3,
-      username: "Mama",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      username: "Username",
+      score: 70,
+      hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-03.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right03.png",
       textColor: "text-red",
@@ -35,8 +35,8 @@ const TopRankingComponent = () => {
     ...Array.from({ length: 6 }, (_, i) => ({
       rank: i + 4,
       username: "Username",
-      score: 12,
-      hashtag: "#RiverCleanup",
+      score: 50 - i,
+      hashtag: "#Tree plating",
       leftIcon: null,
       rightIcon: null,
       textColor: "text-dark-green",
@@ -113,7 +113,7 @@ const TopRankingComponent = () => {
 
                 <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                   <p className="font-bold">{user.score}</p>
-                  <p className="bg-meduim-white px-2 py-1 lg:px-5 lg:py-2 rounded-full">
+                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
                     {user.hashtag}
                   </p>
                 </div>

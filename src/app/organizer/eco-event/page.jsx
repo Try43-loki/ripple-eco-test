@@ -14,8 +14,8 @@ function EcoEventPage() {
   };
 
   return (
-    <main className="w-full">
-      <section className="flex flex-col ">
+    <main className="w-full ">
+      <section className="flex flex-col w-full">
         <DashboardHeaderComponent
           title={headerSection.title}
           text={headerSection.text}

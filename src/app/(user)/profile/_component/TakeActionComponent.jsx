@@ -1,13 +1,11 @@
-import React from 'react'
-import TakeActionCard from '../../take-action/_component/TakeActionCard';
-
+import React from "react";
+import TakeActionCard from "../../../../components/TakeActionCard";
 
 const TakeActionComponent = () => {
   return (
     <main>
       <section className="w-full flex flex-row flex-wrap justify-between items-center">
-        
-        <div className='w-70'>
+        <div className="w-70">
           <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
@@ -18,7 +16,7 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-70'>
+        <div className="w-70">
           <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
@@ -29,7 +27,7 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-70'>
+        <div className="w-70">
           <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
@@ -40,7 +38,7 @@ const TakeActionComponent = () => {
           />
         </div>
 
-        <div className='w-70'>
+        <div className="w-70">
           <TakeActionCard
             image={"/sub-banner.jpg"}
             title={"Stand Up to Plastic Pollution"}
@@ -53,6 +51,6 @@ const TakeActionComponent = () => {
       </section>
     </main>
   );
-}
+};
 
-export default TakeActionComponent
+export default TakeActionComponent;

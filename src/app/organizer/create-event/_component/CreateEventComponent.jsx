@@ -30,13 +30,13 @@ export default function CreateEventComponent({
 
   return (
     <>
-      <h1 className="text-lg text-dark-green font-semibold mb-5">
+      <h1 className="w-full text-lg text-dark-green font-semibold mb-5">
         Event details
       </h1>
-      <form onSubmit={handleNext} className="flex flex-col gap-y-8">
+      <form onSubmit={handleNext} className="flex w-full flex-col gap-y-8">
         {/* Section 1 */}
-        <div className="flex gap-x-5">
-          <div className="grid w-full max-w-sm gap-1.5">
+        <div className="flex w-full gap-x-5">
+          <div className="grid w-full  gap-1.5">
             <Label htmlFor="title">Title</Label>
             <Input
               name="title"
@@ -46,7 +46,7 @@ export default function CreateEventComponent({
               className="bg-lighter-white text-gray-600 border-none h-10"
             />
           </div>
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label>Categories</Label>
             <SelectComponent
               operator="Categories"
@@ -54,7 +54,7 @@ export default function CreateEventComponent({
               setFormData={setFormData}
             />
           </div>
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label>Event type</Label>
             <SelectComponent
               operator="Event_type"
@@ -67,7 +67,7 @@ export default function CreateEventComponent({
         {/* Section 2 */}
         <div className="flex gap-x-5">
           <div className="flex w-1/3 gap-x-5">
-            <div className="grid w-full max-w-sm gap-1.5">
+            <div className="grid w-full  gap-1.5">
               <Label htmlFor="volunteer">Volunteer</Label>
               <Input
                 name="volunteer"
@@ -77,7 +77,7 @@ export default function CreateEventComponent({
                 className="bg-lighter-white text-gray-600 border-none h-10"
               />
             </div>
-            <div className="grid w-full max-w-sm gap-1.5">
+            <div className="grid w-full  gap-1.5">
               <Label>Certificate</Label>
               <SelectComponent
                 operator="Certificate"
@@ -87,11 +87,11 @@ export default function CreateEventComponent({
             </div>
           </div>
           <div className="flex w-2/3 gap-x-5">
-            <div className="grid w-full max-w-sm gap-1.5">
+            <div className="grid w-full  gap-1.5">
               <Label>Location</Label>
               <SearchComponent formData={formData} setFormData={setFormData} />
             </div>
-            <div className="grid w-full max-w-sm gap-1.5">
+            <div className="grid w-full  gap-1.5">
               <Label>Contribute type</Label>
               <SelectComponent
                 operator="Contribute_type"
@@ -104,7 +104,7 @@ export default function CreateEventComponent({
 
         {/* Section 3 */}
         <div className="flex gap-x-5">
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full  gap-1.5">
             <Label>Start date</Label>
             <DatePickerComponent
               name="start_date"
@@ -112,7 +112,7 @@ export default function CreateEventComponent({
               setFormData={setFormData}
             />
           </div>
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full  gap-1.5">
             <Label>End date</Label>
             <DatePickerComponent
               name="end_date"
@@ -120,7 +120,7 @@ export default function CreateEventComponent({
               setFormData={setFormData}
             />
           </div>
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full  gap-1.5">
             <Label htmlFor="picture">Picture</Label>
             <Input
               type="file"

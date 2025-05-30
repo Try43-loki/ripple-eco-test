@@ -28,9 +28,11 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
       </DialogTrigger> */}
 
       {/* Dialog Content */}
-      <DialogContent className="w-full bg-white border border-lightes-white">
+      <DialogContent className="w-full  bg-white border border-lightes-white">
         <DialogHeader>
-          <DialogTitle>Create Discussion</DialogTitle>
+          <DialogTitle className="cursor-pointer">
+            Create Discussion
+          </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
