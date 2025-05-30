@@ -7,10 +7,10 @@ const CardOrgLeaderComponent = () => {
   return (
     <>
       <Link href="/">
-        <Card className="bg-white border-none">
-            <CardHeader className="flex flex-row items-center w-80 gap-x-2.5 p-2">
+        <Card className="bg-white border-none flex flex-row items-center px-1.25 py-3 justify-between w-full">
+            <CardHeader className="flex flex-row items-center w-67 gap-x-2.5 p-2">
                 <p className="px-2 bg-light-gray rounded-full">4</p>
-                <div className="w-12.5 h-12.25">
+                <div className="w-12 h-10">
                     <img src="/assets/profileVolunteer.png" alt="" 
                     className="w-full h-full rounded-full"
                     />
@@ -30,9 +30,9 @@ const CardOrgLeaderComponent = () => {
                     
                 </div>
             </CardHeader>
-            <CardFooter>
-                <div className="px-2 py-1 rounded-2xl bg-blue">Recycling</div>
-                <p>84 events</p>
+            <CardFooter className="flex flex-col itmes-center gap-y-0.5">
+                <div className="px-3 py-1.5 rounded-2xl bg-lighter-blue text-sm text-blue">Recycling</div>
+                <p className="text-sm text-meduim-gray">84 events</p>
             </CardFooter>
         </Card>
       </Link>

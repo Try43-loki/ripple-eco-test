@@ -109,7 +109,7 @@ const TakeActionFormComponent = () => {
             <Button
               type="submit"
               onClick={handleSubmitClick}
-              className='w-30 bg-red hover:bg-strong-red text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+              className='w-30 bg-green hover:bg-strong-green text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
             >
               Submit
             </Button>
