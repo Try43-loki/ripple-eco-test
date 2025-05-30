@@ -7,9 +7,10 @@ function ProfilePage() {
     <>
       <section className="flex flex-row gap-x-4 items-start">
         <div className="basis-[60%]">
-          <OrganizerProfileComponent />
+            <OrganizerProfileComponent />
         </div>
-        <div className="basis-[40%]">
+
+        <div className="basis-[40%] h-180">
           <SideComponent />
         </div>
       </section>

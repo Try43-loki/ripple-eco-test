@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import PopupTakeActionForm from "./_component/PopupTakeActionForm";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import Link from "next/link";
+import CreateTakeActionFormComponent from "@/components/CreateTakeActionFormComponent";
 
 const TakeActionPage = () => {
   const heroSectionText = {
@@ -83,7 +84,11 @@ const TakeActionPage = () => {
             support={"11,376"}
           />
         </Link>
+        <div>
+          <Button></Button>
+        </div>
       </section>
+      
     </main>
   );
 };
