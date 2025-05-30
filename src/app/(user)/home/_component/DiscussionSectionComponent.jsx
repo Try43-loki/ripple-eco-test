@@ -20,7 +20,7 @@ const DiscussionSectionComponent = () => {
               Share ideas, explore solutions, and connect with others driving
               environmental change.
             </p>
-            <Link href="/discussion-forums">
+            <Link href="/discussion-forums" className="cursor-pointer">
               <DiscussionButtonComponent text={btnDiscussion} />
             </Link>
           </div>

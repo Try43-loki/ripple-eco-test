@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,6 +22,7 @@ import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
 const NavBarComponent = () => {
+  const [isLoggin, setisLoggin] = useState(true);
   const currentPath = usePathname();
 
   return (
@@ -143,23 +144,35 @@ const NavBarComponent = () => {
               >
                 Leaderbord
               </Link>
-              <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
-                <KnockProvider
-                  apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
-                  userId={3}
-                >
-                  <NotificationItem />
-                </KnockProvider>
-                <div className="flex items-center">
-                  <Popover>
-                    <PopoverTrigger>
-                      <ProfileDropdownComponent operator={"user"} />
+              {!isLoggin && (
+                <Link href="/login">
+                  <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition cursor-pointer">
+                    Sign in
+                  </button>
+                </Link>
+              )}
+              {isLoggin && (
+                <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
+                  <KnockProvider
+                    apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
+                    userId={3}
+                  >
+                    <NotificationItem />
+                  </KnockProvider>
+                  <div className="flex items-center">
+                    <Popover>
+                      <PopoverTrigger>
+                        <ProfileDropdownComponent
+                          operator={"user"}
+                          onLogout={() => setisLoggin(false)}
+                        />
 
-                      {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
-                    </PopoverTrigger>
-                  </Popover>
+                        {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
+                      </PopoverTrigger>
+                    </Popover>
+                  </div>
                 </div>
-              </div>
+              )}
             </li>
           </ul>
         </nav>

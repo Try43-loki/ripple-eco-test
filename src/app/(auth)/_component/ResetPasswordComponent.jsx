@@ -64,12 +64,17 @@ function ResetPasswordCopmponent({ onNext }) {
               </section>
             </form>
 
-            <p className="text-sm text-light-gray font-light">
-              Are you new here?{" "}
-              <Link className="underline text-sm font-medium" href="#">
-                Sign up
-              </Link>{" "}
-            </p>
+            <div className="flex justify-center items-center gap-2">
+              <p className="text-sm text-light-gray font-light">
+                Already have an account?
+              </p>
+              <Link
+                className="underline text-sm font-medium text-white"
+                href="/login"
+              >
+                Sign in
+              </Link>
+            </div>
           </section>
         </section>
       </section>

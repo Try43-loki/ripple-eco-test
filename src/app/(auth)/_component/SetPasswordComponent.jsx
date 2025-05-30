@@ -8,9 +8,11 @@ import {
   EyeClosed,
   Lock,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-function SetPasswordComponent({ onNext }) {
+function SetPasswordComponent({ onNext, onPrev }) {
+  const pathName = usePathname();
   const [showPassword, setShowPassword] = useState(false);
   const [showCfPassword, setShowCfPassword] = useState(false);
   // show password
@@ -37,10 +39,14 @@ function SetPasswordComponent({ onNext }) {
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
           <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon size={18} color="white" />
-            <div className="flex gap-2 grow">
-              {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
-                (step, index) => (
+            <ChevronLeftCircleIcon size={20} color="white" onClick={onPrev} />
+            {pathName === "/register" && (
+              <div className="flex gap-2 grow">
+                {[
+                  "1. Verify email",
+                  "2. Set Password",
+                  "3. Additional Info",
+                ].map((step, index) => (
                   <span
                     key={index}
                     className="flex flex-col gap-[2px] w-full items-start"
@@ -54,9 +60,9 @@ function SetPasswordComponent({ onNext }) {
                       }`}
                     ></span>
                   </span>
-                )
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           {/* Form */}
           <form

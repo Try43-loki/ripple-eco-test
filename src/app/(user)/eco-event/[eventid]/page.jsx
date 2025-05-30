@@ -131,7 +131,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </div>
 
             {/* Image section */}
-            <div className="flex flex-col md:flex-row py-6 gap-6 md:justify-evenly md:flex-wrap">
+            <div className="flex flex-col md:flex-row py-6 gap-6 md:flex-wrap">
               <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden ">
                 <Image
                   src="/assets/eventImage.png"

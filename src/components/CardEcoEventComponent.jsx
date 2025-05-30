@@ -17,7 +17,7 @@ const CardEcoEventComponent = ({ href, operator }) => {
         </span>
         {operator == "organizer" ? <UpdateEventComponent /> : null}
       </div>
-      <Link href={href}>
+      <Link href={href} className="cursor-pointer">
         <div>
           {/* Entire clickable area */}
 
