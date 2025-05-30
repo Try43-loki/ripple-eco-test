@@ -21,7 +21,7 @@ import {
 export function SelectComponent({ operator }) {
   let data = [];
   switch (operator) {
-    case "Event_type":
+    case "Event type":
       data = eventTypes;
       break;
     case "Categories":
@@ -35,7 +35,7 @@ export function SelectComponent({ operator }) {
       data = locations;
 
       break;
-    case "Contribute_type":
+    case "Contribute type":
       data = contributeType;
       break;
     case "Slot":

@@ -12,11 +12,11 @@ import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 
-export function RequestFormComponent() {
+export function RequestFormComponent({ contribute }) {
   return (
-    <Dialog>
+    <Dialog classNam="w-full">
       <DialogTrigger asChild>
-        <div className="py-2 px-8 md:px-11 lg:px-10 bg-light-gray rounded-md flex items-center gap-2">
+        <div className="py-2 px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center items-center gap-2">
           <Image
             src="/assets/tick-circle.png"
             alt="tick-circle"
@@ -24,7 +24,10 @@ export function RequestFormComponent() {
             height={10}
             className="h-5"
           ></Image>
-          <p className="text-sm text-dark-green font-bold">Going</p>
+
+          <p className="text-sm text-dark-green font-bold">
+            {contribute == "Donation" ? "Donation" : "Going"}
+          </p>
         </div>
       </DialogTrigger>
 

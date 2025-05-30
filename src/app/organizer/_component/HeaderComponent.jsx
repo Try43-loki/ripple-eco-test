@@ -22,7 +22,7 @@ function HeaderComponent() {
   const dynamicTitle = formatRouteTitle(pathname);
   return (
     <>
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex w-full justify-between items-center mb-5">
         <h1 className="text-2xl font-bold text-green">{dynamicTitle}</h1>
         <article className="flex justify-center items-center gap-x-4">
           <div className="p-2 rounded-xl h-10 w-10  bg-lighter-white flex justify-center items-center">

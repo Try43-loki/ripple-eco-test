@@ -3,8 +3,10 @@ import React from "react";
 import EcoeventFilterComponent from "./_component/EcoeventFilterComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import Link from "next/link";
+import { events } from "@/service/mockData";
 
 function EcoEventPage() {
+  const data = events;
   const headerSection = {
     title: "Eco-Event",
     text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
@@ -12,7 +14,7 @@ function EcoEventPage() {
   };
 
   return (
-    <main>
+    <main className="w-full">
       <section className="flex flex-col ">
         <DashboardHeaderComponent
           title={headerSection.title}
@@ -23,16 +25,23 @@ function EcoEventPage() {
 
         <div className="w-full border-b border-lightes-white mt-5" />
 
-        <EcoeventFilterComponent />
+        <EcoeventFilterComponent className="w-full" />
 
-        <div className="flex flex-wrap justify-center gap-8 mt-6">
-          {[...Array(10)].map((_, index) => (
-            <div key={index}>
-              <CardEcoEventComponent
-                operator={"organizer"}
-                href={`/organizer/eco-event/${2}`}
-              />
-            </div>
+        <div className="flex flex-wrap justify-between gap-10 mt-6">
+          {data?.map((event, index) => (
+            <CardEcoEventComponent
+              operator={"organizer"}
+              key={index}
+              href={"/eco-event/1"}
+              type={event?.eventTypes?.eventType}
+              contribute={event?.contributeTypesResponse?.contributeTypeName}
+              category={event?.category?.categoryName}
+              status={event?.eventStatus}
+              date={event?.startDate}
+              participats={event?.maxSlot}
+              title={event?.title}
+              location={event?.provinces?.provinceName}
+            />
           ))}
         </div>
       </section>

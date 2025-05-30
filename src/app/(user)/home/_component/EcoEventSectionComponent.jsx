@@ -2,9 +2,10 @@ import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 
 import React from "react";
 import Link from "next/link";
+import { events } from "@/service/mockData";
 
 const EcoEventSectionComponent = () => {
-  const events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // Replace with fetch data later
+  const data = events;
 
   return (
     <div>
@@ -23,8 +24,21 @@ const EcoEventSectionComponent = () => {
           {/* Scrollable card list with hidden scrollbar */}
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
-              {events.map((event, index) => (
-                <CardEcoEventComponent key={index} href={`/eco-event`} />
+              {data?.map((event, index) => (
+                <CardEcoEventComponent
+                  key={index}
+                  href={"/eco-event/1"}
+                  type={event?.eventTypes?.eventType}
+                  contribute={
+                    event?.contributeTypesResponse?.contributeTypeName
+                  }
+                  category={event?.category?.categoryName}
+                  status={event?.eventStatus}
+                  date={event?.startDate}
+                  participats={event?.maxSlot}
+                  title={event?.title}
+                  location={event?.provinces?.provinceName}
+                />
               ))}
             </div>
           </div>

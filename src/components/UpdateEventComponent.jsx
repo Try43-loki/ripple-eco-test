@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Ellipsis, FolderOpen, Upload } from "lucide-react";
+import { Ellipsis, FolderOpen, Settings, Upload } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import { useCallback, useState } from "react";
 import { Card } from "@knocklabs/react";
@@ -69,11 +69,9 @@ export function UpdateEventComponent() {
   return (
     <Dialog className="w-auto">
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="border-0  cursor-pointer bg-light-gray rounded-full h-6 w-6 p-0 hover:bg-gray "
-        >
-          <Ellipsis size={20} />
+        <Button className="shadow-none bg-white hover:bg-white border w-full text-strong-gray font-light cursor-pointer border-light-gray hover:border-light-strok  hover:text-dark-green transition-all ease-in-out duration-100">
+          <Settings size={20} />
+          Update Event
         </Button>
       </DialogTrigger>
       <DialogContent className=" bg-white border border-light-strok !w-auto">
@@ -84,7 +82,7 @@ export function UpdateEventComponent() {
 
         <div className="grid gap-4 py-4">
           <div className="flex justify-center items-start gap-x-8">
-            <div className="w-80 space-y-2.5">
+            <div className="w-50 space-y-2.5">
               <div className="grid w-full max-w-sm gap-1.5">
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -102,8 +100,8 @@ export function UpdateEventComponent() {
                 />
               </div>
             </div>
-            <div className="w-full  mx-auto ">
-              <Label htmlFor="title">Title</Label>
+            <div className="  mx-auto w-50">
+              <Label htmlFor="title">Poster</Label>
               <div
                 className={`relative border-2 border-dashed transition-colors mt-2 py-2 ${
                   isDragOver

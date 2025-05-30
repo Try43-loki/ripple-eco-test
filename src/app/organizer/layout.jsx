@@ -9,9 +9,8 @@ export default function Layout({ children }) {
       <main className="w-full h-screen">
         <section className="flex items-center justify-start w-full ">
           <SidebarTrigger className="opacity-0" />
-
-          <section className="px-3 w-full pr-10">
-            <HeaderComponent />
+          <section className="flex justify-center items-center flex-col gap-y-5 w-full pl-4 pr-8">
+            <HeaderComponent className="w-full" />
             {children}
           </section>
         </section>

@@ -15,7 +15,9 @@ import {
   contributeType,
   eventTypes,
   locations,
+  slots,
 } from "@/data";
+
 export function SelectComponent({ operator }) {
   let data = [];
   switch (operator) {
@@ -35,7 +37,9 @@ export function SelectComponent({ operator }) {
       break;
     case "Contribute_type":
       data = contributeType;
-
+      break;
+    case "Slot":
+      data = slots;
       break;
     default:
       break;
@@ -46,9 +50,13 @@ export function SelectComponent({ operator }) {
         <SelectValue placeholder={`Choose ${operator}`} />
       </SelectTrigger>
       <SelectContent className="bg-white  border border-light-strok text-gray-600">
-        <SelectGroup>
+        <SelectGroup className="">
           {data?.map((item, index) => (
-            <SelectItem key={index} value={item.value}>
+            <SelectItem
+              key={index}
+              value={item.value}
+              className=" !hover:bg-light-gray  cursor-pointer transition ease-in duration-200"
+            >
               {item.label}
             </SelectItem>
           ))}
