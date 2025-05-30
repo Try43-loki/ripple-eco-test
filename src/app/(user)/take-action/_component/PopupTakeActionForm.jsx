@@ -37,17 +37,17 @@ const PopupTakeActionForm = () => {
   };
 
   return (
-    <main className="">
-      <form onSubmit={handleSubmit}>
+    <main>
+      <form onSubmit={handleSubmit} className="w-full">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-primary">
+          <DialogTitle className="text-lg text-primary">
             Create Take Action
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4">
-          <div className="flex flex-col gap-3 items-start">
-            <Label htmlFor="title" className="text-lg">
+        <div className="flex flex-col gap-y-3 py-3">
+          <div className="flex flex-col gap-y-1 items-start">
+            <Label htmlFor="title" className="text-sm">
               Title
             </Label>
             <Input
@@ -57,12 +57,12 @@ const PopupTakeActionForm = () => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="px-5 border-none py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className="px-3 border-none py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
-          <div className="flex flex-col gap-3 items-start">
-            <Label htmlFor="send-to" className="text-lg">
+          <div className="flex flex-col gap-y-1 items-start">
+            <Label htmlFor="send-to" className="text-sm">
               Send To
             </Label>
             <Input
@@ -72,12 +72,12 @@ const PopupTakeActionForm = () => {
               required
               value={sendTo}
               onChange={(e) => setSendTo(e.target.value)}
-              className="px-5 border-none py-3 h-12 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className="px-3 border-none py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
 
-          <div className="flex flex-col gap-3 items-start">
-            <Label htmlFor="description" className="text-lg">
+          <div className="flex flex-col gap-y-1 items-start">
+            <Label htmlFor="description" className="text-sm">
               Description
             </Label>
             <Textarea
@@ -86,42 +86,44 @@ const PopupTakeActionForm = () => {
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="h-24 border-none px-5 py-3 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+              className=" border-none px-3 py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
             />
           </div>
-
-          <h4 className="text-lg">Image</h4>
-
-          <div className="flex flex-col gap-3 items-center">
-            <Input
-              type="file"
-              id="file"
-              className="hidden"
-              accept="image/*"
-              required
-              onChange={handleFileChange}
-            />
-            <Label
-              htmlFor="file"
-              className="h-52 w-52 border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
-            >
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  className="object-cover h-full w-full"
-                />
-              ) : (
-                <>
-                  <ImagePlus className="mb-2 text-description w-6 h-6" />
-                  <span className="text-description text-sm">Upload Image</span>
-                </>
-              )}
-            </Label>
+          <div className="flex flex-col gap-y-1 items-start w-full">
+            <h4 className="text-lg">Image</h4>
+            <div className="flex flex-col gap-y-1 items-center w-full">
+              <Input
+                type="file"
+                id="file"
+                className="hidden"
+                accept="image/*"
+                required
+                onChange={handleFileChange}
+              />
+              <Label
+                htmlFor="file"
+                className="h-30 w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+              >
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="object-cover h-full w-full"
+                  />
+                ) : (
+                  <>
+                    <ImagePlus className="mb-2 text-description w-6 h-6" />
+                    <span className="text-description text-sm">
+                      Upload Image
+                    </span>
+                  </>
+                )}
+              </Label>
+            </div>
           </div>
         </div>
 
-        <DialogFooter className="mt-2.5">
+        <DialogFooter className="mt-2.5 flex flex-row justify-between w-full">
           <DialogClose asChild>
             <Button
               type="button"

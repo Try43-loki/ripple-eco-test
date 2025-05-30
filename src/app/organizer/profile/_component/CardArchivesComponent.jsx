@@ -1,11 +1,5 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { CircleCheck, Dot, Forward } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
