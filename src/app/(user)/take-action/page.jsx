@@ -11,7 +11,7 @@ import Link from "next/link";
 import CreateTakeActionFormComponent from "@/components/CreateTakeActionFormComponent";
 
 const TakeActionPage = () => {
-  const [openForm, setOpenForm] = useState(false); // ✅ Control the form dialog
+  const [openForm, setOpenForm] = useState(false);
 
   const heroSectionText = {
     title: "TAKE ACTION",
@@ -30,15 +30,16 @@ const TakeActionPage = () => {
 
       <section className="mt-[48px] flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-4 md:px-12 lg:px-32 my-6 w-full">
         {/* Search bar */}
-        <SearchBarComponent placeholder="Search Discussion" />
+        <SearchBarComponent placeholder="Search Take Action" />
 
         {/* Create Discussion Button */}
         <Button
           onClick={() => setOpenForm(true)}
           variant="outline"
-          className="w-auto bg-green hover:bg-strong-green text-white hover:text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6"
+          className="w-auto bg-green cursor-pointer hover:bg-strong-green text-white hover:text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6"
         >
           Create Take Action
+          <CreateTakeActionFormComponent />
         </Button>
       </section>
 

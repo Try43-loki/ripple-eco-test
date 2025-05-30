@@ -8,7 +8,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import TakeActionDetailCard from "../_component/TakeActionDetailCard";
-import TakeActionFormComponent from "../_component/TakeActionFormComponent";
 import CreateTakeActionFormComponent from "@/components/CreateTakeActionFormComponent";
 const TakeActionDetailPage = () => {
   return (
@@ -31,7 +30,7 @@ const TakeActionDetailPage = () => {
               className={"[&>svg]:size-5 md:[&>svg]:size-6 lg:[&>svg]:size-7"}
             ></BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-primary">
+              <BreadcrumbLink className="text-green">
                 Green Oasis going Miyawaki
               </BreadcrumbLink>
             </BreadcrumbItem>

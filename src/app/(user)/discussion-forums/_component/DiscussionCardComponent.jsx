@@ -7,7 +7,7 @@ const DiscussionCardComponent = ({ image, fullWidth }) => {
     <article
       className={cn("py-4 bg-white", fullWidth ? "w-full" : "max-w-md mx-auto")}
     >
-      <div className="flex flex-col items-start gap-4">
+      <div className="flex flex-col items-start gap-4 border border-light-white py-3 px-4 rounded-2xl">
         {/* User Info */}
         <div className="flex gap-4">
           <Image
@@ -30,13 +30,13 @@ const DiscussionCardComponent = ({ image, fullWidth }) => {
         {/* Card Details */}
         <div className="w-full">
           <h2 className="text-base md:text-lg lg:text-xl font-semibold text-dark-green">
-            Have you participated in river-cleanup efforts or citizen-science
-            water testing?
+            Have you participated in <br /> river-cleanup efforts or <br />
+            citizen-science water testing?
           </h2>
           <p className="text-xs md:text-sm lg:text-base text-lighters-green mt-2">
-            These hands-on initiatives empower locals to remove debris, monitor
-            pollution levels, and contribute valuable data to guide river
-            conservation.
+            These hands-on initiatives empower <br /> locals to remove debris,
+            monitor <br /> pollution levels, and contribute <br /> valuable data
+            to guide river <br /> conservation.
           </p>
 
           {/* Image */}

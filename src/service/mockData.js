@@ -39,7 +39,7 @@ export const events = [
     description: "string",
     createdAt: "2025-05-29T18:41:04.726422",
     isProvideCertificate: true,
-    eventStatus: "Upcoming",
+    eventStatus: "Finished",
   },
   {
     eventId: "2b6e524e-8ae1-445e-8d56-5407b4971636",
