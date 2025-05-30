@@ -5,6 +5,8 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./globals.css";
+import NavBarComponent from "@/components/NavbarComponent";
+import FooterComponent from "@/components/FooterComponent";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700"],

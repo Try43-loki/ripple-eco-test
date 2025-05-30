@@ -30,7 +30,7 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
       <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white rounded-2xl p-6">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-green active:border-none">
-            Create Take Action
+            Create Survey
           </DialogTitle>
         </DialogHeader>
 
@@ -120,7 +120,7 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
               type="submit"
               className="w-1/3 sm:w-auto cursor-pointer bg-green hover:bg-green/80 text-white"
             >
-              Create Take Action
+              Create Survey
             </Button>
           </DialogFooter>
         </form>

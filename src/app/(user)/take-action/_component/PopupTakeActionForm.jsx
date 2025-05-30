@@ -41,7 +41,7 @@ const PopupTakeActionForm = () => {
       <form onSubmit={handleSubmit} className="w-full">
         <DialogHeader>
           <DialogTitle className="text-lg text-primary">
-            Create Take Action
+            Create Survey
           </DialogTitle>
         </DialogHeader>
 
@@ -139,7 +139,7 @@ const PopupTakeActionForm = () => {
             variant="outline"
             className="w-auto bg-meduim-green hover:bg-green hover:text-white text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
           >
-            Create Take Action
+            Create Survey
           </Button>
         </DialogFooter>
       </form>
