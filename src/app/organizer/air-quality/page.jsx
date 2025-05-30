@@ -59,7 +59,7 @@ const switchColor = (value) => {
 function AirQualityDashboardPage() {
   const dynamicColor = switchColor(aqiData.value);
   return (
-    <section className="flex flex-col gap-9 bg-air-green">
+    <section className="flex flex-col gap-9 ">
       {/* Hero Section */}
       <section className="w-full">
         <HeroSectionAirQualityDashboardComponent

@@ -138,7 +138,7 @@ const RecentDisasterComponent = ({ isDashboard }) => {
   return (
     <article
       className={clsx(" flex gap-8 w-full text-light-gray lg:flex-col", {
-        "lg:px-[150px] px-6 ": !isDashboard,
+        "lg:px-[180px] px-6 ": !isDashboard,
       })}
     >
       <Card>
