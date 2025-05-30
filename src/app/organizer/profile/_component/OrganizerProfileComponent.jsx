@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import CardEcoEvnentOrgProfile from "./CardEcoEvnentOrgProfile";
+import ArchivesComponent from "./ArchivesComponent";
 
 const OrganizerProfileComponent = () => (
   <>
@@ -32,7 +32,7 @@ const OrganizerProfileComponent = () => (
         <p className="text-strong-gray text-sm">
           We Interesting to apply our support to the earth.It is a long
           established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout{" "}
+          content of a page when looking at its layout
         </p>
       </article>
       <hr className="h-0.5 text-light-gray my-2" />
@@ -52,7 +52,7 @@ const OrganizerProfileComponent = () => (
       </div>
     </section>
 
-    <section className="w-200 mt-5">
+    <section className="w-full mt-5">
       <Tabs defaultValue="earned-badge" className="w-full">
         <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-1.5 border-1 border-border w-80">
           <TabsTrigger
@@ -78,7 +78,7 @@ const OrganizerProfileComponent = () => (
           </TabsTrigger>
         </TabsList>
         <TabsContent value="archive-post" className="mt-5 w-full">
-          <CardEcoEvnentOrgProfile />
+          <ArchivesComponent />
         </TabsContent>
         <TabsContent
           value="earned-badge"

@@ -6,13 +6,15 @@ function ProfilePage() {
   return (
     <>
       <section className="flex flex-row gap-x-4 items-start">
-        <div className="w-180">
-          <OrganizerProfileComponent/>
+        <div className="basis-[60%]">
+          <OrganizerProfileComponent />
         </div>
-        <SideComponent/>
+        <div className="basis-[40%]">
+          <SideComponent />
+        </div>
       </section>
     </>
-  )
+  );
 }
 
 export default ProfilePage;
