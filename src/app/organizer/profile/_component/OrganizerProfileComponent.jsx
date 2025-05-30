@@ -27,7 +27,7 @@ const OrganizerProfileComponent = () => (
           height={110}
           className="rounded-full"
         />
-        <EditprofileComponent/>
+        <EditprofileComponent title={""}/>
       </div>
       <article className="flex flex-col items-start gap-y-2 mt-2.5">
         <h2 className="text-xl">United Nations Environment Program (UNEP)</h2>
