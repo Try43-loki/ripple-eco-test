@@ -44,7 +44,7 @@ export default function ListVolunteerComponent() {
       <h2 className="text-xl font-semibold mb-2">Recent Request</h2>
       <Table className="text-light-green  ">
         <TableHeader>
-          <TableRow className="border-[#00000020] py-2">
+          <TableRow className="border-[#00000020] ">
             <TableHead>No</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Name</TableHead>

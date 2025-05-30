@@ -1,140 +1,183 @@
 "use client";
-
-import { useState } from "react";
-import { X, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Ellipsis, FolderOpen, Upload } from "lucide-react";
+import { Textarea } from "./ui/textarea";
+import { useCallback, useState } from "react";
+import { Card } from "@knocklabs/react";
 
-export default function Component() {
-  const handleDrag = (e) => {
+export function UpdateEventComponent() {
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleDragOver = useCallback((e) => {
     e.preventDefault();
-  };
+    setIsDragOver(true);
+  }, []);
 
-  const handleDrop = (e) => {
+  const handleDragLeave = useCallback((e) => {
     e.preventDefault();
-  };
+    setIsDragOver(false);
+  }, []);
 
-  const handleFileInput = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      // Handle file upload here
-      console.log("File selected:", e.target.files[0]);
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const files = Array.from(e.dataTransfer.files);
+    const imageFile = files.find(
+      (file) =>
+        file.type === "image/png" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/jpg"
+    );
+
+    if (imageFile) {
+      setSelectedFile(imageFile);
+    }
+  }, []);
+
+  const handleFileSelect = useCallback((e) => {
+    const file = e.target.files?.[0];
+    if (
+      file &&
+      (file.type === "image/png" ||
+        file.type === "image/jpeg" ||
+        file.type === "image/jpg")
+    ) {
+      setSelectedFile(file);
+    }
+  }, []);
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      // Handle file upload logic here
+      console.log("Uploading file:", selectedFile.name);
     }
   };
-
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl bg-white">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-          <CardTitle className="text-2xl font-semibold text-strong-gr">
-            Event Update
-          </CardTitle>
-          <Button variant="ghost" size="icon" className="h-6 w-6">
-            <X className="h-4 w-4" />
-          </Button>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="title"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Title
-                </Label>
+    <Dialog className="w-auto">
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          className="border-0  cursor-pointer bg-light-gray rounded-full h-6 w-6 p-0 hover:bg-gray "
+        >
+          <Ellipsis size={20} />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className=" bg-white border border-light-strok !w-auto">
+        <DialogHeader>
+          <DialogTitle className="text-strong-green">Event Update</DialogTitle>
+          <DialogDescription>{""}</DialogDescription>
+        </DialogHeader>
+
+        <div className="grid gap-4 py-4">
+          <div className="flex justify-center items-start gap-x-8">
+            <div className="w-80 space-y-2.5">
+              <div className="grid w-full max-w-sm gap-1.5">
+                <Label htmlFor="title">Title</Label>
                 <Input
-                  id="title"
-                  placeholder="Title Event"
-                  className="bg-gray-50 border-gray-200"
+                  name="title"
+                  placeholder="Tree planting"
+                  className="bg-lighter-white text-gray-600 border-none h-10"
                 />
               </div>
-
-              <div className="space-y-2">
-                <Label
-                  htmlFor="volunteer"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Volunteer
-                </Label>
+              <div className="grid w-full max-w-sm gap-1.5">
+                <Label htmlFor="title">Volunteer</Label>
                 <Input
-                  id="volunteer"
-                  placeholder="Total volunteer"
-                  className="bg-gray-50 border-gray-200"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label
-                  htmlFor="description"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  Description
-                </Label>
-                <Textarea
-                  id="description"
-                  placeholder="Description"
-                  className="bg-gray-50 border-gray-200 min-h-[200px] resize-none"
+                  name="title"
+                  placeholder="1000"
+                  className="bg-lighter-white text-gray-600 border-none h-10"
                 />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label className="text-sm font-medium text-gray-700">
-                Poster
-              </Label>
+            <div className="w-full  mx-auto ">
+              <Label htmlFor="title">Title</Label>
               <div
-                className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors border-gray-300 bg-gray-50 
+                className={`relative border-2 border-dashed transition-colors mt-2 py-2 ${
+                  isDragOver
+                    ? "border-green-400 bg-green-50"
+                    : "border-gray-300 bg-white"
                 }`}
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
               >
-                <div className="flex flex-col items-center space-y-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Upload className="w-6 h-6 text-green-600" />
+                <div className=" text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                      <FolderOpen className="w-4 h-4 text-green-600" />
+                    </div>
                   </div>
+
+                  <p className="text-gray-600 mb-2 text-sm">Drop file here</p>
+
                   <div className="space-y-2">
-                    <p className="text-sm font-medium text-gray-700">
-                      Drop file here
-                    </p>
-                    <input
-                      type="file"
-                      accept=".png,.jpg,.jpeg"
-                      onChange={handleFileInput}
-                      className="hidden"
-                      id="file-upload"
-                    />
-                    <label htmlFor="file-upload">
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept=".png,.jpg,.jpeg"
+                        // onChange={handleFileSelect}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
                       <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="cursor-pointer"
-                        asChild
+                        variant="default"
+                        className="bg-green-600 hover:bg-green-700 text-white"
                       >
-                        <span>Upload file</span>
+                        <Upload className="w-4 h-4 mr-2" />
+                        Upload file
                       </Button>
-                    </label>
-                    <p className="text-xs text-gray-500">
-                      Only PNG, JPG and JPEG files are supported
-                    </p>
+                    </div>
+
+                    {selectedFile && (
+                      <Button
+                        onClick={handleUpload}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        Upload {selectedFile.name}
+                      </Button>
+                    )}
                   </div>
+
+                  <p className="text-xs text-gray-500 mt-4">
+                    Only PNG, JPG and JPEG files are supported
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="flex justify-end pt-4">
-            <Button className="bg-green-600 hover:bg-green-700 text-white px-8">
-              Submit
-            </Button>
+          <div className="grid w-full gap-1.5 ">
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              name="description"
+              rows={5}
+              placeholder="Details about your event."
+              className="h-40 border border-light-strok bg-lighter-white text-gray-600 outline-0 focus:border-lighter-green shadow-none"
+            />
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button
+              type="submit"
+              className="bg-green text-white hover:bg-meduim-green hover:text-white cursor-pointer"
+            >
+              Save changes
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

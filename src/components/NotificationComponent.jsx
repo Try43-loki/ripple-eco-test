@@ -52,7 +52,7 @@ const NotificationItem = () => {
     <div className="notifications">
       <Popover>
         <PopoverTrigger>
-          <Bell className="text-[#048d4c]" />
+          <Bell className="text-light-green" size={20} />
         </PopoverTrigger>
         <PopoverContent className="w-96 border border-light-strok bg-white">
           You have {metadata?.total_count} unread items

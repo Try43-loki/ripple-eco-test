@@ -167,3 +167,13 @@ export const locations = [
     value: "tboung-khmum",
   },
 ];
+export const slots = [
+  {
+    label: "Available",
+    value: "available",
+  },
+  {
+    label: "Unavailable",
+    value: "unavailable",
+  },
+];
