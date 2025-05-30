@@ -2,10 +2,12 @@
 
 import { Knock } from "@knocklabs/node";
 
-const knock = new Knock(process.env.KNOCK_API_SECRET);
+const knock = new Knock({
+  apiKey: "sk_test_54taCg965eCJPFKr_OYsPf0AyftLby9kaILDVl8nuIw",
+});
 
-export const sendCommentAction = async (_, FormData) => {
-  console.log("FormData", FormData);
+export const sendCommentAction = async (comment) => {
+  console.log("comment ", comment);
 
   try {
     // The key of the workflow (from Knock dashboard)
@@ -13,13 +15,7 @@ export const sendCommentAction = async (_, FormData) => {
       data: {
         message: "A Notification just sent to you!",
       },
-      recipients: [
-        {
-          id: "3",
-          name: "Kimhout Theam",
-          email: "movin430630@gmail.com",
-        },
-      ],
+      recipients: ["3"],
     });
   } catch (error) {
     console.log(error);
