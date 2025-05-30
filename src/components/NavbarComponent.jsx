@@ -10,7 +10,6 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
-  Bell,
   ClipboardList,
   MessageCircleQuestion,
   SunDim,
@@ -28,7 +27,7 @@ const NavBarComponent = () => {
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
-        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#fff8]  backdrop-blur-sm rounded-xl ">
+        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-lightes-white  backdrop-blur-sm rounded-xl ">
           <ul className="flex flex-row justify-between items-center w-full">
             <li>
               <Link href="/home" className="text-white text-2xl font-semibold">
@@ -128,7 +127,7 @@ const NavBarComponent = () => {
                         }`}
                       >
                         <Wind />
-                        Natural Disastor
+                        Natural Disaster
                       </NavigationMenuLink>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -154,22 +153,26 @@ const NavBarComponent = () => {
                 </Link>
               )}
               {isLoggin && (
-                <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
+                <div className="flex items-center gap-2.5 h-14">
                   <KnockProvider
                     apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
-                    userId={3}
+                    userId={"3"}
                   >
-                    <NotificationItem />
+                    <div
+                      className="flex items-center h-full mt-2
+                    "
+                    >
+                      <NotificationItem />
+                    </div>
                   </KnockProvider>
-                  <div className="flex items-center">
+
+                  <div className="flex items-center h-full">
                     <Popover>
                       <PopoverTrigger>
                         <ProfileDropdownComponent
                           operator={"user"}
                           onLogout={() => setisLoggin(false)}
                         />
-
-                        {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
                       </PopoverTrigger>
                     </Popover>
                   </div>

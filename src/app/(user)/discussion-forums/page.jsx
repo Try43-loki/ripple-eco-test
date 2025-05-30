@@ -19,6 +19,7 @@ const buttonText = "Create Discussion";
 
 const DiscussionPage = async () => {
   const discussions = await getAllDiscussionsService();
+
   return (
     <main className="w-full h-full flex flex-col">
       {/* Hero Section */}
