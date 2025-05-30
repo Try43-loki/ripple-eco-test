@@ -1,6 +1,7 @@
 import React from "react";
-import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
+
 import { forecast } from "../mockData/forecast";
+import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
 
 const HourlyForecastComponent = () => {
   const data = forecast;

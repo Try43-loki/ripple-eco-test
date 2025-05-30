@@ -27,12 +27,11 @@ function EcoEventPage() {
 
         <EcoeventFilterComponent className="w-full" />
 
-        <div className="flex flex-wrap justify-between gap-10 mt-6">
+        <div className="flex flex-wrap justify-start gap-10.5 mt-6">
           {data?.map((event, index) => (
             <CardEcoEventComponent
               operator={"organizer"}
               key={index}
-              href={"/eco-event/1"}
               type={event?.eventTypes?.eventType}
               contribute={event?.contributeTypesResponse?.contributeTypeName}
               category={event?.category?.categoryName}

@@ -31,12 +31,14 @@ const ProfilePage = ({ params }) => {
 
       <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
         <img
-          src="https://i.pinimg.com/736x/35/48/35/3548357337902e2d9d7a79b1a6a166bc.jpg"
+          src="/assets/Organizer.png"
           alt="sakuke"
-          className="w-[170px] h-[170px] rounded-full absolute -top-10 left-30"
+          className=" rounded-full absolute top-10 left-30"
         />
         <div className="space-y-2">
-          <h2 className="text-[30px] text-green">Uchiha Sasuke</h2>
+          <h2 className="text-[30px] text-green">
+            United Nations Environment Program (UNEP)
+          </h2>
           <p className="text-[20px] text-black">
             Passionate about protecting the Earth and encouraging eco-friendly
             habits.
@@ -56,12 +58,6 @@ const ProfilePage = ({ params }) => {
             </div>
           </div>
         </div>
-        <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
-          <div className="flex gap-1.5 items-center">
-            <SquarePen className="w-4 h-4" />
-            <p>Edit Profile</p>
-          </div>
-        </Button>
       </article>
 
       <section className="mt-12 mx-36">

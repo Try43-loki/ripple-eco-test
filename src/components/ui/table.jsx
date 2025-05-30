@@ -33,7 +33,10 @@ function TableBody({ className, ...props }) {
   return (
     <tbody
       data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0 overflow-y-scroll ", className)}
+      className={cn(
+        " [&_tr:last-child]:border-0 overflow-y-scroll ",
+        className
+      )}
       {...props}
     />
   );

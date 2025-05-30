@@ -17,10 +17,11 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
 import OwnFeedBackComponent from "@/app/(user)/profile/_component/OwnFeedBackComponent";
-import DisccusionComponent from "@/app/(user)/profile/_component/DisccusionComponent";
 import TakeActionComponent from "@/app/(user)/profile/_component/TakeActionComponent";
-const ProfilePage = ({ params }) => {
+import DisccusionComponent from "@/app/(user)/profile/_component/DisccusionComponent";
+const ProfilePage = () => {
   return (
     <main>
       <HeroSectionComponent
@@ -36,7 +37,7 @@ const ProfilePage = ({ params }) => {
           className="w-[170px] h-[170px] rounded-full absolute -top-10 left-30"
         />
         <div className="space-y-2">
-          <h2 className="text-[30px] text-green">Uchiha Sasuke</h2>
+          <h2 className="text-[30px] text-green">Sochetra</h2>
           <p className="text-[20px] text-black">
             Passionate about protecting the Earth and encouraging eco-friendly
             habits.
@@ -56,17 +57,11 @@ const ProfilePage = ({ params }) => {
             </div>
           </div>
         </div>
-        <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
-          <div className="flex gap-1.5 items-center">
-            <SquarePen className="w-4 h-4" />
-            <p>Edit Profile</p>
-          </div>
-        </Button>
       </article>
 
       <section className="mt-12 mx-36">
         <Tabs defaultValue="event-history" className="w-full">
-          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
+          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-light-gray">
             <TabsTrigger
               value="event-history"
               className={cn(

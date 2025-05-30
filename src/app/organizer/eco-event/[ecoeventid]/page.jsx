@@ -24,14 +24,14 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
     {
       id: 1,
       text: "Hand-on event",
-      bgColor: "bg-[#EDF0F3]",
-      textColor: "text-dark-green",
+      bgColor: "bg-green",
+      textColor: "text-white",
     },
     {
       id: 2,
       text: "#Tree-Planting",
-      bgColor: "bg-[#EDF0F3]",
-      textColor: "text-dark-green",
+      bgColor: "bg-blue",
+      textColor: "text-white",
     },
     {
       id: 3,
@@ -111,7 +111,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </div>
 
             {/* Image section */}
-            <div className="flex flex-col md:flex-row py-6 gap-6 md:justify-evenly md:flex-wrap">
+            <div className="flex flex-col md:flex-row py-6 gap-6 md:justify-start md:flex-wrap">
               <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden ">
                 <Image
                   src="/assets/eventImage.png"
@@ -138,7 +138,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               </div>
             </div>
             {/* Tab */}
-            <TabEcoeventComponent />
+            <TabEcoeventComponent operator={"organizer"} />
             {/* Post Activity Section */}
             <PostActivityComponent />
           </div>

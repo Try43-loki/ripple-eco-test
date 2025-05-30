@@ -2,13 +2,10 @@
 
 import React, { useState } from "react";
 import SearchBarComponent from "@/components/SearchBarComponent";
-
-import TakeActionCard from "../../../components/TakeActionCard";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import Link from "next/link";
-import CreateTakeActionFormComponent from "@/components/CreateTakeActionFormComponent";
+import TakeActionCard from "@/components/TakeActionCard";
 
 const TakeActionPage = () => {
   const [openForm, setOpenForm] = useState(false); // ✅ Control the form dialog

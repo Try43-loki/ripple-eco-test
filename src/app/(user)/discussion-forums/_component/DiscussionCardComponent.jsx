@@ -2,7 +2,7 @@ import React from "react";
 import TagComponent from "../../../../components/TagComponent";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-const DiscussionCardComponent = ({ image, fullWidth }) => {
+const DiscussionCardComponent = ({ image, fullWidth, operator }) => {
   return (
     <article
       className={cn("py-4 bg-white", fullWidth ? "w-full" : "max-w-md mx-auto")}

@@ -57,10 +57,12 @@ const TakeActionCard = ({
               >
                 {description}
               </CardDescription>
-              <article className="flex gap-x-2 items-center text-green text-[16px]">
-                <h1>ACT NOW</h1>
-                <Play className="w-[14px] h-[14px] fill-green" />
-              </article>
+              <Link href="/organizer/take-action/1">
+                <article className="flex gap-x-2 items-center text-green text-[16px]">
+                  ACT NOW
+                  <Play className="w-[14px] h-[14px] fill-green" />
+                </article>
+              </Link>
             </CardHeader>
 
             <CardFooter className="flex flex-col items-start p-2 mt-4">

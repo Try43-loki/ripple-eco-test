@@ -1,19 +1,23 @@
+"use client";
+import React from "react";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import StatusButtonComponent from "@/components/StatusButtonComponent";
 import { CalendarDays, MapPin } from "lucide-react";
-import Image from "next/image";
-import React from "react";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import DonationComponent from "./_component/DonateComponent";
 import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
-import EventActivityComponent from "@/components/EventActivityComponent";
 import Link from "next/link";
 import { RequestFormComponent } from "@/components/RequesFormComponent";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import EventActivityComponent from "@/components/EventActivityComponent";
+import RatingDialog from "@/components/RateComponent";
 
-const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
-  const { eventid } = await ParamsPromise;
+const EcoEventDetailPage = () => {
+  const currentEvent = usePathname();
+  const currentEventId = currentEvent.split("/").pop();
 
   // Hero Section param data
   const heroSectionText = {
@@ -93,9 +97,13 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               </div>
 
               {/* Join Event Button */}
-              <div className="mt-3 md:mt-0 text-green  hidden md:block">
-                <RequestFormComponent />
-              </div>
+              {currentEventId === "1" ? (
+                ""
+              ) : (
+                <div className="mt-3 md:mt-0 text-green  hidden md:block">
+                  <RequestFormComponent />
+                </div>
+              )}
             </div>
 
             {/* Title */}
@@ -104,16 +112,36 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </h2>
 
             {/* Status Tags */}
-            <div className="flex gap-3 flex-wrap mb-2">
-              {statusSection.map((status) => (
-                <StatusButtonComponent
-                  key={status.id}
-                  text={status.text}
-                  bgColor={status.bgColor}
-                  textColor={status.textColor}
-                />
-              ))}
-            </div>
+            {currentEventId === "1" ? (
+              <div className="flex gap-3 flex-wrap mb-2">
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8 text-center text-white bg-green hover:bg-green`}
+                >
+                  Hands-on event
+                </Button>
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8 text-center text-white bg-blue hover:bg-blue`}
+                >
+                  #Tree-Planting
+                </Button>
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8  text-center text-white bg-gray-600 hover:bg-gray-600`}
+                >
+                  Finished
+                </Button>
+              </div>
+            ) : (
+              <div className="flex gap-3 flex-wrap mb-2">
+                {statusSection.map((status) => (
+                  <StatusButtonComponent
+                    key={status.id}
+                    text={status.text}
+                    bgColor={status.bgColor}
+                    textColor={status.textColor}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Date & Location */}
             <div className="flex items-center mt-3 py-1 text-xs gap-4 md:text-sm lg:text-base text-light-green">
@@ -165,7 +193,16 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             {/* Tab */}
             <TabEcoeventComponent />
             {/* Donate Section */}
-            <DonationComponent operator={"detail"} />
+            {currentEventId === "1" ? (
+              <EventActivityComponent />
+            ) : (
+              <DonationComponent operator={"detail"} />
+            )}
+
+            {/* Rating Section */}
+            <Button className="w-full flex justify-end items-center mt-4 p-0 shadow-none">
+              <RatingDialog />
+            </Button>
           </div>
         </article>
       </article>

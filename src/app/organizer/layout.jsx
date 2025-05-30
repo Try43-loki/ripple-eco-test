@@ -4,7 +4,7 @@ import HeaderComponent from "./_component/HeaderComponent";
 
 export default function Layout({ children }) {
   return (
-    <SidebarProvider className="mt-3">
+    <SidebarProvider className="mt-3 w-full">
       <AppSidebar />
       <main className="w-full h-screen">
         <section className="flex items-center justify-start w-full ">

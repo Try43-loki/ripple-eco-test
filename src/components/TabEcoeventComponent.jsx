@@ -6,7 +6,7 @@ import AgendaComponent from "@/app/(user)/eco-event/[eventid]/_component/AgendaC
 import ReviewComponent from "@/app/(user)/eco-event/[eventid]/_component/ReviewComponent";
 import VolunteerComponent from "@/app/(user)/eco-event/[eventid]/_component/VolunteerComponent";
 
-const TabEcoeventComponent = () => {
+const TabEcoeventComponent = ({ operator }) => {
   return (
     <Tabs defaultValue="agenda" className="w-full">
       {/* Tab Buttons */}
@@ -42,7 +42,7 @@ const TabEcoeventComponent = () => {
 
       <TabsContent value="review">
         <div className="space-y-2">
-          <ReviewComponent />
+          <ReviewComponent operator={operator} />
         </div>
       </TabsContent>
     </Tabs>

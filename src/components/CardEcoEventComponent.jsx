@@ -29,7 +29,12 @@ const CardEcoEventComponent = ({
         </span>
         {operator == "organizer" ? <ListComponent /> : null}
       </div>
-      <Link href={href} className="cursor-pointer">
+      <Link
+        href={
+          operator == "organizer" ? "/organizer/eco-event/1" : "/eco-event/1"
+        }
+        className="cursor-pointer"
+      >
         <div>
           <div>
             {/* Image Section */}

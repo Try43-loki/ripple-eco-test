@@ -16,7 +16,7 @@ import React from "react";
 import ArchivesComponent from "./ArchivesComponent";
 import EditprofileComponent from "./EditprofileComponent";
 
-const OrganizerProfileComponent = () => (
+const OrganizerProfileComponent = ({ operator }) => (
   <>
     <section className="rounded-2xl px-5 py-6 w-full border-light-gray border-1 drop-shadow-lg">
       <div className="flex items-start justify-between">
@@ -27,10 +27,19 @@ const OrganizerProfileComponent = () => (
           height={110}
           className="rounded-full"
         />
-        <EditprofileComponent title={""}/>
+        {operator == "organizer" ? (
+          <EditprofileComponent operator={operator} title={""} />
+        ) : (
+          ""
+        )}
       </div>
       <article className="flex flex-col items-start gap-y-2 mt-2.5">
-        <h2 className="text-xl">United Nations Environment Program (UNEP)</h2>
+        {operator == "organizer" ? (
+          <h2 className="text-xl">United Nations Environment Program (UNEP)</h2>
+        ) : (
+          <h2 className="text-xl">MEY soytry</h2>
+        )}
+
         <p className="text-strong-gray text-sm">
           We Interesting to apply our support to the earth.It is a long
           established fact that a reader will be distracted by the readable
@@ -58,31 +67,35 @@ const OrganizerProfileComponent = () => (
       <Tabs defaultValue="earned-badge" className="w-full">
         <section className="flex flex-row items-center gap-x-0.5 w-full">
           <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-1.5 border-2 border-light-gray drop-shadow-light-gray">
-          <TabsTrigger
-            value="earned-badge"
-            className={cn(
-              "text-sm sm:text-sm md:text-base lg:text-lg py-2 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-              "data-[state=active]:bg-meduim-green data-[state=active]:text-white", "w-45"
-            )}  
-          >
-            <Clock className="w-4.5 h-4.5" />
-            <p>Earned Badge</p>
-          </TabsTrigger>
-
-          <TabsTrigger
-            value="archive-post"
-            className={cn(
-              "text-sm sm:text-sm md:text-base lg:text-lg py-2 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
-              "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+            <TabsTrigger
+              value="earned-badge"
+              className={cn(
+                "text-sm sm:text-sm md:text-base lg:text-lg py-2 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+                "data-[state=active]:bg-meduim-green data-[state=active]:text-white",
+                "w-45"
+              )}
+            >
+              <Clock className="w-4.5 h-4.5" />
+              <p>Earned Badge</p>
+            </TabsTrigger>
+            {operator == "orgainzer" ? (
+              <TabsTrigger
+                value="archive-post"
+                className={cn(
+                  "text-sm sm:text-sm md:text-base lg:text-lg py-2 px-4 rounded-xl flex gap-x-2 items-center transition-colors",
+                  "data-[state=active]:bg-meduim-green data-[state=active]:text-white"
+                )}
+              >
+                <MessagesSquare className="w-4.5 h-4.5" />
+                <p>Archives</p>
+              </TabsTrigger>
+            ) : (
+              ""
             )}
-          >
-            <MessagesSquare className="w-4.5 h-4.5" />
-            <p>Archives</p>
-          </TabsTrigger>
-        </TabsList>
-        <hr className="border-t-2 border-light-gray w-full" />
+          </TabsList>
+          <hr className="border-t-2 border-light-gray w-full" />
         </section>
-        
+
         <TabsContent value="archive-post" className="mt-5 w-full">
           <ArchivesComponent />
         </TabsContent>

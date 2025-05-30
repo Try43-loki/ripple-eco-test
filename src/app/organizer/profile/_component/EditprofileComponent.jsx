@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ImagePlus, SquarePen, XCircle } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-const EditprofileComponent = ({title}) => {
+const EditprofileComponent = ({ title, operator }) => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -32,9 +32,13 @@ const EditprofileComponent = ({title}) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger asChild >
+        <DialogTrigger asChild>
           <Button variant="outline" className="border-none shadow-none">
-            {title ===""?  <SquarePen className="w-8 h-8 text-strong-gray" />: title }
+            {title === "" ? (
+              <SquarePen className="w-8 h-8 text-strong-gray" />
+            ) : (
+              title
+            )}
             {/* <SquarePen className="w-8 h-8 text-strong-gray" /> */}
           </Button>
         </DialogTrigger>
@@ -176,16 +180,16 @@ const EditprofileComponent = ({title}) => {
           </div>
           <DialogFooter className="flex justify-end">
             <div className="flex flex-row gap-x-5 justify-end items-end w-1/2">
-                <DialogClose>
-                    <Button  className="border-1 border-red text-red">
-                    Cancel
-                    </Button>
-                </DialogClose>
-                <Button type="submit" className="text-green border-1 border-green">
+              <DialogClose>
+                <Button className="border-1 border-red text-red">Cancel</Button>
+              </DialogClose>
+              <Button
+                type="submit"
+                className="text-green border-1 border-green"
+              >
                 Save changes
-                </Button>
+              </Button>
             </div>
-            
           </DialogFooter>
         </DialogContent>
       </Dialog>

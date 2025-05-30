@@ -30,7 +30,6 @@ const formatTime = (time) => {
 };
 
 const HourlyValueAQIComponent = ({ data }) => {
-  console.log(data);
   const isSameHour =
     new Date(data.timestamp).getHours() === new Date().getHours();
   const isSameDay =
@@ -45,7 +44,7 @@ const HourlyValueAQIComponent = ({ data }) => {
     <>
       <div
         className={clsx(
-          "w-[200px] flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
+          "w-[200px] **: flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
           {
             "bg-light-gray px-": isActive,
           }
