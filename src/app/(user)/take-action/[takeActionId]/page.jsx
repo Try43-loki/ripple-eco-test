@@ -28,18 +28,27 @@ const TakeActionDetailPage = () => {
         }
         showSearchBar={false}
       />
+      <HeroSectionComponent
+        text={"TAKE ACTION"}
+        description={
+          "Share ideas, explore solutions, and connect with others driving environmental change."
+        }
+        showSearchBar={false}
+      />
 
+      <div className="w-full my-6 px-6 md:px-5 lg:px-37.5">
       <div className="w-full my-6 px-6 md:px-5 lg:px-37.5">
         <Breadcrumb>
           <BreadcrumbList className="flex items-center text-sm md:text-base lg:text-lg font-semibold">
             <BreadcrumbItem>
+              <BreadcrumbLink href="/take-action">Take Action</BreadcrumbLink>
               <BreadcrumbLink href="/take-action">Take Action</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator
               className={"[&>svg]:size-5 md:[&>svg]:size-6 lg:[&>svg]:size-7"}
             ></BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-primary">
+              <BreadcrumbLink className="text-green">
                 Green Oasis going Miyawaki
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -63,5 +72,9 @@ const TakeActionDetailPage = () => {
     </main>
   );
 };
+  );
+};
+
+export default TakeActionDetailPage;
 
 export default TakeActionDetailPage;

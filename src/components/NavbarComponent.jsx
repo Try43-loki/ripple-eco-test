@@ -28,7 +28,7 @@ const NavBarComponent = () => {
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
-        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#fff8]  backdrop-blur-sm rounded-xl ">
+        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#fff8] backdrop-blur-sm rounded-xl ">
           <ul className="flex flex-row justify-between items-center w-full">
             <li>
               <Link href="/home" className="text-white text-2xl font-semibold">
@@ -154,12 +154,14 @@ const NavBarComponent = () => {
                 </Link>
               )}
               {isLoggin && (
-                <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
+                <div className="flex gap-x-[20px] items-center w-[100px] justify-end">
                   <KnockProvider
                     apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
                     userId={3}
                   >
-                    <NotificationItem />
+                    <div className="mt-1">
+                      <NotificationItem />
+                    </div>
                   </KnockProvider>
                   <div className="flex items-center">
                     <Popover>

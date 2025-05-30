@@ -8,7 +8,7 @@ const TopRankingComponent = () => {
     {
       rank: 1,
       username: "Username",
-      score: 100,
+      score: 5,
       hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-01.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-01.png",
@@ -17,7 +17,7 @@ const TopRankingComponent = () => {
     {
       rank: 2,
       username: "Username",
-      score: 90,
+      score: 4,
       hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-02.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right-02.png",
@@ -26,7 +26,7 @@ const TopRankingComponent = () => {
     {
       rank: 3,
       username: "Username",
-      score: 70,
+      score: 3,
       hashtag: "#Tree plating",
       leftIcon: "/assets/leaderboard/laurel-wreath-left-03.png",
       rightIcon: "/assets/leaderboard/laurel-wreath-right03.png",
@@ -35,7 +35,7 @@ const TopRankingComponent = () => {
     ...Array.from({ length: 6 }, (_, i) => ({
       rank: i + 4,
       username: "Username",
-      score: 50 - i,
+      score: 2 - i,
       hashtag: "#Tree plating",
       leftIcon: null,
       rightIcon: null,

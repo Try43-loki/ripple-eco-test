@@ -35,7 +35,7 @@ const TakeActionDetailCard = ({ view }) => {
                   className="h-15 w-15 rounded-full object-cover"
                 />
                 <div className="flex flex-col">
-                  <p className="text-xl font-medium text-gray">KPSxZyXL</p>
+                  <p className="text-xl font-medium text-gray">Kimlong</p>
                   <p className="text-sm font-normal text-strong-gray">
                     6h agos . Public
                   </p>
@@ -44,7 +44,7 @@ const TakeActionDetailCard = ({ view }) => {
             )}
           </div>
 
-          <CardTitle className="text-2xl lg:text-3xl text-lighter-green">
+          <CardTitle className="text-2xl lg:text-2xl text-dark-green">
             Reclaim Empty Spaces for Community Gardens
           </CardTitle>
 

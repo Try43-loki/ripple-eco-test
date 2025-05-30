@@ -76,7 +76,7 @@ function LoginComponent({ onNext }) {
                   </span>
                   <span
                     onClick={handleShowPassword}
-                    className="flex justify-center items-center text-[14px] gap-1 top-[37px] right-2.5 absolute text-gray-500 cursor-pointer"
+                    className="flex justify-center items-center text-[14px] gap-1 top-[38px] right-2.5 absolute text-gray-500 cursor-pointer"
                   >
                     {showPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
                   </span>

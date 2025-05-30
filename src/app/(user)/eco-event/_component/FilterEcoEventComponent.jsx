@@ -12,27 +12,27 @@ const FilterEcoEventComponent = () => {
         <h1 className="h-9 text-2xl font-semibold text-green ">Filter </h1>
         <div className="flex w-full gap-3 md:gap-4">
           <div className="grid w-[200px] gap-1.5">
-            <Label className="text-dark-gray">Location</Label>
+            {/* <Label className="text-dark-gray">Location</Label> */}
             <SelectComponent className="w-[400px]" operator={"Location"} />
           </div>
           <div className="grid w-[200px] gap-1.5">
-            <Label className="text-dark-gray">Event type</Label>
+            {/* <Label className="text-dark-gray">Event type</Label> */}
             <SelectComponent operator="Event_type" />
           </div>
           <div className="grid w-[200px] gap-1.5">
-            <Label className="text-dark-gray">Contribute types</Label>
+            {/* <Label className="text-dark-gray">Contribute types</Label> */}
             <SelectComponent operator="Contribute_type" />
           </div>
           <div className="grid w-[200px] gap-1.5">
-            <Label className="text-dark-gray">Categories</Label>
+            {/* <Label className="text-dark-gray">Categories</Label> */}
             <SelectComponent operator="Categories" />
           </div>
           <div className="grid w-[200px] gap-1.5">
-            <Label className="text-dark-gray"> Slot</Label>
+            {/* <Label className="text-dark-gray"> Slot</Label> */}
             <SelectComponent operator="Slot" />
           </div>
           <div className="grid gap-1.5">
-            <Label className="text-dark-gray"> Date range</Label>
+            {/* <Label className="text-dark-gray"> Date range</Label> */}
             <DateRangComponent />
           </div>
         </div>
