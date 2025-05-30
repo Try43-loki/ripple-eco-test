@@ -7,7 +7,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Star } from "lucide-react";
 import React from "react";
-
+const imagePath = "/badges/no profile icon.jpg"
 const OwnFeedBackCardComponent = ({ link, desc }) => {
   const isLoading = false;
   let isHasImage = true;
@@ -24,7 +24,7 @@ const OwnFeedBackCardComponent = ({ link, desc }) => {
   return (
     <main>
       <Card
-        className={`w-full rounded-2xl flex flex-col items-center gap-y-5 border border-border ${paddingY}`}
+        className={`w-full rounded-2xl flex flex-col items-center gap-y-5 border border-light-gray ${paddingY}`}
       >
         <CardContent className="flex items-center justify-between w-full">
           <div>
@@ -32,19 +32,19 @@ const OwnFeedBackCardComponent = ({ link, desc }) => {
               <div className="flex items-center space-x-4">
                 <Skeleton className="h-12 w-12 rounded-full" />
                 <div className="space-y-2">
-                  <Skeleton className="h-4 w-[250px]" />
-                  <Skeleton className="h-4 w-[200px]" />
+                  <Skeleton className="h-4 w-62.5" />
+                  <Skeleton className="h-4 w-50" />
                 </div>
               </div>
             ) : (
               <div className="flex items-center space-x-4">
                 <img
-                  src="https://i.pinimg.com/736x/e3/cc/19/e3cc196b34603811d13323ee70c31c42.jpg"
+                  src={imagePath}
                   alt="user"
                   className="h-12 w-12 rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-y-0">
-                  <p className="text-lg font-medium text-gray">KPSxZyXL</p>
+                  <p className="text-lg font-medium text-gray">Chorn Seyha</p>
                   <div className="flex items-center gap-x-1">
                     <p className="text-sm font-normal text-strong-gray">4.0</p>
                     <Star className="w-2.5 h-2.5 text-strong-orange fill-strong-orange" />

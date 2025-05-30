@@ -21,6 +21,7 @@ import TakeActionComponent from "./_component/TakeActionComponent";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
 import EventHistoryComponent from "./_component/EventHistoryComponent";
+import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
 const ProfilePage = () => {
   return (
     <main>
@@ -58,16 +59,13 @@ const ProfilePage = () => {
           </div>
         </div>
         <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
-          <div className="flex gap-1.5 items-center">
-            <SquarePen className="w-4 h-4" />
-            <p>Edit Profile</p>
-          </div>
+          <EditprofileComponent title={"Edit Profile"}/>
         </Button>
       </article>
 
       <section className="mt-12 mx-36">
         <Tabs defaultValue="event-history" className="w-full">
-          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-border">
+          <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-2 border-1 border-light-gray">
             <TabsTrigger
               value="event-history"
               className={cn(
