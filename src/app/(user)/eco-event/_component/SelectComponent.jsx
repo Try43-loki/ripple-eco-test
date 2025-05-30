@@ -45,7 +45,7 @@ export function SelectComponent({ operator }) {
       <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
         <SelectValue placeholder={`Choose ${operator}`} />
       </SelectTrigger>
-      <SelectContent className="bg-white  border border-light-strok text-gray-600">
+      <SelectContent className="bg-white  border border-light-stroke text-gray-600">
         <SelectGroup>
           {data?.map((item, index) => (
             <SelectItem key={index} value={item.value}>
