@@ -59,7 +59,7 @@ const switchColor = (value) => {
 function AirQualityDashboardPage() {
   const dynamicColor = switchColor(aqiData.value);
   return (
-    <section className="flex flex-col gap-9">
+    <section className="flex flex-col gap-9 bg-air-green">
       {/* Hero Section */}
       <section className="w-full">
         <HeroSectionAirQualityDashboardComponent
@@ -70,12 +70,12 @@ function AirQualityDashboardPage() {
       </section>
 
       {/* Section 2 */}
-      <section className="w-[1393px]">
+      <section className="w-full">
         <HourlyForecastComponent />
       </section>
 
       {/* Section 3 */}
-      <section className="flex justify-center gap-10  py-10 text-white">
+      <section className="flex justify-center gap-10 text-white">
         <DailyForecastComponent />
         <div className="flex flex-col w-full gap-10">
           <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />

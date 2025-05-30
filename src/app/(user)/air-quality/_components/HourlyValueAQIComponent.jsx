@@ -1,14 +1,49 @@
 import { clsx } from "clsx";
 import Image from "next/image";
 import React from "react";
+import { date } from "zod";
 
 const LineVertical = () => (
-  <div className="flex justify-center text-light-gray items-center">
+  <div className="flex flex-col justify-center text-light-gray items-center">
+    <span className="text-dark-gray">Tue</span>
     <hr className="w-px h-36 border-1 " />
   </div>
 );
 
-const HourlyValueAQIComponent = ({ isActive }) => {
+const listOfImageWeather = {
+  sun: "Sun",
+  rain: "Rain",
+  cloud: "Cloud",
+  cloudAndSun: "CloudWithSun",
+};
+
+const checkIcon = (icon) => {};
+
+const dynamicColorAqi = (value) => {
+  if (value < 50) return "text-air-green";
+  if (value < 100) return "text-air-yellow";
+  if (value < 150) return "text-air-orange";
+  if (value >= 150) return "text-air-red";
+};
+const formatTime = (time) => {
+  return time.substring(11, 16);
+};
+
+const HourlyValueAQIComponent = ({ data }) => {
+  // const hour =
+  //   formatTime(data.timestamp) == new Date().getHours() + ":00"
+  //     ? "Now"
+  //     : formatTime(data.timestamp);
+  // const isActive = hour === "Now";
+  console.log(data);
+  const isSameHour = data.timestamp.getHours() === now.getHours();
+  const isSameDay =
+    timestampDate.getDate() === now.getDate() &&
+    timestampDate.getMonth() === now.getMonth() &&
+    timestampDate.getFullYear() === now.getFullYear();
+
+  const hour = isSameHour && isSameDay ? "Now" : formatTime(data.timestamp);
+
   return (
     <>
       <div
@@ -19,9 +54,9 @@ const HourlyValueAQIComponent = ({ isActive }) => {
           }
         )}
       >
-        <span className="text-lg font-medium text-darker-gray">Now</span>
+        <span className="text-lg font-medium text-darker-gray">{hour}</span>
         <Image
-          src="/assets/air_quality_images/Sun.svg"
+          src={`/assets/air_quality_images/${listOfImageWeather.cloudAndSun}.svg`}
           alt="Logo"
           width={36}
           height={36}
