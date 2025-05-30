@@ -46,7 +46,7 @@ const FooterComponent = () => {
                   Take Action
                 </Link>
                 <Link
-                  href="/discussion"
+                  href="/discussion-forums"
                   className=" text-gray-400 hover:text-gray-200"
                 >
                   Discussion
