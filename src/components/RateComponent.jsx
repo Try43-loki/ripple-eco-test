@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 
 export default function RateComponent() {
   const [currentPage, setCurrentPage] = useState(1);

@@ -8,13 +8,23 @@ import {
   EyeClosed,
   Lock,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 function SetPasswordComponent({ onNext, onPrev }) {
   const pathName = usePathname();
   const [showPassword, setShowPassword] = useState(false);
   const [showCfPassword, setShowCfPassword] = useState(false);
+  const router = useRouter();
+
+  const handleNext = () => {
+    if (pathName == "/forget-password") {
+      router.push("/login-success?redirectTo=/login");
+    } else {
+      onNext();
+    }
+  };
+
   // show password
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -171,7 +181,7 @@ function SetPasswordComponent({ onNext, onPrev }) {
             </article>
             {/* Button submit */}
             <Button
-              onClick={onNext}
+              onClick={handleNext}
               className="w-full text-white bg-strong-green hover:bg-green-800 rounded-xl mt-4 h-11  text-md"
             >
               Next

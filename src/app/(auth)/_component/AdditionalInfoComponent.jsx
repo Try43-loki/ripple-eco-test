@@ -11,9 +11,18 @@ import {
 import { DatePickerComponent } from "./DatePickerComponent";
 import { SelectGenderComponent } from "./SelectGenderComponent";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function AdditonalInfoComponent({ onNext, onPrev }) {
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const router = useRouter();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const redirectTo = isOrganizer ? "/organizer/overview" : "/home";
+    router.push(`/login-success?redirectTo=${redirectTo}`);
+  };
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
@@ -194,7 +203,7 @@ function AdditonalInfoComponent({ onNext, onPrev }) {
               )}
             </section>
             <Button
-              onClick={onNext}
+              onClick={handleRegister}
               className="w-full bg-green hover:bg-green-800 text-white rounded-xl subtext-sub-info h-9  text-md"
             >
               Register
