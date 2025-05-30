@@ -24,8 +24,8 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
     {
       id: 1,
       text: "Hand-on event",
-      bgColor: "bg-dark-blue",
-      textColor: "text-white",
+      bgColor: "bg-[#EDF0F3]",
+      textColor: "text-dark-green",
     },
     {
       id: 2,

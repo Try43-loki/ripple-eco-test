@@ -27,13 +27,15 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] bg-white border border-lightes-white">
+      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white rounded-2xl p-6">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-green">
+          <DialogTitle className="text-2xl font-bold text-green active:border-none">
             Create Take Action
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
+
+        <form onSubmit={handleSubmit} className="space-y-6 w-full">
+          {/* Title Input */}
           <div className="space-y-2">
             <Label
               htmlFor="title"
@@ -48,6 +50,7 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
             />
           </div>
 
+          {/* Send To Input */}
           <div className="space-y-2">
             <Label
               htmlFor="sendTo"
@@ -62,6 +65,7 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
             />
           </div>
 
+          {/* Description */}
           <div className="space-y-2">
             <Label
               htmlFor="description"
@@ -76,6 +80,7 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
             />
           </div>
 
+          {/* Image Upload Placeholder */}
           <div className="space-y-2">
             <Label className="text-lg font-medium text-dark-green">Image</Label>
             <div className="border-2 border-dashed border-orange-300 rounded-lg p-8 text-center cursor-pointer hover:bg-muted/50 transition-colors">
@@ -86,7 +91,8 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
             </div>
           </div>
 
-          <div className="flex items-center justify-end space-x-2">
+          {/* Anonymous Toggle */}
+          {/* <div className="flex items-center justify-end space-x-2">
             <Label
               htmlFor="anonymous"
               className="text-lg font-medium text-dark-green"
@@ -98,22 +104,23 @@ export default function CreateTakeActionFormComponent({ open, onOpenChange }) {
               checked={isAnonymous}
               onCheckedChange={setIsAnonymous}
             />
-          </div>
+          </div> */}
 
-          <DialogFooter className="gap-2 sm:gap-0">
+          {/* Buttons */}
+          <DialogFooter className="flex flex-row gap-2 sm:gap-5">
             <Button
               type="button"
               variant="destructive"
               onClick={() => onOpenChange(false)}
-              className="w-full sm:w-auto"
+              className="w-1/3 sm:w-auto hover:bg-lighter-white bg-meduim-white cursor-pointer"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="w-full sm:w-auto bg-green hover:bg-green/80 text-white"
+              className="w-1/3 sm:w-auto cursor-pointer bg-green hover:bg-green/80 text-white"
             >
-              Create Take action
+              Create Take Action
             </Button>
           </DialogFooter>
         </form>

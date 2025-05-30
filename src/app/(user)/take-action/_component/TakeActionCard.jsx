@@ -16,7 +16,7 @@ const TakeActionCard = ({ image, title, description, support, layout }) => {
       <Card className="p-0 pb-4 w-full rounded-2xl border border-lightes-white border border-light-strok">
         <CardContent className="px-1.75 py-[5px] h-[155px] relative">
           <Image
-            src={`/assets/${image}` || `/${image}`}
+            src={`${image}` || `/${image}`}
             alt="sub-banner"
             width={298}
             height={155}
