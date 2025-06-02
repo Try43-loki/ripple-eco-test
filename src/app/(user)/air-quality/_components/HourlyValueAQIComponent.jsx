@@ -26,19 +26,25 @@ const dynamicColorAqi = (value) => {
   if (value >= 150) return "text-air-red";
 };
 const formatTime = (time) => {
+  // Return Hour Only
   return time.substring(11, 16);
 };
 
-const HourlyValueAQIComponent = ({ data }) => {
+function getCurrentTime(data) {
+  // Check Current Time with Data Time
   const isSameHour =
     new Date(data.timestamp).getHours() === new Date().getHours();
   const isSameDay =
     new Date(data.timestamp).getDate() === new Date().getDate() &&
     new Date(data.timestamp).getMonth() === new Date().getMonth() &&
     new Date(data.timestamp).getFullYear() === new Date().getFullYear();
-
   const hour = isSameHour && isSameDay ? "Now" : formatTime(data.timestamp);
-  const isActive = hour === "Now";
+  return hour;
+}
+
+const HourlyValueAQIComponent = ({ data }) => {
+  const isActive = getCurrentTime(data) === "Now";
+  const hour = formatTime(data.timestamp);
 
   return (
     <>
@@ -51,6 +57,7 @@ const HourlyValueAQIComponent = ({ data }) => {
         )}
       >
         <span className="text-lg font-medium text-darker-gray">{hour}</span>
+        {/* Image Icon */}
         <Image
           src={`/assets/air_quality_images/${listOfImageWeather.cloudAndSun}.svg`}
           alt="Logo"

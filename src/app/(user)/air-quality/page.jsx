@@ -5,11 +5,6 @@ import AirQualityComponent from "./_components/AirQualityComponent";
 import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 import HeroSectionAirDisasterComponent from "./_components/HeroSectionAirDisasterComponent";
 
-const bgGreen = "#CDE8DB";
-const bgYellow = "#FAF0CC";
-const bgOrange = "#FFE2CF";
-const bgRed = "#FECDD6";
-
 const aqiData = {
   value: 89,
   unit: "PP AQI*",
@@ -82,12 +77,12 @@ const AirQualityPage = () => {
         />
       </section>
 
-      {/* Section 2 */}
+      {/* Section 2 HourlyForecast */}
       <section className="flex justify-center px-6  text-white lg:px-[180px]">
         <HourlyForecastComponent />
       </section>
 
-      {/* Section 3 */}
+      {/* Section 3 Daily Forecast And AirQuality With HealthRecommend */}
       <section className="flex justify-center gap-10 px-6  text-white lg:px-[180px]">
         <DailyForecastComponent />
         <div className="flex flex-col w-full gap-10">
