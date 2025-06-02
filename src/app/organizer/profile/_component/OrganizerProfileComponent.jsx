@@ -16,7 +16,7 @@ import CardEcoEvnentOrgProfile from "./CardEcoEvnentOrgProfile";
 
 const OrganizerProfileComponent = () => (
   <>
-    <section className="rounded-2xl px-5 py-6 w-full border-light-gray border-1 drop-shadow-lg">
+    <section className="rounded-2xl px-5 py-6 flex flex-col min-w-2xs border-light-gray border-1 drop-shadow-lg">
       <div className="flex items-start justify-between">
         <Image
           src="/assets/profileVolunteer.png"
@@ -27,7 +27,7 @@ const OrganizerProfileComponent = () => (
         />
         <SquarePen className="w-6 h-6 text-strong-gray" />
       </div>
-      <article className="flex flex-col items-start gap-y-2 mt-2.5">
+      <article className="flex flex-col  items-start gap-y-2 mt-2.5">
         <h2 className="text-xl">United Nations Environment Program (UNEP)</h2>
         <p className="text-strong-gray text-sm">
           We Interesting to apply our support to the earth.It is a long
@@ -52,7 +52,7 @@ const OrganizerProfileComponent = () => (
       </div>
     </section>
 
-    <section className="w-200 mt-5">
+    <section className="w-full mt-5">
       <Tabs defaultValue="earned-badge" className="w-full">
         <TabsList className="flex flex-row gap-x-2 bg-white h-auto rounded-[14px] p-1.5 border-1 border-border w-80">
           <TabsTrigger
