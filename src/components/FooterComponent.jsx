@@ -5,7 +5,7 @@ import React from "react";
 const FooterComponent = () => {
   return (
     <>
-      <footer className="py-12 bg-footer text-white">
+      <footer className="py-12 bg-footer text-white mt-10">
         <div className="flex items-start justify-between px-40">
           <aside className="flex flex-col items-start gap-y-[20px]">
             <Link href="/home" className="text-[24px]">
@@ -16,7 +16,9 @@ const FooterComponent = () => {
               <br />
               through community action and awareness.
             </p>
-            <Send />
+            <Link href={"https://t.me/ripple_eco_alert"}>
+              <Send />
+            </Link>
           </aside>
           <div className="flex items-center gap-x-16">
             <nav className="flex flex-col items-start gap-y-3">
@@ -46,7 +48,7 @@ const FooterComponent = () => {
                   Take Action
                 </Link>
                 <Link
-                  href="/discussion"
+                  href="/discussion-forums"
                   className=" text-gray-400 hover:text-gray-200"
                 >
                   Discussion

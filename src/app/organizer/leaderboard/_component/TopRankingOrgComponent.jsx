@@ -7,13 +7,51 @@ import SearchComponent from "@/app/(user)/leaderboard/_component/SearchComponent
 import { SelectComponent } from "../../create-event/_component/SelectComponent";
 
 export const TopRankingOrgComponent = () => {
+  const rankData = [
+    {
+      rank: 1,
+      username: "Username",
+      score: 5,
+      hashtag: "#Tree plating",
+      leftIcon: "/assets/leaderboard/laurel-wreath-left-01.png",
+      rightIcon: "/assets/leaderboard/laurel-wreath-right-01.png",
+      textColor: "text-strong-yellow",
+    },
+    {
+      rank: 2,
+      username: "Username",
+      score: 4,
+      hashtag: "#Tree plating",
+      leftIcon: "/assets/leaderboard/laurel-wreath-left-02.png",
+      rightIcon: "/assets/leaderboard/laurel-wreath-right-02.png",
+      textColor: "text-darker-gray",
+    },
+    {
+      rank: 3,
+      username: "Username",
+      score: 3,
+      hashtag: "#Tree plating",
+      leftIcon: "/assets/leaderboard/laurel-wreath-left-03.png",
+      rightIcon: "/assets/leaderboard/laurel-wreath-right03.png",
+      textColor: "text-red",
+    },
+    ...Array.from({ length: 6 }, (_, i) => ({
+      rank: i + 4,
+      username: "Username",
+      score: 2 - i,
+      hashtag: "#Tree plating",
+      leftIcon: null,
+      rightIcon: null,
+      textColor: "text-dark-green",
+    })),
+  ];
   return (
     <>
       <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
         {/* Top  */}
         <div>
           <h2 className="text-lg lg:text-xl xl:text-2xl text-dark-green font-bold">
-            Top User Ranking
+            Top Organizer Ranking
           </h2>
         </div>
 
@@ -29,213 +67,71 @@ export const TopRankingOrgComponent = () => {
         </article>
       </section>
 
-      <section className="  h-full bg-white  mt-10">
-        <div className="">
-          <article className="flex gap-4 ">
-            {/* image rank 1 */}
-            <div className="flex gap-2 items-center justify-center">
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-left-01.png"
-                  alt="laurel-wreath-left-01"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-              <p className="text-xl lg:text-3xl font-bold text-strong-yellow ">
-                1
-              </p>
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-right-01.png"
-                  alt="laurel-wreath-left-01"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-            </div>
-            {/* leaderboard card 1 */}
-            <article className="flex flex-row justify-between w-full bg-white border-1 border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
-              <div className="rounded-full w-[30px] h-[30px] lg:w-[50px] lg:h-[40px] flex gap-4 items-center">
-                <Image
-                  src="/assets/leaderboard/image.jpg"
-                  alt="image"
-                  width={40}
-                  height={80}
-                  className="rounded-full"
-                ></Image>
-                <h2 className="text-sm md:text-lg lg:text-xl text-dark-green font-medium">
-                  Username
-                </h2>
-              </div>
-
-              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <div className="flex flex-col">
-                  <p className="mx-auto font-bold">12</p>
-                  <div className="flex gap-2">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                  </div>
-                </div>
-                <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
-                  #RiverCleanup
+      <section className="pt-10 bg-white mb-15">
+        {/* Scrollable container */}
+        <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2 s[-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
+          {rankData.map((user) => (
+            <article className="flex gap-4" key={user.rank}>
+              {/* Rank Icon + Number */}
+              <div className="flex gap-2 items-center justify-center">
+                {user.leftIcon && (
+                  <Image
+                    src={user.leftIcon}
+                    alt={`left-icon-${user.rank}`}
+                    width={20}
+                    height={20}
+                  />
+                )}
+                <p
+                  className={`text-xl lg:text-3xl font-bold ${user.textColor} ${
+                    !user.leftIcon ? "ml-7" : ""
+                  }`}
+                >
+                  {user.rank}
                 </p>
-              </div>
-            </article>
-          </article>
-
-          <article className="flex gap-4 mt-4 ">
-            {/* image rank 2*/}
-            <div className="flex gap-2 items-center justify-center">
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-left-02.png"
-                  alt="laurel-wreath-left-02"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-              <p className="text-xl lg:text-3xl font-bold text-darker-gray">
-                2
-              </p>
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-right-02.png"
-                  alt="laurel-wreath-left-02"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-            </div>
-            {/* leaderboard card 2*/}
-            <article className="flex flex-row justify-between w-full bg-white border-1 border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
-              <div className="rounded-full w-[30px] h-[30px] lg:w-[50px] lg:h-[40px] flex gap-4 items-center">
-                <Image
-                  src="/assets/leaderboard/image.jpg"
-                  alt="image"
-                  width={40}
-                  height={80}
-                  className="rounded-full"
-                ></Image>
-                <h2 className="text-sm md:text-lg lg:text-xl text-dark-green font-medium">
-                  Username
-                </h2>
+                {user.rightIcon && (
+                  <Image
+                    src={user.rightIcon}
+                    alt={`right-icon-${user.rank}`}
+                    width={20}
+                    height={20}
+                  />
+                )}
               </div>
 
-              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <div className="flex flex-col">
-                  <p className="mx-auto font-bold">12</p>
-                  <div className="flex gap-2">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                  </div>
+              {/* Leaderboard Card */}
+              <article className="flex flex-row justify-between w-full bg-white border border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src="/assets/leaderboard/image.jpg"
+                    alt="user image"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
+                    {user.username}
+                  </h2>
                 </div>
-                <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
-                  #RiverCleanup
-                </p>
-              </div>
-            </article>
-          </article>
 
-          <article className="flex gap-4 mt-4 ">
-            {/* image rank 3*/}
-            <div className="flex gap-2 items-center justify-center">
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-left-03.png"
-                  alt="laurel-wreath-left-03"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-              <p className="text-xl lg:text-3xl font-bold text-red">3</p>
-              <div>
-                <Image
-                  src="/assets/leaderboard/laurel-wreath-right03.png"
-                  alt="laurel-wreath-left-03"
-                  width={20}
-                  height={20}
-                ></Image>
-              </div>
-            </div>
-            {/* leaderboard card 3*/}
-            <article className="flex flex-row justify-between w-full bg-white border-1 border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
-              <div className="rounded-full w-[30px] h-[30px] lg:w-[50px] lg:h-[40px] flex gap-4 items-center">
-                <Image
-                  src="/assets/leaderboard/image.jpg"
-                  alt="image"
-                  width={40}
-                  height={80}
-                  className="rounded-full"
-                ></Image>
-                <h2 className="text-sm md:text-lg lg:text-xl text-dark-green font-medium">
-                  Username
-                </h2>
-              </div>
-
-              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <div className="flex flex-col">
-                  <p className="mx-auto font-bold">12</p>
-                  <div className="flex gap-2">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
+                <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
+                  <div className="flex justify-center items-center flex-col">
+                    <p className="font-bold">{user.score}</p>
+                    <div className="flex gap-1 text-orange">
+                      <Star />
+                      <Star />
+                      <Star />
+                      <Star />
+                      <Star />
+                    </div>
                   </div>
+                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
+                    {user.hashtag}
+                  </p>
                 </div>
-                <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
-                  #RiverCleanup
-                </p>
-              </div>
+              </article>
             </article>
-          </article>
-
-          <article className="flex gap-10 mt-4 ">
-            {/* rank 4*/}
-            <div className="flex gap-2 items-center justify-center">
-              <p className="text-xl lg:text-3xl font-bold text-dark-green ml-7">
-                4
-              </p>
-            </div>
-            {/* leaderboard card 4*/}
-            <article className="flex flex-row justify-between w-full bg-white border-1 border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
-              <div className="rounded-full w-[30px] h-[30px] lg:w-[50px] lg:h-[40px] flex gap-4 items-center">
-                <Image
-                  src="/assets/leaderboard/image.jpg"
-                  alt="image"
-                  width={40}
-                  height={80}
-                  className="rounded-full"
-                ></Image>
-                <h2 className="text-sm md:text-lg lg:text-xl text-dark-green font-medium">
-                  Username
-                </h2>
-              </div>
-
-              <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                <div className="flex flex-col">
-                  <p className="mx-auto font-bold">12</p>
-                  <div className="flex gap-2">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                  </div>
-                </div>
-                <p className=" bg-meduim-white px-2 py-1 lg:px-3 text-lg lg:py-1 rounded-full">
-                  #RiverCleanup
-                </p>
-              </div>
-            </article>
-          </article>
+          ))}
         </div>
       </section>
     </>

@@ -29,7 +29,7 @@ const CommentComponent = ({ discussions }) => {
     if (input) {
       const commentDetail = {
         content: input,
-        commentRepliedToId: "efdc3d4f-e951-41ea-a4fa-15f1273cfcf1",
+        // commentRepliedToId: "efdc3d4f-e951-41ea-a4fa-15f1273cfcf1",
         userId: "bc3f154f-a06c-4f30-829e-9e335f71a497",
       };
       console.log(commentDetail);

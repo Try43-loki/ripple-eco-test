@@ -64,7 +64,7 @@ const switchColor = (value) => {
 const AirQualityPage = () => {
   const dynamicColor = switchColor(aqiData.value);
   return (
-    <div className="relative">
+    <div className="relative flex flex-col gap-7">
       {/* Full-page background */}
       <div
         className="absolute bottom-0 -z-1 left-0 right-0 top-0"
@@ -74,7 +74,7 @@ const AirQualityPage = () => {
       ></div>
 
       {/* Hero Section */}
-      <section className="relative flex w-full  h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center">
+      <section className="relative   flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center ">
         <HeroSectionAirDisasterComponent
           dataSearch={api}
           dataCard={aqiData}
@@ -83,12 +83,12 @@ const AirQualityPage = () => {
       </section>
 
       {/* Section 2 */}
-      <section className="flex justify-center px-6 py-10 text-white lg:px-[150px]">
+      <section className="flex justify-center px-6  text-white lg:px-[180px]">
         <HourlyForecastComponent />
       </section>
 
       {/* Section 3 */}
-      <section className="flex justify-center gap-10 px-6 py-10 text-white lg:px-[150px]">
+      <section className="flex justify-center gap-10 px-6  text-white lg:px-[180px]">
         <DailyForecastComponent />
         <div className="flex flex-col w-full gap-10">
           <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />

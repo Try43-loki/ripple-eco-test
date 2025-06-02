@@ -10,13 +10,13 @@ import {
 import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const TakeActionNoImageCardComponent = ({ isLoading }) => {
+const TakeActionNoImageCardComponent = ({ isView }) => {
   return (
     <main>
       <Card className="relative py-5 w-full rounded-2xl bg-light-gray border-none">
         <CardContent className="flex flex-col items-start gap-y-4">
           <div>
-            {isLoading ? (
+            {isView == "private" ? (
               <div className="flex items-center space-x-4">
                 <Skeleton className="h-12 w-12 rounded-full bg-meduim-gray" />
                 <div className="space-y-2">

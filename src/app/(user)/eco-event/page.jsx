@@ -3,8 +3,10 @@ import React from "react";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import FilterEcoEventComponent from "./_component/FilterEcoEventComponent";
 import Link from "next/link";
+import { events } from "@/service/mockData";
 
 const EcoEventPage = () => {
+  const data = events;
   const heroSectionText = {
     title: "ECO EVENT",
     description:
@@ -14,7 +16,7 @@ const EcoEventPage = () => {
 
   return (
     <main className="w-full">
-      <article className="flex flex-col">
+      <article className="flex flex-col justify-center items-center">
         {/* Hero Secition */}
         <HeroSectionComponent
           text={heroSectionText.title}
@@ -23,15 +25,24 @@ const EcoEventPage = () => {
         />
 
         {/* Filter Section */}
-        <FilterEcoEventComponent />
 
         {/* Card Eco-Event Section */}
-        <section className="px-4 md:px-20 lg:px-[150px] pb-12">
-          <div className="flex flex-wrap gap-5 lg:gap-12 justify-center">
-            {[...Array(8)].map((_, index) => (
-              <div key={index}>
-                <CardEcoEventComponent href={`/eco-event/${2}`} />
-              </div>
+        <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-5">
+          <FilterEcoEventComponent />
+          <div className="flex flex-wrap gap-5 w-full justify-between">
+            {data?.map((event, index) => (
+              <CardEcoEventComponent
+                key={index}
+                href={"/eco-event/1"}
+                type={event?.eventTypes?.eventType}
+                contribute={event?.contributeTypesResponse?.contributeTypeName}
+                category={event?.category?.categoryName}
+                status={event?.eventStatus}
+                date={event?.startDate}
+                participats={event?.maxSlot}
+                title={event?.title}
+                location={event?.provinces?.provinceName}
+              />
             ))}
           </div>
         </section>

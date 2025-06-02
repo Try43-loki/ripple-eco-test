@@ -1,45 +1,50 @@
+"use client";
 import React from "react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 
+import { Label } from "@/components/ui/label";
+import { SelectComponent } from "./SelectComponent";
+import { DateRangComponent } from "./DateRangComponent";
 const FilterEcoEventComponent = () => {
-  const filters = [
-    { id: "province", placeholder: "Province" },
-    { id: "eventType", placeholder: "Event Type" },
-    { id: "contributeType", placeholder: "Contribute Type" },
-    { id: "categoryType", placeholder: "Category Type" },
-    { id: "slot", placeholder: "Slot" },
-    { id: "dateRange", placeholder: "Date Range" },
-  ];
   return (
-    <div className="px-4 py-8 md:px-20 lg:px-[150px]">
-      <div className="flex flex-wrap justify-start lg:gap-7 items-center gap-4">
-        {/* Aligned label */}
-        <div className="min-w-[80px] flex items-center text-gray-700 font-medium">
-          Filter by:
+    <section className="w-full mb-8 justify-center  flex flex-col gap-4 md:flex-row md:items-center md:gap-6 ">
+      {/* Search bar */}
+      <div className="flex justify-center  items-end gap-x-8">
+        <h1 className="h-9 text-2xl font-semibold text-green ">Filter </h1>
+        <div className="flex w-full gap-3 md:gap-4">
+          <div className="grid w-[200px] gap-1.5">
+            {/* <Label className="text-dark-gray">Location</Label> */}
+            <SelectComponent className="w-[400px]" operator={"Location"} />
+          </div>
+          <div className="grid w-[200px] gap-1.5">
+            {/* <Label className="text-dark-gray">Event type</Label> */}
+            <SelectComponent operator="Event_type" />
+          </div>
+          <div className="grid w-[200px] gap-1.5">
+            {/* <Label className="text-dark-gray">Contribute types</Label> */}
+            <SelectComponent operator="Contribute_type" />
+          </div>
+          <div className="grid w-[200px] gap-1.5">
+            {/* <Label className="text-dark-gray">Categories</Label> */}
+            <SelectComponent operator="Categories" />
+          </div>
+          <div className="grid w-[200px] gap-1.5">
+            {/* <Label className="text-dark-gray"> Slot</Label> */}
+            <SelectComponent operator="Slot" />
+          </div>
+          <div className="grid gap-1.5">
+            {/* <Label className="text-dark-gray"> Date range</Label> */}
+            <DateRangComponent />
+          </div>
         </div>
-
-        {/* Filters */}
-        {filters.map((filter) => (
-          <Select key={filter.id}>
-            <SelectTrigger className="bg-light-gray border-none focus-visible:ring-0 text-lighter-green font-medium min-w-[162px]">
-              <SelectValue placeholder={filter.placeholder} />
-            </SelectTrigger>
-            <SelectContent className="bg-white border-lightes-white">
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="recycling">Recycling</SelectItem>
-              <SelectItem value="cleanup">Clean-up</SelectItem>
-              <SelectItem value="education">Education</SelectItem>
-            </SelectContent>
-          </Select>
-        ))}
       </div>
-    </div>
+
+      {/* Label */}
+      {/* <span className="hidden md:inline font-semibold text-sm text-muted-foreground">
+        Filter:
+      </span> */}
+
+      {/* Filter dropdowns */}
+    </section>
   );
 };
 

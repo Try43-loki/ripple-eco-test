@@ -9,7 +9,7 @@ import {
 import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
-export function ProfileDropdownComponent({ operator }) {
+export function ProfileDropdownComponent({ operator, onLogout }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -17,7 +17,7 @@ export function ProfileDropdownComponent({ operator }) {
           <ChevronDown
             variant="outline"
             size={20}
-            className=" text-light-green"
+            className="cursor-pointer text-light-green"
           />
         ) : (
           <img
@@ -37,7 +37,8 @@ export function ProfileDropdownComponent({ operator }) {
             <h3 className="text-lighter-green text-lg">Profile</h3>
           </Link>
           <Link
-            href="#"
+            onClick={onLogout}
+            href="/home"
             className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <LogOut className="text-lighter-green" />

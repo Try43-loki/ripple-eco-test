@@ -1,17 +1,36 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import {
-  ChevronLeftCircleIcon,
-  CircleCheck,
-  Eye,
-  EyeClosed,
-  Lock,
-} from "lucide-react";
-import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 function LoginSuccessComponent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const redirectTo = searchParams.get("redirectTo") || "/home";
+
+  const [buttonLabel, setButtonLabel] = useState("Continue");
+  const [textLabel, setTextLabel] = useState();
+
+  useEffect(() => {
+    if (redirectTo.includes("login")) {
+      setButtonLabel("Go to Login Page");
+      setTextLabel("Reset Password Sucessfull");
+    }
+    if (redirectTo.includes("organizer")) {
+      setButtonLabel("Go to Dashboard");
+      setTextLabel("Register Sucessfull");
+    }
+    if (redirectTo.includes("home")) {
+      setTextLabel("Register Sucessfull");
+    }
+  }, [redirectTo]);
+
+  const handleClick = () => {
+    router.push(redirectTo);
+  };
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
@@ -34,20 +53,19 @@ function LoginSuccessComponent() {
               width={50}
               height={50}
               alt="tick-circle"
-            ></Image>
+            />
           </div>
-          <h1 className="text-white text-2xl">Registration Successful</h1>
+          <h2 className="text-white text-2xl">{textLabel}</h2>
           <p className="text-light-gray text-sm text-center">
             Your account has been created successfully. You’re now part of the
-            Ripple<span className="text-strong-green">Eco </span>
-            community.{" "}
+            Ripple<span className="text-strong-green">Eco</span> community.
           </p>
-          <Link
-            href="/home"
-            className="bg-strong-green rounded-3xl h-10 text-center flex items-center justify-center text-white w-full hover:bg-green-800"
+          <Button
+            onClick={handleClick}
+            className="bg-green hover:bg-green-700 text-white rounded-xl px-6 py-2"
           >
-            Go to Homepage
-          </Link>
+            {buttonLabel}
+          </Button>
         </section>
       </section>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +10,6 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
-  Bell,
   ClipboardList,
   MessageCircleQuestion,
   SunDim,
@@ -22,12 +21,13 @@ import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
 const NavBarComponent = () => {
+  const [isLoggin, setisLoggin] = useState(true);
   const currentPath = usePathname();
 
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
-        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#fff8]  backdrop-blur-sm rounded-xl ">
+        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-lightes-white backdrop-blur-sm rounded-xl ">
           <ul className="flex flex-row justify-between items-center w-full">
             <li>
               <Link href="/home" className="text-white text-2xl font-semibold">
@@ -127,7 +127,7 @@ const NavBarComponent = () => {
                         }`}
                       >
                         <Wind />
-                        Natural Disastor
+                        Natural Disaster
                       </NavigationMenuLink>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -143,23 +143,38 @@ const NavBarComponent = () => {
               >
                 Leaderbord
               </Link>
-              <div className="flex gap-x-[10px] items-center w-[100px] justify-end">
-                <KnockProvider
-                  apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
-                  userId={3}
-                >
-                  <NotificationItem />
-                </KnockProvider>
-                <div className="flex items-center">
-                  <Popover>
-                    <PopoverTrigger>
-                      <ProfileDropdownComponent operator={"user"} />
+            </li>
+            <li>
+              {!isLoggin && (
+                <Link href="/login">
+                  <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition cursor-pointer">
+                    Sign in
+                  </button>
+                </Link>
+              )}
+              {isLoggin && (
+                <div className="flex gap-x-[20px] items-center w-[100px] justify-end">
+                  <KnockProvider
+                    apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
+                    userId={3}
+                  >
+                    <div className="mt-1">
+                      <NotificationItem />
+                    </div>
+                  </KnockProvider>
 
-                      {/* <Image src='https://i.pinimg.com/736x/24/21/99/2421998d6c1e6bdc695a4243ba70f0ab.jpg' alt='avatar' width={40} height={40} className='rounded-full'/> */}
-                    </PopoverTrigger>
-                  </Popover>
+                  <div className="flex items-center h-full">
+                    <Popover>
+                      <PopoverTrigger>
+                        <ProfileDropdownComponent
+                          operator={"user"}
+                          onLogout={() => setisLoggin(false)}
+                        />
+                      </PopoverTrigger>
+                    </Popover>
+                  </div>
                 </div>
-              </div>
+              )}
             </li>
           </ul>
         </nav>

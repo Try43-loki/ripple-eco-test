@@ -1,7 +1,10 @@
 import React from "react";
+
+import { forecast } from "../mockData/forecast";
 import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
 
 const HourlyForecastComponent = () => {
+  const data = forecast;
   return (
     <article className="w-full flex flex-col gap-7 bg-white/50 rounded-3xl p-6 border-2 text-light-gray ">
       {/* Title Of Hourly Forecast */}
@@ -13,26 +16,9 @@ const HourlyForecastComponent = () => {
       </div>
       {/* Row Of Hourly */}
       <div className="flex justify-between gap-3 overflow-x-scroll">
-        <HourlyValueAQIComponent isActive={true} />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
-        <HourlyValueAQIComponent />
+        {data.map((value) => (
+          <HourlyValueAQIComponent key={value} data={value} />
+        ))}
       </div>
     </article>
   );

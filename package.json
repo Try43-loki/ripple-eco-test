@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev ",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -25,6 +25,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-separator": "^1.1.6",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.5",
     "@radix-ui/react-tabs": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.6",
     "@radix-ui/react-use-is-hydrated": "^0.1.0",
@@ -43,13 +44,14 @@
     "primeicons": "^7.0.0",
     "primereact": "^10.9.5",
     "react": "^19.0.0",
-    "react-day-picker": "^9.7.0",
+    "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
     "react-leaflet": "^5.0.0",
     "react-transition-group": "^4.4.5",
     "recharts": "^2.15.3",
     "sockjs-client": "^1.6.1",
+    "supports-color": "^10.0.0",
     "tailwind-merge": "^3.3.0",
     "use-debounce": "^10.0.4",
     "zod": "^3.25.7"

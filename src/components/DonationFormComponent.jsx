@@ -5,18 +5,23 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const DonationFormComponent = () => {
+const DonationFormComponent = ({ operator }) => {
   return (
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <DollarSign size={18} />
+          {operator == "detail" ? (
+            <button className="text-white bg-green px-3 py-1 rounded-xl cursor-pointer">
+              Donate
+            </button>
+          ) : (
+            <DollarSign size={18} />
+          )}
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-md bg-white">
@@ -31,12 +36,18 @@ const DonationFormComponent = () => {
             </DialogDescription>
             <hr className="text-meduim-gray my-2" />
 
-            <DialogDescription className="flex items-center justify-center my-10">
+            <DialogDescription className="flex flex-col gap-7 items-center justify-center my-10">
               <Image
                 src="/assets/donation_form/qr.jpg"
                 alt="qr"
                 width={250}
                 height={200}
+              ></Image>
+              <Image
+                src="/assets/donation_form/WeBill365.jpg"
+                alt="Webill365"
+                width={200}
+                height={15}
               ></Image>
             </DialogDescription>
           </DialogHeader>

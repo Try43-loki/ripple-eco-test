@@ -52,10 +52,10 @@ const NotificationItem = () => {
     <div className="notifications">
       <Popover>
         <PopoverTrigger>
-          <Bell className="text-[#048d4c]" />
+          <Bell className="cursor-pointer text-light-green" size={20} />
         </PopoverTrigger>
         <PopoverContent className="w-96 border border-light-strok bg-white">
-          You have {metadata?.total_count} unread items
+          You have {metadata?.unread_count} Items
           <section className="w-full">
             <div className="flex justify-between items-center">
               <h1 className="text-meduim-green text-xl font-semibold">

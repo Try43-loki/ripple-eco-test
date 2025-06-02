@@ -11,9 +11,18 @@ import {
 import { DatePickerComponent } from "./DatePickerComponent";
 import { SelectGenderComponent } from "./SelectGenderComponent";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-function AdditonalInfoComponent({ onNext }) {
+function AdditonalInfoComponent({ onNext, onPrev }) {
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const router = useRouter();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const redirectTo = isOrganizer ? "/organizer/overview" : "/home";
+    router.push(`/login-success?redirectTo=${redirectTo}`);
+  };
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
@@ -31,7 +40,7 @@ function AdditonalInfoComponent({ onNext }) {
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
           <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon size={18} color="white" />
+            <ChevronLeftCircleIcon size={18} color="white" onClick={onPrev} />
             <div className="flex gap-2 grow">
               {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
                 (step, index) => (
@@ -44,7 +53,7 @@ function AdditonalInfoComponent({ onNext }) {
                     </p>
                     <span
                       className={`h-2 w-full rounded-2xl ${
-                        index < 2 ? "bg-green" : "bg-light-gray"
+                        index < 3 ? "bg-green" : "bg-light-gray"
                       }`}
                     ></span>
                   </span>
@@ -188,13 +197,13 @@ function AdditonalInfoComponent({ onNext }) {
                     className="text-gray-500 px-3 text-sub-info h-9 placeholder:text-strong-gray placeholder:font-light bg-lighter-white focus-visible:ring-0 border-none rounded-md w-full outline-none"
                     type="text"
                     id="organizerName"
-                    placeholder="United Nations"
+                    placeholder="HRD Center"
                   />
                 </div>
               )}
             </section>
             <Button
-              onClick={onNext}
+              onClick={handleRegister}
               className="w-full bg-green hover:bg-green-800 text-white rounded-xl subtext-sub-info h-9  text-md"
             >
               Register

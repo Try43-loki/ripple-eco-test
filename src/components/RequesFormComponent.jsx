@@ -12,11 +12,11 @@ import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 
-export function RequestFormComponent() {
+export function RequestFormComponent({ contribute }) {
   return (
-    <Dialog>
+    <Dialog classNam="w-full">
       <DialogTrigger asChild>
-        <div className="py-2 px-8 md:px-11 lg:px-10 bg-light-gray rounded-md flex items-center gap-2">
+        <div className="py-2 cursor-pointer px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center items-center gap-2">
           <Image
             src="/assets/tick-circle.png"
             alt="tick-circle"
@@ -24,54 +24,87 @@ export function RequestFormComponent() {
             height={10}
             className="h-5"
           ></Image>
-          <p className="text-sm text-dark-green font-bold">Going</p>
+
+          <p className="text-sm text-dark-green font-bold cursor-pointer">
+            {contribute == "Donation" ? "Donation" : "Going"}
+          </p>
         </div>
       </DialogTrigger>
+      {contribute == "Donation" ? (
+        <DialogContent className="sm:max-w-md bg-white">
+          <DialogHeader>
+            <DialogTitle className="text-dark-green font-medium text-lg mb-4.5">
+              Donation Form
+            </DialogTitle>
 
-      <DialogContent className="sm:max-w-md bg-white border-none">
-        <DialogHeader>
-          <DialogTitle className="text-dark-green font-medium text-lg mb-4.5">
-            Request Form
-          </DialogTitle>
-
-          <DialogDescription className="text-dark-green text-sm font-normal">
-            <span className="w-2 h-2 bg-green rounded-full inline-block mr-2" />
-            What are the main reasons someone should consider joining this
-            event?
-          </DialogDescription>
-          <hr className="text-meduim-gray my-2" />
-          <DialogDescription>
-            <label className="block text-dark-green text-sm font-normal mb-2">
+            <DialogDescription className="text-dark-green text-sm font-normal">
               <span className="w-2 h-2 bg-green rounded-full inline-block mr-2" />
-              Your perspective
-            </label>
-            <textarea
-              className="w-full min-h-[150px] bg-light-gray rounded-2xl p-3 text-sm resize-none focus:outline-none focus:ring-0 focus:border-none"
-              placeholder="Type your answer here..."
-            ></textarea>
-          </DialogDescription>
-        </DialogHeader>
+              Thank you
+            </DialogDescription>
+            <hr className="text-meduim-gray my-2" />
 
-        <DialogFooter className="sm:justify-start">
-          {/* <Link href="#"> */}
-          {/* <button
+            <DialogDescription className="flex flex-col gap-7 items-center justify-center my-10">
+              <Image
+                src="/assets/donation_form/qr.jpg"
+                alt="qr"
+                width={250}
+                height={200}
+              ></Image>
+              <Image
+                src="/assets/donation_form/WeBill365.jpg"
+                alt="Webill365"
+                width={200}
+                height={15}
+              ></Image>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      ) : (
+        <DialogContent className="sm:max-w-md bg-white border-none">
+          <DialogHeader>
+            <DialogTitle className="text-dark-green font-medium text-lg mb-4.5">
+              Request Form
+            </DialogTitle>
+
+            <DialogDescription className="text-dark-green text-sm font-normal">
+              <span className="w-2 h-2 bg-green rounded-full inline-block mr-2" />
+              What are the main reasons someone should consider joining this
+              event?
+            </DialogDescription>
+            <hr className="text-meduim-gray my-2" />
+            <DialogDescription>
+              <label className="block text-dark-green text-sm font-normal mb-2">
+                <span className="w-2 h-2 bg-green rounded-full inline-block mr-2" />
+                Your perspective
+              </label>
+              <textarea
+                className="w-full min-h-[150px] bg-light-gray rounded-2xl p-3 text-sm resize-none focus:outline-none focus:ring-0 focus:border-none"
+                placeholder="Type your answer here..."
+              ></textarea>
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="sm:justify-start">
+            {/* <Link href="#"> */}
+            {/* <button
             type="button"
             className="text-white bg-green px-8 py-2 rounded-xl cursor-pointer"
           >
             Send
           </button> */}
-          {/* </Link> */}
-          <DialogClose asChild>
-            <Button
-              type="button"
-              // variant="secondary"
-              className="text-white bg-green hover:bg-meduim-green px-8 py-2 rounded-xl cursor-pointer"
-            >
-              Send
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
+            {/* </Link> */}
+            <DialogClose asChild>
+              <Button
+                type="button"
+                // variant="secondary"
+                className="text-white bg-green hover:bg-meduim-green px-8 py-2 rounded-xl cursor-pointer"
+              >
+                Send
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      )}
     </Dialog>
   );
 }

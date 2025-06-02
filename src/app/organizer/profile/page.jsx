@@ -4,14 +4,17 @@ import SideComponent from "./_component/SideComponent";
 
 function ProfilePage() {
   return (
-    <section className="flex gap-4 w-full">
-      <div className="flex flex-col w-full">
-        <OrganizerProfileComponent />
-      </div>
-      <div className="flex w-full">
-        <SideComponent />
-      </div>
-    </section>
+    <>
+      <section className="flex flex-row gap-x-4 items-start">
+        <div className="basis-[60%]">
+          <OrganizerProfileComponent />
+        </div>
+
+        <div className="basis-[40%] h-180">
+          <SideComponent />
+        </div>
+      </section>
+    </>
   );
 }
 

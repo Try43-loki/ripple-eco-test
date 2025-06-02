@@ -1,8 +1,5 @@
 import CardInformationAQI from "@/app/(user)/air-quality/_components/CardInformationAQIComponent";
 import MultiSelectDropdown from "@/app/(user)/air-quality/_components/MultiSelectDropdownComponent";
-import SearchBarComponent from "@/components/SearchBarComponent";
-import { ChevronDown } from "lucide-react";
-import Image from "next/image";
 import React from "react";
 
 const HeroSectionAirQualityDashboardComponent = (props) => {
@@ -10,7 +7,7 @@ const HeroSectionAirQualityDashboardComponent = (props) => {
 
   return (
     <>
-      <div className="rounded-2xl relative flex items-center justify-start bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9] p-10 h-42.5 mt-8">
+      <div className="rounded-2xl relative flex items-center justify-start bg-gradient-to-tr from-[#dfc7ac66] to-[#d7e4d7d9] p-10 h-42.5 ">
         <article className="flex flex-col-reverse gap-10 lg:flex-row w-full">
           <div className="flex flex-col gap-5 justify-center items-start w-full">
             <div className="flex flex-col gap-1 items-start justify-center">

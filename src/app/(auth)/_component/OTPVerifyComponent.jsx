@@ -6,10 +6,14 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-function OTPVerifyComponent({ onNext }) {
-  const [otpCode, setOtpCode] = useState("");
+function OTPVerifyComponent({ onNext, onPrev }) {
+  const pathName = usePathname();
+  const [otpCode, setOtpCode] = useState();
+  const [resendOtp, setResendOtp] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0);
 
   const handleOTPChange = (value) => {
     setOtpCode(value);
@@ -20,6 +24,36 @@ function OTPVerifyComponent({ onNext }) {
     console.log("Submitted OTP:", otpCode);
   };
 
+  useEffect(() => {
+    let timer;
+
+    if (resendOtp) {
+      setTimeLeft(5);
+
+      timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setResendOtp(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [resendOtp]);
+
+  const handleSendOtp = () => {
+    setResendOtp(true);
+  };
+
+  const formatTime = (sec) => {
+    const m = String(Math.floor(sec / 60)).padStart(2, "0");
+    const s = String(sec % 60).padStart(2, "0");
+    return `${m}:${s}`;
+  };
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20">
@@ -39,10 +73,14 @@ function OTPVerifyComponent({ onNext }) {
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
           <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon size={20} color="white" />
-            <div className="flex gap-2 grow">
-              {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
-                (step, index) => (
+            <ChevronLeftCircleIcon size={20} color="white" onClick={onPrev} />
+            {pathName === "/register" && (
+              <div className="flex gap-2 grow">
+                {[
+                  "1. Verify email",
+                  "2. Set Password",
+                  "3. Additional Info",
+                ].map((step, index) => (
                   <span
                     key={index}
                     className="flex flex-col gap-[2px] w-full items-start"
@@ -52,21 +90,23 @@ function OTPVerifyComponent({ onNext }) {
                     </p>
                     <span
                       className={`h-2 w-full rounded-2xl ${
-                        index === 0 ? "bg-green" : "bg-light-gray"
+                        index < 1 ? "bg-green" : "bg-light-gray"
                       }`}
                     ></span>
                   </span>
-                )
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 w-full pl-9"
+            className="flex flex-col gap-4 w-full px-4"
           >
-            <h3 className="text-lg text-white">Enter Verification Code</h3>
+            <h3 className="text-lg text-white text-center">
+              Enter Verification Code
+            </h3>
 
             <div className="w-full">
               <InputOTP
@@ -95,14 +135,18 @@ function OTPVerifyComponent({ onNext }) {
               >
                 Verify
               </Button>
-              <Button
-                type="button"
-                className="w-full text-white cursor-pointer bg-transparent hover:bg-transparent border border-light-gray rounded-2xl p-4 h-10 text-md"
-              >
-                Resend Code
-              </Button>
               <p className="text-light-gray text-sm text-center">
-                Code expires in: <span>3:00</span>
+                {resendOtp ? (
+                  `Code expires in: ${formatTime(timeLeft)}`
+                ) : (
+                  <Button
+                    type="button"
+                    onClick={() => setResendOtp(true)}
+                    className="w-full text-white cursor-pointer bg-transparent hover:bg-transparent border border-light-gray rounded-2xl p-4 h-10 text-md"
+                  >
+                    Resend Code
+                  </Button>
+                )}
               </p>
             </div>
           </form>

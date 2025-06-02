@@ -1,77 +1,77 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/form"
-import { BadgeCheck } from 'lucide-react'
-import { Toast } from 'primereact/toast'
-import { useRef } from "react"
-import { Textarea } from "@/components/ui/textarea"
-import { Download } from 'lucide-react'
+} from "@/components/ui/form";
+import { BadgeCheck } from "lucide-react";
+import { Toast } from "primereact/toast";
+import { useRef } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { Download } from "lucide-react";
 
 const TakeActionFormComponent = () => {
   const form = useForm({
     defaultValues: {
       description: "",
     },
-  })
-  const router = useRouter()
-  const toastCenter = useRef(null)
+  });
+  const router = useRouter();
+  const toastCenter = useRef(null);
 
   const showCustomCenterToast = (content) => {
     toastCenter.current.show({
-      severity: 'success',
+      severity: "success",
       life: 3000,
-      content
+      content,
     });
-  }
+  };
 
   const handleDownloadClick = () => {
     showCustomCenterToast(
-      <div className='w-auto'>
-        <article className='flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg'>
-            <BadgeCheck className='w-42.5 h-42.5 text-green' />
-            <h4 className='text-[35px] font-semibold'>Download Successfully!</h4>
-            <p className='text-base text-muted-foreground'>Your Take Action has been downloaded</p>
+      <div className="w-auto">
+        <article className="flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg">
+          <BadgeCheck className="w-42.5 h-42.5 text-green" />
+          <h4 className="text-[35px] font-semibold">Download Successfully!</h4>
+          <p className="text-base text-muted-foreground">
+            Your Take Action has been downloaded
+          </p>
         </article>
       </div>
-      
-    )
+    );
     setTimeout(() => {
-        router.push('/take-action');
+      router.push("/take-action");
     }, 1000);
-  }
+  };
 
   const handleSubmitClick = () => {
     showCustomCenterToast(
-      <div className='w-auto'>
-        <article className='flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg'>
-            <BadgeCheck className='w-42.5 h-42.5 text-green' />
-            <h4 className='text-4xl font-semibold'>Submit Successfully!</h4>
-            <p className='text-base text-muted-foreground'>Your Take Action has been created</p>
+      <div className="w-auto">
+        <article className="flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg">
+          <BadgeCheck className="w-42.5 h-42.5 text-green" />
+          <h4 className="text-4xl font-semibold">Submit Successfully!</h4>
+          <p className="text-base text-muted-foreground">
+            Your Take Action has been created
+          </p>
         </article>
       </div>
-      
-    )
+    );
     setTimeout(() => {
-        router.push('/take-action')  
-    }, 1000)
-  }
+      router.push("/take-action");
+    }, 1000);
+  };
 
-  const onSubmit = (data) => {
-    
-  }
+  const onSubmit = (data) => {};
 
   return (
-    <main className='p-5 rounded-2xl border-1 border-border relative'>
+    <main className="p-5 rounded-2xl border-1 border-light-white relative ">
       {/* form data */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -81,35 +81,33 @@ const TakeActionFormComponent = () => {
             render={({ field }) => (
               <FormItem className="flex flex-col gap-y-2.75 items-start">
                 <FormLabel className="text-2xl">Sign the Pledge</FormLabel>
-                <FormControl className='mt-2'>
+                <FormControl className="mt-2">
                   <Textarea
                     {...field}
                     id="description"
                     placeholder="Share your ideas here ..."
                     required
-                    className="h-88.25 px-5 py-3.75 bg-light-gray rounded-xl placeholder:text-lg placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+                    className="h-88.25 border-none px-5 py-3.75 bg-light-gray rounded-xl placeholder:text-lg placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-          <Toast ref={toastCenter} position="center" closable={false}/>
-          <div className='flex items-center justify-between'>
-            
-
-            <Button
+          <Toast ref={toastCenter} position="center" closable={false} />
+          <div className="flex justify-end">
+            {/* <Button
               type="button"
               onClick={handleDownloadClick}
-              className='w-auto flex gap-x-2.75 bg-light-gray hover:bg-light-gray text-sub-info border border-border text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+              className="w-auto flex gap-x-2.75 bg-light-gray hover:bg-light-gray text-sub-info border border-light-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
             >
-              <Download className='w-6 h-6' />
+              <Download className="w-6 h-6 " />
               <p>Download PDF</p>
-            </Button>
+            </Button> */}
 
             <Button
               type="submit"
               onClick={handleSubmitClick}
-              className='w-30 bg-red hover:bg-strong-red text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5'
+              className="w-30 bg-green hover:bg-strong-green text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
             >
               Submit
             </Button>
@@ -117,7 +115,7 @@ const TakeActionFormComponent = () => {
         </form>
       </Form>
     </main>
-  )
-}
+  );
+};
 
-export default TakeActionFormComponent
+export default TakeActionFormComponent;

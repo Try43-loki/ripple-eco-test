@@ -4,6 +4,8 @@ import { Bell, ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ProfileDropdownComponent } from "@/components/ProfileDropdownComponent";
 import { usePathname } from "next/navigation";
+import NotificationItem from "@/components/NotificationComponent";
+import { KnockProvider } from "@knocklabs/react";
 
 // Format route path into readable title
 const formatRouteTitle = (path) => {
@@ -20,11 +22,16 @@ function HeaderComponent() {
   const dynamicTitle = formatRouteTitle(pathname);
   return (
     <>
-      <div className="flex justify-between items-center mb-5">
-        <h1 className="text-2xl font-bold text-green">{dynamicTitle}</h1>
-        <article className="flex justify-center items-center gap-x-4">
+      <div className="flex w-full justify-between items-center mb-2">
+        <h1 className="text-2xl  font-bold text-green">{dynamicTitle}</h1>
+        <article className="flex  justify-center items-center gap-x-4">
           <div className="p-2 rounded-xl h-10 w-10  bg-lighter-white flex justify-center items-center">
-            <Bell className="text-light-green" size={20} />
+            <KnockProvider
+              apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
+              userId={3}
+            >
+              <NotificationItem />
+            </KnockProvider>
           </div>
           <div className="px-1 h-10 rounded-lg bg-lighter-white flex justify-center items-center gap-x-2">
             <Avatar>

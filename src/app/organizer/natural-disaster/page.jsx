@@ -5,7 +5,7 @@ import RecentDisasterComponent from "@/app/(user)/natural-disaster/_components/R
 
 function NaturalDisaster() {
   return (
-    <section className="flex flex-col gap-9">
+    <section className="flex w-full flex-col gap-9">
       <HeroSectionNaturalDisasterDashboardComponent />
       {/* Section Map */}
       <MapComponent isDashboard={true} />

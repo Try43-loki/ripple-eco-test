@@ -76,7 +76,7 @@ function LoginComponent({ onNext }) {
                   </span>
                   <span
                     onClick={handleShowPassword}
-                    className="flex justify-center items-center text-[14px] gap-1 top-[37px] right-2.5 absolute text-gray-500 cursor-pointer"
+                    className="flex justify-center items-center text-[14px] gap-1 top-[38px] right-2.5 absolute text-gray-500 cursor-pointer"
                   >
                     {showPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
                   </span>
@@ -95,12 +95,18 @@ function LoginComponent({ onNext }) {
                 >
                   Forgot your password?
                 </Link>
-                <Button
-                  onClick={onNext}
-                  className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
+                <Link
+                  href={"/home"}
+                  className="flex w-full h-10 bg-green items-center justify-center text-white hover:bg-meduim-green text-md cursor-pointer rounded-2xl p-4"
                 >
                   Login
-                </Button>
+                  {/* <Button
+                    // onClick={onNext}
+                    className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
+                  >
+                    Login
+                  </Button> */}
+                </Link>
                 <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
                   <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
                   <span className="text-sm text-white">OR</span>

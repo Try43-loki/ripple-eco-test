@@ -12,24 +12,28 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ImageIcon } from "lucide-react";
 
-const CreateDiscussionComponent = () => {
+const CreateDiscussionComponent = ({ open, onOpenChange }) => {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Trigger Button */}
-      <DialogTrigger asChild>
+      {/* <DialogTrigger asChild>
         <Button
           variant="default"
+
           className="py-4 px-5 bg-green text-white rounded-2xl hover:bg-green/80"
         >
           Start the Discussion
         </Button>
-      </DialogTrigger>
+      </DialogTrigger> */}
 
       {/* Dialog Content */}
-      <DialogContent className="w-full bg-white border border-lightes-white">
+      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white">
         <DialogHeader>
-          <DialogTitle>Create Discussion</DialogTitle>
+          <DialogTitle className="cursor-pointer">
+            Create Discussion
+          </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
@@ -106,25 +110,31 @@ const CreateDiscussionComponent = () => {
               className="mt-1 relative cursor-pointer border-2 border-dashed border-orange-400 rounded-md px-6 py-10 text-center"
               style={{ minHeight: "120px" }}
             >
-              <Image
+              {/* <Image
                 src="/assets/upload-icon.png"
                 alt="Upload icon"
                 width={24}
                 height={24}
                 className="mx-auto mb-2"
-              />
-              <p className="text-sm text-gray-500">Upload image</p>
+              /> */}
+              <div className="flex flex-col items-center gap-2">
+                <ImageIcon className="h-10 w-10 text-gray-400" />
+                <span className="text-gray-500">Upload image</span>
+              </div>
             </div>
           </div>
 
           {/* Submit Buttons */}
           <DialogFooter>
-            <Button type="submit" className="bg-lighter-white">
+            <Button
+              type="submit"
+              className="hover:bg-lighter-white bg-meduim-white cursor-pointer"
+            >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-green text-white hover:bg-green/80"
+              className="bg-green text-white hover:bg-green/80 cursor-pointer"
             >
               Create Discussion
             </Button>

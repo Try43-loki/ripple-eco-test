@@ -1,16 +1,23 @@
+"use client";
+import React from "react";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import StatusButtonComponent from "@/components/StatusButtonComponent";
 import { CalendarDays, MapPin } from "lucide-react";
-import Image from "next/image";
-import React from "react";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import DonationComponent from "./_component/DonateComponent";
 import JoinEventButtonComponent from "./_component/JoinEventButtonComponent";
+import Link from "next/link";
+import { RequestFormComponent } from "@/components/RequesFormComponent";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import EventActivityComponent from "@/components/EventActivityComponent";
+import RatingDialog from "@/components/RateComponent";
 
-const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
-  const { eventid } = await ParamsPromise;
+const EcoEventDetailPage = () => {
+  const currentEvent = usePathname();
+  const currentEventId = currentEvent.split("/").pop();
 
   // Hero Section param data
   const heroSectionText = {
@@ -75,12 +82,14 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               {/* Organizer Info */}
               <div className="flex items-center text-xs md:text-sm lg:text-base text-light-green font-semibold">
                 <div className="w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center">
-                  <Image
-                    src={"/assets/Organizer.png"}
-                    width={40}
-                    height={40}
-                    alt="Organizer profile"
-                  />
+                  <Link href={"/view-profile/organizer/1"}>
+                    <Image
+                      src={"/assets/Organizer.png"}
+                      width={40}
+                      height={40}
+                      alt="Organizer profile"
+                    />
+                  </Link>
                 </div>
                 <h3 className="px-3">
                   United Nations Environment Program (UNEP)
@@ -88,9 +97,13 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
               </div>
 
               {/* Join Event Button */}
-              <div className="mt-3 md:mt-0 hidden md:block">
-                <DiscussionButtonComponent text="Join Event" />
-              </div>
+              {currentEventId === "1" ? (
+                ""
+              ) : (
+                <div className="mt-3 md:mt-0 text-green  hidden md:block">
+                  <RequestFormComponent />
+                </div>
+              )}
             </div>
 
             {/* Title */}
@@ -99,16 +112,36 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </h2>
 
             {/* Status Tags */}
-            <div className="flex gap-3 flex-wrap mb-2">
-              {statusSection.map((status) => (
-                <StatusButtonComponent
-                  key={status.id}
-                  text={status.text}
-                  bgColor={status.bgColor}
-                  textColor={status.textColor}
-                />
-              ))}
-            </div>
+            {currentEventId === "1" ? (
+              <div className="flex gap-3 flex-wrap mb-2">
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8 text-center text-white bg-green hover:bg-green`}
+                >
+                  Hands-on event
+                </Button>
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8 text-center text-white bg-blue hover:bg-blue`}
+                >
+                  #Tree-Planting
+                </Button>
+                <Button
+                  className={`text-xs md:text-sm lg:text-base rounded-full px-4 h-6 md:h-7 lg:h-8  text-center text-white bg-gray-600 hover:bg-gray-600`}
+                >
+                  Finished
+                </Button>
+              </div>
+            ) : (
+              <div className="flex gap-3 flex-wrap mb-2">
+                {statusSection.map((status) => (
+                  <StatusButtonComponent
+                    key={status.id}
+                    text={status.text}
+                    bgColor={status.bgColor}
+                    textColor={status.textColor}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Date & Location */}
             <div className="flex items-center mt-3 py-1 text-xs gap-4 md:text-sm lg:text-base text-light-green">
@@ -131,7 +164,7 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             </div>
 
             {/* Image section */}
-            <div className="flex flex-col md:flex-row py-6 gap-6 md:justify-evenly md:flex-wrap">
+            <div className="flex flex-col md:flex-row py-6 gap-6 md:flex-wrap">
               <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden ">
                 <Image
                   src="/assets/eventImage.png"
@@ -160,7 +193,16 @@ const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
             {/* Tab */}
             <TabEcoeventComponent />
             {/* Donate Section */}
-            <DonationComponent />
+            {currentEventId === "1" ? (
+              <EventActivityComponent />
+            ) : (
+              <DonationComponent operator={"detail"} />
+            )}
+
+            {/* Rating Section */}
+            <Button className="w-full flex justify-end items-center mt-4 p-0 shadow-none">
+              <RatingDialog />
+            </Button>
           </div>
         </article>
       </article>
