@@ -6,7 +6,11 @@ import DiscussionCardComponent from "./_component/DiscussionCardComponent";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 import { MessageCircleQuestion } from "lucide-react";
-import { getAllDiscussionsService } from "@/service/discussionService";
+import {
+  getAllDiscussionsService,
+  getAllPopularDiscussionService,
+  getTotalDiscussionService,
+} from "@/service/discussionService";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -18,7 +22,11 @@ const heroSectionText = {
 const buttonText = "Create Discussion";
 
 const DiscussionPage = async () => {
+  // Service
   const discussions = await getAllDiscussionsService();
+  const discussionData = discussions?.data;
+  const totalDiscussion = await getTotalDiscussionService();
+  const popularDiscussion = await getAllPopularDiscussionService();
 
   return (
     <main className="w-full h-full flex flex-col">
@@ -36,15 +44,17 @@ const DiscussionPage = async () => {
       <article className="flex flex-col w-full px-6 md:px-20 lg:px-[150px] md:flex-row lg:flex-row">
         <div className="w-full flex-col">
           <h2 className="text-sm md:text-base lg:text-xl font-bold text-dark-green">
-            10,200 Discussions
+            {totalDiscussion?.data?.total} Discussions
           </h2>
           <div className="w-full border-b py-2 border-lighter-white"></div>
-          <Link href={`/discussion-forums/${1}`}>
-            <CardDiscussionComponent
-              discussions={discussions}
-              image={"/assets/tree-planting.png"}
-            />
-          </Link>
+          {discussionData?.map((data) => (
+            <Link
+              href={`/discussion-forums/${data.discussionId}`}
+              key={data.discussionId}
+            >
+              <CardDiscussionComponent discussions={data} />
+            </Link>
+          ))}
         </div>
         {/* Centered Post Components */}
         <div className="flex justify-center mt-6 h-fit md:ml-7 lg:ml-7">
@@ -56,10 +66,15 @@ const DiscussionPage = async () => {
               </h2>
               <MessageCircleQuestion className="h-4 w-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-green" />
             </div>
-            <PostComponent />
-            <PostComponent />
-            <PostComponent />
-            <PostComponent />
+            {/* Subtext */}
+            <p className="text-xs md:text-sm lg:text-base text-lighters-green">
+              10 Discussions found
+            </p>
+            {popularDiscussion?.data?.map((data, index) => (
+              <div key={index}>
+                <PostComponent popular={data} />
+              </div>
+            ))}
           </div>
         </div>
       </article>
