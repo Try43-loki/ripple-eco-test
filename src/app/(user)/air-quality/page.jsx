@@ -5,6 +5,8 @@ import AirQualityComponent from "./_components/AirQualityComponent";
 import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 import HeroSectionAirDisasterComponent from "./_components/HeroSectionAirDisasterComponent";
 import { getAllDistricts } from "@/service/airQualityService";
+import { getAirPollution } from "@/action/AirQualityAction";
+import { useSearchParams } from "next/navigation";
 
 const bgGreen = "#CDE8DB";
 const bgYellow = "#FAF0CC";
@@ -63,8 +65,11 @@ const switchColor = (value) => {
 };
 
 const AirQualityPage = async () => {
+  const currentPathName = useSearchParams();
   const dynamicColor = switchColor(aqiData.value);
   const dataProvinces = await getAllDistricts();
+
+  console.log(dataProvinces);
 
   return (
     <div className="relative flex flex-col gap-7">

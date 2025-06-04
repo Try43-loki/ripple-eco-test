@@ -12,14 +12,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { getDistrictName } from "@/action/AirQualityAction";
+import { useRouter } from "next/navigation";
 
 export default function MultiSelectDropdown({ provincesList }) {
   const [selected, setSelected] = useState(null);
+  const router = useRouter();
 
   function handleSelected(districtId, districtName) {
     setSelected(districtName);
-    getDistrictName(districtId);
+    router.push(`/search?district=${districtId}`);
   }
 
   return (

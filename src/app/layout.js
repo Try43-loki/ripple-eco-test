@@ -7,8 +7,8 @@ import "primeicons/primeicons.css";
 import "./globals.css";
 import NavBarComponent from "@/components/NavbarComponent";
 import FooterComponent from "@/components/FooterComponent";
-import { auth } from "../../auth";
 import { getUserProfileAction } from "@/action/user-action";
+import { auth } from "../../auth";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700"],
@@ -25,8 +25,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await auth();
-  const profile = await getUserProfileAction();
+  // const session = await auth();
+  // const profile = await getUserProfileAction();
 
   return (
     <html lang="en">
