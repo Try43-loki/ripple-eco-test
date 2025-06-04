@@ -3,10 +3,10 @@ const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YW5la2FoNDAwQGNpZ2lkZWEuY29tIiwiaWF0IjoxNzQ4ODQ5MzI0LCJleHAiOjE3NDkxMDg1MjR9.xT38yXnRrqKXlByDQqo_pbYrX3WJI6kADd8B7PU2raY";
 
 // Get all discussion
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
+import { baseUrl } from "./constants";
 export const getAllDiscussionsService = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/discussions/all`);
+    const res = await fetch(`${baseUrl}/discussions/all`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -17,7 +17,7 @@ export const getAllDiscussionsService = async () => {
 // Get discussion by id
 export const getDiscussionByIdService = async (discussionId) => {
   try {
-    const res = await fetch(`${API_BASE_URL}/discussions/${discussionId}`);
+    const res = await fetch(`${baseUrl}/discussions/${discussionId}`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -28,7 +28,7 @@ export const getDiscussionByIdService = async (discussionId) => {
 // Get Total Discussion
 export const getTotalDiscussionService = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/discussions/all-discussion-count`);
+    const res = await fetch(`${baseUrl}/discussions/all-discussion-count`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -39,7 +39,7 @@ export const getTotalDiscussionService = async () => {
 // Get all Popular discussion
 export const getAllPopularDiscussionService = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/discussions/popular`);
+    const res = await fetch(`${baseUrl}/discussions/popular`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -52,7 +52,7 @@ export const createDiscussionService = async () => {
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YW5la2FoNDAwQGNpZ2lkZWEuY29tIiwiaWF0IjoxNzQ4ODM4OTgzLCJleHAiOjE3NDkwOTgxODN9.BwCNyKQXUnzKuKbATP6L5qX0ml5rgoBOriAtPDrNHuY";
   try {
-    const res = await fetch(`${API_BASE_URL}/discussions`, {
+    const res = await fetch(`${baseUrl}/discussions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

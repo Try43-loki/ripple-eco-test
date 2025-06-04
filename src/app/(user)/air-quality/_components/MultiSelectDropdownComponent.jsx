@@ -12,13 +12,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { provinces } from "../mockData/provinces";
+import { getDistrictName } from "@/action/AirQualityAction";
 
-export default function MultiSelectDropdown() {
+export default function MultiSelectDropdown({ provincesList }) {
   const [selected, setSelected] = useState(null);
 
-  // Fetch Data
-  const data = provinces;
+  function handleSelected(districtId, districtName) {
+    setSelected(districtName);
+    getDistrictName(districtId);
+  }
 
   return (
     <DropdownMenu>
@@ -33,11 +35,11 @@ export default function MultiSelectDropdown() {
 
       <DropdownMenuContent
         align="start"
-        className="bg-white text-black shadow-lg border border-gray-200 rounded-xl w-[400px] mt-2"
+        className="bg-white text-black shadow-lg border border-gray-200 rounded-xl w-[670px] h-[300px] mt-2 scrollbar-hide"
       >
-        {data.map((value) => (
+        {provincesList.data.map((value) => (
           <DropdownMenuSub key={value.provinceId}>
-            <DropdownMenuSubTrigger className="hover:bg-gray-100 hover:cursor-pointer rounded-md px-2 py-1.5 flex justify-between w-full">
+            <DropdownMenuSubTrigger className=" hover:cursor-pointer hover:bg-blue-200 rounded-md px-2 py-1.5 flex justify-between w-full">
               <span>{value.provinceName}</span>
             </DropdownMenuSubTrigger>
 
@@ -45,7 +47,9 @@ export default function MultiSelectDropdown() {
               {value.districtList.map((item) => (
                 <DropdownMenuItem
                   key={item.districtId}
-                  onClick={() => setSelected(item.districtName)}
+                  onClick={() =>
+                    handleSelected(item.districtId, item.districtName)
+                  }
                   className="hover:bg-gray-100 px-2 py-1.5 rounded-md"
                 >
                   {item.districtName}

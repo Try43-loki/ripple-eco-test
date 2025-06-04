@@ -1,8 +1,7 @@
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
-
+import { baseUrl } from "./constants";
 export const getAllUserRankingService = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/leaderboard/user-rankings`);
+    const res = await fetch(`${baseUrl}/leaderboard/user-rankings`);
     const data = await res.json();
     // console.log("data : ", data);
     return data;
@@ -13,7 +12,7 @@ export const getAllUserRankingService = async () => {
 
 export const getAllOrganizerRankingService = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/leaderboard/organizer-rankings`);
+    const res = await fetch(`${baseUrl}/leaderboard/organizer-rankings`);
     const data = await res.json();
     // console.log("data", data);
     return data;
