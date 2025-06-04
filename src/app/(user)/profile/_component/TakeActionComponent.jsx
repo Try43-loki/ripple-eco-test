@@ -1,70 +1,26 @@
 import React from "react";
 import TakeActionCard from "../../../../components/TakeActionCard";
 
-const TakeActionComponent = () => {
+const TakeActionComponent = ( {cardData} ) => {
   return (
     <main>
       <section className="w-full flex flex-row flex-wrap justify-between items-center">
-        <div className="w-70">
+        {cardData.map((data, index) => 
+        <div className="w-70" key={index}>
           <TakeActionCard
-            image={"/assets/sub-banner.jpg"}
-            title={"Stand Up to Plastic Pollution"}
+            image={data?.image}
+            id ={data?.takeActionId}
+            title={data?.title}
             description={
-              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
+              data?.description
             }
-            support={"11,376"}
-            isPublic={true}
+            support={data?.numberOfSupporter}
+            isPublic={data?.anonymous}
             isOwner={true}
           />
         </div>
-        <div className="w-70">
-          <TakeActionCard
-            image={"/assets/sub-banner.jpg"}
-            title={"Stand Up to Plastic Pollution"}
-            description={
-              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
-            }
-            support={"11,376"}
-            isPublic={false}
-            isOwner={true}
-          />
-        </div>
-        <div className="w-70">
-          <TakeActionCard
-            image={"/assets/sub-banner.jpg"}
-            title={"Stand Up to Plastic Pollution"}
-            description={
-              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
-            }
-            support={"11,376"}
-            isPublic={false}
-            isOwner={true}
-          />
-        </div>
-        <div className="w-70">
-          <TakeActionCard
-            image={"/assets/sub-banner.jpg"}
-            title={"Stand Up to Plastic Pollution"}
-            description={
-              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
-            }
-            support={"11,376"}
-            isPublic={true}
-            isOwner={true}
-          />
-        </div>
-        <div className="w-70">
-          <TakeActionCard
-            image={"/assets/sub-banner.jpg"}
-            title={"Stand Up to Plastic Pollution"}
-            description={
-              "We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution.We need you to add your voice. Sign the pledge today and stand with The Nature Conservancy as we call on world leaders to come together and Stand Up to Plastic Pollution."
-            }
-            support={"11,376"}
-            isPublic={true}
-            isOwner={true}
-          />
-        </div>
+        )}
+        
       </section>
     </main>
   );
