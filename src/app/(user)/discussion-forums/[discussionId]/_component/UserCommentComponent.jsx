@@ -4,11 +4,6 @@ import { useTimeFormat } from "@/hooks/dayjs";
 
 const UserCommentComponent = ({ comments, onReply, postOwner }) => {
   const formatTime = useTimeFormat();
-  console.log("comments ", comments);
-  console.log(
-    "comments res ",
-    comments[0]?.commentResponses[0]?.appUser.firstName
-  );
 
   return (
     <>
@@ -59,7 +54,9 @@ const UserCommentComponent = ({ comments, onReply, postOwner }) => {
                   <button
                     className="flex items-center hover:text-green transition"
                     aria-label="Comment on post"
-                    onClick={() => onReply?.(data)}
+                    onClick={() => {
+                      onReply?.(data);
+                    }}
                   >
                     <MessageCircle className="h-4 w-4 lg:h-5 lg:w-5" />
                   </button>
@@ -74,17 +71,13 @@ const UserCommentComponent = ({ comments, onReply, postOwner }) => {
               </div>
             </div>
           </div>
-
-          {/* Render replies recursively */}
-          {data.commentResponses?.length > 0 && (
-            <div className="ml-20">
-              <UserCommentComponent
-                comments={data.commentResponses}
-                onReply={onReply}
-                postOwner={postOwner}
-              />
-            </div>
-          )}
+          <div className="ml-20">
+            <UserCommentComponent
+              comments={data.commentResponses}
+              onReply={onReply}
+              postOwner={postOwner}
+            />
+          </div>
         </div>
       ))}
     </>

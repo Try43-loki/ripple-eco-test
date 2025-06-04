@@ -9,25 +9,14 @@ import {
   DialogDescription,
   DialogFooter,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ImageIcon } from "lucide-react";
 
 const CreateDiscussionComponent = ({ open, onOpenChange }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* Trigger Button */}
-      {/* <DialogTrigger asChild>
-        <Button
-          variant="default"
-
-          className="py-4 px-5 bg-green text-white rounded-2xl hover:bg-green/80"
-        >
-          Start the Discussion
-        </Button>
-      </DialogTrigger> */}
-
       {/* Dialog Content */}
       <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white">
         <DialogHeader>
@@ -126,12 +115,11 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
 
           {/* Submit Buttons */}
           <DialogFooter>
-            <Button
-              type="submit"
-              className="hover:bg-lighter-white bg-meduim-white cursor-pointer"
-            >
-              Cancel
-            </Button>
+            <DialogClose asChild>
+              <Button className="hover:bg-lighter-white bg-meduim-white cursor-pointer">
+                Cancel
+              </Button>
+            </DialogClose>
             <Button
               type="submit"
               className="bg-green text-white hover:bg-green/80 cursor-pointer"

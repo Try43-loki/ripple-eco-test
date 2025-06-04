@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { MessageCircle, Trash2, User2, SendHorizonal, X } from "lucide-react";
 import UserCommentComponent from "./UserCommentComponent";
 import { useCommentSocket } from "../../../../../../socket/socket";
@@ -9,6 +9,7 @@ const CommentComponent = ({ discussions }) => {
   const [commentInputs, setCommentInputs] = useState("");
   const [commentId, setCommentId] = useState();
   const [replyTarget, setReplyTarget] = useState(null);
+  const [showInputComment, setShowInputComment] = useState(false);
   const postOwner = discussions?.data?.appUser?.appUserId;
 
   const { comments, addComment, updateComment } = useCommentSocket(
@@ -22,6 +23,8 @@ const CommentComponent = ({ discussions }) => {
 
   const handleInputChange = (value) => {
     setCommentInputs(value);
+    // setShowInputComment(true);
+    // console.log("showInputComment", showInputComment);
   };
 
   const handleAddComment = () => {

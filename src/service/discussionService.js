@@ -42,3 +42,25 @@ export const getAllPopularDiscussionService = async () => {
     console.log(e);
   }
 };
+
+// Create Discussion
+export const createDiscussionService = async () => {
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YW5la2FoNDAwQGNpZ2lkZWEuY29tIiwiaWF0IjoxNzQ4ODM4OTgzLCJleHAiOjE3NDkwOTgxODN9.BwCNyKQXUnzKuKbATP6L5qX0ml5rgoBOriAtPDrNHuY";
+  try {
+    const res = await fetch(`${API_BASE_URL}/discussions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "*/*",
+      },
+      body: JSON.stringify(),
+    });
+    if (!res.ok) throw new Error("Failed to create discussion");
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};

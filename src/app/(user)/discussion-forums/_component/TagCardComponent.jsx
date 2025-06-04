@@ -1,7 +1,7 @@
 import CommentButtonComponent from "@/app/(user)/discussion-forums/_component/CommentButtonComponent";
 import React from "react";
 
-const TagCardComponent = ({ tags }) => {
+const TagCardComponent = ({ tags, counts }) => {
   return (
     <main className="w-full">
       <article className="flex justify-between">
@@ -16,7 +16,7 @@ const TagCardComponent = ({ tags }) => {
           ))}
           {/* Comment Button */}
         </article>
-        <CommentButtonComponent />
+        <CommentButtonComponent totalComment={counts} />
       </article>
       <div className="w-full border-b border-lightes-white py-2"></div>
     </main>

@@ -5,8 +5,7 @@ import TagCardComponent from "@/app/(user)/discussion-forums/_component/TagCardC
 import { getDiscussionById } from "@/service/discussionService";
 import { useTimeFormat } from "@/hooks/dayjs";
 
-const CardDiscussionComponent = async ({ discussions }) => {
-  console.log("discussion id is : ", discussions);
+const CardDiscussionComponent = ({ discussions }) => {
   const formatTime = useTimeFormat();
   return (
     <div className="w-full mt-8 space-y-8">
@@ -57,7 +56,10 @@ const CardDiscussionComponent = async ({ discussions }) => {
 
             {/* Tags */}
             <div className="flex justify-between mt-4">
-              <TagCardComponent tags={discussions?.tag} />
+              <TagCardComponent
+                tags={discussions?.tag}
+                counts={discussions?.commentCount}
+              />
             </div>
           </div>
         </div>
