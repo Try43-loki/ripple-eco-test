@@ -4,6 +4,7 @@ import DailyForecastComponent from "./_components/DailyForecastComponent";
 import AirQualityComponent from "./_components/AirQualityComponent";
 import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 import HeroSectionAirDisasterComponent from "./_components/HeroSectionAirDisasterComponent";
+import { getAllDistricts } from "@/service/airQualityService";
 
 const bgGreen = "#CDE8DB";
 const bgYellow = "#FAF0CC";
@@ -61,8 +62,10 @@ const switchColor = (value) => {
     };
 };
 
-const AirQualityPage = () => {
+const AirQualityPage = async () => {
   const dynamicColor = switchColor(aqiData.value);
+  const dataProvinces = await getAllDistricts();
+
   return (
     <div className="relative flex flex-col gap-7">
       {/* Full-page background */}
@@ -76,9 +79,10 @@ const AirQualityPage = () => {
       {/* Hero Section */}
       <section className="relative   flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center ">
         <HeroSectionAirDisasterComponent
-          dataSearch={api}
-          dataCard={aqiData}
-          levelColor={dynamicColor}
+          provincesList={dataProvinces}
+          // dataSearch={api}
+          // dataCard={aqiData}
+          // levelColor={dynamicColor}
         />
       </section>
 
