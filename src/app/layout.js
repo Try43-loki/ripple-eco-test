@@ -8,6 +8,7 @@ import "./globals.css";
 import NavBarComponent from "@/components/NavbarComponent";
 import FooterComponent from "@/components/FooterComponent";
 import { auth } from "../../auth";
+import { getUserProfileAction } from "@/action/user-action";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700"],
@@ -25,7 +26,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await auth();
-  console.log("session", session);
+  const profile = await getUserProfileAction();
+
   return (
     <html lang="en">
       <body className={gabarito.className}>{children}</body>

@@ -1,6 +1,6 @@
-import { auth } from "@/auth";
+import { auth } from "../../auth";
 
 export async function getAuthToken() {
   const session = await auth();
-  return session?.payload.token || null;
+  return session?.data?.token;
 }

@@ -1,11 +1,23 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { LoginShecma } from "@/lib/zod/LoginShecma";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 function ResetPasswordCopmponent({ onNext }) {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(LoginShecma),
+  });
+
   return (
     <>
       {/* Container */}

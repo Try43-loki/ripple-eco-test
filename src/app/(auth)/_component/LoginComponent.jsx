@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { LoginShecma } from "@/lib/zod/LoginShecma";
 import { loginAction } from "@/action/auth-action";
+import { redirect } from "next/navigation";
 
 // import { loginAction } from "@/action/authAction";
 
@@ -24,8 +25,11 @@ function LoginComponent({ onNext }) {
     resolver: zodResolver(LoginShecma),
   });
   // form get data
-  const handleLogin = (formData) => {
-    loginAction(formData);
+  const handleLogin = async (formData) => {
+    const isLogin = await loginAction(formData);
+    if (isLogin?.success) {
+      redirect("/home");
+    }
     reset();
   };
   const [showPassword, setShowPassword] = React.useState(false);
@@ -93,7 +97,7 @@ function LoginComponent({ onNext }) {
                       className={clsx(
                         "h-4 w-4 bg-red rounded-full border border-light-strok",
                         {
-                          hidden: !errors?.password?.message,
+                          hidden: !errors?.email?.message,
                         }
                       )}
                     ></div>

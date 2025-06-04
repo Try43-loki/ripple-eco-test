@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { baseUrl } from "../constants";
+import headerToken from "@/utils/headerToken";
 
 export const loginService = async ({ email, password }) => {
   const res = await fetch(`${baseUrl}/auths/login`, {
@@ -22,16 +23,70 @@ export const loginService = async ({ email, password }) => {
 };
 
 export const registerService = async (registerData) => {
-  const res = await fetch(`http://localhost:8080/api/v1/auths/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(registerData),
-  });
-  const data = await res.json();
-  if (!data) {
-    redirect("/register");
+  try {
+    const res = await fetch(`${baseUrl}/auths/request-otp?type=REGISTER`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(registerData),
+    });
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
   }
-  return data;
+};
+
+export const verifyOtpService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/verify-otp?type=REGISTER`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const setPasswordService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/set-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    console.log("data ser", data);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const addInfomationService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/complete-register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };

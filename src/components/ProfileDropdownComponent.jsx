@@ -9,7 +9,7 @@ import {
 import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
-export function ProfileDropdownComponent({ operator, onLogout }) {
+export function ProfileDropdownComponent({ operator, handleLogout }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -30,20 +30,19 @@ export function ProfileDropdownComponent({ operator, onLogout }) {
       <PopoverContent className="w-50 mr-10 p-0 mt-3 rounded-2xl px-2 py-2 bg-white border border-light-strok">
         <div className="flex justify-center items-start flex-col w-full rounded-xl">
           <Link
-            href={operator == "organizer" ? "/organizer/profile" : "/profile"}
+            href={"/profile"}
             className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <User className="text-lighter-green" />
             <h3 className="text-lighter-green text-lg">Profile</h3>
           </Link>
-          <Link
-            onClick={onLogout}
-            href="/home"
+          <Button
+            onClick={handleLogout}
             className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <LogOut className="text-lighter-green" />
             <h3 className="text-lighter-green text-lg">Logout</h3>
-          </Link>
+          </Button>
         </div>
       </PopoverContent>
     </Popover>
