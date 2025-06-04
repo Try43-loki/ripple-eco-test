@@ -29,14 +29,14 @@ const DiscussionCardComponent = ({ image, fullWidth, operator }) => {
 
         {/* Card Details */}
         <div className="w-full">
-          <h2 className="text-base md:text-lg lg:text-xl font-semibold text-dark-green">
-            Have you participated in <br /> river-cleanup efforts or <br />
-            citizen-science water testing?
+          <h2 className="text-base md:text-lg lg:text-xl font-semibold text-dark-green wrap-break-word">
+            Have you participated in river-cleanup efforts or citizen-science
+            water testing?
           </h2>
-          <p className="text-xs md:text-sm lg:text-base text-lighters-green mt-2">
-            These hands-on initiatives empower <br /> locals to remove debris,
-            monitor <br /> pollution levels, and contribute <br /> valuable data
-            to guide river <br /> conservation.
+          <p className="text-xs md:text-sm lg:text-base text-lighters-green mt-2 wrap-break-word">
+            These hands-on initiatives empower locals to remove debris, monitor
+            pollution levels, and contribute valuable data to guide river
+            conservation.
           </p>
 
           {/* Image */}

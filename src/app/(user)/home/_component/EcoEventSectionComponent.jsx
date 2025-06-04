@@ -1,11 +1,11 @@
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 
 import React from "react";
-import Link from "next/link";
-import { events } from "@/service/mockData";
+import { getAllEcoEventService } from "@/service/ecoEventService";
 
-const EcoEventSectionComponent = () => {
-  const data = events;
+const EcoEventSectionComponent = async () => {
+  const response = await getAllEcoEventService();
+  const data = Array.isArray(response) ? response : response?.data || [];
 
   return (
     <div>
@@ -23,20 +23,19 @@ const EcoEventSectionComponent = () => {
 
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
-              {data?.map((event, index) => (
+              {data?.map((item, index) => (
                 <CardEcoEventComponent
                   key={index}
-                  href={"/eco-event/1"}
-                  type={event?.eventTypes?.eventType}
-                  contribute={
-                    event?.contributeTypesResponse?.contributeTypeName
-                  }
-                  category={event?.category?.categoryName}
-                  status={event?.eventStatus}
-                  date={event?.startDate}
-                  participats={event?.maxSlot}
-                  title={event?.title}
-                  location={event?.provinces?.provinceName}
+                  href={`/eco-event/${item?.eventId}`}
+                  type={item.eventTypes.eventType}
+                  image={item.image}
+                  contribute={item.contributeTypesResponse.contributeTypeName}
+                  category={item.category.categoryName}
+                  status={item.eventStatus}
+                  date={item.startDate}
+                  participats={item.maxSlot}
+                  title={item.title}
+                  location={item.provinces.provinceName}
                 />
               ))}
             </div>
