@@ -1,4 +1,3 @@
-"use client";
 
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import React from "react";
@@ -11,14 +10,18 @@ import {
 } from "@/components/ui/breadcrumb";
 import TakeActionDetailCard from "../_component/TakeActionDetailCard";
 import TakeActionFormComponent from "../_component/TakeActionFormComponent";
-import { usePathname, useSearchParams } from "next/navigation";
 import TakeActionNoImageCardComponent from "@/app/organizer/take-action/_component/TakeActionNoImageCardComponent";
-const TakeActionDetailPage = () => {
-  const pathName = usePathname();
-  const query = useSearchParams();
-  const view = query.get("view");
-  const owner = query.get("owner");
-
+import { getAllTakeActionService } from "@/service/takeActionService";
+const TakeActionDetailPage =  async ( { params , searchParams}) => {
+  // const pathName = usePathname();
+  // const query = useSearchParams();
+  // const view = query.get("view");
+  // const owner = query.get("owner");
+  const view = searchParams?.view;
+  const owner = searchParams?.owner;
+  const id = params?.takeActionID;
+  const cardData = await getAllTakeActionService();
+  const cardDetail = cardData?.data?.find((item) => item.takeActionId === id);
   return (
     <main>
       <HeroSectionComponent
@@ -40,14 +43,21 @@ const TakeActionDetailPage = () => {
             ></BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink className="text-green">
-                Green Oasis going Miyawaki
+                {cardDetail?.title}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5">
-        <TakeActionDetailCard view={view} />
+        <TakeActionDetailCard
+          view={view}
+          image={cardDetail?.image}
+          description={cardDetail?.description}
+          title={cardDetail?.title}
+          numberOfSupporter={cardDetail?.numberOfSupporter}
+          destination={cardDetail?.destinationPerson}
+        />
       </section>
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5 mt-12 mb-24">
         {owner == "false" && <TakeActionFormComponent />}

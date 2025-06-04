@@ -1,9 +1,13 @@
 import React from "react";
-import HeroSectionDashboarComponent from "./_component/HeroSectionDashboarComponent";
 import TakeActionBodyComponent from "./_component/TakeActionBodyComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
+import { getAllTakeActionService, getOwnTakeActionService } from "@/service/takeActionService";
 
-function TakeActionPage() {
+const TakeActionPage = async () => {
+  const response = await getAllTakeActionService();
+  const cardData = response?.data || [];
+  const response2 = await getOwnTakeActionService();
+  const ownCardData = response2?.data || [];
   const headerSection = {
     title: "Take Action Now",
     text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
@@ -19,7 +23,7 @@ function TakeActionPage() {
         />
       </section>
       <section>
-        <TakeActionBodyComponent />
+        <TakeActionBodyComponent cardData={cardData} ownCardData ={ownCardData }/>
       </section>
     </>
   );

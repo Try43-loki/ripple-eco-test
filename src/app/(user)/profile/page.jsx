@@ -13,16 +13,27 @@ import {
   MessagesSquare,
   Phone,
   Sparkles,
-  SquarePen,
 } from "lucide-react";
 import Image from "next/image";
 
 import TakeActionComponent from "./_component/TakeActionComponent";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
-import EventHistoryComponent from "./_component/EventHistoryComponent";
 import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
-const ProfilePage = () => {
+import FilterEcoEventComponent from "../eco-event/_component/FilterEcoEventComponent";
+import CardEcoEventComponent from "@/components/CardEcoEventComponent";
+import { getCurrentUserProfileService } from "@/service/profileService";
+import { getOwnTakeActionService } from "@/service/takeActionService";
+import { getAllOwnDiscussionsService } from "@/service/discussionService";
+const ProfilePage = async () => {
+  const response2 = await getOwnTakeActionService();
+  const ownTakeActionData = response2?.data || [];
+  const response = await getCurrentUserProfileService();
+  const userData = response?.data || [];
+  const response3 = await getAllOwnDiscussionsService();
+  const ownDiscussionsData = response3?.data || [];
+  
+  const data = null
   return (
     <main>
       <HeroSectionComponent
@@ -30,38 +41,40 @@ const ProfilePage = () => {
         description={" "}
         showSearchBar={false}
       />
-
       <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
-        <img
-          src="https://i.pinimg.com/736x/35/48/35/3548357337902e2d9d7a79b1a6a166bc.jpg"
-          alt="sakuke"
-          className="w-[170px] h-[170px] rounded-full absolute -top-10 left-30"
-        />
-        <div className="space-y-2">
-          <h2 className="text-[30px] text-green">Uchiha Sasuke</h2>
+        
+        <div className="w-1/4">
+          <img
+            src={userData?.profileImageUrl}
+            alt={`${userData?.firstName} ${userData?.lastName}`}
+            className="w-[170px] h-[170px] rounded-full absolute -top-10 left-20"
+          />
+        </div>
+        <div className="space-y-2 w-3/4">
+          <h2 className="text-[30px] text-green">{`${userData?.firstName} ${userData?.lastName}`}</h2>
           <p className="text-[20px] text-black">
-            Passionate about protecting the Earth and encouraging eco-friendly
-            habits.
+            {userData?.bio}
           </p>
           <div className="flex items-center gap-10">
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <Phone className="w-4.5 h-4.5" />
-              <p>012-333-334</p>
+              <p>{userData?.phoneNumber}</p>
             </div>
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <MapPin className="w-4.5 h-4.5" />
-              <p>Phnom Penh</p>
+              <p>{userData?.address}</p>
             </div>
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <Mail className="w-4.5 h-4.5" />
-              <p>UNEP@gmail.com</p>
+              <p>{userData?.email}</p>
             </div>
           </div>
         </div>
         <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
-          <EditprofileComponent title={"Edit Profile"}/>
+          <EditprofileComponent title={"Edit Profile"} />
         </Button>
       </article>
+      
 
       <section className="mt-12 mx-36">
         <Tabs defaultValue="event-history" className="w-full">
@@ -123,11 +136,11 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
-            <DisccusionComponent />
+            <DisccusionComponent disccusionData={ownDiscussionsData}/>
           </TabsContent>
 
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-            <TakeActionComponent />
+            <TakeActionComponent cardData={ownTakeActionData}/>
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
@@ -164,7 +177,27 @@ const ProfilePage = () => {
           </TabsContent>
 
           <TabsContent value="event-history" className="w-full mt-5 mb-10">
-            {/* <EventHistoryComponent/> */}
+            <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-5">
+              <FilterEcoEventComponent />
+              <div className="flex flex-wrap gap-5 w-full justify-between">
+                {data?.map((event, index) => (
+                  <CardEcoEventComponent
+                    key={index}
+                    href={"/eco-event/1"}
+                    type={event?.eventTypes?.eventType}
+                    contribute={
+                      event?.contributeTypesResponse?.contributeTypeName
+                    }
+                    category={event?.category?.categoryName}
+                    status={event?.eventStatus}
+                    date={event?.startDate}
+                    participats={event?.maxSlot}
+                    title={event?.title}
+                    location={event?.provinces?.provinceName}
+                  />
+                ))}
+              </div>
+            </section>
           </TabsContent>
         </Tabs>
       </section>

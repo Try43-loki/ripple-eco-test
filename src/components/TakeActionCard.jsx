@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 
 const TakeActionCard = ({
   image,
+  id,
   title,
   description,
   support,
@@ -23,13 +24,18 @@ const TakeActionCard = ({
   isOrganizer,
   isPublic,
 }) => {
+  const getImageSrc = (img) => {
+    if (!img) return defaultImage;
+    if (img.startsWith('http')) return img;
+    return `/${img}`;
+  };
   return (
     <main>
       <Card className="p-0 pb-4 w-full rounded-2xl  border border-light-strok">
         <CardContent className="p-2  h-[155px] relative">
           <Link
             href={{
-              pathname: `${isOrganizer ? "/organizer" : ""}/take-action/${1}`,
+              pathname: `${isOrganizer ? "/organizer" : ""}/take-action/${id}`,
               query: {
                 view: isPublic ? "public" : "private",
                 owner: isOwner ? "true" : "false",
@@ -37,8 +43,8 @@ const TakeActionCard = ({
             }}
           >
             <Image
-              src="/assets/leaderboard/save_world.jpg"
-              alt="sub-banner"
+              src={getImageSrc(image)}
+              alt={title}
               width={270}
               height={150}
               className="rounded-t-xl h-40 object-cover"
@@ -63,18 +69,16 @@ const TakeActionCard = ({
               >
                 {description}
               </CardDescription>
-              <Link href="/organizer/take-action/1">
                 <article className="flex gap-x-2 items-center text-green text-[16px]">
                   ACT NOW
                   <Play className="w-[14px] h-[14px] fill-green" />
                 </article>
-              </Link>
             </CardHeader>
 
             <CardFooter className="flex flex-col items-start p-2 mt-4">
               <div>
                 <p className="text-[18px] font-700 text-green">{support}</p>
-                <p className="text-[10px] font-600 text-black">SUPPORTERS</p>
+                <p className="text-[10px] font-600 text-black">{support > 1 ? "SUPPORTERS" :"SUPPORTER"}</p>
               </div>
             </CardFooter>
           </div>
