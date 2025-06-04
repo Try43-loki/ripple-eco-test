@@ -5,9 +5,6 @@ import { getAllDiscussionsService } from "@/service/discussionService";
 import React from "react";
 
 const DiscussioForumsDetailPage = async ({ params: ParamsPromise }) => {
-  const discussions = await getAllDiscussionsService();
-  const { discussionid } = await ParamsPromise;
-
   // Hero Section param data
   const heroSectionText = {
     title: "ECO EVENT",
