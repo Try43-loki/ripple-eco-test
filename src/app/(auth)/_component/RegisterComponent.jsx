@@ -1,12 +1,39 @@
 "use client";
+import { registerAction } from "@/action/auth-action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { registerSchema } from "@/lib/zod/RegisterShecma";
+import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
 
-function RegisterCopmponent({ onNext }) {
+function RegisterCopmponent({ onNext, handleEmailChange }) {
+  const [isVerified, setIsVerified] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const {
+    register,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+  });
+  const handleRegister = async (formData) => {
+    const isSuccess = await registerAction(formData);
+    handleEmailChange(formData.email);
+    if (isSuccess?.success) {
+      setIsVerified(false);
+      reset();
+      onNext();
+    } else {
+      setIsVerified(true);
+      setMessage(isSuccess?.message);
+    }
+  };
   return (
     <>
       {/* Container */}
@@ -29,7 +56,7 @@ function RegisterCopmponent({ onNext }) {
           <section className="flex justify-center items-center flex-col gap-3 w-[400px]  bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
-              action=""
+              action={handleSubmit(handleRegister)}
               className="flex justify-center items-center flex-col gap-3  w-full  "
             >
               <h1 className="text-3xl font-semibold text-white text-center">
@@ -53,10 +80,18 @@ function RegisterCopmponent({ onNext }) {
                     type="email"
                     id="email"
                     placeholder="example@gmaill.com"
+                    {...register("email")}
                   />
+                  <span
+                    className={clsx("flex justify-start gap-x-2 items-center", {
+                      hidden: !isVerified,
+                    })}
+                  >
+                    <span className="text-red-400 text-sm">{message}</span>
+                  </span>
                 </div>
                 <Button
-                  onClick={onNext}
+                  type="submit"
                   className="w-full text-white bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg"
                 >
                   Sent OTP

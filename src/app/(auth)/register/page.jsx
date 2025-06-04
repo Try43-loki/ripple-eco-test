@@ -10,20 +10,40 @@ import AdditonalInfoComponent from "../_component/AdditionalInfoComponent";
 
 function RegisterPage() {
   const [currentStep, setCurrentStep] = useState(1);
-
+  const [email, setEmail] = useState("");
   const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 5));
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+
+  const handleEmailChange = (value) => {
+    setEmail(value);
+  };
+
+  console.log(email);
+
   return (
     <>
-      {currentStep === 1 && <RegisterCopmponent onNext={nextStep} />}
+      {currentStep === 1 && (
+        <RegisterCopmponent
+          handleEmailChange={handleEmailChange}
+          onNext={nextStep}
+        />
+      )}
       {currentStep === 2 && (
-        <OTPVerifyComponent onNext={nextStep} onPrev={prevStep} />
+        <OTPVerifyComponent onNext={nextStep} onPrev={prevStep} email={email} />
       )}
       {currentStep === 3 && (
-        <SetPasswordComponent onNext={nextStep} onPrev={prevStep} />
+        <SetPasswordComponent
+          onNext={nextStep}
+          onPrev={prevStep}
+          email={email}
+        />
       )}
       {currentStep === 4 && (
-        <AdditonalInfoComponent onNext={nextStep} onPrev={prevStep} />
+        <AdditonalInfoComponent
+          onNext={nextStep}
+          onPrev={prevStep}
+          email={email}
+        />
       )}
       {currentStep === 5 && <LoginSuccessComponent onPrev={prevStep} />}
     </>

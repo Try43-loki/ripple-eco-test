@@ -1,26 +1,80 @@
 "use client";
+import { setPasswordAction } from "@/action/auth-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { setPasswordSchema } from "@/lib/zod/setPasswordShecma";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronLeftCircleIcon,
   CircleCheck,
+  CircleX,
   Eye,
   EyeClosed,
   Lock,
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-function SetPasswordComponent({ onNext, onPrev }) {
+function SetPasswordComponent({ onNext, onPrev, email }) {
   const pathName = usePathname();
   const [showPassword, setShowPassword] = useState(false);
   const [showCfPassword, setShowCfPassword] = useState(false);
+  const [passwordValue, setPasswordValue] = useState("");
+  const [cfPasswordValue, setCfPasswordValue] = useState("");
+  const [validationState, setValidationState] = useState({
+    minLength: false,
+    hasNumber: false,
+    hasUpperLower: false,
+    hasSpecialChar: false,
+    passwordsMatch: false,
+  });
   const router = useRouter();
 
-  const handleNext = () => {
-    if (pathName == "/forget-password") {
-      router.push("/login-success?redirectTo=/login");
-    } else {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(setPasswordSchema),
+  });
+
+  // Watch form values
+  const watchedPassword = watch("password");
+  const watchedCfPassword = watch("cfpassword");
+
+  // Update validation state when password changes
+  useEffect(() => {
+    if (watchedPassword) {
+      setPasswordValue(watchedPassword);
+      validatePassword(watchedPassword, watchedCfPassword || "");
+    }
+  }, [watchedPassword]);
+
+  useEffect(() => {
+    if (watchedCfPassword) {
+      setCfPasswordValue(watchedCfPassword);
+      validatePassword(watchedPassword || "", watchedCfPassword);
+    }
+  }, [watchedCfPassword]);
+
+  const validatePassword = (password, confirmPassword) => {
+    const newValidationState = {
+      minLength: password.length >= 8,
+      hasNumber: /\d/.test(password),
+      hasUpperLower: /[a-z]/.test(password) && /[A-Z]/.test(password),
+      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      passwordsMatch: password === confirmPassword && password.length > 0,
+    };
+    setValidationState(newValidationState);
+  };
+
+  const handelPassword = async (formData) => {
+    const password = formData.password;
+    const isSuccess = await setPasswordAction(password, email);
+    if (isSuccess?.success) {
       onNext();
     }
   };
@@ -32,6 +86,10 @@ function SetPasswordComponent({ onNext, onPrev }) {
   const handleShowCfPassword = () => {
     setShowCfPassword(!showCfPassword);
   };
+
+  // Check if all validations pass
+  const isFormValid = Object.values(validationState).every(Boolean);
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">
@@ -76,26 +134,28 @@ function SetPasswordComponent({ onNext, onPrev }) {
           </div>
           {/* Form */}
           <form
-            action=""
-            className="flex justify-center items-center flex-col  w-full  "
+            onSubmit={handleSubmit(handelPassword)}
+            className="flex justify-center items-center flex-col w-full"
           >
             <section className="flex justify-between items-center flex-col gap-4 w-full">
               {/* input password */}
-              <div className="grid w-full items-center gap-1.5  ">
+              <div className="grid w-full items-center gap-1.5">
                 <Label
                   htmlFor="password"
-                  className=" text-label text-light-gray font-light"
+                  className="text-label text-light-gray font-light"
                 >
                   Password
                 </Label>
-
                 <div className="relative">
                   <input
                     required
-                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className={`text-gray-500 pl-9 text-label h-11 placeholder:text-strong-gray placeholder:font-light bg-lighter-white focus-visible:ring-[0px] border-2 rounded-md w-full outline-none ${
+                      errors.password ? "border-red-500" : "border-transparent"
+                    }`}
                     type={showPassword ? "text" : "password"}
                     id="password"
-                    placeholder="123"
+                    placeholder="Enter your password"
+                    {...register("password")}
                   />
                   <span className="flex justify-center items-center text-label gap-1 top-[11px] left-2.5 absolute text-gray-500">
                     <Lock size={14} />|
@@ -107,23 +167,33 @@ function SetPasswordComponent({ onNext, onPrev }) {
                     {showPassword ? <Eye size={16} /> : <EyeClosed size={16} />}
                   </span>
                 </div>
+                {errors.password && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
+
               {/* Confirm password */}
-              <div className="grid w-full items-center gap-1.5 relative ">
+              <div className="grid w-full items-center gap-1.5 relative">
                 <Label
                   htmlFor="cfpassword"
-                  className=" text-label text-light-gray font-light"
+                  className="text-label text-light-gray font-light"
                 >
                   Confirm Password
                 </Label>
-
                 <div className="relative">
                   <input
                     required
-                    className="text-gray-500 pl-9 text-label h-11   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    className={`text-gray-500 pl-9 text-label h-11 placeholder:text-strong-gray placeholder:font-light bg-lighter-white focus-visible:ring-[0px] border-2 rounded-md w-full outline-none ${
+                      errors.cfpassword
+                        ? "border-red-500"
+                        : "border-transparent"
+                    }`}
                     type={showCfPassword ? "text" : "password"}
                     id="cfpassword"
-                    placeholder="123"
+                    placeholder="Confirm your password"
+                    {...register("cfpassword")}
                   />
                   <span className="flex justify-center items-center text-label gap-1 top-[11px] left-2.5 absolute text-gray-500">
                     <Lock size={14} />|
@@ -139,50 +209,122 @@ function SetPasswordComponent({ onNext, onPrev }) {
                     )}
                   </span>
                 </div>
+                {errors.cfpassword && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.cfpassword.message}
+                  </p>
+                )}
               </div>
             </section>
-            {/* condition */}
-            <article className="flex justify-start items-start flex-col gap-y-2 mt-2 w-full">
-              <p className="text-label text-white text-start ">
+
+            {/* Dynamic validation requirements */}
+            <article className="flex justify-start items-start flex-col gap-y-2 mt-4 w-full">
+              <p className="text-label text-white text-start">
                 Your password must contain
               </p>
               <ul className="flex justify-center items-start flex-col gap-y-1">
                 <li className="flex item-center justify-center gap-x-2">
-                  <div className="flex justify-center items-center ">
-                    <CircleCheck size={17} className="text-white" />
+                  <div className="flex justify-center items-center">
+                    {validationState.minLength ? (
+                      <CircleCheck size={17} className="text-green-400" />
+                    ) : (
+                      <CircleX size={17} className="text-red-400" />
+                    )}
                   </div>
-                  <p className="text-white text-sub-info">
+                  <p
+                    className={`text-sub-info ${
+                      validationState.minLength
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
                     At least 8 characters
                   </p>
                 </li>
                 <li className="flex item-center justify-center gap-x-2">
-                  <div className="flex justify-center items-center ">
-                    <CircleCheck size={17} className="text-white" />
+                  <div className="flex justify-center items-center">
+                    {validationState.hasNumber ? (
+                      <CircleCheck size={17} className="text-green-400" />
+                    ) : (
+                      <CircleX size={17} className="text-red-400" />
+                    )}
                   </div>
-                  <p className="text-white text-sub-info">At least 1 number</p>
+                  <p
+                    className={`text-sub-info ${
+                      validationState.hasNumber
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    At least 1 number
+                  </p>
                 </li>
                 <li className="flex item-center justify-center gap-x-2">
-                  <div className="flex justify-center items-center ">
-                    <CircleCheck size={17} className="text-white" />
+                  <div className="flex justify-center items-center">
+                    {validationState.hasUpperLower ? (
+                      <CircleCheck size={17} className="text-green-400" />
+                    ) : (
+                      <CircleX size={17} className="text-red-400" />
+                    )}
                   </div>
-                  <p className="text-white text-sub-info">
+                  <p
+                    className={`text-sub-info ${
+                      validationState.hasUpperLower
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
                     At least 1 uppercase & lowercase characters
                   </p>
                 </li>
                 <li className="flex item-center justify-center gap-x-2">
-                  <div className="flex justify-center items-center ">
-                    <CircleCheck size={17} className="text-white" />
+                  <div className="flex justify-center items-center">
+                    {validationState.hasSpecialChar ? (
+                      <CircleCheck size={17} className="text-green-400" />
+                    ) : (
+                      <CircleX size={17} className="text-red-400" />
+                    )}
                   </div>
-                  <p className="text-white text-sub-info">
+                  <p
+                    className={`text-sub-info ${
+                      validationState.hasSpecialChar
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
                     At least 1 special character ( Example : !@#$ )
+                  </p>
+                </li>
+                <li className="flex item-center justify-center gap-x-2">
+                  <div className="flex justify-center items-center">
+                    {validationState.passwordsMatch ? (
+                      <CircleCheck size={17} className="text-green-400" />
+                    ) : (
+                      <CircleX size={17} className="text-red-400" />
+                    )}
+                  </div>
+                  <p
+                    className={`text-sub-info ${
+                      validationState.passwordsMatch
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    Password must be matching
                   </p>
                 </li>
               </ul>
             </article>
+
             {/* Button submit */}
             <Button
-              onClick={handleNext}
-              className="w-full text-white bg-strong-green hover:bg-green-800 rounded-xl mt-4 h-11  text-md"
+              type="submit"
+              disabled={!isFormValid}
+              className={`w-full text-white rounded-xl mt-4 h-11 text-md ${
+                isFormValid
+                  ? "bg-strong-green hover:bg-green-800"
+                  : "bg-gray-500 cursor-not-allowed"
+              }`}
             >
               Next
             </Button>

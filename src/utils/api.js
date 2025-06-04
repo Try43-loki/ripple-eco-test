@@ -1,5 +1,4 @@
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
-
+import { baseUrl } from "@/service/constants";
 export async function apiRequest(
   endpoint,
   method = "GET",
@@ -25,7 +24,7 @@ export async function apiRequest(
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+  const response = await fetch(`${baseUrl}${endpoint}`, options);
   const data = await response.json();
   return data;
 }

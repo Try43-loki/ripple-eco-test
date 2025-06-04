@@ -2,11 +2,36 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import { LoginShecma } from "@/lib/zod/LoginShecma";
+import { loginAction } from "@/action/auth-action";
+import { redirect } from "next/navigation";
+
+// import { loginAction } from "@/action/authAction";
 
 function LoginComponent({ onNext }) {
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(LoginShecma),
+  });
+  // form get data
+  const handleLogin = async (formData) => {
+    const isLogin = await loginAction(formData);
+    if (isLogin?.success) {
+      redirect("/home");
+    }
+    reset();
+  };
   const [showPassword, setShowPassword] = React.useState(false);
   // show password
   const handleShowPassword = () => {
@@ -38,7 +63,7 @@ function LoginComponent({ onNext }) {
           <section className="flex justify-center items-center flex-col gap-4 w-[400px]   bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
-              action=""
+              onSubmit={handleSubmit(handleLogin)}
               className="flex justify-center items-center flex-col  w-full  "
             >
               <h5 className="text-3xl text-white">Login</h5>
@@ -61,7 +86,25 @@ function LoginComponent({ onNext }) {
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
+                    {...register("email")}
                   />
+                  <span
+                    className={clsx("flex justify-start gap-x-2 items-center", {
+                      hidden: !errors?.email?.message,
+                    })}
+                  >
+                    <div
+                      className={clsx(
+                        "h-4 w-4 bg-red rounded-full border border-light-strok",
+                        {
+                          hidden: !errors?.email?.message,
+                        }
+                      )}
+                    ></div>
+                    <span className="text-white text-sm">
+                      {errors?.email?.message}
+                    </span>
+                  </span>
                 </div>
                 {/* input password */}
                 <div className="grid w-full items-center gap-1.5 relative ">
@@ -86,7 +129,21 @@ function LoginComponent({ onNext }) {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="123"
+                    {...register("password")}
                   />
+                  <span className="flex justify-start gap-x-2 items-start">
+                    <div
+                      className={clsx(
+                        "h-4 w-4 bg-red rounded-full border border-light-strok",
+                        {
+                          hidden: !errors?.password?.message,
+                        }
+                      )}
+                    ></div>
+                    <span className="text-white text-sm">
+                      {errors?.password?.message}
+                    </span>
+                  </span>
                 </div>
 
                 <Link
@@ -95,18 +152,13 @@ function LoginComponent({ onNext }) {
                 >
                   Forgot your password?
                 </Link>
-                <Link
-                  href={"/home"}
-                  className="flex w-full h-10 bg-green items-center justify-center text-white hover:bg-meduim-green text-md cursor-pointer rounded-2xl p-4"
+                <Button
+                  type="submit"
+                  className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
                 >
                   Login
-                  {/* <Button
-                    // onClick={onNext}
-                    className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
-                  >
-                    Login
-                  </Button> */}
-                </Link>
+                </Button>
+
                 <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
                   <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
                   <span className="text-sm text-white">OR</span>

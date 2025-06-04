@@ -1,151 +1,109 @@
-import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_component/JoinEventButtonComponent";
-import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
-import HeroSectionComponent from "@/components/HeroSectionComponent";
-import StatusButtonComponent from "@/components/StatusButtonComponent";
-import TabEcoeventComponent from "@/components/TabEcoeventComponent";
-import { CalendarDays, MapPin } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import BreadcrumbComponent from "@/components/BreadcrumbComponent";
+import StatusButtonComponent from "@/components/StatusButtonComponent";
+import { CalendarDays, MapPin } from "lucide-react";
+import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_component/JoinEventButtonComponent";
+import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import PostActivityComponent from "./_component/PostActivityComponent";
 
-const EcoEventDetailPage = async ({ params: ParamsPromise }) => {
-  const { ecoeventid } = await ParamsPromise;
+export default async function EcoEventDetailPage({ params }) {
+  const { ecoeventid } = await params;
 
-  // Breadcrumb Section param data
-  const breadcrumbSection = {
+  if (!ecoeventid) {
+    return <p className="p-6 text-red-600">Event not found.</p>;
+  }
+  const breadcrumb = {
     back: "Eco Event",
-    current: "Green Oasis going Miyawaki",
+    current: "hi",
     link: "/organizer/eco-event",
   };
 
-  // Button Status Events
-  const statusSection = [
-    {
-      id: 1,
-      text: "Hand-on event",
-      bgColor: "bg-green",
-      textColor: "text-white",
-    },
-    {
-      id: 2,
-      text: "#Tree-Planting",
-      bgColor: "bg-blue",
-      textColor: "text-white",
-    },
-    {
-      id: 3,
-      text: "Upcoming",
-      bgColor: "bg-[#FFE8D5]",
-      textColor: "text-orange",
-    },
-  ];
   return (
     <main className="w-full">
-      <article className="flex flex-col">
-        {/* Breadcrumb Section */}
-        <div className="py-5">
-          <BreadcrumbComponent
-            back={breadcrumbSection.back}
-            current={breadcrumbSection.current}
-            Link={breadcrumbSection.link}
-          />
-        </div>
+      {/* Breadcrumb */}
+      <div className="py-5">
+        <BreadcrumbComponent
+          back={breadcrumb.back}
+          current={breadcrumb.current}
+          Link={breadcrumb.link}
+        />
+      </div>
 
-        {/* Detail Section */}
-        <article className="flex w-full py-2">
-          <div className="w-full flex flex-col h-auto bg-light-gray rounded-3xl p-5 md:p-8 lg:p-10 relative">
-            {/* Top Section: Organizer Info + Join Button */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-              {/* Organizer Info */}
-              <div className="flex items-center text-xs md:text-sm lg:text-base text-light-green font-semibold">
-                <div className="w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center">
-                  <Image
-                    src={"/assets/Organizer.png"}
-                    width={40}
-                    height={40}
-                    alt="Organizer profile"
-                  />
-                </div>
-                <h3 className="px-3">
-                  United Nations Environment Program (UNEP)
-                </h3>
-              </div>
+      {/* Content */}
+      <article className="flex w-full py-2">
+        <div className="w-full flex flex-col bg-light-gray rounded-3xl p-5 md:p-8 lg:p-10">
+          {/* Organizer Info */}
+          <div className="flex items-center text-light-green font-semibold mb-3">
+            <div className="w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center">
+              <Image
+                src={"/assets/Organizer.png"}
+                width={30}
+                height={30}
+                alt="Organizer"
+              />
             </div>
-
-            {/* Title */}
-            <h2 className="py-3 text-base md:text-lg lg:text-xl font-bold text-dark-green">
-              Green Oasis going Miyawaki
-            </h2>
-
-            {/* Status Tags */}
-            <div className="flex gap-3 flex-wrap mb-2">
-              {statusSection.map((status) => (
-                <StatusButtonComponent
-                  key={status.id}
-                  text={status.text}
-                  bgColor={status.bgColor}
-                  textColor={status.textColor}
-                />
-              ))}
-            </div>
-
-            {/* Date & Location */}
-            <div className="flex items-center mt-3 py-1 text-xs gap-4 md:text-sm lg:text-base text-light-green">
-              <CalendarDays className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
-              <p>12-14 June, 2025 at 8 AM</p>
-            </div>
-            <div className="flex items-center text-xs gap-4 md:text-sm lg:text-base text-light-green">
-              <MapPin className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
-              <p>Kandal Province, Cambodia</p>
-            </div>
-
-            {/* Description */}
-            <p className="text-xs md:text-sm lg:text-base text-light-green py-4">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              since the 1500s...
-            </p>
-            <div className="w-full md:hidden">
-              <JoinEventButtonComponent text={"Join Event"} />
-            </div>
-
-            {/* Image section */}
-            <div className="flex flex-col md:flex-row py-6 gap-6 md:justify-start md:flex-wrap">
-              <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden ">
-                <Image
-                  src="/assets/eventImage.png"
-                  alt="Event image"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden">
-                <Image
-                  src="/assets/eventImage.png"
-                  alt="Event image"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative w-[400px] h-[300px] md:w-[350px] md:h-[300px] bg-white rounded-xl overflow-hidden">
-                <Image
-                  src="/assets/eventImage.png"
-                  alt="Event image"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            {/* Tab */}
-            <TabEcoeventComponent operator={"organizer"} />
-            {/* Post Activity Section */}
-            <PostActivityComponent />
+            <h3 className="px-3">United Nations Environment Program (UNEP)</h3>
           </div>
-        </article>
+
+          {/* Title */}
+          <h2 className="py-3 text-lg lg:text-xl font-bold text-dark-green">
+            {ecoeventid}
+          </h2>
+
+          {/* Status tags */}
+          <div className="flex gap-3 flex-wrap mb-2">
+            <StatusButtonComponent
+              text="Hand-on event"
+              bgColor="bg-green"
+              textColor="text-white"
+            />
+            <StatusButtonComponent
+              text="#Tree-Planting"
+              bgColor="bg-blue"
+              textColor="text-white"
+            />
+            <StatusButtonComponent
+              text="Upcoming"
+              bgColor="bg-[#FFE8D5]"
+              textColor="text-orange"
+            />
+          </div>
+
+          {/* Date & Location */}
+          <div className="flex items-center gap-4 text-light-green text-sm">
+            <CalendarDays className="w-5 h-5" />
+            <p>{ecoeventid}</p>
+          </div>
+          <div className="flex items-center gap-4 text-light-green text-sm">
+            <MapPin className="w-5 h-5" />
+            <p>{ecoeventid}, Cambodia</p>
+          </div>
+
+          {/* Description */}
+          <p className="text-light-green py-4">{ecoeventid}</p>
+
+          {/* Join button (mobile only) */}
+          <div className="w-full md:hidden">
+            <JoinEventButtonComponent text="Join Event" />
+          </div>
+
+          {/* Images */}
+          <div className="flex flex-wrap gap-6 py-6">
+            <div className="relative w-[350px] h-[300px] bg-white rounded-xl overflow-hidden">
+              <Image
+                src="/assets/eventImage.png"
+                alt="Event"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Tabs & Posts */}
+          <TabEcoeventComponent operator="organizer" />
+          <PostActivityComponent />
+        </div>
       </article>
     </main>
   );
-};
-
-export default EcoEventDetailPage;
+}

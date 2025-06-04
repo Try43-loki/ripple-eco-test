@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
 
+import React from "react";
 import { forecast } from "../mockData/forecast";
 import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
+
+import DragScroll from "react-indiana-drag-scroll";
 
 const HourlyForecastComponent = () => {
   const data = forecast;
@@ -15,11 +18,14 @@ const HourlyForecastComponent = () => {
         </p>
       </div>
       {/* Row Of Hourly */}
-      <div className="flex justify-between gap-3 overflow-x-scroll">
+      <DragScroll
+        vertical={false}
+        className="flex justify-between gap-3 cursor-grab overflow-x-scroll scrollbar-hide active:cursor-grabbing"
+      >
         {data.map((value) => (
           <HourlyValueAQIComponent key={value} data={value} />
         ))}
-      </div>
+      </DragScroll>
     </article>
   );
 };
