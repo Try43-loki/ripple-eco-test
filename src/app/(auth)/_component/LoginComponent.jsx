@@ -14,11 +14,23 @@ import { loginAction } from "@/action/auth-action";
 import { redirect } from "next/navigation";
 import { doSocialLogin } from "@/action/loginSocialAction";
 import LoginSocialComponent from "./LoginSocialComponent";
+import { getUserProfileAction } from "@/action/user-action";
 function LoginComponent({ onNext }) {
+  const [message, setMessage] = React.useState("");
   const { handleSubmit, register, reset } = useForm();
 
   const handleLogin = async (formData) => {
-    await loginAction(formData);
+    const isLogin = await loginAction(formData);
+    if (isLogin?.success) {
+      const profile = await getUserProfileAction();
+      if (profile?.data?.organizer) {
+        redirect("/orgainizer/overview");
+      } else {
+        redirect("/home");
+      }
+    } else {
+      setMessage(isLogin?.message);
+    }
     reset();
   };
   const [showPassword, setShowPassword] = React.useState(false);
@@ -103,11 +115,12 @@ function LoginComponent({ onNext }) {
                     placeholder="123"
                     {...register("password")}
                   />
+                  {<p className="text-red text-sm ">{message}</p>}
                 </div>
 
                 <Link
                   href="/forget-password"
-                  className="underline text-end w-full my-2 font-light  text-white text-sub-info "
+                  className="underline text-end self-end my-2 font-light  text-white text-sub-info "
                 >
                   Forgot your password?
                 </Link>

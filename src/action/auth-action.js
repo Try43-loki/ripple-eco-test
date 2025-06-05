@@ -2,6 +2,7 @@
 
 import {
   addInfomationService,
+  loginService,
   loginSocialService,
   registerService,
   registerWithGoogleService,
@@ -14,21 +15,28 @@ import { redirect } from "next/navigation.js";
 export const loginAction = async (formData) => {
   const email = formData.email;
   const password = formData.password;
-  const result = await signIn("credentials", {
-    email,
-    password,
-    redirect: false,
-  });
-  console.log("result", result);
 
-  // if (result?.ok) {
-  //   return { success: true };
-  // } else {
-  //   return {
-  //     success: false,
-  //     error: result?.error || "Login failed",
-  //   };
-  // }
+  try {
+    const res = await loginService({ email, password });
+    if (res?.status == 400) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
+    }
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    return { success: true, data: res };
+  } catch (error) {
+    console.error("Error in login:", error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
 };
 export const registerAction = async (formData) => {
   const email = formData.email;
@@ -117,13 +125,14 @@ export const addInfamtionAction = async (formData) => {
 export const registerWithGoogleAction = async (formData) => {
   try {
     const res = await registerWithGoogleService(formData);
-
-    const token = res?.data?.token;
-    if (token && typeof window !== "undefined") {
-      localStorage.setItem("token", token);
+    if (res?.status == 409) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
     }
-
-    return res;
+    console.log(res);
+    return { success: true, data: res };
   } catch (err) {
     console.error("Registration error:", err);
     return {

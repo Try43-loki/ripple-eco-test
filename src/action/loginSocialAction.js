@@ -14,5 +14,5 @@ export const doSocialLogin = async (formData) => {
 };
 
 export const dologout = async () => {
-  await signOut({ redirectTo: "/" });
+  await signOut({ redirectTo: "/login" });
 };
