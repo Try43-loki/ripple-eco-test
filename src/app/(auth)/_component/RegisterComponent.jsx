@@ -10,6 +10,7 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
+import LoginSocialComponent from "./LoginSocialComponent";
 
 function RegisterCopmponent({ onNext, handleEmailChange }) {
   const [isVerified, setIsVerified] = React.useState(false);
@@ -94,7 +95,7 @@ function RegisterCopmponent({ onNext, handleEmailChange }) {
                   type="submit"
                   className="w-full text-white bg-strong-green hover:bg-green-800 text text-center cursor-pointer rounded-2xl p-4 h-11 text-lg"
                 >
-                  Sent OTP
+                  Next
                 </Button>
               </section>
             </form>
@@ -105,14 +106,7 @@ function RegisterCopmponent({ onNext, handleEmailChange }) {
             </div>
             {/* login with google */}
 
-            <Button className="w-full  text-center cursor-pointer text-dark-green text-lg hover:bg-light-gray  bg-lighter-white backdrop-blur-md  rounded-2xl p-4 h-11 ">
-              <img
-                src="/icons/flat-color-icons_google.png"
-                className="h-5 w-5"
-                alt=""
-              />
-              Login with Google
-            </Button>
+            <LoginSocialComponent />
             <div className="flex justify-center items-center gap-2">
               <p className="text-sm text-light-gray font-light">
                 Already have an account?

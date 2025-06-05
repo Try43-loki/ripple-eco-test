@@ -5,8 +5,8 @@ export const registerSchema = z.object({
 });
 
 // export const infoSchema = z.object({
-//   firstname: z.string().min(1, { message: "First name is required" }),
-//   lastname: z.string().min(1, { message: "Last name is required" }),
+//   firstName: z.string().min(1, { message: "First name is required" }),
+//   lastName: z.string().min(1, { message: "Last name is required" }),
 //   phone: z.string().min(1, { message: "Phone is required" }),
 //   address: z.string().min(1, { message: "Address is required" }),
 //   gender: z.enum(["male", "female"], {
@@ -28,8 +28,8 @@ export const registerSchema = z.object({
 
 export const infoSchema = z
   .object({
-    firstname: z.string().min(1, "First name is required"),
-    lastname: z.string().min(1, "Last name is required"),
+    firstName: z.string().min(1, "First name is required"),
+    lastName: z.string().min(1, "Last name is required"),
     birthDate: z.string().min(1, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     address: z.string().min(1, "Address is required"),
@@ -51,8 +51,8 @@ export const infoSchema = z
 // Alternative approach: Create a more sophisticated schema that validates based on role
 export const infoSchemaWithConditional = z
   .object({
-    firstname: z.string().min(1, "First name is required"),
-    lastname: z.string().min(1, "Last name is required"),
+    firstName: z.string().min(1, "First name is required"),
+    lastName: z.string().min(1, "Last name is required"),
     birthDate: z.string().min(1, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     address: z.string().min(1, "Address is required"),
@@ -80,8 +80,8 @@ export const infoSchemaWithConditional = z
 // For even more control, you can create dynamic schemas
 export const createInfoSchema = (isOrganizer) => {
   return z.object({
-    firstname: z.string().min(1, "First name is required"),
-    lastname: z.string().min(1, "Last name is required"),
+    firstName: z.string().min(1, "First name is required"),
+    lastName: z.string().min(1, "Last name is required"),
     birthDate: z.string().min(1, "Date of birth is required"),
     gender: z.string().min(1, "Gender is required"),
     address: z.string().min(1, "Address is required"),

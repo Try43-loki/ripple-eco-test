@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
-import { signOut } from "../../auth";
+import { signOut } from "../auth";
 const NavBarComponent = () => {
   const [isLoggin, setisLoggin] = useState(true);
   const currentPath = usePathname();

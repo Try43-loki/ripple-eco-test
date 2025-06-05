@@ -76,7 +76,7 @@ function OTPVerifyComponent({ onNext, onPrev, email }) {
 
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
-      <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20">
+      <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20 gap-15">
         <article className="w-1/4 lg:w-[300px]">
           <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
             Ripple<span className="text-green">Eco</span>
