@@ -1,6 +1,7 @@
 import React from "react";
 import TagComponent from "@/components/TagComponent";
-// import moment from "moment";
+import moment from "moment";
+import TagCardComponent from "../../discussion-forums/_component/TagCardComponent";
 
 const CardDiscussion = ({ discussions }) => {
   return (
@@ -22,8 +23,8 @@ const CardDiscussion = ({ discussions }) => {
                   {data?.appUser?.firstName} {data?.appUser?.lastName}
                 </h2>
                 <p className="text-xs md:text-sm lg:text-base text-lighters-green">
-                  {/* {moment(data?.createdAt).fromNow()} */}
-                  {data?.createdAt}
+                  {moment(data?.createdAt).fromNow()}
+                  {/* {data?.createdAt} */}
                 </p>
               </div>
             </div>
@@ -40,19 +41,18 @@ const CardDiscussion = ({ discussions }) => {
               {data?.image && (
                 <img
                   src={data?.image}
-                  alt="Discussion"
-                  className="w-full mt-4 rounded-xl object-cover"
+                  alt={data?.title}
+                  className="w-full h-72 mt-4 rounded-xl object-cover"
                 />
               )}
 
               {/* Tags */}
-              {/* {data?.tag?.length > 0 && ( */}
+              
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {/* {data.tag.map((t, i) => ( */}
-                    <TagComponent  />
-                  {/* ))} */}
+                    <TagCardComponent tags={data?.tag} counts={data?.commentCount}/>
+                    {/* <TagComponent tagData={data?.tag}  /> */}
                 </div>
-              {/* )} */}
+           
             </div>
           </div>
         </article>

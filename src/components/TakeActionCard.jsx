@@ -6,12 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Download, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { DeleteComponent } from "../app/(user)/take-action/_component/DeleteComponent";
 import Link from "next/link";
-import { Button } from "./ui/button";
 
 const TakeActionCard = ({
   image,
@@ -54,7 +53,7 @@ const TakeActionCard = ({
             <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
               Action
             </p>
-            {isOwner ? <DeleteComponent /> : null}
+            {isOwner ? <DeleteComponent cardId={id}/> : null}
           </div>
         </CardContent>
 

@@ -6,7 +6,7 @@ const TagComponent = ({ tagData }) => {
     <main className="w-full">
       <article className="flex justify-between">
         <article className="flex justify-start items-center gap-4 flex-wrap">
-          {tagData?.tag?.map((data, index) => (
+          {tagData?.map((data, index) => (
             <div
               key={index}
               className="mt-1 text-xs bg-lighter-white w-fit rounded-full py-1 px-2 md:px-3"
