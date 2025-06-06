@@ -204,7 +204,7 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
             />
             <label
               htmlFor="file"
-              className={`h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden`}
+              className=" h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
             >
               {imagePreview ? (
                 <img
