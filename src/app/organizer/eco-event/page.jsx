@@ -7,7 +7,6 @@ import { getAllEcoEventService } from "@/service/ecoEventService";
 export default async function EcoEventPage() {
   const response = await getAllEcoEventService();
   const events = response?.data ?? [];
-  // cosnsole.log("All Events : ", events);
 
   const headerSection = {
     title: "Eco‑Event",

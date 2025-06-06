@@ -1,5 +1,9 @@
 export const eventTypes = [
   {
+    label: "All",
+    value: "all",
+  },
+  {
     label: "Seminar",
     value: "seminar",
   },
@@ -9,6 +13,10 @@ export const eventTypes = [
   },
 ];
 export const categories = [
+  {
+    label: "All",
+    value: "all",
+  },
   {
     label: "Tree planting",
     value: "tree-planting",
@@ -33,6 +41,10 @@ export const categories = [
 
 export const certificates = [
   {
+    label: "All",
+    value: "all",
+  },
+  {
     label: "Certificate",
     value: "certificate",
   },
@@ -43,6 +55,10 @@ export const certificates = [
 ];
 
 export const contributeType = [
+  {
+    label: "All",
+    value: "all",
+  },
   {
     label: "Free",
     value: "free",
@@ -66,6 +82,10 @@ export const contributeType = [
 ];
 
 export const locations = [
+  {
+    label: "All",
+    value: "all",
+  },
   {
     label: "Phnom Penh",
     value: "phnom-penh",
@@ -168,6 +188,10 @@ export const locations = [
   },
 ];
 export const slots = [
+  {
+    label: "All",
+    value: "all",
+  },
   {
     label: "Available",
     value: "available",
