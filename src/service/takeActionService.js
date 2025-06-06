@@ -2,7 +2,7 @@ import { apiRequest } from "@/utils/api";
 const token ="eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxMTAwOTIsImV4cCI6MTc0OTM2OTI5Mn0.EuDDPgDyThOKXpbJPzqMh-g-TgBuXzHQmO2fNP9CYZg"
 export const getAllTakeActionService = async () => {
     try {
-        const  data = await apiRequest ("/takeActions/all", "GET", token );
+        const  data = await apiRequest ("/takeActions/all", "GET",null,  token );
         return data ;
     } catch (e){
         console.log( "error",e);
@@ -10,7 +10,7 @@ export const getAllTakeActionService = async () => {
 }
 export const getTakeActionByTitleService = async (title) => {
     try {
-        const  data = await apiRequest (`/takeActions/${title}`, "GET", token );
+        const  data = await apiRequest (`/takeActions/${title}`, "GET",null, token );
         return data ;
     } catch (e){
         console.log( "error",e);
@@ -27,7 +27,7 @@ export const getOwnTakeActionService = async () => {
 export const deleteTakeActionService = async (takeActionId) => {
     try {
         const data = await apiRequest(
-            `/takeActions/${takeActionId}`,
+            `/takeActions/${takeActionId}`, 
             "POST",
             null,
             token

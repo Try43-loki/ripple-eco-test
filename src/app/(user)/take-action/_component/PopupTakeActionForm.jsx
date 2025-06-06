@@ -141,7 +141,9 @@ const PopupTakeActionForm = () => {
               />
               <Label
                 htmlFor="file"
-                className="h-52 w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+                className={` h-52 w-full ${
+                  imagePreview ? '' : 'border border-dashed border-orange'
+                } flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden`}
               >
                 {imagePreview ? (
                   <img
