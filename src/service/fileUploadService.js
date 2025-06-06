@@ -2,20 +2,16 @@ import { baseUrl } from "./constants";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5YW5la2FoNDAwQGNpZ2lkZWEuY29tIiwiaWF0IjoxNzQ4ODQ5MzI0LCJleHAiOjE3NDkxMDg1MjR9.xT38yXnRrqKXlByDQqo_pbYrX3WJI6kADd8B7PU2raY";
 
-export const getFileUploadService = async (file) => {
+export const getFileUploadService = async (image) => {
   try {
     const formData = new FormData();
-    formData.append("file", file);
-    const response = await fetch(`${baseUrl}/upload-image`, {
+    formData.append("file", image);
+    const response = await fetch(`http://192.168.42.98:8883/upload-image`, {
       method: "POST",
-      headers: {
-        Accept: "*/*",
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
+      body: formData,
     });
-    return response;
+    const data = await response.json();
+    return data;
   } catch (e) {
     console.log("Upload error:", e);
     throw e;

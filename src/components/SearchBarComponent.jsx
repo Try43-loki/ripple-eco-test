@@ -3,9 +3,13 @@
 import React from "react";
 import { Search } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const SearchBarComponent = ({ placeholder = "Search", icon = null , pagePath}) => {
+const SearchBarComponent = ({
+  placeholder = "Search",
+  icon = null,
+  pagePath,
+}) => {
   // const handleSubmit = (e) => {
   //   e.preventDefault(); // prevent page reload for now
   // };
@@ -23,7 +27,7 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null , pagePath}) =
         setDebouncedQuery(trimmedQuery);
       }
     }, 1500);
-  
+
     return () => clearTimeout(handler);
   }, [searchQuery]);
 
@@ -33,7 +37,8 @@ const SearchBarComponent = ({ placeholder = "Search", icon = null , pagePath}) =
     }
   }, [debouncedQuery, pathName, router]);
   return (
-    <form action=""
+    <form
+      action=""
       onSubmit={(e) => e.preventDefault()}
       className="flex w-full items-center
              border border-lightes-white rounded-lg md:rounded-2xl 

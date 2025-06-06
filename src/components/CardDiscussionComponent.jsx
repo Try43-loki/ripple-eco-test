@@ -48,9 +48,9 @@ const CardDiscussionComponent = ({ discussions }) => {
             {/* Image */}
             {discussions?.image && (
               <img
-                src={discussions?.image}
+                src={discussions?.image.replace("temp-file", "permanent-file")}
                 alt="discussion visual"
-                className="w-full mt-4 rounded-xl object-cover"
+                className="w-full h-72 mt-4 rounded-xl object-cover"
               />
             )}
 
