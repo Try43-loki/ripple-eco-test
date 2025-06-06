@@ -72,27 +72,31 @@ export default function CreateEventComponent({
   };
 
   const handleEventSubmit = (data) => {
-    console.log("Complete form data:", data);
+    setFormData({
+      ...formData,
+      ...data,
+    });
+    console.log("Form data:", data);
 
     // Validate that all required fields are filled
-    const requiredFields = [
-      "title",
-      "categories",
-      "eventType",
-      "volunteer",
-      "certificate",
-      "location",
-      "contributeType",
-      "startDate",
-      "endDate",
-      "description",
-    ];
-    const missingFields = requiredFields.filter((field) => !data[field]);
+    // const requiredFields = [
+    //   "title",
+    //   "categories",
+    //   "eventType",
+    //   "volunteer",
+    //   "certificate",
+    //   "location",
+    //   "contributeType",
+    //   "startDate",
+    //   "endDate",
+    //   "description",
+    // ];
+    // const missingFields = requiredFields.filter((field) => !data[field]);
 
-    if (missingFields.length > 0) {
-      console.log("Missing fields:", missingFields);
-      return;
-    }
+    // if (missingFields.length > 0) {
+    //   console.log("Missing fields:", missingFields);
+    //   return;
+    // }
 
     // All form data is now available in the data object
     onNext && onNext(data);

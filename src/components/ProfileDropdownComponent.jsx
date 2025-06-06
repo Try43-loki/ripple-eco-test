@@ -1,5 +1,4 @@
 import { dologout } from "@/action/loginSocialAction";
-import { getUserProfileAction } from "@/action/user-action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,15 +19,21 @@ export function ProfileDropdownComponent({ operator, profile }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        {img ? (
-          <img
-            src={img}
-            alt="avatar"
-            className="w-[30px] h-[30px] rounded-full cursor-pointer"
-          />
+        {operator === "organizer" ? (
+          <ChevronDown className="text-lighter-green" />
         ) : (
-          <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">
-            <p>{name || "N"}</p>
+          <div>
+            {img ? (
+              <img
+                src={img}
+                alt="avatar"
+                className="w-[30px] h-[30px] rounded-full cursor-pointer"
+              />
+            ) : (
+              <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">
+                <p>{name || "N"}</p>
+              </div>
+            )}
           </div>
         )}
       </PopoverTrigger>
