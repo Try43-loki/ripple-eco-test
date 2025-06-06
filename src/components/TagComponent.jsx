@@ -1,4 +1,3 @@
-import CommentButtonComponent from "@/app/(user)/discussion-forums/_component/CommentButtonComponent";
 import React from "react";
 
 const TagComponent = ({ tagData }) => {

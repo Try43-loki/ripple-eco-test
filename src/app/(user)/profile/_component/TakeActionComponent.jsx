@@ -6,7 +6,8 @@ const TakeActionComponent = ( {cardData} ) => {
     <main>
       <section className="w-full flex flex-row flex-wrap justify-between items-center">
         {cardData.map((data, index) => 
-        <div className="w-70" key={index}>
+        data?.deleted === false &&
+        <div className="w-70 mt-5" key={index}>
           <TakeActionCard
             image={data?.image}
             id ={data?.takeActionId}

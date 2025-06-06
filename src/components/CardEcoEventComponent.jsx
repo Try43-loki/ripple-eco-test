@@ -18,7 +18,7 @@ const CardEcoEventComponent = ({
   const status = event?.eventStatus || eventStatus;
 
   return (
-    <div className="relative w-[250px] md:w-[270px] lg:w-[280px] pb-6 border border-black/8 bg-white rounded-2xl shadow-md">
+    <div className="relative w-[250px] md:w-[270px] lg:w-[340px] pb-6 border border-black/8 bg-white rounded-2xl shadow-md">
       {/* Top badge & menu */}
       <div className="absolute flex gap-2 flex-wrap z-[1] justify-between w-full p-2">
         <span className="bg-white/90 text-xs text-darker-gray px-2 py-1 rounded-2xl shadow">
@@ -27,18 +27,22 @@ const CardEcoEventComponent = ({
         {operator === "organizer" && <ListComponent />}
       </div>
 
-      {/* Image section */}
       <Link
         href={
           operator === "organizer"
-            ? `/eco-event/${event?.ecoeventid}`
-            : `/organizer/eco-event/${event?.ecoeventid}`
+            ? `/organizer/eco-event/${event?.eventId}`
+            : `/eco-event/${event?.eventId}`
         }
         className="cursor-pointer"
       >
-        <div className="relative w-full h-[150px]">
+        {/* Image section */}
+        <div className="relative w-full h-[170px]">
           <Image
-            src={event?.image?.[0] || "/assets/eventImage.png"}
+            src={
+              Array.isArray(event?.image) && event?.image?.[0]
+                ? event.image[0]
+                : "/assets/eventImage.png"
+            }
             alt="Event"
             fill
             priority
@@ -71,7 +75,7 @@ const CardEcoEventComponent = ({
             </p>
           </div>
           <p className="text-dark-green text-sm">{event?.startDate}</p>
-          <h3 className="text-dark-green text-lg font-bold leading-tight mt-1">
+          <h3 className="text-dark-green text-lg font-bold leading-tight mt-1 line-clamp-1">
             {event?.title}
           </h3>
           <p className="text-light-green text-sm mt-1">

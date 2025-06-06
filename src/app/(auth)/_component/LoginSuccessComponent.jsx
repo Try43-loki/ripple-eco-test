@@ -4,7 +4,7 @@ import Image from "next/image";
 
 async function LoginSuccessComponent() {
   const profile = await getUserProfileAction();
-  console.log("profile", profile);
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
       <section className="w-full h-screen bg-[#00000054] flex gap-20 justify-center items-center p-10 lg:p-20">

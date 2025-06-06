@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import SearchBarComponent from "./SearchBarComponent";
 
-const HeroSectionComponent = ({ text, description, showSearchBar }) => {
+const HeroSectionComponent = async ({ text, description, showSearchBar }) => {
   return (
     <article className="w-full relative">
       <Image
@@ -20,11 +20,11 @@ const HeroSectionComponent = ({ text, description, showSearchBar }) => {
         <p className="text-sm md:text-base lg:text-xl max-w-lg !text-light-gray">
           {description || "Description"}
         </p>
-        {showSearchBar && (
-          <div className="w-full">
+        {/* {showSearchBar && (
+          <div className="w-full bg-green">
             <SearchBarComponent />
           </div>
-        )}
+        )} */}
       </div>
     </article>
   );
