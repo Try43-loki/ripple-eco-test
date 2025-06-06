@@ -13,9 +13,8 @@ const CommentComponent = ({ discussions }) => {
   const postOwner = discussions?.data?.appUser?.appUserId;
 
   const { comments, addComment, updateComment } = useCommentSocket(
-    discussions.data.discussionId
+    discussions.data?.discussionId
   );
-
   const handleReply = (comment) => {
     setReplyTarget(comment);
     setCommentId(comment?.commentId);

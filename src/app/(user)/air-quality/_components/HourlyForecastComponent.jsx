@@ -4,7 +4,7 @@ import React from "react";
 import { forecast } from "../mockData/forecast";
 import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
 
-import DragScroll from "react-indiana-drag-scroll";
+// import DragScroll from "react-indiana-drag-scroll";
 
 const HourlyForecastComponent = () => {
   const data = forecast;
