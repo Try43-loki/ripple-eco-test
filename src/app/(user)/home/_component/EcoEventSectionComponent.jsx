@@ -5,7 +5,7 @@ import { getAllEcoEventService } from "@/service/ecoEventService";
 
 const EcoEventSectionComponent = async () => {
   const response = await getAllEcoEventService();
-  const data = Array.isArray(response) ? response : response?.data || [];
+  const events = response?.data ?? [];
 
   return (
     <div>
@@ -23,20 +23,10 @@ const EcoEventSectionComponent = async () => {
 
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
-              {data?.map((item, index) => (
-                <CardEcoEventComponent
-                  key={index}
-                  href={`/eco-event/${item?.eventId}`}
-                  type={item.eventTypes.eventType}
-                  image={item.image}
-                  contribute={item.contributeTypesResponse.contributeTypeName}
-                  category={item.category.categoryName}
-                  status={item.eventStatus}
-                  date={item.startDate}
-                  participats={item.maxSlot}
-                  title={item.title}
-                  location={item.provinces.provinceName}
-                />
+              {events?.map((event) => (
+                <div key={event?.eventId}>
+                  <CardEcoEventComponent event={event} />
+                </div>
               ))}
             </div>
           </div>

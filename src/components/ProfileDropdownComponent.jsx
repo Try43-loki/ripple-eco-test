@@ -28,7 +28,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
           />
         ) : (
           <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">
-            <p>{name}</p>
+            <p>{name || "N"}</p>
           </div>
         )}
       </PopoverTrigger>
