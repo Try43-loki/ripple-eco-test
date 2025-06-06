@@ -6,10 +6,13 @@ export const getFileUploadService = async (image) => {
   try {
     const formData = new FormData();
     formData.append("file", image);
-    const response = await fetch(`http://192.168.42.98:8883/upload-image`, {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `http://34.101.216.70:8883/api/v1/images/upload-image`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const data = await response.json();
     return data;
   } catch (e) {

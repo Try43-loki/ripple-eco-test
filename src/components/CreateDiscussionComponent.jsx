@@ -25,11 +25,10 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
     handleSubmit,
     setValue,
     getValues,
-    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(discussionSchema),
-    mode: "onChange", // Enables real-time validation
+    mode: "onChange",
     defaultValues: {
       title: "",
       description: "",
