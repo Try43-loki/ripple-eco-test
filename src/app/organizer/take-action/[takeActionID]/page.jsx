@@ -3,8 +3,16 @@ import HeroSectionDashboarComponent from "../_component/HeroSectionDashboarCompo
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 import TakeActionDetailBodyComponent from "../_component/TakeActionDetailBodyComponent";
+import { getAllTakeActionService } from "@/service/takeActionService";
+import { viewUserProfileService } from "@/service/profileService";
 
-const TakeActionDetailPage = () => {
+const TakeActionDetailPage = async ( {params , searchParams}) => {
+  const view = searchParams?.view;
+  const owner = searchParams?.owner;
+  const id = params?.takeActionID;
+  const cardData = await getAllTakeActionService();
+  const cardDetail = cardData?.data?.find((item) => item.takeActionId === id);
+  const userData = await viewUserProfileService(cardDetail?.appUserId);
   return (
     <>
       <section className="w-full">
@@ -15,11 +23,11 @@ const TakeActionDetailPage = () => {
           <BreadcrumbComponent
             back={"Take Action"}
             Link={"/organizer/take-action"}
-            current={"Green Oasis going Miyawaki"}
+            current={cardDetail?.title}
           />
         </section>
 
-        <TakeActionDetailBodyComponent />
+        <TakeActionDetailBodyComponent  userData={userData} cardDetail={cardDetail}/>
       </section>
     </>
   );

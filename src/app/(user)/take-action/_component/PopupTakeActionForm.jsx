@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ImagePlus } from "lucide-react";
+
 import {
   Dialog,
   DialogClose,
@@ -16,14 +20,22 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { createTakeAction } from "@/action/Take-actionAction";
+
+// Zod schema
 
 const PopupTakeActionForm = () => {
-  const [title, setTitle] = useState("");
-  const [sendTo, setSendTo] = useState("");
-  const [description, setDescription] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
-  const [isAnonymous, setIsAnonymous] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [isAnonymous, setIsAnonymous] = useState(false);
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+  });
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -35,9 +47,21 @@ const PopupTakeActionForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
+  const onSubmit = async (data) => {
+    const formData = {
+      ...data,
+      isAnonymous,
+      image: imageFile,
+    };
+    console.log("Form submitted:", formData);
+    // Handle actual form submission here
+    const create = await createTakeAction(formData);
+    reset();
+    setImagePreview(null);
+  };
+  const handleCancel = () => {
+    reset();
+    setImagePreview(null);
   };
 
   return (
@@ -49,7 +73,7 @@ const PopupTakeActionForm = () => {
       </DialogTrigger>
 
       <DialogContent className="lg:w-140 bg-white">
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <DialogHeader>
             <DialogTitle className="text-lg text-primary">
               Create Survey
@@ -60,49 +84,47 @@ const PopupTakeActionForm = () => {
             <div className="flex flex-col gap-y-3 w-3/5">
               {/* Title */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="title" className="text-sm">
-                  Title
-                </Label>
+                <Label htmlFor="title" className="text-sm">Title</Label>
                 <Input
-                  type="text"
                   id="title"
                   placeholder="Enter take action title"
-                  required
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
                   className="px-3 border-none py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+                  {...register("title")}
+                  required
                 />
+                {errors.title && (
+                  <p className="text-red-500 text-xs">{errors.title.message}</p>
+                )}
               </div>
 
               {/* Send To */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="send-to" className="text-sm">
-                  Send To
-                </Label>
+                <Label htmlFor="sendTo" className="text-sm">Send To</Label>
                 <Input
-                  type="text"
-                  id="send-to"
+                  id="sendTo"
                   placeholder="e.g., @government"
-                  required
-                  value={sendTo}
-                  onChange={(e) => setSendTo(e.target.value)}
                   className="px-3 border-none py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+                  {...register("sendTo")}
+                  required
                 />
+                {errors.sendTo && (
+                  <p className="text-red-500 text-xs">{errors.sendTo.message}</p>
+                )}
               </div>
 
               {/* Description */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="description" className="text-sm">
-                  Description
-                </Label>
+                <Label htmlFor="description" className="text-sm">Description</Label>
                 <Textarea
                   id="description"
                   placeholder="Enter take action description"
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
                   className="border-none px-3 py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+                  {...register("description")}
+                  required
                 />
+                {errors.description && (
+                  <p className="text-red-500 text-xs">{errors.description.message}</p>
+                )}
               </div>
             </div>
 
@@ -119,7 +141,9 @@ const PopupTakeActionForm = () => {
               />
               <Label
                 htmlFor="file"
-                className="h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+                className={` h-52 w-full ${
+                  imagePreview ? '' : 'border border-dashed border-orange'
+                } flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden`}
               >
                 {imagePreview ? (
                   <img
@@ -139,28 +163,26 @@ const PopupTakeActionForm = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end space-x-2 ">
+          {/* Anonymous Switch */}
+          <div className="flex items-center justify-end space-x-2">
             <Switch
               id="anonymous"
               checked={isAnonymous}
               onCheckedChange={setIsAnonymous}
-              className="text-red-400 w-10 h-5 rounded-full"
+              className=" w-10 h-5 rounded-full"
             />
-            <Label
-              htmlFor="anonymous"
-              className="text-sm font-medium text-dark-green"
-            >
+            <Label htmlFor="anonymous" className="text-sm font-medium text-dark-green">
               Anonymous
             </Label>
-            
           </div>
-          
+
           <DialogFooter className="mt-2.5 flex flex-row gap-x-7 items-end justify-end w-full">
             <DialogClose asChild>
               <Button
                 type="button"
                 variant="outline"
                 className="w-auto bg-red hover:bg-red text-light-white hover:text-lighter-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-lg px-4 py-5 md:py-4.5"
+                onClick={handleCancel}
               >
                 Cancel
               </Button>

@@ -8,24 +8,94 @@ import React from "react";
 import { SelectComponent } from "./SelectComponent";
 import SearchComponent from "./SearchComponent";
 import { DatePickerComponent } from "@/app/(auth)/_component/DatePickerComponent";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createEventSchemaFromData } from "@/lib/zod/eventShcema";
+import {
+  categories,
+  certificates,
+  contributeType,
+  eventTypes,
+  locations,
+} from "@/data";
 
 export default function CreateEventComponent({
   formData,
   setFormData,
   onNext,
 }) {
-  const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
+  const eventSchema = createEventSchemaFromData({
+    categories,
+    eventTypes,
+    certificates,
+    contributeType,
+    locations,
+  });
+  const {
+    handleSubmit,
+    control,
+    register,
+    getValues,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(eventSchema),
+    defaultValues: {
+      title: "",
+      categories: "",
+      eventType: "",
+      volunteer: "",
+      certificate: "",
+      location: "",
+      contributeType: "",
+      startDate: null,
+      endDate: null,
+      description: "",
+      picture: null,
+    },
+  });
+
+  // Handle file input
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setValue("picture", file);
     setFormData({
       ...formData,
-      [name]: type === "file" ? files[0] : value,
+      picture: file,
     });
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    console.log("Collected Form Data:", formData);
-    onNext();
+  // Get all form values
+  const getAllFormValues = () => {
+    return getValues();
+  };
+
+  const handleEventSubmit = (data) => {
+    console.log("Complete form data:", data);
+
+    // Validate that all required fields are filled
+    const requiredFields = [
+      "title",
+      "categories",
+      "eventType",
+      "volunteer",
+      "certificate",
+      "location",
+      "contributeType",
+      "startDate",
+      "endDate",
+      "description",
+    ];
+    const missingFields = requiredFields.filter((field) => !data[field]);
+
+    if (missingFields.length > 0) {
+      console.log("Missing fields:", missingFields);
+      return;
+    }
+
+    // All form data is now available in the data object
+    onNext && onNext(data);
   };
 
   return (
@@ -33,105 +103,170 @@ export default function CreateEventComponent({
       <h1 className="w-full text-lg text-dark-green font-semibold mb-5">
         Event details
       </h1>
-      <form onSubmit={handleNext} className="flex w-full flex-col gap-y-8">
+      <form
+        onSubmit={handleSubmit(handleEventSubmit)}
+        className="flex w-full flex-col gap-y-8"
+      >
         {/* Section 1 */}
         <div className="flex w-full gap-x-5">
-          <div className="grid w-full  gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label htmlFor="title">Title</Label>
             <Input
               name="title"
-              value={formData.title || ""}
-              onChange={handleChange}
               placeholder="Tree planting"
               className="bg-lighter-white text-gray-600 border-none h-10"
+              {...register("title")}
             />
+            <p className="text-sm text-red">{errors?.title?.message}</p>
           </div>
           <div className="grid w-full gap-1.5">
             <Label>Categories</Label>
-            <SelectComponent
-              operator="Categories"
-              formData={formData}
-              setFormData={setFormData}
+            <Controller
+              name="categories"
+              control={control}
+              render={({ field }) => (
+                <SelectComponent
+                  operator="Categories"
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Choose category"
+                />
+              )}
             />
+            <p className="text-sm text-red">{errors?.categories?.message}</p>
           </div>
           <div className="grid w-full gap-1.5">
             <Label>Event type</Label>
-            <SelectComponent
-              operator="Event_type"
-              formData={formData}
-              setFormData={setFormData}
+            <Controller
+              name="eventType"
+              control={control}
+              render={({ field }) => (
+                <SelectComponent
+                  operator="Event_type"
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Choose event type"
+                />
+              )}
             />
+            <p className="text-sm text-red">{errors?.eventType?.message}</p>
           </div>
         </div>
 
         {/* Section 2 */}
         <div className="flex gap-x-5">
           <div className="flex w-1/3 gap-x-5">
-            <div className="grid w-full  gap-1.5">
+            <div className="grid w-full gap-1.5">
               <Label htmlFor="volunteer">Volunteer</Label>
               <Input
                 name="volunteer"
-                value={formData.volunteer || ""}
-                onChange={handleChange}
                 placeholder="1000"
                 className="bg-lighter-white text-gray-600 border-none h-10"
+                {...register("volunteer")}
               />
+              <p className="text-sm text-red">{errors?.volunteer?.message}</p>
             </div>
-            <div className="grid w-full  gap-1.5">
+            <div className="grid w-full gap-1.5">
               <Label>Certificate</Label>
-              <SelectComponent
-                operator="Certificate"
-                formData={formData}
-                setFormData={setFormData}
+              <Controller
+                name="certificate"
+                control={control}
+                render={({ field }) => (
+                  <SelectComponent
+                    operator="Certificate"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Choose certificate"
+                  />
+                )}
               />
+              <p className="text-sm text-red">{errors?.certificate?.message}</p>
             </div>
           </div>
           <div className="flex w-2/3 gap-x-5">
-            <div className="grid w-full  gap-1.5">
+            <div className="grid w-full gap-1.5">
               <Label>Location</Label>
-              <SelectComponent
-                operator="Location"
-                formData={formData}
-                setFormData={setFormData}
+              <Controller
+                name="location"
+                control={control}
+                render={({ field }) => (
+                  <SelectComponent
+                    operator="Location"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Choose location"
+                  />
+                )}
               />
+              <p className="text-sm text-red">{errors?.location?.message}</p>
             </div>
-            <div className="grid w-full  gap-1.5">
+            <div className="grid w-full gap-1.5">
               <Label>Contribute type</Label>
-              <SelectComponent
-                operator="Contribute_type"
-                formData={formData}
-                setFormData={setFormData}
+              <Controller
+                name="contributeType"
+                control={control}
+                render={({ field }) => (
+                  <SelectComponent
+                    operator="Contribute_type"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Choose contribution type"
+                  />
+                )}
               />
+              <p className="text-sm text-red">
+                {errors?.contributeType?.message}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Section 3 */}
         <div className="flex gap-x-5">
-          <div className="grid w-full  gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label>Start date</Label>
-            <DatePickerComponent
-              name="start_date"
-              formData={formData}
-              setFormData={setFormData}
+            <Controller
+              name="startDate"
+              control={control}
+              render={({ field }) => (
+                <DatePickerComponent
+                  name="start_date"
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Select start date"
+                  error={errors?.startDate}
+                />
+              )}
             />
+            <p className="text-sm text-red">{errors?.startDate?.message}</p>
           </div>
-          <div className="grid w-full  gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label>End date</Label>
-            <DatePickerComponent
-              name="end_date"
-              formData={formData}
-              setFormData={setFormData}
+            <Controller
+              name="endDate"
+              control={control}
+              render={({ field }) => (
+                <DatePickerComponent
+                  name="end_date"
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Select end date"
+                  error={errors?.endDate}
+                />
+              )}
             />
+            <p className="text-sm text-red">{errors?.endDate?.message}</p>
           </div>
-          <div className="grid w-full  gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label htmlFor="picture">Picture</Label>
             <Input
               type="file"
               name="picture"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="bg-lighter-white text-gray-600 border-none h-10"
+              accept="image/*"
             />
+            <p className="text-sm text-red">{errors?.picture?.message}</p>
           </div>
         </div>
 
@@ -141,20 +276,37 @@ export default function CreateEventComponent({
           <Textarea
             name="description"
             rows={5}
-            value={formData.description || ""}
-            onChange={handleChange}
             placeholder="Details about your event."
             className="h-40 border border-light-strok bg-lighter-white text-gray-600"
+            {...register("description")}
           />
+          <p className="text-sm text-red">{errors?.description?.message}</p>
         </div>
 
-        {/* Next Button */}
-        <button
-          type="submit"
-          className="self-end bg-green text-white rounded-xl h-10 w-28 flex items-center justify-center gap-x-1"
-        >
-          Next <ArrowRight size={15} />
-        </button>
+        {/* Debug section - remove in production */}
+        {/* <div className="p-4 bg-gray-50 rounded-lg">
+          <h3 className="font-semibold mb-2">Form Values (Debug):</h3>
+          <pre className="text-xs overflow-auto">
+            {JSON.stringify(watchedValues, null, 2)}
+          </pre>
+        </div> */}
+
+        {/* Action buttons */}
+        <div className="flex gap-x-3 justify-end">
+          {/* <button
+            type="button"
+            onClick={() => console.log("All form values:", getAllFormValues())}
+            className="cursor-pointer bg-gray-500 text-white rounded-xl h-10 px-4 flex items-center justify-center"
+          >
+            Log Values
+          </button> */}
+          <button
+            type="submit"
+            className="cursor-pointer bg-green text-white rounded-xl h-10 w-28 flex items-center justify-center gap-x-1"
+          >
+            Next <ArrowRight size={15} />
+          </button>
+        </div>
       </form>
     </>
   );
