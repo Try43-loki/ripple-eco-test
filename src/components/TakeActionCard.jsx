@@ -23,7 +23,6 @@ const TakeActionCard = ({
   isOrganizer,
   isPublic,
 }) => {
-  console.log(image, id, title, description, support, layout, isOwner);
   const getImageSrc = (img) => {
     if (!img) return defaultImage;
     if (img.startsWith("http")) return img;
