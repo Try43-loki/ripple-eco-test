@@ -1,4 +1,5 @@
 import { baseUrl } from "@/service/constants";
+
 export async function apiRequest(
   endpoint,
   method = "GET",

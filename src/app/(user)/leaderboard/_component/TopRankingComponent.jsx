@@ -8,7 +8,6 @@ const TopRankingComponent = async () => {
   const response = await getAllUserRankingService();
 
   const rawUsers = response.data;
-
   const rankData = rawUsers.map((user) => {
     let leftIcon = null;
     let rightIcon = null;
@@ -38,7 +37,6 @@ const TopRankingComponent = async () => {
       textColor,
     };
   });
-
   return (
     <>
       <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
@@ -61,7 +59,7 @@ const TopRankingComponent = async () => {
       <section className="pt-10 bg-white mb-15">
         <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2 s[-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
           {rankData.map((data) => (
-            <article className="flex gap-4" key={data.rank}>
+            <article className="flex gap-4" key={data.username}>
               {/* Rank Icon + Number */}
               <div className="flex gap-2 items-center justify-center">
                 {data.leftIcon && (
