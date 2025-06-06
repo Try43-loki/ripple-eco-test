@@ -89,7 +89,11 @@ export default function CreateEventComponent({
           <div className="flex w-2/3 gap-x-5">
             <div className="grid w-full  gap-1.5">
               <Label>Location</Label>
-              <SearchComponent formData={formData} setFormData={setFormData} />
+              <SelectComponent
+                operator="Location"
+                formData={formData}
+                setFormData={setFormData}
+              />
             </div>
             <div className="grid w-full  gap-1.5">
               <Label>Contribute type</Label>
