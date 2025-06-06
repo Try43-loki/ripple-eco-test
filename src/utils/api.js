@@ -26,5 +26,6 @@ export async function apiRequest(
 
   const response = await fetch(`${baseUrl}${endpoint}`, options);
   const data = await response.json();
+  // console.log("data login ", data);
   return data;
 }

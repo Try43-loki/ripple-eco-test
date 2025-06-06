@@ -2,22 +2,41 @@
 
 import {
   addInfomationService,
+  loginService,
+  loginSocialService,
   registerService,
+  registerWithGoogleService,
   setPasswordService,
   verifyOtpService,
 } from "@/service/auth/auth.service";
-import { signIn } from "../../auth";
+import { signIn } from "../auth";
 import { redirect } from "next/navigation.js";
 
 export const loginAction = async (formData) => {
   const email = formData.email;
   const password = formData.password;
 
-  await signIn("credentials", {
-    email,
-    password,
-    redirect: false,
-  });
+  try {
+    const res = await loginService({ email, password });
+    if (res?.status == 400) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
+    }
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    return { success: true, data: res };
+  } catch (error) {
+    console.error("Error in login:", error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
 };
 export const registerAction = async (formData) => {
   const email = formData.email;
@@ -86,20 +105,9 @@ export const setPasswordAction = async (password, email) => {
 };
 
 export const addInfamtionAction = async (formData) => {
-  const formDataNew = {
-    email: formData?.email,
-    firstName: formData?.firstname,
-    lastName: formData?.lastname,
-    address: formData?.address,
-    birthDate: formData?.birthDate,
-    gender: formData?.gender,
-    phoneNumber: formData?.phoneNumber,
-    isOrganizer: formData?.isOrganizer,
-    organizerName: formData?.organizerName,
-  };
   try {
-    const res = await addInfomationService(formDataNew);
-    if (res?.status == 400) {
+    const res = await addInfomationService(formData);
+    if (res?.status == 409) {
       return {
         success: false,
         message: res?.detail,
@@ -110,6 +118,26 @@ export const addInfamtionAction = async (formData) => {
     return {
       success: false,
       message: "Add infomation failed",
+    };
+  }
+};
+
+export const registerWithGoogleAction = async (formData) => {
+  try {
+    const res = await registerWithGoogleService(formData);
+    if (res?.status == 409) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
+    }
+    console.log(res);
+    return { success: true, data: res };
+  } catch (err) {
+    console.error("Registration error:", err);
+    return {
+      success: false,
+      message: "Google registration failed.",
     };
   }
 };

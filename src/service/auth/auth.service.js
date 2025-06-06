@@ -1,25 +1,28 @@
 import { redirect } from "next/navigation";
 import { baseUrl } from "../constants";
 import headerToken from "@/utils/headerToken";
+import { apiRequest } from "@/utils/api";
 
 export const loginService = async ({ email, password }) => {
-  const res = await fetch(`${baseUrl}/auths/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  });
-  const data = await res.json();
-  console.log(data);
-
-  if (!data) {
-    redirect("/login");
+  try {
+    const res = await fetch(`${baseUrl}/auths/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    const data = await res.json();
+    if (!data) {
+      redirect("/login");
+    }
+    return data;
+  } catch (e) {
+    console.log(e);
   }
-  return data;
 };
 
 export const registerService = async (registerData) => {
@@ -67,7 +70,6 @@ export const setPasswordService = async (formData) => {
       body: JSON.stringify(formData),
     });
     const data = await res.json();
-    console.log("data ser", data);
     return data;
   } catch (e) {
     console.log(e);
@@ -89,4 +91,26 @@ export const addInfomationService = async (formData) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+// export const registerWithGoogleService = async (formData) => {
+//   try {
+//     const res = await fetch(`${baseUrl}/auths/google-signup`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "*/*",
+//       },
+//       body: JSON.stringify(formData),
+//     });
+//     const data = await res.json();
+//     return data;
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
+// services/authService.js
+export const registerWithGoogleService = async (formData) => {
+  return await apiRequest("/auths/google-signup", "POST", formData);
 };

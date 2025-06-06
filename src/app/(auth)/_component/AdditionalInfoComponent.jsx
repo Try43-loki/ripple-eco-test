@@ -5,16 +5,30 @@ import { Label } from "@/components/ui/label";
 import { ChevronLeftCircleIcon } from "lucide-react";
 import { SelectGenderComponent } from "./SelectGenderComponent";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createInfoSchema } from "@/lib/zod/RegisterShecma"; // Use the dynamic schema
-import { addInfamtionAction } from "@/action/auth-action";
+import {
+  addInfamtionAction,
+  loginSocialAction,
+  registerWithGoogleAction,
+} from "@/action/auth-action";
+import { usePathname } from "next/navigation";
+import { auth } from "@/auth";
+import { useRouter } from "next/navigation";
 
-function AdditonalInfoComponent({ onNext, onPrev, email }) {
+function AdditonalInfoComponent({
+  onNext,
+  onPrev,
+  email,
+  session,
+  operator,
+  image,
+}) {
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const [message, setMessage] = useState("");
   const router = useRouter();
-
+  const currentPath = usePathname();
   const {
     register,
     handleSubmit,
@@ -52,12 +66,22 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
       ...data,
       isOrganizer: isOrganizer,
       organizerName: isOrganizer ? data.organizerName : null,
-      email: email,
+      email: email || session?.email,
     };
-    const isSuccess = await addInfamtionAction(formData);
+    if (session?.image) {
+      formData.profileImageUrl = session?.image;
+    }
+    console.log("formData : imge", formData);
+    const isSuccess =
+      operator == "google"
+        ? await registerWithGoogleAction(formData)
+        : await addInfamtionAction(formData);
     if (isSuccess?.success) {
       router.push("/login-success");
+    } else {
+      setMessage(isSuccess?.message);
     }
+
     reset();
   };
 
@@ -78,16 +102,22 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
 
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
-          <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon
-              size={18}
-              color="white"
-              onClick={onPrev}
-              className="cursor-pointer"
-            />
-            <div className="flex gap-2 grow">
-              {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
-                (step, index) => (
+          {currentPath == "/register-google" ? (
+            <h1 className="text-lg text-white ">Information</h1>
+          ) : (
+            <div className="flex items-center w-full gap-2">
+              <ChevronLeftCircleIcon
+                size={18}
+                color="white"
+                onClick={onPrev}
+                className="cursor-pointer"
+              />
+              <div className="flex gap-2 grow">
+                {[
+                  "1. Verify email",
+                  "2. Set Password",
+                  "3. Additional Info",
+                ].map((step, index) => (
                   <span
                     key={index}
                     className="flex flex-col gap-[2px] w-full items-start"
@@ -101,11 +131,10 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
                       }`}
                     ></span>
                   </span>
-                )
-              )}
+                ))}
+              </div>
             </div>
-          </div>
-
+          )}
           {/* Form */}
           <form
             onSubmit={handleSubmit(handleInfomation)}
@@ -116,20 +145,20 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
               <div className="flex gap-x-3">
                 <div className="grid w-full gap-1.5">
                   <Label
-                    htmlFor="firstname"
+                    htmlFor="firstName"
                     className="text-light-gray font-light"
                   >
                     First name
                   </Label>
                   <input
-                    id="firstname"
+                    id="firstName"
                     placeholder="Kim"
                     className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
-                    {...register("firstname")}
+                    {...register("firstName")}
                   />
                   {errors.firstname && (
                     <p className="text-red-400 text-xs">
-                      {errors.firstname.message}
+                      {errors.firstName.message}
                     </p>
                   )}
                 </div>
@@ -141,14 +170,14 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
                     Last name
                   </Label>
                   <input
-                    id="lastname"
+                    id="lastName"
                     placeholder="Hout"
                     className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
-                    {...register("lastname")}
+                    {...register("lastName")}
                   />
-                  {errors.lastname && (
+                  {errors.lastName && (
                     <p className="text-red-400 text-xs">
-                      {errors.lastname.message}
+                      {errors.lastName.message}
                     </p>
                   )}
                 </div>
@@ -281,6 +310,8 @@ function AdditonalInfoComponent({ onNext, onPrev, email }) {
                   )}
                 </div>
               )}
+
+              <p className="text-red-400 text-xs">{message}</p>
             </section>
 
             <Button

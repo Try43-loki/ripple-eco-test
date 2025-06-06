@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 import RegisterCopmponent from "../_component/RegisterComponent";
-import { OTPInputContext } from "input-otp";
 import OTPVerifyComponent from "../_component/OTPVerifyComponent";
 import SetPasswordComponent from "../_component/SetPasswordComponent";
 import LoginSuccessComponent from "../_component/LoginSuccessComponent";

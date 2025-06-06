@@ -5,9 +5,12 @@ import { CalendarDays, MapPin } from "lucide-react";
 import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_component/JoinEventButtonComponent";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import PostActivityComponent from "./_component/PostActivityComponent";
+import { getEcoEventByIdService } from "@/service/ecoEventService";
 
 export default async function EcoEventDetailPage({ params }) {
   const { ecoeventid } = await params;
+  const event = await getEcoEventByIdService(ecoeventid);
+  // console.log("Event : ", event);
 
   if (!ecoeventid) {
     return <p className="p-6 text-red-600">Event not found.</p>;
