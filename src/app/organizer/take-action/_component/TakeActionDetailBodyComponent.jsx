@@ -20,7 +20,7 @@ const TakeActionDetailBodyComponent = ({userData,cardDetail }) => {
         view={view}
         image={cardDetail?.data?.image}
         description={cardDetail?.data?.description}
-        title={cardDetail?.title}
+        title={cardDetail?.data?.title}
         numberOfSupporter={cardDetail?.data?.numberOfSupporter}
         destination={cardDetail?.data?.destinationPerson}
         createdAt={cardDetail?.data?.createdAt}

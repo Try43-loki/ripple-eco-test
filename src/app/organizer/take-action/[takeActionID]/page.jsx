@@ -22,7 +22,7 @@ const TakeActionDetailPage = async ( {params , searchParams}) => {
           <BreadcrumbComponent
             back={"organizer/take-action"}
             Link={"/organizer/take-action"}
-            current={cardDetail?.title}
+            current={cardDetail?.data?.title}
           />
         </section>
 
