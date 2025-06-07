@@ -9,9 +9,17 @@ export const getAllTakeActionService = async () => {
     console.log("error", e);
   }
 };
+export const getTakeActionByIDService = async (takeActionID) => {
+    try {
+      const data = await apiRequest(`/takeActions/${takeActionID}`, "GET", null, token);
+      return data;
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
 export const getTakeActionByTitleService = async (title) => {
   try {
-    const data = await apiRequest(`/takeActions/${title}`, "GET", null, token);
+    const data = await apiRequest(`/takeActions/search/${title}`, "GET", null, token);
     return data;
   } catch (e) {
     console.log("error", e);
@@ -25,11 +33,24 @@ export const getOwnTakeActionService = async () => {
     console.log("error", e);
   }
 };
+export const markAsCompletedTakeActionService = async (takeActionId) => {
+  try {
+    const data = await apiRequest(
+      `/takeActions/${takeActionId}`,
+      "PUT",
+      null,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
 export const deleteTakeActionService = async (takeActionId) => {
   try {
     const data = await apiRequest(
       `/takeActions/${takeActionId}`,
-      "POST",
+      "PATCH",
       null,
       token
     );

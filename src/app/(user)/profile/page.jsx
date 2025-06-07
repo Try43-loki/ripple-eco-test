@@ -25,6 +25,8 @@ import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getCurrentUserProfileService } from "@/service/profileService";
 import { getOwnTakeActionService } from "@/service/takeActionService";
 import { getAllOwnDiscussionsService } from "@/service/discussionService";
+import { getAllEcoEventService } from "@/service/ecoEventService";
+import FilterEventHistory from "./_component/FilterEventHistory";
 const ProfilePage = async () => {
   const response2 = await getOwnTakeActionService();
   const ownTakeActionData = response2?.data || [];
@@ -32,7 +34,9 @@ const ProfilePage = async () => {
   const userData = response?.data || [];
   const response3 = await getAllOwnDiscussionsService();
   const ownDiscussionsData = response3?.data || [];
-  const data = null
+  const response4 = await getAllEcoEventService();
+  const cardData = response4?.data ?? [];
+  const data = null;
   return (
     <main>
       <HeroSectionComponent
@@ -41,7 +45,6 @@ const ProfilePage = async () => {
         showSearchBar={false}
       />
       <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
-        
         <div className="w-1/4">
           <img
             src={userData?.profileImageUrl}
@@ -51,9 +54,7 @@ const ProfilePage = async () => {
         </div>
         <div className="space-y-2 w-3/4">
           <h2 className="text-[30px] text-green">{`${userData?.firstName} ${userData?.lastName}`}</h2>
-          <p className="text-[20px] text-black">
-            {userData?.bio}
-          </p>
+          <p className="text-[20px] text-black">{userData?.bio}</p>
           <div className="flex items-center gap-10">
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <Phone className="w-4.5 h-4.5" />
@@ -73,7 +74,6 @@ const ProfilePage = async () => {
           <EditprofileComponent title={"Edit Profile"} />
         </Button>
       </article>
-      
 
       <section className="mt-12 mx-36">
         <Tabs defaultValue="event-history" className="w-full">
@@ -135,11 +135,11 @@ const ProfilePage = async () => {
           </TabsContent>
 
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
-            <DisccusionComponent disccusionData={ownDiscussionsData}/>
+            <DisccusionComponent disccusionData={ownDiscussionsData} />
           </TabsContent>
 
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-            <TakeActionComponent cardData={ownTakeActionData}/>
+            <TakeActionComponent cardData={ownTakeActionData} />
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
@@ -175,28 +175,22 @@ const ProfilePage = async () => {
             </section>
           </TabsContent>
 
-          <TabsContent value="event-history" className="w-full mt-5 mb-10">
-            <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-5">
-              <FilterEcoEventComponent />
-              <div className="flex flex-wrap gap-5 w-full justify-between">
-                {data?.map((event, index) => (
-                  <CardEcoEventComponent
-                    key={index}
-                    href={"/eco-event/1"}
-                    type={event?.eventTypes?.eventType}
-                    contribute={
-                      event?.contributeTypesResponse?.contributeTypeName
-                    }
-                    category={event?.category?.categoryName}
-                    status={event?.eventStatus}
-                    date={event?.startDate}
-                    participats={event?.maxSlot}
-                    title={event?.title}
-                    location={event?.provinces?.provinceName}
-                  />
-                ))}
+          <TabsContent value="event-history" className="px-4 md:px-20 lg:px-[150px] pb-12 mt-10 w-full  mb-10">
+              <FilterEventHistory/>
+
+              <div className="flex flex-wrap justify-start gap-5 mt-0">
+                {cardData?.length > 0 ? (
+                  cardData.map((event) => (
+                    <div key={event?.eventId}>
+                      <CardEcoEventComponent event={event} />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-red text-center w-full">
+                    No events found.
+                  </p>
+                )}
               </div>
-            </section>
           </TabsContent>
         </Tabs>
       </section>

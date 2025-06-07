@@ -3,7 +3,7 @@ import { fileUploadAction } from "./FileUploadAction";
 
 export const createTakeAction = async (data) => {
     try {
-        const imageUrl = await fileUploadAction(data.image) || "nuller";
+        const imageUrl = await fileUploadAction(data.image);
         const takeActionData = {
             title: data.title,
             destinationPerson: data.sendTo,
@@ -12,6 +12,7 @@ export const createTakeAction = async (data) => {
             isAnonymous: data.isAnonymous,
         }
         const upload = await createTakeActionService(takeActionData);
+        return upload;
     } catch (e){
         console.log( "error",e);
     }

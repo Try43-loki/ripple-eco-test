@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
 
 const TakeActionCardDetail = ({ view , image , description , title , numberOfSupporter, destination, createdAt, userData }) => {
   const isLoading = false;
@@ -69,7 +70,7 @@ const TakeActionCardDetail = ({ view , image , description , title , numberOfSup
           <article className="space-y-1">
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <CalendarDays className="w-4.5 h-4.5" />
-              <p>{createdAt}</p>
+              <p>{dayjs(createdAt).format("DD MMM YYYY")}</p>
             </div>
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <Send className="w-4.5 h-4.5" />
