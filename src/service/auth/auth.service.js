@@ -42,9 +42,9 @@ export const registerService = async (registerData) => {
   }
 };
 
-export const verifyOtpService = async (formData) => {
+export const verifyOtpService = async (formData, type) => {
   try {
-    const res = await fetch(`${baseUrl}/auths/verify-otp?type=REGISTER`, {
+    const res = await fetch(`${baseUrl}/auths/verify-otp?type=${type}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,6 +53,7 @@ export const verifyOtpService = async (formData) => {
       body: JSON.stringify(formData),
     });
     const data = await res.json();
+    console.log(data);
     return data;
   } catch (e) {
     console.log(e);
@@ -113,4 +114,28 @@ export const addInfomationService = async (formData) => {
 // services/authService.js
 export const registerWithGoogleService = async (formData) => {
   return await apiRequest("/auths/google-signup", "POST", formData);
+};
+
+export const forgetPasswordService = async (email) => {
+  try {
+    const data = await apiRequest(
+      `/auths/forgot-password?email=${email}`,
+      "POST",
+      {
+        email: email,
+      }
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updatePasswordService = async (formData) => {
+  try {
+    const data = await apiRequest("/auths/reset-password", "PUT", formData);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };

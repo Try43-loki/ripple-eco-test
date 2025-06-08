@@ -2,11 +2,13 @@
 
 import {
   addInfomationService,
+  forgetPasswordService,
   loginService,
   loginSocialService,
   registerService,
   registerWithGoogleService,
   setPasswordService,
+  updatePasswordService,
   verifyOtpService,
 } from "@/service/auth/auth.service";
 import { signIn } from "../auth";
@@ -39,7 +41,7 @@ export const loginAction = async (formData) => {
   }
 };
 export const registerAction = async (formData) => {
-  const email = formData.email;
+  const email = formData?.email;
   try {
     const res = await registerService(email);
     if (res?.status == 409) {
@@ -58,14 +60,15 @@ export const registerAction = async (formData) => {
   }
 };
 
-export const verifyOTPAction = async (email, otpCode) => {
+export const verifyOTPAction = async (email, otpCode, type) => {
+  console.log(email, otpCode, type);
   const formData = {
     email: email,
     otp: otpCode,
   };
 
   try {
-    const res = await verifyOtpService(formData);
+    const res = await verifyOtpService(formData, type);
     if (res?.status == 400) {
       return {
         success: false,
@@ -95,6 +98,7 @@ export const setPasswordAction = async (password, email) => {
         message: res?.detail,
       };
     }
+    console.log(res);
     return { success: true, data: res };
   } catch (err) {
     return {
@@ -139,5 +143,41 @@ export const registerWithGoogleAction = async (formData) => {
       success: false,
       message: "Google registration failed.",
     };
+  }
+};
+
+export const forgetPasswordAction = async (formData) => {
+  const email = formData?.email;
+  try {
+    const res = await forgetPasswordService(email);
+    if (res?.status == 404) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
+    }
+    return { success: true, data: res };
+  } catch (err) {
+    console.error("Forget password error:", err);
+  }
+};
+
+export const updatePasswordAction = async (password, email, otp) => {
+  const formData = {
+    email: email,
+    newPassword: password,
+    otp: otp,
+  };
+  try {
+    const res = await updatePasswordService(formData);
+    if (res?.status == 400) {
+      return {
+        success: false,
+        message: res?.detail,
+      };
+    }
+    return { success: true, data: res };
+  } catch (err) {
+    console.error("Update password error:", err);
   }
 };
