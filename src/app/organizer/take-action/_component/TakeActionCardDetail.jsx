@@ -13,11 +13,21 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import dayjs from "dayjs";
+import ExcelButton from "./DownloadComponent";
 
 const TakeActionCardDetail = ({ view , image , description , title , numberOfSupporter, destination, createdAt, userData }) => {
   const isLoading = false;
   const userProfile = userData?.data;
-
+  const data = {
+    view: view,
+    image: image,
+    description: description,
+    title: title,
+    numberOfSupporter: numberOfSupporter,
+    destination: destination,
+    createdAt: createdAt,
+    userData: userData
+  };
   return (
     <main>
       <Card className="relative py-8 w-full rounded-2xl bg-light-gray border-none">
@@ -98,13 +108,14 @@ const TakeActionCardDetail = ({ view , image , description , title , numberOfSup
             <p className="text-3xl font-bold text-green">{numberOfSupporter}</p>
             <p className="text-xl font-semibold text-foreground">{numberOfSupporter > 1 ? "SUPPORTERS": "SUPPORTER"}</p>
           </div>
-          <Button
+          {/* <Button
             type="button"
             className="w-[300px] flex gap-x-2.75 bg-green hover:bg-green-600 border-light-gray text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl  py-5 md:py-6.5"
           >
             <Download className="w-6 h-6 text-white" />
             <p className="text-white">Download PDF</p>
-          </Button>
+          </Button> */}
+          <ExcelButton data={data}/>
         </CardFooter>
       </Card>
     </main>
