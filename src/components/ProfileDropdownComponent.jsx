@@ -11,6 +11,7 @@ import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
 export function ProfileDropdownComponent({ operator, profile }) {
+  // console.log(profile);
   const img = profile?.data?.profileImage;
   const first = profile?.data?.firstName.charAt(0);
   const last = profile?.data?.lastName.charAt(0);

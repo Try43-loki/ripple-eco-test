@@ -12,35 +12,41 @@ import {
 import { RefreshCcw } from "lucide-react";
 import React from "react";
 
-function ResetButtonComponent({ onReset, disabled }) {
+function ResetButtonComponent({ handleResetClick, confirmReset }) {
   return (
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <button
             type="button"
-            disabled={disabled}
-            className="flex gap-x-2 items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handleResetClick}
+            className="flex items-center gap-3 px-5 py-3 cursor-pointer bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-2xl hover:from-gray-600 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500/50 focus:ring-offset-2 transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:scale-105"
           >
             <RefreshCcw size={20} />
-            Reset to Default
+            Reset Form
           </button>
         </AlertDialogTrigger>
-        <AlertDialogContent className="bg-white border border-light-strok rounded-3xl">
+        <AlertDialogContent className="bg-white/95 backdrop-blur-sm border border-gray-200/50 rounded-2xl shadow-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle>Reset Form</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to reset the form? This will remove all days
-              and activities except one empty day. This action cannot be undone.
+            <AlertDialogTitle className="text-xl font-bold text-gray-800 flex items-center gap-3">
+              <RefreshCcw size={24} className="text-orange-500" />
+              Reset Form?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600 text-base leading-relaxed">
+              Are you sure you want to reset the form? This will permanently
+              delete all your current agenda data including all days and
+              activities. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogFooter className="gap-3">
+            <AlertDialogCancel className="px-6 cursor-pointer py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl border-none transition-all duration-200">
+              Cancel
+            </AlertDialogCancel>
             <AlertDialogAction
-              onClick={onReset}
-              className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-500"
+              onClick={confirmReset}
+              className="px-6 cursor-pointer py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-xl border-none transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              Reset Form
+              Yes, Reset Form
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

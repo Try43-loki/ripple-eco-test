@@ -14,7 +14,7 @@ import {
   contributeType,
   eventTypes,
   locations,
-} from "@/data";
+} from "@/utils/data";
 
 export function SelectComponent({
   operator,
@@ -33,11 +33,12 @@ export function SelectComponent({
       break;
     case "Certificate":
       data = certificates;
+
       break;
     case "Location":
       data = locations;
       break;
-    case "Contribute_type":
+    case "contributeType":
       data = contributeType;
       break;
     default:

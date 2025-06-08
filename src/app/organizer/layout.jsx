@@ -5,6 +5,7 @@ import { getUserProfileAction } from "@/action/user-action";
 
 export default async function Layout({ children }) {
   const profile = await getUserProfileAction();
+  // console.log("profile org", profile);
   return (
     <SidebarProvider className="mt-3 w-full">
       <AppSidebar />

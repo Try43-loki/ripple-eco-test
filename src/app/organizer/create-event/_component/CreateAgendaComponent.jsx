@@ -1,5 +1,15 @@
 "use client";
 import React, { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  CalendarDays,
+  PlusCircle,
+  Trash2,
+  Clock,
+  RefreshCcw,
+} from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,294 +19,188 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import {
-  Calendar,
-  CalendarDays,
-  PlusCircleIcon,
-  RefreshCcw,
-} from "lucide-react";
+import { agendaSchema } from "@/lib/zod/AgendaSchema";
+import DayActivitiesComponent from "./DayActivitiesComponent";
 import ResetButtonComponent from "./ResetButtonComponent";
-import CardDayComponent from "./CardDayComponent";
-import ActivityRowComponent from "./ActivityRowComponent";
-
-// Utility function to generate unique IDs
-const generateId = () => Math.random().toString(36).substring(2, 11);
-
-// Validation Schema
-const AgendaSchema = {
-  validateDay: (day, dayIndex) => {
-    const errors = [];
-
-    if (!day.activities || day.activities.length === 0) {
-      errors.push(`Day ${dayIndex + 1}: At least one activity is required`);
-    }
-
-    return errors;
-  },
-
-  validateActivity: (activity, activityIndex, dayIndex) => {
-    const errors = [];
-
-    if (!activity.time) {
-      errors.push(
-        `Day ${dayIndex + 1}, Activity ${activityIndex + 1}: Time is required`
-      );
-    } else if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(activity.time)) {
-      errors.push(
-        `Day ${dayIndex + 1}, Activity ${
-          activityIndex + 1
-        }: Invalid time format`
-      );
-    }
-
-    if (!activity.task || activity.task.trim() === "") {
-      errors.push(
-        `Day ${dayIndex + 1}, Activity ${
-          activityIndex + 1
-        }: Task description is required`
-      );
-    } else if (activity.task.trim().length < 3) {
-      errors.push(
-        `Day ${dayIndex + 1}, Activity ${
-          activityIndex + 1
-        }: Task description must be at least 3 characters`
-      );
-    }
-
-    return errors;
-  },
-
-  validateAgenda: (days) => {
-    const errors = [];
-
-    if (!days || days.length === 0) {
-      errors.push("At least one day is required");
-      return errors;
-    }
-
-    // Validate each day
-    days.forEach((day, dayIndex) => {
-      // errors.push(...AgendaSchema.validateDay(day, dayIndex));
-
-      // Validate activities for this day
-      if (day.activities) {
-        day.activities.forEach((activity, activityIndex) => {
-          errors.push(
-            ...AgendaSchema.validateActivity(activity, activityIndex, dayIndex)
-          );
-        });
-      }
-    });
-
-    // Check for duplicate dates
-    const dates = days.map((day) => day.date).filter((date) => date);
-    const duplicates = dates.filter(
-      (date, index) => dates.indexOf(date) !== index
-    );
-    if (duplicates.length > 0) {
-      errors.push(
-        `Duplicate dates found: ${[...new Set(duplicates)].join(", ")}`
-      );
-    }
-
-    return errors;
-  },
-};
-
-// Initial data structures
-const createNewActivity = () => ({
-  id: generateId(),
-  time: "",
-  task: "",
-});
-
-const createNewDay = () => ({
-  id: generateId(),
-  activities: [createNewActivity()],
-});
-
+import { createEventAction } from "@/action/createEventAction";
+// Main Component
 function CreateAgendaComponent({ setFormData, formData, onBack }) {
-  // State management
-  const [days, setDays] = useState([createNewDay()]);
-  const [errors, setErrors] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showResetDialog, setShowResetDialog] = useState(false);
 
-  // Clear errors when data changes
-  const clearErrors = () => {
-    if (errors.length > 0) {
-      setErrors([]);
-    }
-  };
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(agendaSchema),
+    defaultValues: {
+      days: [
+        {
+          activities: [{ time: "", task: "" }],
+        },
+      ],
+    },
+  });
 
-  // Function to reset form to initial state
-  const resetForm = () => {
-    setDays([createNewDay()]);
-    setErrors([]);
-    setIsSubmitting(false);
-  };
+  const {
+    fields: dayFields,
+    append: appendDay,
+    remove: removeDay,
+  } = useFieldArray({
+    control,
+    name: "days",
+  });
 
-  // Day management functions
-  const addDay = () => {
-    setDays((prevDays) => [...prevDays, createNewDay()]);
-    clearErrors();
-  };
+  // Watch form data to determine if reset button should show
+  const watchedDays = watch("days");
 
-  const removeDay = (dayId) => {
-    if (days.length > 1) {
-      setDays((prevDays) => prevDays.filter((day) => day.id !== dayId));
-      clearErrors();
-    }
-  };
-
-  // Activity management functions
-  const addActivity = (dayId) => {
-    setDays((prevDays) =>
-      prevDays.map((day) =>
-        day.id === dayId
-          ? { ...day, activities: [...day.activities, createNewActivity()] }
-          : day
-      )
-    );
-    clearErrors();
-  };
-
-  const removeActivity = (dayId, activityId) => {
-    setDays((prevDays) =>
-      prevDays.map((day) => {
-        if (day.id === dayId && day.activities.length > 1) {
-          return {
-            ...day,
-            activities: day.activities.filter(
-              (activity) => activity.id !== activityId
-            ),
-          };
-        }
-        return day;
-      })
-    );
-    clearErrors();
-  };
-
-  const updateActivity = (dayId, activityId, field, value) => {
-    setDays((prevDays) =>
-      prevDays.map((day) =>
-        day.id === dayId
-          ? {
-              ...day,
-              activities: day.activities.map((activity) =>
-                activity.id === activityId
-                  ? { ...activity, [field]: value }
-                  : activity
-              ),
-            }
-          : day
-      )
-    );
-    clearErrors();
-  };
-
-  // Form submission with validation
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  // Form handlers
+  const onSubmit = async (data) => {
     try {
-      // Validate the agenda
-      const validationErrors = AgendaSchema.validateAgenda(days);
-
-      if (validationErrors.length > 0) {
-        setErrors(validationErrors);
-        return;
-      }
-
-      // Clean and prepare data
-      const cleanedAgenda = days.map((day) => ({
-        activities: day.activities
-          .filter((activity) => activity.time && activity.task?.trim())
-          .map((activity) => ({
-            time: activity.time,
-            task: activity.task.trim(),
-          })),
+      // Clean and format the data
+      const cleanedAgenda = data.days.map((day) => ({
+        activities: day.activities.map((activity) => ({
+          time: activity.time,
+          task: activity.task.trim(),
+        })),
       }));
 
-      // Update parent form data
       setFormData((prevFormData) => ({
         ...prevFormData,
         agenda: cleanedAgenda,
       }));
-
-      // Clear the form after successful submission
-      resetForm();
-
-      console.log("Agenda submitted successfully:", cleanedAgenda);
+      const res = await createEventAction(formData);
+      console.log("Form data submitted:", res);
+      performReset();
     } catch (error) {
-      setErrors([`Submission failed: ${error.message}`]);
-    } finally {
-      setIsSubmitting(false);
+      console.error("Form submission error:", error);
+    }
+  };
+  console.log("Form data submitted:", formData);
+  const performReset = () => {
+    reset({
+      days: [
+        {
+          activities: [{ time: "", task: "" }],
+        },
+      ],
+    });
+  };
+
+  const handleResetClick = () => {
+    setShowResetDialog(true);
+  };
+
+  const confirmReset = () => {
+    performReset();
+    setShowResetDialog(false);
+  };
+
+  const addDay = () => {
+    appendDay({
+      activities: [{ time: "", task: "" }],
+    });
+  };
+
+  const handleRemoveDay = (dayIndex) => {
+    if (dayFields.length > 1) {
+      removeDay(dayIndex);
     }
   };
 
-  // Check if reset button should be shown
-  const shouldShowResetButton = () => {
-    return (
-      days.length > 1 || (days.length === 1 && days[0].activities.length > 1)
-    );
-  };
+  // Calculate if reset button should be shown
+  const hasMultipleDays = dayFields.length > 1;
+  const hasMultipleActivitiesInFirstDay =
+    watchedDays?.[0]?.activities?.length > 1;
+  const hasAnyFormData = watchedDays?.some((day) =>
+    day.activities?.some((activity) => activity.time || activity.task)
+  );
+
+  const showResetButton =
+    hasMultipleDays || hasMultipleActivitiesInFirstDay || hasAnyFormData;
 
   return (
-    <section className="w-full  mx-auto">
-      <div className="w-full">
-        {/* Action Buttons */}
-        <div className="flex space-x-3 mb-6">
-          <button
-            type="button"
-            onClick={addDay}
-            className="flex items-center px-4 py-2 gap-2 bg-blue cursor-pointer hover:bg-cyan-700 text-white rounded-lg"
-          >
-            <CalendarDays size={20} />
-            Add Day
-          </button>
-          {shouldShowResetButton() && (
-            <ResetButtonComponent onReset={resetForm} disabled={isSubmitting} />
-          )}
-        </div>
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full space-y-6">
-          {days.map((day, dayIndex) => (
-            <CardDayComponent
-              key={day.id}
-              day={day}
-              dayIndex={dayIndex}
-              onRemoveDay={removeDay}
-              onAddActivity={addActivity}
-              onRemoveActivity={removeActivity}
-              onUpdateActivity={updateActivity}
-              canRemoveDay={days.length > 1}
-            />
-          ))}
-          <div className="flex justify-between items-center pt-6 border-t border-gray-200">
+    <>
+      <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 w-full">
+        <div className="w-full mx-auto">
+          {/* Action Buttons */}
+          <div className="flex justify-start items-center gap-4  mb-10">
             <button
               type="button"
-              onClick={onBack}
-              disabled={isSubmitting}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              onClick={addDay}
+              className="flex items-center cursor-pointer gap-3 px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:scale-105"
             >
-              Previous
+              <CalendarDays size={20} />
+              Add New Day
             </button>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-6 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-green-600 text-white hover:bg-green-700 focus:ring-green-500"
-            >
-              Submit
-            </button>
+            {showResetButton && (
+              <ResetButtonComponent
+                confirmReset={confirmReset}
+                handleResetClick={handleResetClick}
+              />
+            )}
           </div>
-        </form>
-      </div>
-    </section>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            {dayFields.map((day, dayIndex) => (
+              <DayActivitiesComponent
+                key={day.id}
+                dayIndex={dayIndex}
+                control={control}
+                register={register}
+                errors={errors}
+                onRemoveDay={() => handleRemoveDay(dayIndex)}
+                canRemoveDay={dayFields.length > 1}
+              />
+            ))}
+
+            {/* Form-level errors */}
+            {errors.days?.message && (
+              <div className="p-6 bg-red-50/80 backdrop-blur-sm border border-red-200/50 rounded-2xl shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <p className="text-red-600 font-medium">
+                    {errors.days.message}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex justify-between items-center pt-12">
+              <button
+                type="button"
+                onClick={onBack}
+                className="px-4 py-3 cursor-pointer bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 font-medium rounded-2xl hover:bg-white hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                ← Previous
+              </button>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-4 py-3 cursor-pointer    bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-2xl hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:scale-105 disabled:transform-none"
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Submitting...
+                  </div>
+                ) : (
+                  "Submit 🌿"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </>
   );
 }
 
