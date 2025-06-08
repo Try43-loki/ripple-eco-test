@@ -2,7 +2,7 @@ import CardAirQualityComponent from "@/components/CardAirQualityComponent";
 import Link from "next/link";
 
 import React from "react";
-import CardInformationAQI from "../../air-quality/_components/CardInformationAQIComponent";
+import CardInformationAQI from "../../[...air-quality]/_components/CardInformationAQIComponent";
 
 const aqiData = {
   value: 80,

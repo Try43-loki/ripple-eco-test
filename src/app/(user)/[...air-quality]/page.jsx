@@ -4,25 +4,11 @@ import DailyForecastComponent from "./_components/DailyForecastComponent";
 import AirQualityComponent from "./_components/AirQualityComponent";
 import HealthRecommendComponent from "./_components/HealthRecommendComponent";
 import HeroSectionAirDisasterComponent from "./_components/HeroSectionAirDisasterComponent";
-import { getAllDistricts } from "@/service/airQualityService";
-import { getAirPollution } from "@/action/AirQualityAction";
-import { useSearchParams } from "next/navigation";
-
-const aqiData = {
-  value: 89,
-  unit: "PP AQI*",
-  level: "Moderate",
-  pollutant: "PM2.5",
-  pollutantValue: "14.5",
-  windSpeed: "5.5",
-  temperature: "33",
-  humidity: "62",
-};
-
-const api = {
-  province: "Phnom Penh",
-  pollution: "PM2.5",
-};
+import {
+  getAllDistricts,
+  getCurrentAirPollutionByDistrictId,
+  getForecastAirPollutionByDistrictId,
+} from "@/service/airQualityService";
 
 const switchColor = (value) => {
   if (value < 50)
@@ -59,12 +45,17 @@ const switchColor = (value) => {
     };
 };
 
-const AirQualityPage = async () => {
-  const currentPathName = useSearchParams();
-  const dynamicColor = switchColor(aqiData.value);
+const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
+  const { search: districtId } = await ParamsPromise;
   const dataProvinces = await getAllDistricts();
-
-  console.log(dataProvinces);
+  const dataProvince = await getCurrentAirPollutionByDistrictId(
+    districtId || "5bac8def24b967f0b530894c"
+  );
+  const dataHourly = await getForecastAirPollutionByDistrictId(
+    districtId || "5bac8def24b967f0b530894c",
+    "HOURLY"
+  );
+  const dynamicColor = switchColor(dataProvince.data.aqi);
 
   return (
     <div className="relative flex flex-col gap-7">
@@ -80,23 +71,22 @@ const AirQualityPage = async () => {
       <section className="relative   flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center ">
         <HeroSectionAirDisasterComponent
           provincesList={dataProvinces}
-          // dataSearch={api}
-          // dataCard={aqiData}
-          // levelColor={dynamicColor}
+          provinceData={dataProvince.data}
+          levelColor={dynamicColor}
         />
       </section>
 
       {/* Section 2 HourlyForecast */}
       <section className="flex justify-center px-6  text-white lg:px-[180px]">
-        <HourlyForecastComponent />
+        <HourlyForecastComponent hourlyData={dataHourly} />
       </section>
 
       {/* Section 3 Daily Forecast And AirQuality With HealthRecommend */}
       <section className="flex justify-center gap-10 px-6  text-white lg:px-[180px]">
         <DailyForecastComponent />
         <div className="flex flex-col w-full gap-10">
-          <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />
-          <HealthRecommendComponent levelColor={dynamicColor} />
+          {/* <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />
+          <HealthRecommendComponent levelColor={dynamicColor} /> */}
         </div>
       </section>
     </div>

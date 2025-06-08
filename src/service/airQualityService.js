@@ -10,7 +10,17 @@ export const getAllDistricts = async () => {
   }
 };
 
-export const getCurrentAirPollutionByDistrictId = async (districtId, type) => {
+export const getCurrentAirPollutionByDistrictId = async (districtId) => {
+  try {
+    const res = await fetch(`${baseUrl}/air-pollution/current/${districtId}`);
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getForecastAirPollutionByDistrictId = async (districtId, type) => {
   try {
     const res = await fetch(
       `${baseUrl}/air-pollution/forecast/${districtId}?type=${type}`

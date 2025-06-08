@@ -12,15 +12,26 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function MultiSelectDropdown({ provincesList }) {
   const [selected, setSelected] = useState(null);
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   function handleSelected(districtId, districtName) {
     setSelected(districtName);
-    router.push(`/search?district=${districtId}`);
+    const params = new URLSearchParams(searchParams);
+
+    if (districtId) {
+      params.set("search", districtId);
+    } else {
+      params.delete("search");
+    }
+    const basePath = pathname.split("/").slice(0, 2).join("/");
+    const newDistrictName = districtName.replace(/\s+/g, "");
+    replace(`${basePath}/${newDistrictName.toString()}?${params.toString()}`);
   }
 
   return (

@@ -1,5 +1,8 @@
+"use client";
+
 import clsx from "clsx";
 import { Cloud, Droplet, Wind } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const IconLabel = ({ icon: Icon, label, color }) => {
@@ -11,24 +14,35 @@ const IconLabel = ({ icon: Icon, label, color }) => {
   );
 };
 
-const CardInformationAQI = (props) => {
+const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
   const {
-    value,
-    unit,
-    level,
-    pollutant,
-    pollutantValue,
-    windSpeed,
+    aqi,
+    cloudIcon,
+    concentration,
+    concentrationIndex,
+    humidityPercent,
+    mainPollution,
     temperature,
-    humidity,
-  } = props.dataCard;
+    windSpeed,
+  } = provinceData;
 
-  const { bg, label, text, bgRaw } = props.levelColor;
+  const { bg, label, text, bgRaw } = levelColor;
 
-  const bgGreen = "#CDE8DB";
-  const bgYellow = "#FAF0CC";
-  const bgOrange = "#FFE2CF";
-  const bgRed = "#FECDD6";
+  // For Get Province AQI
+  const pathName = usePathname();
+  const path = pathName.split("/")[2];
+
+  // const bgGreen = "#CDE8DB";
+  // const bgYellow = "#FAF0CC";
+  // const bgOrange = "#FFE2CF";
+  // const bgRed = "#FECDD6";
+
+  const checkLevel = (value) => {
+    if (value < 50) return "Good";
+    if (value < 100) return "Moderate";
+    if (value < 150) return "Unhealthy for sensitive groups";
+    if (value >= 150) return "Unhealthy";
+  };
 
   return (
     <article
@@ -37,22 +51,22 @@ const CardInformationAQI = (props) => {
     >
       {/* AQI Value */}
       <div className="flex flex-col gap-2 px-3 items-center ">
-        <h2 className={clsx("text-7xl  font-bold", text)}>{value}</h2>
-        <p className="text-base text-darker-gray ">{unit}</p>
+        <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
+        <p className="text-base text-darker-gray ">{path} AQI</p>
       </div>
 
       {/* AQI Details */}
       <div className="flex flex-col  gap-3">
         <h2 className="text-2xl font-semibold text-darker-gray flex justify-start">
-          {level}
+          {checkLevel(aqi)}
         </h2>
         <div className="flex justify-between min-w-sm">
           <p className="text-lg text-darker-gray">
             Main pollutant:
-            <span className="text-darker-gray pl-[5px]">{pollutant} </span>
+            <span className="text-darker-gray pl-[5px]">{mainPollution} </span>
           </p>
           <p className="text-darker-gray text-lg font-medium flex gap-1.5">
-            {pollutantValue}
+            {concentration}
             <span className="text-lg font-medium">
               µg/m<sup>3</sup>
             </span>
@@ -75,11 +89,15 @@ const CardInformationAQI = (props) => {
               </>
             }
           />
-          <IconLabel icon={Droplet} color={label} label={<>{humidity}%</>} />
+          <IconLabel
+            icon={Droplet}
+            color={label}
+            label={<>{humidityPercent}%</>}
+          />
         </div>
       </div>
     </article>
   );
 };
 
-export default CardInformationAQI;
+export default CardInformationAQIComponent;

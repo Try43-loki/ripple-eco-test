@@ -1,5 +1,5 @@
-import CardInformationAQI from "@/app/(user)/air-quality/_components/CardInformationAQIComponent";
-import MultiSelectDropdown from "@/app/(user)/air-quality/_components/MultiSelectDropdownComponent";
+import CardInformationAQI from "@/app/(user)/[...air-quality]/_components/CardInformationAQIComponent";
+import MultiSelectDropdown from "@/app/(user)/[...air-quality]/_components/MultiSelectDropdownComponent";
 import React from "react";
 
 const HeroSectionAirQualityDashboardComponent = (props) => {

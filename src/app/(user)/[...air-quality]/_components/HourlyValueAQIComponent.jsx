@@ -1,7 +1,6 @@
 import { clsx } from "clsx";
 import Image from "next/image";
 import React from "react";
-import { date } from "zod";
 
 const LineVertical = () => (
   <div className="flex flex-col justify-center text-light-gray items-center">
@@ -15,15 +14,20 @@ const listOfImageWeather = {
   rain: "Rain",
   cloud: "Cloud",
   cloudAndSun: "CloudWithSun",
+  nightRain: "Night-Rain",
 };
 
-const checkIcon = (icon) => {};
+const checkIcon = (icon) => {
+  if (icon === "scattered-clouds") return listOfImageWeather.cloud;
+  if (icon === "rain") return listOfImageWeather.rain;
+  if (icon === "night-rain") return listOfImageWeather.nightRain;
+};
 
 const dynamicColorAqi = (value) => {
-  if (value < 50) return "text-air-green";
-  if (value < 100) return "text-air-yellow";
-  if (value < 150) return "text-air-orange";
-  if (value >= 150) return "text-air-red";
+  if (value < 50) return "bg-air-green";
+  if (value < 100) return "bg-air-yellow";
+  if (value < 150) return "bg-air-orange";
+  if (value >= 150) return "bg-air-red";
 };
 const formatTime = (time) => {
   // Return Hour Only
@@ -44,7 +48,8 @@ function getCurrentTime(data) {
 
 const HourlyValueAQIComponent = ({ data }) => {
   const isActive = getCurrentTime(data) === "Now";
-  const hour = formatTime(data.timestamp);
+  const hour = formatTime(data?.timestamp);
+  // console.log(data);
 
   return (
     <>
@@ -59,17 +64,23 @@ const HourlyValueAQIComponent = ({ data }) => {
         <span className="text-lg font-medium text-darker-gray">{hour}</span>
         {/* Image Icon */}
         <Image
-          src={`/assets/air_quality_images/${listOfImageWeather.cloudAndSun}.svg`}
+          src={`/assets/air_quality_images/${checkIcon(data?.cloudIcon)}.svg`}
           alt="Logo"
           width={36}
           height={36}
         />
         <span className="text-2xl font-semibold text-darker-gray">
-          40<sup>o</sup>
+          {data.temperature.current}
+          <sup>o</sup>
         </span>
         {/* Value Of AQI */}
-        <div className="bg-strong-green rounded-lg w-[60px] h-[30px] leading-[30px] ">
-          <p className="text-center font-medium text-white">12</p>
+        <div
+          className={clsx(
+            " rounded-lg w-[60px] h-[30px] leading-[30px] ",
+            dynamicColorAqi(data?.aqi)
+          )}
+        >
+          <p className="text-center font-medium text-white">{data?.aqi}</p>
         </div>
       </div>
       <LineVertical />
