@@ -32,7 +32,6 @@ const ProfilePage = async () => {
   const userData = response?.data || [];
   const response3 = await getAllOwnDiscussionsService();
   const ownDiscussionsData = response3?.data || [];
-  
   const data = null
   return (
     <main>

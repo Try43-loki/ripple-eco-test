@@ -1,8 +1,10 @@
 
 import { editUserProfileService } from "@/service/profileService";
+import { fileUploadAction } from "./FileUploadAction";
 
-export const getEditUserProfileData = async (formData , dataFile) => {
+export const getEditUserProfileData = async (formData) => {
     try {
+        const dataFile = await fileUploadAction(formData.profileImage);
         const userData = {
             firstName: formData.firstName,
             lastName: formData.lastName,

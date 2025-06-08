@@ -12,23 +12,24 @@ import clsx from "clsx";
 import { LoginShecma } from "@/lib/zod/LoginShecma";
 import { loginAction } from "@/action/auth-action";
 import { redirect } from "next/navigation";
-
-// import { loginAction } from "@/action/authAction";
-
+import { doSocialLogin } from "@/action/loginSocialAction";
+import LoginSocialComponent from "./LoginSocialComponent";
+import { getUserProfileAction } from "@/action/user-action";
 function LoginComponent({ onNext }) {
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(LoginShecma),
-  });
-  // form get data
+  const [message, setMessage] = React.useState("");
+  const { handleSubmit, register, reset } = useForm();
+
   const handleLogin = async (formData) => {
     const isLogin = await loginAction(formData);
     if (isLogin?.success) {
-      redirect("/home");
+      const profile = await getUserProfileAction();
+      if (profile?.data?.organizer) {
+        redirect("/orgainizer/overview");
+      } else {
+        redirect("/home");
+      }
+    } else {
+      setMessage(isLogin?.message);
     }
     reset();
   };
@@ -88,23 +89,6 @@ function LoginComponent({ onNext }) {
                     placeholder="exaple@gmaill.com"
                     {...register("email")}
                   />
-                  <span
-                    className={clsx("flex justify-start gap-x-2 items-center", {
-                      hidden: !errors?.email?.message,
-                    })}
-                  >
-                    <div
-                      className={clsx(
-                        "h-4 w-4 bg-red rounded-full border border-light-strok",
-                        {
-                          hidden: !errors?.email?.message,
-                        }
-                      )}
-                    ></div>
-                    <span className="text-white text-sm">
-                      {errors?.email?.message}
-                    </span>
-                  </span>
                 </div>
                 {/* input password */}
                 <div className="grid w-full items-center gap-1.5 relative ">
@@ -131,24 +115,12 @@ function LoginComponent({ onNext }) {
                     placeholder="123"
                     {...register("password")}
                   />
-                  <span className="flex justify-start gap-x-2 items-start">
-                    <div
-                      className={clsx(
-                        "h-4 w-4 bg-red rounded-full border border-light-strok",
-                        {
-                          hidden: !errors?.password?.message,
-                        }
-                      )}
-                    ></div>
-                    <span className="text-white text-sm">
-                      {errors?.password?.message}
-                    </span>
-                  </span>
+                  {<p className="text-red text-sm ">{message}</p>}
                 </div>
 
                 <Link
                   href="/forget-password"
-                  className="underline text-end w-full my-2 font-light  text-white text-sub-info "
+                  className="underline text-end self-end my-2 font-light  text-white text-sub-info "
                 >
                   Forgot your password?
                 </Link>
@@ -168,14 +140,7 @@ function LoginComponent({ onNext }) {
             </form>
             {/* login with google */}
 
-            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md hover:bg-white  rounded-2xl p-4">
-              <img
-                src="/icons/flat-color-icons_google.png"
-                className="h-5 w-5"
-                alt=""
-              />
-              Login with Google
-            </Button>
+            <LoginSocialComponent />
             <p className="text-[12px] text-light-gray font-light">
               Are you new here?{" "}
               <Link

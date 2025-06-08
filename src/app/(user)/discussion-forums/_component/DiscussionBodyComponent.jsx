@@ -18,7 +18,10 @@ const DiscussionBodyComponent = ({
   return (
     <main>
       <article className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-6 md:px-20 lg:px-[150px] my-6 w-full">
-        <SearchBarComponent placeholder="Search Title or Tag" />
+        <SearchBarComponent
+          placeholder="Search Title or Tag"
+          pagePath={`/discussion-forums`}
+        />
         <div onClick={() => setOpen(true)}>
           <DiscussionButtonComponent text={buttonText} />
         </div>

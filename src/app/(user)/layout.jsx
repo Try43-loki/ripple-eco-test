@@ -1,10 +1,13 @@
 import NavBarComponent from "@/components/NavbarComponent";
 import "../globals.css";
 import FooterComponent from "@/components/FooterComponent";
-export default function UserLayout({ children }) {
+import { getUserProfileAction } from "@/action/user-action";
+export default async function UserLayout({ children }) {
+  const profile = await getUserProfileAction();
+  console.log(profile);
   return (
     <main className="overflow-hidden">
-      <NavBarComponent />
+      <NavBarComponent profile={profile} />
       {children}
       <FooterComponent />
     </main>

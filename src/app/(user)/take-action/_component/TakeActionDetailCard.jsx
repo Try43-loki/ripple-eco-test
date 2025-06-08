@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/card";
 import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import moment from "moment";
 
 
-const TakeActionDetailCard = ({ view , image , description , title , numberOfSupporter, destination}) => {
+const TakeActionDetailCard = ({ view , image , description , title , numberOfSupporter, destination, createdAt, userData}) => {
   const isLoading = false;
-
+  const ownerData = userData.data;
   return (
     <main>
       <Card className="relative py-8 w-full rounded-2xl bg-light-gray border-none">
@@ -30,12 +31,12 @@ const TakeActionDetailCard = ({ view , image , description , title , numberOfSup
             ) : (
               <div className="flex items-center space-x-4">
                 <img
-                  src="https://i.pinimg.com/736x/e3/cc/19/e3cc196b34603811d13323ee70c31c42.jpg"
-                  alt="user"
+                  src={ownerData?.profileImageUrl}
+                  alt={`${ownerData?.firstName} ${ownerData?.lastName}`}
                   className="h-15 w-15 rounded-full object-cover"
                 />
                 <div className="flex flex-col">
-                  <p className="text-xl font-medium text-gray">Kimlong</p>
+                  <p className="text-xl font-medium text-gray">{`${ownerData?.firstName} ${ownerData?.lastName}`}</p>
                   <p className="text-sm font-normal text-strong-gray">
                     6h agos . Public
                   </p>
@@ -65,7 +66,7 @@ const TakeActionDetailCard = ({ view , image , description , title , numberOfSup
           <article className="space-y-1">
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <CalendarDays className="w-4.5 h-4.5" />
-              <p>16 June, 2025</p>
+              <p>{moment(createdAt).format("DD MMM YYYY")}</p>
             </div>
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <Send className="w-4.5 h-4.5" />

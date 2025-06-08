@@ -17,8 +17,6 @@ import { ImagePlus, SquarePen } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { getEditUserProfileData } from "@/action/EditUserProfileAction";
-import { fileUploadAction } from "@/action/FileUploadAction";
-import { getFileUploadService } from "@/service/fileUploadService";
 
 const EditprofileComponent = ({ title = "", operator }) => {
   const {
@@ -45,16 +43,15 @@ const EditprofileComponent = ({ title = "", operator }) => {
   };
 
   const onSubmit = async (data) => {
-    const dataFile = await fileUploadAction(data.profileImage);
-    // handle API submission here
-    console.log("dataName", dataFile)
-    const editProfile = getEditUserProfileData(data , dataFile);
+    const editProfile = getEditUserProfileData(data);
     reset();
     setImagePreview(null);
-    if(editProfile) {
-      alert("Edit profile success");
-    }
   };
+  const handleCancel = () =>{
+    reset();
+    setImagePreview(null);
+  }
+
 
   return (
     <Dialog>
@@ -188,7 +185,9 @@ const EditprofileComponent = ({ title = "", operator }) => {
           <DialogFooter className="flex justify-end pt-4">
             <div className="flex flex-row gap-x-5 w-1/2 justify-end">
               <DialogClose asChild>
-                <Button type="button" className="border-1 border-red text-red">
+                <Button type="button" className="border-1 border-red text-red"
+                  onClick={handleCancel}
+                >
                   Cancel
                 </Button>
               </DialogClose>

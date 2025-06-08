@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "100mb",
+    },
+  },
   images: {
     unoptimized: true,
   },
@@ -13,7 +18,9 @@ const nextConfig = {
     ];
   },
   env: {
-    NEXT_APIURL: "http://34.101.52.71:8883/api/v1",
+    // NEXT_APIURL: "http://34.101.52.71:8883/api/v1",
+    // NEXT_APIURL: "http://192.168.42.98:8883/api/v1",
+    NEXT_APIURL: "http://34.101.216.70:8883/api/v1",
   },
 };
 
