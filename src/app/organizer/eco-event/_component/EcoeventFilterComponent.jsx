@@ -1,20 +1,17 @@
 "use client";
 import React from "react";
-
-import SearchBarComponent from "@/components/SearchBarComponent";
-
 import { SelectComponent } from "./SelectComponent";
-import { Label } from "@/components/ui/label";
 import SearchComponent from "./SearchComponent";
 import { DateRangComponent } from "./DateRangComponent";
+
 const EcoEventFilterComponent = () => {
   return (
     <section className="w-full py-4 flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
       {/* Search bar */}
       <div className="flex w-full items-center justify-between gap-x-7">
-        <div className="grid w-[500px] gap-1.5">
+        {/* <div className="grid w-[500px] gap-1.5">
           <SearchBarComponent className="grow" />
-        </div>
+        </div> */}
         <div className="flex items-center w-full justify-between">
           <div className="grid w-[200px] gap-1.5">
             <SearchComponent className="w-[400px]" operator={"dashboard"} />
