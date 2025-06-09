@@ -41,7 +41,7 @@ const eventSchema = z.object({
     .max(5, "Maximum 5 images allowed"),
 });
 
-export default function UpdateEventComponent() {
+export default function UpdateEventComponent({ eventId }) {
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
@@ -145,7 +145,7 @@ export default function UpdateEventComponent() {
     setImagePreviews([]);
     const imgURLs = await multipleFileUploadAction(data?.images);
     data.images = imgURLs;
-    const res = await updateEventAction(data);
+    const res = await updateEventAction(data, eventId);
     setIsDialogOpen(false);
   };
 

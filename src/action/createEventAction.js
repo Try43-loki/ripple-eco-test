@@ -46,8 +46,7 @@ export const createEventAction = async (formData) => {
   }
 };
 
-export const updateEventAction = async (data) => {
-  const eventId = "25d73c5c-8ca9-4f6b-b174-320a3f97fb38";
+export const updateEventAction = async (data, eventId) => {
   const formData = {
     title: data?.title,
     image: data?.images?.map((pic) => pic?.imageUrl),
