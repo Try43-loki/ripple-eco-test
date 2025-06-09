@@ -20,7 +20,6 @@ import TakeActionComponent from "./_component/TakeActionComponent";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
 import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
-import FilterEcoEventComponent from "../eco-event/_component/FilterEcoEventComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getCurrentUserProfileService } from "@/service/profileService";
 import { getOwnTakeActionService } from "@/service/takeActionService";

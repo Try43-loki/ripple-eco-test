@@ -3,11 +3,8 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const TakeActionNoImageCardComponent = ({ isView, answerData }) => {

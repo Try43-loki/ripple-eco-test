@@ -8,7 +8,6 @@ const DisccusionComponent = ({ disccusionData }) => {
   return (
     <main>
       <section className="flex flex-wrap justify-start items-start gap-2.5">
-        {/* <CardDiscussionComponent discussions={disccusionData} image={"https://i.pinimg.com/564x/24/76/ef/2476efbf3daa04c675e03e0083ad38ac.jpg"}/> */}
         <CardDiscussion discussions={disccusionData} />
       </section>
     </main>

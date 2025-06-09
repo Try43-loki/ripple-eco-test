@@ -14,8 +14,10 @@ export const DeleteComponent = ({ cardId }) => {
   const router = useRouter();
   const handleDelete = async () => {
       const deleted = await deleteTakeActionService(cardId);
-      console.log("is deleted",deleted);
       router.refresh()
+      if(deleted){
+        alert("Take Action Deleted")
+      }
   };
   return (
     <Popover>

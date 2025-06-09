@@ -2,9 +2,8 @@ import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TakeActionCard from "@/components/TakeActionCard";
 import { cn } from "@/lib/utils";
-import { Clock, ClipboardList, MessagesSquare } from "lucide-react";
+import { Clock, MessagesSquare } from "lucide-react";
 import { TabsContent } from "@/components/ui/tabs";
-import OwnTakeActionComponent from "./OwnTakeActionComponent";
 const TakeActionBodyComponent = ( {cardData , ownCardData} ) => {
   return (
     <>
