@@ -26,7 +26,7 @@ const SearchBarComponent = ({
       } else {
         setDebouncedQuery(trimmedQuery);
       }
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(handler);
   }, [searchQuery]);
