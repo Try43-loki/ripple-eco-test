@@ -3,7 +3,6 @@
 import Image from "next/image";
 import React from "react";
 import MultiSelectDropdown from "./MultiSelectDropdownComponent";
-import { formatValue } from "@/utils/format";
 import { usePathname, useSearchParams } from "next/navigation";
 import CardInformationAQIComponent from "./CardInformationAQIComponent";
 
@@ -31,11 +30,11 @@ const HeroSectionAirDisasterComponent = ({
           <div className="flex flex-col gap-8 w-full justify-between">
             <div className="flex flex-col gap-1 items-start">
               <h2 className="font-bold  text-2xl lg:text-4xl">
-                Air Quality In {formatValue(path)}
+                Air Quality In {path || "Phnom Penh"}
               </h2>
               <p className="text-sm lg:text-xl max-w-xl">
-                Air quality index (AQI*) and {formatValue(mainPollution)} air
-                pollution in {formatValue(path)}
+                Air quality index (AQI*) and {mainPollution || "Phnom Penh"} air
+                pollution in {path || "Phnom Penh"}
               </p>
             </div>
             <div className="w-2xl text-dark-gray ">

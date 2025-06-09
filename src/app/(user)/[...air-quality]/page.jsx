@@ -49,10 +49,10 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
   const { search: districtId } = await ParamsPromise;
   const dataProvinces = await getAllDistricts();
   const dataProvince = await getCurrentAirPollutionByDistrictId(
-    districtId || "5bac8def24b967f0b530894c"
+    districtId || "Qpmt7iC423kyhanrm"
   );
   const dataHourly = await getForecastAirPollutionByDistrictId(
-    districtId || "5bac8def24b967f0b530894c",
+    districtId || "Qpmt7iC423kyhanrm",
     "HOURLY"
   );
   const dynamicColor = switchColor(dataProvince.data.aqi);

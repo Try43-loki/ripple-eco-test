@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import React from "react";
 import CardInformationAQI from "../../[...air-quality]/_components/CardInformationAQIComponent";
+import { getCurrentAirPollutionByDistrictId } from "@/service/airQualityService";
 
 const aqiData = {
   value: 80,
@@ -50,8 +51,13 @@ const switchColor = (value) => {
     };
 };
 
-const AirQualitySectionComponent = () => {
-  const dynamicColor = switchColor(aqiData.value);
+const AirQualitySectionComponent = async () => {
+  // Get Current Phnom Penh Static
+  const dataProvince = await getCurrentAirPollutionByDistrictId(
+    "Qpmt7iC423kyhanrm"
+  );
+  const dynamicColor = switchColor(dataProvince.data.aqi);
+
   return (
     <section className="flex flex-col lg:flex-row items-center justify-between w-full bg-white py-10 sm:py-12 md:py-20 px-6 md:px-20 lg:px-45">
       {/* Text content */}
@@ -73,7 +79,10 @@ const AirQualitySectionComponent = () => {
 
       {/* Card */}
       <div className="w-full lg:w-auto">
-        <CardInformationAQI dataCard={aqiData} levelColor={dynamicColor} />
+        <CardInformationAQI
+          provinceData={dataProvince.data}
+          levelColor={dynamicColor}
+        />
       </div>
     </section>
   );

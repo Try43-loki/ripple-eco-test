@@ -31,13 +31,22 @@ const dynamicColorAqi = (value) => {
 };
 const formatTime = (time) => {
   // Return Hour Only
-  return time.substring(11, 16);
+  const original = new Date(time);
+  // Add 7 hours (in milliseconds)
+  const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
+  // Get hours and minutes
+  const hours = updatedTime.getHours();
+  const minutes = updatedTime.getMinutes().toString().padStart(2, "0");
+
+  // Final time string
+  const timeString = `${hours}:${minutes}`;
+  return timeString;
 };
 
 function getCurrentTime(data) {
   // Check Current Time with Data Time
-  const isSameHour =
-    new Date(data.timestamp).getHours() === new Date().getHours();
+  const currentTime = new Date(data.timestamp).getHours() + 7;
+  const isSameHour = currentTime === new Date().getHours();
   const isSameDay =
     new Date(data.timestamp).getDate() === new Date().getDate() &&
     new Date(data.timestamp).getMonth() === new Date().getMonth() &&

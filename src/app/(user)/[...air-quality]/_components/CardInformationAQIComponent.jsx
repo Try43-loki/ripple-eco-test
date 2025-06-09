@@ -52,7 +52,7 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
       {/* AQI Value */}
       <div className="flex flex-col gap-2 px-3 items-center ">
         <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
-        <p className="text-base text-darker-gray ">{path} AQI</p>
+        <p className="text-base text-darker-gray ">{path || "PhnomPenh"} AQI</p>
       </div>
 
       {/* AQI Details */}
