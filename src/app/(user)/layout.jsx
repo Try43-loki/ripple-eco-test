@@ -4,7 +4,7 @@ import FooterComponent from "@/components/FooterComponent";
 import { getUserProfileAction } from "@/action/user-action";
 export default async function UserLayout({ children }) {
   const profile = await getUserProfileAction();
-  console.log(profile);
+  // console.log("profile", profile);
   return (
     <main className="overflow-hidden">
       <NavBarComponent profile={profile} />

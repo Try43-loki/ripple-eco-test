@@ -3,5 +3,6 @@ import { getAuthToken } from "@/utils/auth-api";
 export const getUserProfileService = async () => {
   const token = await getAuthToken();
   const res = await apiRequest(`/profile`, "GET", null, token);
+  console.log("getUserProfileService", res);
   return res;
 };

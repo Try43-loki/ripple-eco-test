@@ -3,7 +3,6 @@ import { auth } from "./src/auth";
 
 export async function middleware(req) {
   const session = await auth();
-
   if (!session?.payload.token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
