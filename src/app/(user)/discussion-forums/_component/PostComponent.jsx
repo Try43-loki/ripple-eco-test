@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const PostComponent = ({ popular }) => {
   return (
-    <Link href={`/discussion-forums/${1}`}>
+    <Link href={`/discussion-forums/${popular.discussionId}`}>
       <article className="flex flex-col w-full max-w-sm md:max-w-md lg:max-w-lg mt-3">
         {/* Main Question */}
         <h3 className="truncate text-sm md:text-base lg:text-lg font-medium mt-2 text-dark-green">

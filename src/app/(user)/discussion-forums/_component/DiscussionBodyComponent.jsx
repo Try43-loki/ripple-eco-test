@@ -1,22 +1,25 @@
 "use client";
+
 import CardDiscussionComponent from "@/components/CardDiscussionComponent";
 import DiscussionButtonComponent from "@/components/DiscussionButtonComponent";
 import { MessageCircleQuestion } from "lucide-react";
 import PostComponent from "./PostComponent";
 import SearchBarComponent from "@/components/SearchBarComponent";
-import Link from "next/link";
 import CreateDiscussionComponent from "@/components/CreateDiscussionComponent";
 import { useState } from "react";
+import { getUserProfileService } from "@/service/auth/user-service";
 
 const DiscussionBodyComponent = ({
-  discussionData,
   totalDiscussion,
   popularDiscussion,
+  search,
+  currentUserId,
 }) => {
   const buttonText = "Create Discussion";
   const [open, setOpen] = useState(false);
   return (
-    <main>
+    <main className="min-h-screen flex flex-col">
+      {/* Top Search + Create Button */}
       <article className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-6 md:px-20 lg:px-[150px] my-6 w-full">
         <SearchBarComponent
           placeholder="Search Title or Tag"
@@ -27,24 +30,31 @@ const DiscussionBodyComponent = ({
         </div>
       </article>
 
-      <article className="flex flex-col w-full px-6 md:px-20 lg:px-[150px] md:flex-row lg:flex-row">
-        <div className="w-full flex-col">
+      {/* Scrollable layout */}
+      <article className="flex flex-1 overflow-hidden px-6 md:px-20 lg:px-[150px] gap-6">
+        {/* Scrollable card list */}
+        <div className="flex-1 overflow-y-auto pr-4 h-[160vh] scrollbar-hide">
           <h2 className="text-sm md:text-base lg:text-xl font-bold text-dark-green">
-            {totalDiscussion} Discussions
+            {search?.length ?? totalDiscussion} Discussions
           </h2>
           <div className="w-full border-b py-2 border-lighter-white"></div>
-          {discussionData?.map((data) => (
-            <Link
-              href={`/discussion-forums/${data.discussionId}`}
-              key={data.discussionId}
-            >
-              <CardDiscussionComponent discussions={data} />
-            </Link>
-          ))}
+          {search?.length > 0 ? (
+            search.map((data) => (
+              <div className="cursor-pointer" key={data.discussionId}>
+                <CardDiscussionComponent
+                  discussions={data}
+                  currentUserId={currentUserId}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-red text-center w-full">No discussion found.</p>
+          )}
         </div>
-        {/* Centered Post Components */}
-        <div className="flex justify-center mt-6 h-fit md:ml-7 lg:ml-7">
-          <div className="w-full md:w-[350px] lg:w-[400px] p-6 border border-lighter-white bg-white rounded-[20px]">
+
+        {/* popular discussion */}
+        <div className="hidden md:flex md:w-[350px] lg:w-[400px] sticky top-6 self-start">
+          <div className="w-full p-6 border border-lighter-white bg-white rounded-[20px]">
             {/* Title + Icon */}
             <div className="flex items-center gap-2 md:gap-3">
               <h2 className="text-base md:text-lg lg:text-xl font-bold text-dark-green">
@@ -54,7 +64,7 @@ const DiscussionBodyComponent = ({
             </div>
             {/* Subtext */}
             <p className="text-xs md:text-sm lg:text-base text-lighters-green">
-              10 Discussions found
+              {popularDiscussion?.length} Discussions found
             </p>
             {popularDiscussion?.map((data, index) => (
               <div key={index}>
@@ -64,7 +74,8 @@ const DiscussionBodyComponent = ({
           </div>
         </div>
       </article>
-      {/* Create Discussion Modal */}
+
+      {/* Modal */}
       <CreateDiscussionComponent
         open={open}
         onOpenChange={() => setOpen(false)}

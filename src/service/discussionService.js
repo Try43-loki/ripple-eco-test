@@ -1,6 +1,6 @@
 import { apiRequest } from "@/utils/api";
 const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxMDg5NjIsImV4cCI6MTc0OTM2ODE2Mn0.ymgJ4AAtOUcfU6nGxm-KbQW7nw28t0-ONZVJzq5iQc8";
+  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxNzY3NjYsImV4cCI6MTc0OTQzNTk2Nn0.Ifsa-p-RG191_Tk3eXXOUnFJwIo6k_4k9h6mCZBeidY";
 
 // Get all discussion
 import { baseUrl } from "./constants";
@@ -53,8 +53,6 @@ export const getAllPopularDiscussionService = async () => {
 
 // Create Discussion
 export const createDiscussionService = async (discussionData) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxMDg5NjIsImV4cCI6MTc0OTM2ODE2Mn0.ymgJ4AAtOUcfU6nGxm-KbQW7nw28t0-ONZVJzq5iQc8";
   try {
     const data = await apiRequest(
       `/discussions`,
@@ -75,5 +73,48 @@ export const getAllOwnDiscussionsService = async () => {
     return data;
   } catch (e) {
     console.log("error", e);
+  }
+};
+
+// Search Discussion
+export const getSearchDiscussionService = async (search) => {
+  try {
+    const res = await fetch(
+      `${baseUrl}/discussions/search?titleOrTage=${search}`
+    );
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Update Discussion
+export const updateDiscussionService = async (updateData, discussionId) => {
+  try {
+    const data = await apiRequest(
+      `/discussions/${discussionId}`,
+      "PUT",
+      updateData,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Delete Discussion
+export const deleteDiscussionService = async (discussionId) => {
+  try {
+    const data = await apiRequest(
+      `/discussions/${discussionId}`,
+      "DELETE",
+      null,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
   }
 };

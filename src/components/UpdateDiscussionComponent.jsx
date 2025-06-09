@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,97 +8,99 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { ImagePlus } from "lucide-react";
-import { useForm, Controller } from "react-hook-form";
+import { Badge } from "@/components/ui/badge";
+import { ImagePlus, X } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { discussionSchema } from "@/lib/zod/DiscussionSchema";
-import { insertDiscussionAction } from "@/action/DiscussionAction";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
+import { updateDiscussionAction } from "@/action/DiscussionAction";
 
-const CreateDiscussionComponent = ({ open, onOpenChange }) => {
+export default function UpdateDiscussionComponent({
+  open,
+  onOpenChange,
+  defaultValues,
+}) {
+  const [preview, setPreview] = useState(null);
+  const [tagInput, setTagInput] = useState("");
+
   const {
     register,
-    reset,
     handleSubmit,
     setValue,
-    getValues,
+    reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(discussionSchema),
-    mode: "onChange",
     defaultValues: {
+      id: "",
       title: "",
-      description: "",
       tag: [],
+      description: "",
       image: undefined,
     },
   });
 
-  const [imagePreview, setImagePreview] = useState(null);
-  const [tagError, setTagError] = useState("");
+  const tags = watch("tag");
 
-  // Handle image file change & preview
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
+  useEffect(() => {
+    if (defaultValues) {
+      reset({
+        id: defaultValues.id || "",
+        title: defaultValues.title || "",
+        tag: defaultValues.tags || [],
+        description: defaultValues.description || "",
+        image: undefined,
+      });
+      setPreview(defaultValues.image || null);
+    }
+  }, [defaultValues, reset]);
+
+  const handleAddTag = () => {
+    const cleaned = tagInput.trim();
+    if (
+      cleaned &&
+      !tags.includes(cleaned) &&
+      cleaned.startsWith("#") &&
+      cleaned.length <= 15
+    ) {
+      if (tags.length < 3) {
+        setValue("tag", [...tags, cleaned]);
+        setTagInput("");
+      }
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove) => {
+    setValue(
+      "tag",
+      tags.filter((tag) => tag !== tagToRemove)
+    );
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
-      setValue("image", file, { shouldValidate: true });
-      setImagePreview(URL.createObjectURL(file));
+      setValue("image", file);
+      setPreview(URL.createObjectURL(file));
     }
   };
 
-  // Add new tag
-  const addTag = () => {
-    const inputEl = document.getElementById("tag-input");
-    const rawTag = inputEl?.value.trim();
+  const closeDialog = () => onOpenChange(false);
 
-    if (!rawTag) return;
-
-    const tag = rawTag.startsWith("#") ? rawTag : `#${rawTag}`;
-
-    const currentTags = getValues("tag") || [];
-    if (currentTags.includes(tag)) {
-      setTagError("This tag already exists");
-      return;
-    }
-    if (currentTags.length >= 3) {
-      setTagError("You can add up to 3 tags only");
-      return;
-    }
-    const newTags = [...currentTags, tag];
-
-    setValue("tag", newTags, { shouldValidate: true });
-    inputEl.value = "";
-    setTagError("");
-  };
-
-  // Remove a tag
-  const removeTag = (tagToRemove) => {
-    const currentTags = getValues("tag").filter((tag) => tag !== tagToRemove);
-    setValue("tag", currentTags, { shouldValidate: true });
-    setTagError("");
-  };
-
-  // Submit handler
-  const handleAddDiscussion = (data) => {
-    const formatData = {
+  const onSubmit = async (data) => {
+    const result = await updateDiscussionAction({
       ...data,
-      tag: data.tag,
-    };
-    insertDiscussionAction(formatData);
-    setImagePreview(null);
-    reset();
-    onOpenChange(false);
-  };
-
-  // Reset and close dialog
-  const closeDialog = () => {
-    setImagePreview(null);
-    setTagError("");
-    reset();
-    onOpenChange(false);
+      id: defaultValues.id,
+    });
+    if (result.success) {
+      closeDialog();
+    } else {
+      alert(result.message);
+    }
   };
 
   return (
@@ -106,14 +108,11 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
       <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white cursor-pointer">
         <DialogHeader>
           <DialogTitle className="text-dark-green">
-            Create Discussion
+            Update Discussion
           </DialogTitle>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(handleAddDiscussion)}
-          encType="multipart/form-data"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           {/* Title */}
           <div className="py-4">
             <label
@@ -122,17 +121,14 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
             >
               Title <span className="text-red">*</span>
             </label>
-            <input
-              type="text"
+            <Input
               id="title"
               placeholder="Environment"
               className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
               {...register("title")}
             />
             {errors.title && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.title.message}
-              </p>
+              <p className="text-red text-sm">{errors.title.message}</p>
             )}
           </div>
 
@@ -143,42 +139,42 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
             </label>
             <div className="flex items-center gap-2">
               <Input
-                id="tag-input"
                 placeholder="#climate-change"
+                value={tagInput}
+                className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
+                onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                    addTag();
+                    handleAddTag();
                   }
                 }}
-                className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-green placeholder:text-lighter-green"
               />
               <Button
                 type="button"
+                onClick={handleAddTag}
                 className="bg-green hover:bg-green text-white cursor-pointer"
-                onClick={addTag}
               >
                 +
               </Button>
             </div>
 
-            {tagError && (
-              <p className="text-red-500 text-sm mt-1">{tagError}</p>
-            )}
-
             <div className="flex flex-wrap gap-2 mt-2">
-              {getValues("tag")?.map((tag, index) => (
+              {tags.map((tag, index) => (
                 <Badge
                   key={index}
                   className="flex items-center gap-1 px-3 py-1"
                 >
                   {tag}
-                  <button onClick={() => removeTag(tag)}>
-                    <X className="w-3 h-3 cursor-pointer" />
+                  <button type="button" onClick={() => handleRemoveTag(tag)}>
+                    <X className="w-3 h-3" />
                   </button>
                 </Badge>
               ))}
             </div>
+            {errors.tag && (
+              <p className="text-red text-sm">{errors.tag.message}</p>
+            )}
           </div>
 
           {/* Description */}
@@ -211,15 +207,15 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               id="file"
               className="hidden"
               accept="image/*"
-              onChange={handleFileChange}
+              onChange={handleImageChange}
             />
             <label
               htmlFor="file"
-              className=" h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+              className="h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
             >
-              {imagePreview ? (
+              {preview ? (
                 <img
-                  src={imagePreview}
+                  src={preview}
                   alt="Preview"
                   className="object-cover h-full w-full"
                 />
@@ -233,9 +229,7 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               )}
             </label>
             {errors.image && (
-              <span className="text-red text-sm mt-4">
-                {errors.image.message}
-              </span>
+              <p className="text-red text-sm">{errors.image.message}</p>
             )}
           </div>
 
@@ -253,13 +247,11 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               type="submit"
               className="bg-green text-white hover:bg-green cursor-pointer"
             >
-              Create Discussion
+              Update Discussion
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
   );
-};
-
-export default CreateDiscussionComponent;
+}
