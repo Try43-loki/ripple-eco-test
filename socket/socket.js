@@ -12,7 +12,7 @@ export const useCommentSocket = (postId) => {
 
     const client = new Client({
       brokerURL: undefined, // SockJS fallback
-      webSocketFactory: () => new SockJS("http://34.101.216.70:8883/comment"),
+      webSocketFactory: () => new SockJS("http://34.101.213.159:8883/comment"),
       reconnectDelay: 5000, // auto reconnect
       connectHeaders: {
         discussionId: postId, // The discussion you're viewing

@@ -18,8 +18,8 @@ import { getEcoEventByIdService } from "@/service/ecoEventService";
 
 const EcoEventDetailPage = async ({ params }) => {
   const { eventid } = params;
-  const res = await getEcoEventByIdService(eventid); // <- full response
-  const event = res.data; // <- extract the actual event object
+  const res = await getEcoEventByIdService(eventid);
+  const event = res.data;
 
   console.log("Event Data:", event);
 

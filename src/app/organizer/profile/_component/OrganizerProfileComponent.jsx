@@ -16,49 +16,48 @@ import React from "react";
 import ArchivesComponent from "./ArchivesComponent";
 import EditprofileComponent from "./EditprofileComponent";
 
-const OrganizerProfileComponent = ({ operator }) => (
+const OrganizerProfileComponent = ({ operator , organizerData}) => {
+  return (
   <>
     <section className="rounded-2xl px-5 py-6 flex flex-col min-w-2xs border-light-gray border-1 drop-shadow-lg">
       <div className="flex items-start justify-between">
         <Image
-          src="/badges/no profile icon.jpg"
-          alt="Picture of the author"
+          src={organizerData?.profileImageUrl}
+          alt={`${organizerData?.firstName} ${organizerData?.lastName}`}
           width={110}
           height={110}
           className="rounded-full"
         />
-        {operator == "organizer" ? (
+        {operator ? (
           <EditprofileComponent operator={operator} title={""} />
         ) : (
           ""
         )}
       </div>
       <article className="flex flex-col items-start gap-y-2 mt-2.5">
-        {operator == "organizer" ? (
-          <h2 className="text-xl">United Nations Environment Program (UNEP)</h2>
+        {operator ? (
+          <h2 className="text-xl">{`${organizerData?.firstName} ${organizerData?.lastName}`}</h2>
         ) : (
-          <h2 className="text-xl">MEY soytry</h2>
+          <h2 className="text-xl"></h2>
         )}
 
         <p className="text-strong-gray text-sm">
-          We Interesting to apply our support to the earth.It is a long
-          established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout
+          {organizerData?.bio}
         </p>
       </article>
       <hr className="h-0.5 text-light-gray my-2" />
       <div className="flex flex-col gap-y-2">
         <div className="flex items-center text-sub-info text-strong-gray gap-x-1.5">
           <Phone className="w-4.5 h-4.5" />
-          <p>012-333-334</p>
+          <p>{organizerData?.phoneNumber}</p>
         </div>
         <div className="flex items-center text-sub-info text-strong-gray gap-x-1.5">
           <MapPin className="w-4.5 h-4.5" />
-          <p>Phnom Penh</p>
+          <p>{organizerData?.address}</p>
         </div>
         <div className="flex items-center text-sub-info text-strong-gray gap-x-1.5">
           <Mail className="w-4.5 h-4.5" />
-          <p>UNEP@gmail.com</p>
+          <p>{organizerData?.email}</p>
         </div>
       </div>
     </section>
@@ -78,7 +77,7 @@ const OrganizerProfileComponent = ({ operator }) => (
               <Clock className="w-4.5 h-4.5" />
               <p>Earned Badge</p>
             </TabsTrigger>
-            {operator == "orgainzer" ? (
+            {operator ? (
               <TabsTrigger
                 value="archive-post"
                 className={cn(
@@ -126,5 +125,5 @@ const OrganizerProfileComponent = ({ operator }) => (
     </section>
   </>
 );
-
+}
 export default OrganizerProfileComponent;

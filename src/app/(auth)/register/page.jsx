@@ -17,8 +17,6 @@ function RegisterPage() {
     setEmail(value);
   };
 
-  console.log(email);
-
   return (
     <>
       {currentStep === 1 && (

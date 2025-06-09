@@ -53,8 +53,6 @@ const PopupTakeActionForm = () => {
       isAnonymous,
       image: imageFile,
     };
-    console.log("Form submitted:", formData);
-    // Handle actual form submission here
     const create = await createTakeAction(formData);
     reset();
     setImagePreview(null);

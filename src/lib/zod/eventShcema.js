@@ -1,8 +1,37 @@
 import { z } from "zod";
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+const MIN_IMAGE = 1;
+const MAX_IMAGES = 15;
+export const createMultiImageSchema = (
+  maxFileSize = MAX_FILE_SIZE,
+  acceptedTypes = ACCEPTED_IMAGE_TYPES
+) => {
+  const customSingleImageSchema = z
+    .any()
+    .refine((file) => file instanceof File, "Must be a valid file")
+    .refine(
+      (file) => file?.size <= maxFileSize,
+      `Max image size is ${maxFileSize / (1024 * 1024)}MB.`
+    )
+    .refine(
+      (file) => acceptedTypes.includes(file?.type),
+      `Only ${acceptedTypes
+        .map((type) => type.split("/")[1])
+        .join(", ")} formats are supported.`
+    );
+  return customSingleImageSchema;
+};
 
 export const createEventSchemaFromData = (dataArrays) => {
-  const { categories, eventTypes, certificates, locations, contributeType } =
-    dataArrays;
+  const {
+    categories,
+    eventTypes,
+    certificates,
+    locations,
+    contributeType,
+    pictures,
+  } = dataArrays;
 
   return z
     .object({
@@ -20,7 +49,7 @@ export const createEventSchemaFromData = (dataArrays) => {
         { errorMap: () => ({ message: "Please select a valid category" }) }
       ),
 
-      eventType: z.enum(
+      eventTypes: z.enum(
         eventTypes.map((type) => type.value),
         { errorMap: () => ({ message: "Please select a valid event type" }) }
       ),
@@ -42,7 +71,6 @@ export const createEventSchemaFromData = (dataArrays) => {
 
       startDate: z.date({ required_error: "Start date is required" }),
       endDate: z.date({ required_error: "End date is required" }),
-      picture: z.any().optional(),
     })
     .refine((data) => data.endDate >= data.startDate, {
       message: "End date must be after start date",

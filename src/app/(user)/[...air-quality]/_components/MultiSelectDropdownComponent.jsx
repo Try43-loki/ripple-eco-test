@@ -49,22 +49,22 @@ export default function MultiSelectDropdown({ provincesList }) {
         align="start"
         className="bg-white text-black shadow-lg border border-gray-200 rounded-xl w-[670px] h-[300px] mt-2 scrollbar-hide"
       >
-        {provincesList.data.map((value) => (
+        {provincesList?.data?.map((value) => (
           <DropdownMenuSub key={value.provinceId}>
             <DropdownMenuSubTrigger className=" hover:cursor-pointer hover:bg-blue-200 rounded-md px-2 py-1.5 flex justify-between w-full">
               <span>{value.provinceName}</span>
             </DropdownMenuSubTrigger>
 
             <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg rounded-xl">
-              {value.districtList.map((item) => (
+              {value?.districtList?.map((item) => (
                 <DropdownMenuItem
-                  key={item.districtId}
+                  key={item?.districtId}
                   onClick={() =>
-                    handleSelected(item.districtId, item.districtName)
+                    handleSelected(item?.districtId, item?.districtName)
                   }
                   className="hover:bg-gray-100 px-2 py-1.5 rounded-md"
                 >
-                  {item.districtName}
+                  {item?.districtName}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuSubContent>

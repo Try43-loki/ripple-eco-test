@@ -15,6 +15,8 @@ import Link from "next/link";
 const TakeActionCard = ({
   image,
   id,
+  idUser,
+  isCompleted,
   title,
   description,
   support,
@@ -23,10 +25,9 @@ const TakeActionCard = ({
   isOrganizer,
   isPublic,
 }) => {
-  console.log(image, id, title, description, support, layout, isOwner);
   const getImageSrc = (img) => {
     if (!img) return defaultImage;
-    if (img.startsWith("http")) return img;
+    if (img.startsWith('http')) return img;
     return `/${img}`;
   };
   return (
@@ -52,16 +53,16 @@ const TakeActionCard = ({
           </Link>
           <div className="absolute top-0 left-0 flex justify-between items-center p-3 w-full">
             <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
-              Action
+              {isCompleted ? "Completed" : "Action"}
             </p>
-            {isOwner ? <DeleteComponent cardId={id} /> : null}
+            {isOwner ? <DeleteComponent cardId={id}/> : null}
           </div>
         </CardContent>
 
         {layout === "col" ? (
           <div>
             <CardHeader className="px-2">
-              <CardTitle className="line-clamp-1  text-[18px] text-dark-green ">
+              <CardTitle className={"text-[18px] text-dark-green line-clamp-1"}>
                 {title}
               </CardTitle>
               <CardDescription
@@ -69,27 +70,23 @@ const TakeActionCard = ({
               >
                 {description}
               </CardDescription>
-              <article className="flex gap-x-2 items-center text-green text-[16px]">
-                ACT NOW
-                <Play className="w-[14px] h-[14px] fill-green" />
-              </article>
+                <article className="flex gap-x-2 items-center text-green text-[16px]">
+                  ACT NOW
+                  <Play className="w-[14px] h-[14px] fill-green" />
+                </article>
             </CardHeader>
 
             <CardFooter className="flex flex-col items-start p-2 mt-4">
               <div>
                 <p className="text-[18px] font-700 text-green">{support}</p>
-                <p className="text-[10px] font-600 text-black">
-                  {support > 1 ? "SUPPORTERS" : "SUPPORTER"}
-                </p>
+                <p className="text-[10px] font-600 text-black">{support > 1 ? "SUPPORTERS" :"SUPPORTER"}</p>
               </div>
             </CardFooter>
           </div>
         ) : (
           <div>
             <CardHeader className="px-2">
-              <CardTitle className={"line-clamp-1 text-[18px]"}>
-                {title}
-              </CardTitle>
+              <CardTitle className={"text-[18px] line-clamp-1"}>{title}</CardTitle>
               <CardDescription
                 className={"line-clamp-3 text-[14px] text-lighter-green"}
               >
@@ -106,7 +103,7 @@ const TakeActionCard = ({
                   {support}
                 </p>
                 <p className="text-[10px] font-medium text-lighter-green">
-                  SUPPORTERS
+                  SUPPORTER {support > 1? "S" : ""}
                 </p>
               </div>
             </CardFooter>

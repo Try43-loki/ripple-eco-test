@@ -8,16 +8,22 @@ import {
 } from "@/components/ui/input-otp";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { registerAction, verifyOTPAction } from "@/action/auth-action";
+import {
+  forgetPasswordAction,
+  registerAction,
+  verifyOTPAction,
+} from "@/action/auth-action";
 import clsx from "clsx";
 
-function OTPVerifyComponent({ onNext, onPrev, email }) {
+function OTPVerifyComponent({ onNext, onPrev, email, handleOtpChangeParent }) {
   const pathName = usePathname();
   const [otpCode, setOtpCode] = useState("");
   const [resendOtp, setResendOtp] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0);
   const [isVerified, setIsVerified] = useState(false);
   const [message, setMessage] = useState("");
+  const currentPath = usePathname();
+  const type = currentPath === "/register" ? "REGISTER" : "FORGOT_PASSWORD";
 
   const formData = {
     email: email,
@@ -25,16 +31,22 @@ function OTPVerifyComponent({ onNext, onPrev, email }) {
 
   const handleOTPChange = (value) => {
     setOtpCode(value);
+    handleOtpChangeParent(value);
   };
 
   const handleSendOtp = async () => {
-    await registerAction(formData);
+    {
+      currentPath === "/register"
+        ? await registerAction(formData)
+        : await forgetPasswordAction(formData);
+    }
   };
 
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
     if (otpCode.length === 6) {
-      const isSuccess = await verifyOTPAction(email, otpCode);
+      handleOtpChangeParent(otpCode);
+      const isSuccess = await verifyOTPAction(email, otpCode, type);
 
       if (isSuccess?.success) {
         setIsVerified(false);

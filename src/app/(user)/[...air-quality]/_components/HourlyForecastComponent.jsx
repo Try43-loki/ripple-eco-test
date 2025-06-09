@@ -29,6 +29,8 @@ const HourlyForecastComponent = ({ hourlyData }) => {
       >
         {data?.map((value, index) => (
           <HourlyValueAQIComponent key={index} data={value} />
+        {data?.map((value, index) => (
+          <HourlyValueAQIComponent key={index} data={value} />
         ))}
       </DragScroll>
     </article>

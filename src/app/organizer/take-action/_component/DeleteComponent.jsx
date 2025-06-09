@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { Edit, Ellipsis, OctagonX, Settings } from "lucide-react";
+import { Ellipsis, OctagonX } from "lucide-react";
 
 export function DeleteComponent() {
   return (

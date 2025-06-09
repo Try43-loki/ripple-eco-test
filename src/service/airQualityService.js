@@ -1,5 +1,7 @@
 import { baseUrl } from "./constants";
 
+import { baseUrl } from "./constants";
+
 export const getAllDistricts = async () => {
   try {
     const res = await fetch(`${baseUrl}/provinces/districts`);

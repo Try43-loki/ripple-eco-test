@@ -1,9 +1,10 @@
+import CommentButtonComponent from "@/app/(user)/discussion-forums/_component/CommentButtonComponent";
 import React from "react";
 
 const TagComponent = ({ tagData }) => {
   return (
     <main className="w-full">
-      <article className="flex justify-between">
+      <article className="flex justify-between items-center">
         <article className="flex justify-start items-center gap-4 flex-wrap">
           {tagData?.tag?.map((data, index) => (
             <div
@@ -14,6 +15,7 @@ const TagComponent = ({ tagData }) => {
             </div>
           ))}
           {/* Comment Button */}
+          <CommentButtonComponent totalComment={tagData?.commentCount} />
         </article>
       </article>
       <div className="w-full border-b border-lightes-white py-2"></div>

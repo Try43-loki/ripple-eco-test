@@ -25,11 +25,10 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
     handleSubmit,
     setValue,
     getValues,
-    control,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(discussionSchema),
-    mode: "onChange", // Enables real-time validation
+    mode: "onChange",
     defaultValues: {
       title: "",
       description: "",
@@ -39,6 +38,7 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
   });
 
   const [imagePreview, setImagePreview] = useState(null);
+  const [tagError, setTagError] = useState("");
 
   // Handle image file change & preview
   const handleFileChange = (e) => {
@@ -59,16 +59,26 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
     const tag = rawTag.startsWith("#") ? rawTag : `#${rawTag}`;
 
     const currentTags = getValues("tag") || [];
+    if (currentTags.includes(tag)) {
+      setTagError("This tag already exists");
+      return;
+    }
+    if (currentTags.length >= 3) {
+      setTagError("You can add up to 3 tags only");
+      return;
+    }
     const newTags = [...currentTags, tag];
 
     setValue("tag", newTags, { shouldValidate: true });
-    inputEl.value = ""; // Clear input
+    inputEl.value = "";
+    setTagError("");
   };
 
   // Remove a tag
   const removeTag = (tagToRemove) => {
     const currentTags = getValues("tag").filter((tag) => tag !== tagToRemove);
     setValue("tag", currentTags, { shouldValidate: true });
+    setTagError("");
   };
 
   // Submit handler
@@ -86,13 +96,14 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
   // Reset and close dialog
   const closeDialog = () => {
     setImagePreview(null);
-    reset(); // Reset form values
+    setTagError("");
+    reset();
     onOpenChange(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={closeDialog}>
-      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white">
+      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white cursor-pointer">
         <DialogHeader>
           <DialogTitle className="text-dark-green">
             Create Discussion
@@ -109,13 +120,13 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               htmlFor="title"
               className="block text-sm font-medium text-dark-green"
             >
-              Title
+              Title <span className="text-red">*</span>
             </label>
             <input
               type="text"
               id="title"
-              placeholder="Enter discussion title"
-              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green"
+              placeholder="Environment"
+              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
               {...register("title")}
             />
             {errors.title && (
@@ -128,12 +139,12 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
           {/* Tags */}
           <div className="mb-4 flex flex-col gap-2">
             <label className="block text-sm font-medium text-dark-green">
-              Tags
+              Tags <span className="text-red">*</span>
             </label>
             <div className="flex items-center gap-2">
               <Input
                 id="tag-input"
-                placeholder="Add tag"
+                placeholder="#climate-change"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -144,14 +155,15 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               />
               <Button
                 type="button"
-                className="bg-green hover:bg-green text-white"
+                className="bg-green hover:bg-green text-white cursor-pointer"
                 onClick={addTag}
               >
                 +
               </Button>
             </div>
-            {errors.tag && (
-              <p className="text-red text-sm mt-1">{errors.tag.message}</p>
+
+            {tagError && (
+              <p className="text-red-500 text-sm mt-1">{tagError}</p>
             )}
 
             <div className="flex flex-wrap gap-2 mt-2">
@@ -161,10 +173,9 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
                   className="flex items-center gap-1 px-3 py-1"
                 >
                   {tag}
-                  <X
-                    className="w-3 h-3 cursor-pointer"
-                    onClick={() => removeTag(tag)}
-                  />
+                  <button onClick={() => removeTag(tag)}>
+                    <X className="w-3 h-3 cursor-pointer" />
+                  </button>
                 </Badge>
               ))}
             </div>
@@ -180,9 +191,9 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
             </label>
             <textarea
               id="description"
-              placeholder="Enter discussion"
+              placeholder="These hands-on initiatives empower locals to remove debris"
               rows={4}
-              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green"
+              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
               {...register("description")}
             />
             {errors.description && (
@@ -234,13 +245,13 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               type="button"
               variant="outline"
               onClick={closeDialog}
-              className="hover:bg-lighter-white bg-light-gray border-none"
+              className="hover:bg-lighter-white bg-light-gray border-none cursor-pointer"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-green text-white hover:bg-green"
+              className="bg-green text-white hover:bg-green cursor-pointer"
             >
               Create Discussion
             </Button>

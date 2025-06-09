@@ -2,9 +2,27 @@ import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 import React from "react";
 import EcoeventFilterComponent from "./_component/EcoeventFilterComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
-import { getAllEcoEventService } from "@/service/ecoEventService";
+import {
+  getAllEcoEventService,
+  getEcoEventByTitleService,
+} from "@/service/ecoEventService";
+import SearchBarComponent from "@/components/SearchBarComponent";
 
-export default async function EcoEventPage() {
+export default async function EcoEventPage({
+  searchParams: searchParamsPromise,
+}) {
+  let cardData = [];
+  const searchParams = (await searchParamsPromise) || null;
+  const searchQuery = searchParams?.search || "";
+
+  if (searchQuery !== "") {
+    const response = await getEcoEventByTitleService(searchQuery);
+    cardData = response?.data ?? [];
+  } else {
+    const response = await getAllEcoEventService();
+    cardData = response?.data ?? [];
+  }
+
   const response = await getAllEcoEventService();
   const events = response?.data ?? [];
 
@@ -25,29 +43,27 @@ export default async function EcoEventPage() {
         />
 
         <div className="w-full border-b border-lightes-white mt-5" />
+        <div className="flex w-full items-center justify-between gap-x-7">
+          <div className="w-[500px] gap-1.5">
+            <SearchBarComponent
+              placeholder="Search Eco Event"
+              pagePath="/organizer/eco-event"
+            />
+          </div>
 
-        <EcoeventFilterComponent className="w-full" />
+          <EcoeventFilterComponent className="w-full" />
+        </div>
 
         <div className="flex flex-wrap justify-start gap-5 mt-6">
-          {events?.map((event) => (
-            <div key={event?.eventId}>
-              <CardEcoEventComponent event={event} />
-            </div>
-            // <CardEcoEventComponent
-            //   key={item.eventId}
-            //   operator="organizer"
-            //   href={`/eco-event/${item.eventId}`}
-            //   type={item.eventTypes.eventType}
-            //   contribute={item.contributeTypesResponse.contributeTypeName}
-            //   category={item.category.categoryName}
-            //   status={item.eventStatus}
-            //   date={item.startDate}
-            //   participats={item.maxSlot}
-            //   title={item.title}
-            //   location={item.provinces?.provinceName}
-            //   image={item.image}
-            // />
-          ))}
+          {cardData?.length > 0 ? (
+            cardData.map((event) => (
+              <div key={event?.eventId}>
+                <CardEcoEventComponent event={event} />
+              </div>
+            ))
+          ) : (
+            <p className="text-red text-center w-full">No events found.</p>
+          )}
         </div>
       </section>
     </main>
