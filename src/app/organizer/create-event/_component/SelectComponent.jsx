@@ -4,7 +4,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -44,6 +43,7 @@ export function SelectComponent({
     default:
       break;
   }
+  console.log("data ", data);
 
   return (
     <Select value={value} onValueChange={onChange} {...props}>
@@ -51,13 +51,11 @@ export function SelectComponent({
         <SelectValue placeholder={placeholder || `Choose ${operator}`} />
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-gray-600">
-        <SelectGroup>
-          {data?.map((item, index) => (
-            <SelectItem key={index} value={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
+        {data?.map((item, index) => (
+          <SelectItem key={index} value={item.value}>
+            {item.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );

@@ -48,7 +48,7 @@ const eventTypeData = await getAllEventTypesService();
 eventTypeData.data.forEach((prov) => {
   eventTypes.push({
     label: prov?.eventType,
-    value: generateHexId(),
+    value: prov?.eventTypeId,
   });
 });
 

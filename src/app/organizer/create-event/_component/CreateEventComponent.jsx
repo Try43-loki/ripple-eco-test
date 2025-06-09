@@ -42,7 +42,6 @@ export default function CreateEventComponent({
     control,
     register,
     getValues,
-    watch,
     setValue,
     formState: { errors },
   } = useForm({
