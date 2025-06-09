@@ -7,7 +7,7 @@ import DragScroll from "react-indiana-drag-scroll";
 import { usePathname } from "next/navigation";
 
 const HourlyForecastComponent = ({ hourlyData }) => {
-  const data = hourlyData?.data[0]?.forecastDetail;
+  const data = hourlyData?.data?.forecastDetail;
 
   // For Get Province AQI
   const pathName = usePathname();
@@ -19,7 +19,7 @@ const HourlyForecastComponent = ({ hourlyData }) => {
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Hourly Forecast</h2>
         <p className="text-darker-gray text-lg">
-          {path} Air Quality Index (AQI) Forecast
+          {path || "Phnom Penh"} Air Quality Index (AQI) Forecast
         </p>
       </div>
       {/* Row Of Hourly */}
@@ -29,12 +29,9 @@ const HourlyForecastComponent = ({ hourlyData }) => {
       >
         {data?.map((value, index) => (
           <HourlyValueAQIComponent key={index} data={value} />
-        {data?.map((value, index) => (
-          <HourlyValueAQIComponent key={index} data={value} />
         ))}
       </DragScroll>
     </article>
   );
 };
-
 export default HourlyForecastComponent;

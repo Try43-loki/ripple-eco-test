@@ -1,4 +1,4 @@
-import CardInformationAQI from "@/app/(user)/[...air-quality]/_components/CardInformationAQIComponent";
+import CardInformationAQI from "@/app/(user)/air-quality/[...slug]/_components/CardInformationAQIComponent";
 import CardCurrentDisasterComponent from "@/app/(user)/natural-disaster/_components/CardCurrentDisasterComponent";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import { ChevronDown, Droplet, Flame, Waves, Wind } from "lucide-react";

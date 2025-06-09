@@ -2,9 +2,9 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import React from "react";
 
-const LineVertical = () => (
+const LineVertical = ({ day }) => (
   <div className="flex flex-col justify-center text-light-gray items-center">
-    {/* <span className="text-dark-gray">Tue</span> */}
+    {day && <span className="text-dark-gray">{day}</span>}
     <hr className="w-px h-36 border-1 " />
   </div>
 );
@@ -45,6 +45,7 @@ const formatTime = (time) => {
 
 function getCurrentTime(data) {
   // Check Current Time with Data Time
+
   const currentTime = new Date(data.timestamp).getHours() + 7;
   const isSameHour = currentTime === new Date().getHours();
   const isSameDay =
@@ -56,43 +57,47 @@ function getCurrentTime(data) {
 }
 
 const HourlyValueAQIComponent = ({ data }) => {
-  const isActive = getCurrentTime(data) === "Now";
-  const hour = formatTime(data?.timestamp);
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
-      <div
-        className={clsx(
-          "w-[200px] **: flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
-          {
-            "bg-light-gray px-": isActive,
-          }
-        )}
-      >
-        <span className="text-lg font-medium text-darker-gray">{hour}</span>
-        {/* Image Icon */}
-        <Image
-          src={`/assets/air_quality_images/${checkIcon(data?.cloudIcon)}.svg`}
-          alt="Logo"
-          width={36}
-          height={36}
-        />
-        <span className="text-2xl font-semibold text-darker-gray">
-          {data.temperature.current}
-          <sup>o</sup>
-        </span>
-        {/* Value Of AQI */}
+      {data.forecastGroupByDay.map((value) => (
         <div
           className={clsx(
-            " rounded-lg w-[60px] h-[30px] leading-[30px] ",
-            dynamicColorAqi(data?.aqi)
+            "w-[200px] **: flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
+            {
+              "bg-light-gray px-": getCurrentTime(value?.time) === "Now",
+            }
           )}
         >
-          <p className="text-center font-medium text-white">{data?.aqi}</p>
+          <span className="text-lg font-medium text-darker-gray">
+            {formatTime(value?.time)}
+          </span>
+          {/* Image Icon */}
+          <Image
+            src={`/assets/air_quality_images/${checkIcon(
+              value?.cloudIcon
+            )}.svg`}
+            alt="Logo"
+            width={36}
+            height={36}
+          />
+          <span className="text-2xl font-semibold text-darker-gray">
+            {value?.temperature?.current}
+            <sup>o</sup>
+          </span>
+          {/* Value Of AQI */}
+          <div
+            className={clsx(
+              " rounded-lg w-[60px] h-[30px] leading-[30px] ",
+              dynamicColorAqi(value?.aqi)
+            )}
+          >
+            <p className="text-center font-medium text-white">{value?.aqi}</p>
+          </div>
         </div>
-      </div>
-      <LineVertical />
+      ))}
+      <LineVertical day={data.day} />
     </>
   );
 };

@@ -55,6 +55,10 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
     districtId || "Qpmt7iC423kyhanrm",
     "HOURLY"
   );
+  const dataDaily = await getForecastAirPollutionByDistrictId(
+    districtId || "Qpmt7iC423kyhanrm",
+    "DAILY"
+  );
   const dynamicColor = switchColor(dataProvince.data.aqi);
 
   return (
@@ -83,10 +87,13 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
 
       {/* Section 3 Daily Forecast And AirQuality With HealthRecommend */}
       <section className="flex justify-center gap-10 px-6  text-white lg:px-[180px]">
-        <DailyForecastComponent />
+        <DailyForecastComponent dataDaily={dataDaily.data.forecastDetail} />
         <div className="flex flex-col w-full gap-10">
-          {/* <AirQualityComponent levelColor={dynamicColor} dataCard={aqiData} />
-          <HealthRecommendComponent levelColor={dynamicColor} /> */}
+          <AirQualityComponent
+            levelColor={dynamicColor}
+            dataCard={dataProvince.data}
+          />
+          <HealthRecommendComponent levelColor={dynamicColor} />
         </div>
       </section>
     </div>
