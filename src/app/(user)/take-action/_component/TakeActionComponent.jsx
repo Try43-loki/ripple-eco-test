@@ -11,9 +11,11 @@ const TakeActionComponent = ({ cardData }) => {
             key={index}
             image={data?.image}
             id={data?.takeActionId}
+            idUser={data?.appUser?.appUserId}
             title={data?.title}
             description={data?.description}
             support={data?.numberOfSupporter}
+            isCompleted={data?.completed}
             isPublic={data?.anonymous}
             isOwner={false}
           />

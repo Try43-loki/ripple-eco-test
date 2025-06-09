@@ -11,19 +11,19 @@ const TakeActionDetailBodyComponent = ({userData,cardDetail }) => {
   const query = useSearchParams();
   const view = query.get("view");
   const owner = query.get("owner");
-
+  const answer = cardDetail?.data?.answers;
   return (
     <>
       <section className="w-full my-6">
         <TakeActionCardDetail 
         userData={userData}
         view={view}
-        image={cardDetail?.image}
-        description={cardDetail?.description}
-        title={cardDetail?.title}
-        numberOfSupporter={cardDetail?.numberOfSupporter}
-        destination={cardDetail?.destinationPerson}
-        createdAt={cardDetail?.createdAt}
+        image={cardDetail?.data?.image}
+        description={cardDetail?.data?.description}
+        title={cardDetail?.data?.title}
+        numberOfSupporter={cardDetail?.data?.numberOfSupporter}
+        destination={cardDetail?.data?.destinationPerson}
+        createdAt={cardDetail?.data?.createdAt}
          />
       </section>
       <section className="w-full my-6  mt-12">
@@ -32,8 +32,8 @@ const TakeActionDetailBodyComponent = ({userData,cardDetail }) => {
       <section className="w-full my-6  mt-12 flex flex-col gap-y-10">
         {owner == "true" && (
           <>
-            <TakeActionNoImageCardComponent isView={view} />
-            <TakeActionNoImageCardComponent isView={view} />
+            <TakeActionNoImageCardComponent isView={view} answerData={answer}/>
+            <TakeActionNoImageCardComponent isView={view} answerData={answer}/>
           </>
         )}
       </section>

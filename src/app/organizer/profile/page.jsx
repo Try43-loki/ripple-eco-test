@@ -1,13 +1,20 @@
 import React from "react";
 import OrganizerProfileComponent from "./_component/OrganizerProfileComponent";
 import SideComponent from "./_component/SideComponent";
+import { getCurrentUserProfileService } from "@/service/profileService";
 
-function ProfilePage() {
+const ProfilePage = async () => {
+  const currentUser = await getCurrentUserProfileService();
+  const isOrganizer = currentUser?.data?.organizer;
+  let organizerData = {};
+  if (isOrganizer === true) {
+    organizerData = currentUser?.data;
+  }
   return (
     <>
       <section className="flex flex-row gap-x-4 items-start">
         <div className="basis-[60%]">
-            <OrganizerProfileComponent />
+            <OrganizerProfileComponent operator={isOrganizer} organizerData = {organizerData}/>
         </div>
 
         <div className="basis-[40%] h-180">

@@ -2,9 +2,8 @@ import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TakeActionCard from "@/components/TakeActionCard";
 import { cn } from "@/lib/utils";
-import { Clock, ClipboardList, MessagesSquare } from "lucide-react";
+import { Clock, MessagesSquare } from "lucide-react";
 import { TabsContent } from "@/components/ui/tabs";
-import OwnTakeActionComponent from "./OwnTakeActionComponent";
 const TakeActionBodyComponent = ( {cardData , ownCardData} ) => {
   return (
     <>
@@ -37,7 +36,7 @@ const TakeActionBodyComponent = ( {cardData , ownCardData} ) => {
 
           <TabsContent
             value="all"
-            className="flex flex-row justify-start gap-8 mt-5"
+            className="flex flex-wrap justify-start gap-8 mt-5"
           >
             
               { cardData?.map(((data, index) =>
@@ -61,7 +60,7 @@ const TakeActionBodyComponent = ( {cardData , ownCardData} ) => {
           {/* Own */}
           <TabsContent
             value="own-post"
-            className="w-295 flex flex-row gap-8 mt-5"
+            className="w-291 flex flex-wrap gap-8 mt-5"
           >
               {ownCardData?.map(((data, index) =>
               // <div key={index} className="py-5">

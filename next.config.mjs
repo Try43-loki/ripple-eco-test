@@ -18,6 +18,7 @@ const nextConfig = {
     ];
   },
   env: {
+    // NEXT_APIURL: "http://34.101.213.159:8883/api/v1",
     NEXT_APIURL: "http://34.101.213.159:8883/api/v1",
   },
 };

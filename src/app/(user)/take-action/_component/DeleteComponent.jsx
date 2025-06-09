@@ -13,12 +13,11 @@ import { useRouter } from "next/navigation";
 export const DeleteComponent = ({ cardId }) => {
   const router = useRouter();
   const handleDelete = async () => {
-    try {
-      await deleteTakeActionService(cardId);
+      const deleted = await deleteTakeActionService(cardId);
       router.refresh()
-    } catch (error) {
-      console.log(error);
-    }
+      if(deleted){
+        alert("Take Action Deleted")
+      }
   };
   return (
     <Popover>

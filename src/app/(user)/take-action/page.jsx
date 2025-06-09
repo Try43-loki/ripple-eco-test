@@ -9,7 +9,6 @@ import {
 } from "@/service/takeActionService";
 
 const TakeActionPage = async ({ searchParams: searchParamsPromise }) => {
-  // const [openForm, setOpenForm] = useState(false);
   let cardData;
   const searchParams = (await searchParamsPromise) || null;
   const searchQuery = searchParams?.search || "";
