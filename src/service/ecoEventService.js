@@ -78,18 +78,12 @@ export const getEcoEventByTitleService = async (title) => {
   }
 };
 
-export const fetchFilteredEventsService = async ({
-  contributeTypeId,
-  provinceId,
-  eventTypeId,
-  categoryId,
-  slotStatus,
-  startDate,
-  endDate,
-}) => {
+export const fetchFilteredEventsService = async (filters) => {
   try {
+    // const query = new URLSearchParams(filters).toString();
     const res = await fetch(
-      `${baseUrl}/event/filter?contributeTypeId=${contributeTypeId}&provinceId=${provinceId}&eventTypeId=${eventTypeId}&categoryId=${categoryId}&slotStatus=${slotStatus}&startDate=${startDate}&endDate=${endDate}`
+      `${baseUrl}/event/filter?${query}`
+      // , { cache: "no-store", }
     );
     const data = await res.json();
     // console.log("data : ", data);

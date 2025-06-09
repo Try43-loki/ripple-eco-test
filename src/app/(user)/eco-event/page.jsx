@@ -1,20 +1,47 @@
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import FilterEcoEventComponent from "./_component/FilterEcoEventComponent";
+import SearchBarComponent from "@/components/SearchBarComponent";
 import {
   getAllEcoEventService,
   getEcoEventByTitleService,
+  fetchFilteredEventsService,
 } from "@/service/ecoEventService";
-import SearchBarComponent from "@/components/SearchBarComponent";
 
-const EcoEventPage = async ({ searchParams: searchParamsPromise }) => {
+const EcoEventPage = async ({ searchParams = {} }) => {
   let cardData = [];
 
-  const searchParams = (await searchParamsPromise) || null;
   const searchQuery = searchParams?.search || "";
+  const province = (await searchParams?.provinceId) || "";
+  const eventType = (await searchParams?.eventTypeId) || "";
+  const contributeType = (await searchParams?.contributeTypeId) || "";
+  const category = (await searchParams?.categoryId) || "";
+  const slot = (await searchParams?.slot) || "";
+  const startDate = (await searchParams?.startDate) || "";
+  const endDate = (await searchParams?.endDate) || "";
 
-  if (searchQuery !== "") {
+  const shouldFilter =
+    province ||
+    eventType ||
+    contributeType ||
+    category ||
+    slot ||
+    startDate ||
+    endDate;
+
+  if (searchQuery) {
     const response = await getEcoEventByTitleService(searchQuery);
+    cardData = response?.data ?? [];
+  } else if (shouldFilter) {
+    const response = await fetchFilteredEventsService({
+      provinceId: province,
+      eventTypeId: eventType,
+      contributeTypeId: contributeType,
+      categoryId: category,
+      slotStatus: slot,
+      startDate,
+      endDate,
+    });
     cardData = response?.data ?? [];
   } else {
     const response = await getAllEcoEventService();
