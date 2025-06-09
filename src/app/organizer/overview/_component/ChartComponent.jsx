@@ -17,20 +17,26 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [{ handsOnEvent: 1260, seminar: 970 }];
 
-const chartConfig = {
-  handsOnEvent: {
-    label: "Hands-On Event",
-    color: "hsl(var(--chart-1))",
-  },
-  seminar: {
-    label: "Seminar",
-    color: "hsl(var(--chart-2))",
-  },
-};
+export function ChartComponent({ eventTypeStats }) {
+  const chartData = [
+    {
+      handsOnEvent: eventTypeStats.eventTypeCount[0].eventCount,
+      seminar: eventTypeStats.eventTypeCount[1].eventCount,
+    },
+  ];
 
-export function ChartComponent() {
+  const chartConfig = {
+    handsOnEvent: {
+      label: eventTypeStats.eventTypeCount[0].type,
+      color: "hsl(var(--chart-1))",
+    },
+    seminar: {
+      label: eventTypeStats.eventTypeCount[0].type,
+      color: "hsl(var(--chart-2))",
+    },
+  };
+
   const totalEvents = chartData[0].handsOnEvent + chartData[0].seminar;
   const percentageHandsOnEvent =
     (chartData[0].handsOnEvent / totalEvents) * 100;
