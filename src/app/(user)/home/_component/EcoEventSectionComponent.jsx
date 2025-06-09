@@ -23,10 +23,20 @@ const EcoEventSectionComponent = async () => {
 
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
-              {events?.map((event) => (
-                <div key={event?.eventId}>
-                  <CardEcoEventComponent event={event} />
-                </div>
+              {data?.map((item, index) => (
+                <CardEcoEventComponent
+                  key={index}
+                  href={`/eco-event/${item?.eventId}`}
+                  type={item?.eventTypes?.eventType}
+                  image={item?.image}
+                  contribute={item?.contributeTypesResponse?.contributeTypeName}
+                  category={item?.category?.categoryName}
+                  status={item?.eventStatus}
+                  date={item?.startDate}
+                  participats={item?.maxSlot}
+                  title={item?.title}
+                  location={item?.provinces?.provinceName}
+                />
               ))}
             </div>
           </div>
