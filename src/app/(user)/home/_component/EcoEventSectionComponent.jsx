@@ -27,15 +27,15 @@ const EcoEventSectionComponent = async () => {
                 <CardEcoEventComponent
                   key={index}
                   href={`/eco-event/${item?.eventId}`}
-                  type={item.eventTypes.eventType}
-                  image={item.image}
-                  contribute={item.contributeTypesResponse.contributeTypeName}
-                  category={item.category.categoryName}
-                  status={item.eventStatus}
-                  date={item.startDate}
-                  participats={item.maxSlot}
-                  title={item.title}
-                  location={item.provinces.provinceName}
+                  type={item?.eventTypes?.eventType}
+                  image={item?.image}
+                  contribute={item?.contributeTypesResponse?.contributeTypeName}
+                  category={item?.category?.categoryName}
+                  status={item?.eventStatus}
+                  date={item?.startDate}
+                  participats={item?.maxSlot}
+                  title={item?.title}
+                  location={item?.provinces?.provinceName}
                 />
               ))}
             </div>

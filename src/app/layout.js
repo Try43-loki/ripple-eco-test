@@ -26,6 +26,10 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const profile = await getUserProfileAction();
+  console.log("profile", profile);
+  const session = await auth();
+  console.log("session", session);
   return (
     <html lang="en">
       <body className={gabarito.className}>{children}</body>

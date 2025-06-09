@@ -41,7 +41,8 @@ function AdditonalInfoComponent({
     resolver: zodResolver(createInfoSchema(isOrganizer)),
     mode: "onChange",
   });
-
+  const fullname = session?.name;
+  const [firstname, lastname] = fullname?.split(" ") || ["", ""];
   // Update form resolver when role changes
   useEffect(() => {
     reset(undefined, {
@@ -71,11 +72,11 @@ function AdditonalInfoComponent({
     if (session?.image) {
       formData.profileImageUrl = session?.image;
     }
-    console.log("formData : imge", formData);
     const isSuccess =
       operator == "google"
         ? await registerWithGoogleAction(formData)
         : await addInfamtionAction(formData);
+
     if (isSuccess?.success) {
       router.push("/login-success");
     } else {
@@ -152,11 +153,14 @@ function AdditonalInfoComponent({
                   </Label>
                   <input
                     id="firstName"
+                    defaultValue={
+                      currentPath == "/register-google" ? firstname : ""
+                    }
                     placeholder="Kim"
                     className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
                     {...register("firstName")}
                   />
-                  {errors.firstname && (
+                  {errors.firstName && (
                     <p className="text-red-400 text-xs">
                       {errors.firstName.message}
                     </p>
@@ -171,6 +175,9 @@ function AdditonalInfoComponent({
                   </Label>
                   <input
                     id="lastName"
+                    defaultValue={
+                      currentPath == "/register-google" ? lastname : ""
+                    }
                     placeholder="Hout"
                     className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
                     {...register("lastName")}

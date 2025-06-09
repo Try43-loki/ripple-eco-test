@@ -94,28 +94,6 @@ export const addInfomationService = async (formData) => {
   }
 };
 
-// export const registerWithGoogleService = async (formData) => {
-//   try {
-//     const res = await fetch(`${baseUrl}/auths/google-signup`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Accept: "*/*",
-//       },
-//       body: JSON.stringify(formData),
-//     });
-//     const data = await res.json();
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
-// services/authService.js
-export const registerWithGoogleService = async (formData) => {
-  return await apiRequest("/auths/google-signup", "POST", formData);
-};
-
 export const forgetPasswordService = async (email) => {
   try {
     const data = await apiRequest(
@@ -134,6 +112,23 @@ export const forgetPasswordService = async (email) => {
 export const updatePasswordService = async (formData) => {
   try {
     const data = await apiRequest("/auths/reset-password", "PUT", formData);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const registerWithGoogleService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/google-signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
     return data;
   } catch (e) {
     console.log(e);
