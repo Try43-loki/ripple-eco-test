@@ -1,6 +1,7 @@
 import { apiRequest } from "@/utils/api";
+
 import { baseUrl } from "./constants";
-const token = "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxNzY3NjYsImV4cCI6MTc0OTQzNTk2Nn0.Ifsa-p-RG191_Tk3eXXOUnFJwIo6k_4k9h6mCZBeidY"
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjp0cnVlLCJmdWxsTmFtZSI6IktpbSBMb25nIFNSQyIsImlkIjoiZDhmYWMxMjEtMTViMC00MGNiLTk5NWEtOTY4YzEwMzIzMjg2IiwiZW1haWwiOiJ0aHVuZGVyZ29kdGhvcjk2NkBnbWFpbC5jb20iLCJzdWIiOiJ0aHVuZGVyZ29kdGhvcjk2NkBnbWFpbC5jb20iLCJpYXQiOjE3NDk1MjYwMzQsImV4cCI6MTc0OTc4NTIzNH0.D_5TDFbLoGcgQiLQnVD7La9zHsRwo8b5r3zpvaKfKtI"
 export const getAllTakeActionService = async () => {
   try {
     const data = await apiRequest("/takeActions/all", "GET", null, token);
@@ -46,27 +47,42 @@ export const markAsCompletedTakeActionService = async (takeActionId) => {
     console.log("error", e);
   }
 };
+
 export const deleteTakeActionService = async (takeActionId) => {
   try {
     const data = await apiRequest(
       `/takeActions/${takeActionId}`,
       "PATCH",
-      null,
+      null, // no body
       token
     );
-  console.log("take action ",data);
-  
     return data;
   } catch (e) {
-    console.log("error", e);
+    console.error("Delete failed:", e);
+    throw e;
   }
 };
+
 export const createTakeActionService = async (takeActionData) => {
   try {
     const data = await apiRequest(
       `/takeActions`,
       "POST",
       takeActionData,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
+
+export const submitTakeActionAnswerService = async (answerData) => {
+  try {
+    const data = await apiRequest(
+      `/takeActionAnswer`,
+      "POST",
+      answerData,
       token
     );
     return data;

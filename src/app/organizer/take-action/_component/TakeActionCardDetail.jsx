@@ -107,13 +107,6 @@ const TakeActionCardDetail = ({ view , image , description , title , numberOfSup
             <p className="text-3xl font-bold text-green">{numberOfSupporter}</p>
             <p className="text-xl font-semibold text-foreground">{numberOfSupporter > 1 ? "SUPPORTERS": "SUPPORTER"}</p>
           </div>
-          {/* <Button
-            type="button"
-            className="w-[300px] flex gap-x-2.75 bg-green hover:bg-green-600 border-light-gray text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl  py-5 md:py-6.5"
-          >
-            <Download className="w-6 h-6 text-white" />
-            <p className="text-white">Download PDF</p>
-          </Button> */}
           <ExcelButton data={data}/>
         </CardFooter>
       </Card>

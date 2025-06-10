@@ -9,7 +9,7 @@ export const getFileUploadService = async (image) => {
     const formData = new FormData();
     formData.append("file", image);
     const response = await fetch(
-      `http://34.101.213.159:8883/api/v1/images/upload-image`,
+      `https://ripple-api.kshrd.app/api/v1/images/upload-image`,
       {
         method: "POST",
         body: formData,

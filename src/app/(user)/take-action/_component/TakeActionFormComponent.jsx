@@ -15,9 +15,10 @@ import { BadgeCheck } from "lucide-react";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { Download } from "lucide-react";
+import { submitTakeActionAnswer } from "@/action/Take-actionAction";
 
-const TakeActionFormComponent = () => {
+
+const TakeActionFormComponent = ({takeActionId}) => {
   const form = useForm({
     defaultValues: {
       description: "",
@@ -34,22 +35,7 @@ const TakeActionFormComponent = () => {
     });
   };
 
-  const handleDownloadClick = () => {
-    showCustomCenterToast(
-      <div className="w-auto">
-        <article className="flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg">
-          <BadgeCheck className="w-42.5 h-42.5 text-green" />
-          <h4 className="text-[35px] font-semibold">Download Successfully!</h4>
-          <p className="text-base text-muted-foreground">
-            Your Take Action has been downloaded
-          </p>
-        </article>
-      </div>
-    );
-    setTimeout(() => {
-      router.push("/take-action");
-    }, 1000);
-  };
+  
 
   const handleSubmitClick = () => {
     showCustomCenterToast(
@@ -65,10 +51,16 @@ const TakeActionFormComponent = () => {
     );
     setTimeout(() => {
       router.push("/take-action");
-    }, 1000);
+    }, 1500);
   };
 
-  const onSubmit = (data) => {};
+  const onSubmit = async (data) => {
+    const isSubmit = await submitTakeActionAnswer(data, takeActionId)
+    if(isSubmit?.code === 201){
+      form.reset();
+      handleSubmitClick()
+    }
+  };
 
   return (
     <main className="p-5 rounded-2xl border-1 border-light-white relative ">
@@ -95,18 +87,8 @@ const TakeActionFormComponent = () => {
           />
           <Toast ref={toastCenter} position="center" closable={false} />
           <div className="flex justify-end">
-            {/* <Button
-              type="button"
-              onClick={handleDownloadClick}
-              className="w-auto flex gap-x-2.75 bg-light-gray hover:bg-light-gray text-sub-info border border-light-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
-            >
-              <Download className="w-6 h-6 " />
-              <p>Download PDF</p>
-            </Button> */}
-
             <Button
               type="submit"
-              onClick={handleSubmitClick}
               className="w-30 bg-green hover:bg-strong-green text-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:py-6.5"
             >
               Submit
