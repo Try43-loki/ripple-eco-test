@@ -1,9 +1,9 @@
 import React from "react";
 import HeroSectionAirQualityDashboardComponent from "./_component/HeroSectionAirQualityDashboardComponent";
-import HourlyForecastComponent from "@/app/(user)/air-quality/_components/HourlyForecastComponent";
-import DailyForecastComponent from "@/app/(user)/air-quality/_components/DailyForecastComponent";
-import AirQualityComponent from "@/app/(user)/air-quality/_components/AirQualityComponent";
-import HealthRecommendComponent from "@/app/(user)/air-quality/_components/HealthRecommendComponent";
+import HourlyForecastComponent from "@/app/(user)/air-quality/[...slug]/_components/HourlyForecastComponent";
+import DailyForecastComponent from "@/app/(user)/air-quality/[...slug]/_components/DailyForecastComponent";
+import AirQualityComponent from "@/app/(user)/air-quality/[...slug]/_components/AirQualityComponent";
+import HealthRecommendComponent from "@/app/(user)/air-quality/[...slug]/_components/HealthRecommendComponent";
 
 const aqiData = {
   value: 89,

@@ -1,12 +1,10 @@
 import React from "react";
 import HomeHeroSectionComponent from "./_component/HomeHeroSectionComponent";
 import MarqueeComponent from "./_component/MarqueeComponent";
-import AirQualitySectionComponent from "./_component/AirQualitySectionComponent";
 import EcoEventSectionComponent from "./_component/EcoEventSectionComponent";
 import DiscussionSectionComponent from "./_component/DiscussionSectionComponent";
 import TakeActionSectionComponent from "./_component/TakeActionSectionComponent";
-import FooterComponent from "@/components/FooterComponent";
-import CardInformationAQI from "../air-quality/_components/CardInformationAQIComponent";
+import AirQualitySectionComponent from "./_component/AirQualitySectionComponent";
 
 function HomePage() {
   return (

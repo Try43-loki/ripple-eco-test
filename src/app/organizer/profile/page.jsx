@@ -14,7 +14,10 @@ const ProfilePage = async () => {
     <>
       <section className="flex flex-row gap-x-4 items-start">
         <div className="basis-[60%]">
-            <OrganizerProfileComponent operator={isOrganizer} organizerData = {organizerData}/>
+          <OrganizerProfileComponent
+            operator={isOrganizer}
+            organizerData={organizerData}
+          />
         </div>
 
         <div className="basis-[40%] h-180">
@@ -23,6 +26,6 @@ const ProfilePage = async () => {
       </section>
     </>
   );
-}
+};
 
 export default ProfilePage;

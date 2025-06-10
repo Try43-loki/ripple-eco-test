@@ -12,14 +12,26 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { getDistrictName } from "@/action/AirQualityAction";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function MultiSelectDropdown({ provincesList }) {
   const [selected, setSelected] = useState(null);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   function handleSelected(districtId, districtName) {
     setSelected(districtName);
-    getDistrictName(districtId);
+    const params = new URLSearchParams(searchParams);
+
+    if (districtId) {
+      params.set("search", districtId);
+    } else {
+      params.delete("search");
+    }
+    const basePath = pathname.split("/").slice(0, 2).join("/");
+    const newDistrictName = districtName.replace(/\s+/g, "");
+    replace(`${basePath}/${newDistrictName.toString()}?${params.toString()}`);
   }
 
   return (
