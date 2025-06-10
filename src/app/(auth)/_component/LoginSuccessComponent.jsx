@@ -1,9 +1,13 @@
 import { getUserProfileAction } from "@/action/user-action";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 async function LoginSuccessComponent() {
   const profile = await getUserProfileAction();
+  const isOrganizer = profile?.data?.organizer;
+  const fullname = profile?.data?.firstName + " " + profile?.data?.lastName;
+  const organizerName = profile?.data?.organizerName;
 
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
@@ -29,14 +33,21 @@ async function LoginSuccessComponent() {
               alt="tick-circle"
             />
           </div>
-          <h2 className="text-white text-2xl">hello</h2>
+          <h2 className="text-white text-2xl">
+            {isOrganizer ? fullname : organizerName}
+          </h2>
           <p className="text-light-gray text-sm text-center">
             Your account has been created successfully. You’re now part of the
             Ripple<span className="text-strong-green">Eco</span> community.
           </p>
-          <Button className="bg-green hover:bg-green-700 text-white rounded-xl px-6 py-2">
-            Go to Login
-          </Button>
+          <Link
+            href={isOrganizer ? "/organizer" : "/"}
+            className="cursor-pointer"
+          >
+            <Button className="bg-green cursor-pointer hover:bg-green-700 text-white rounded-xl px-6 py-2">
+              {isOrganizer ? "Go to Dashboard" : "Go to homepage"}
+            </Button>
+          </Link>
         </section>
       </section>
     </section>

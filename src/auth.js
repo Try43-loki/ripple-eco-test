@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { registerWithGoogleAction } from "./action/auth-action";
 import { baseUrl } from "./service/constants";
+import { getUserProfileAction } from "./action/user-action";
 
 export const {
   handlers: { GET, POST },
@@ -18,10 +19,22 @@ export const {
         password: {},
       },
       authorize: async (credentials) => {
-        const { email, password } = credentials;
-        const user = await loginService({ email, password });
-        console.log("user", user);
-        return user;
+        try {
+          const { email, password } = credentials;
+          const res = await loginService(email, password);
+          if (res && res.data?.token) {
+            return {
+              id: res.data.id,
+              email,
+              customToken: res.data.token,
+            };
+          }
+
+          return null;
+        } catch (error) {
+          console.error("Credentials login error:", error);
+          return null;
+        }
       },
     }),
     GoogleProvider({
@@ -38,15 +51,31 @@ export const {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: profile?.email }),
           });
-
-          const loginData = await loginRes.json();
-
+          const loginData = await loginRes.json(); // token only
+          console.log("loginRes", loginRes);
           if (loginRes.ok && loginData.data?.token) {
             user.customToken = loginData.data?.token;
-            user.userId = loginData.data.id;
+            // user.user.userId = loginData.data.id;
             return true;
           }
-
+          console.log("user", user);
+          // if (user?.customToken) {
+          //   const res = await fetch(`${baseUrl}/profile`, {
+          //     method: "GET",
+          //     headers: {
+          //       "Content-Type": "application/json",
+          //       Authorization: `Bearer ${user.customToken}`,
+          //     },
+          //   });
+          //   const profile = await res.json();
+          //   if (profile?.code == 200) {
+          //     user.role = profile.data.organizer ? "ORGANIZER" : "USER" ?? "";
+          //     user.userId = profile.data.appUserId;
+          //   }
+          // }
+          const fullName = profile?.name?.split(" ");
+          const googleFirstName = fullName[0];
+          const googleLastName = fullName[fullName.length - 1];
           const response = await fetch(`${baseUrl}/auths/google-signup`, {
             method: "POST",
             headers: {
@@ -55,19 +84,17 @@ export const {
             body: JSON.stringify({
               email: profile?.email,
               profileImageUrl: profile?.picture,
-              firstName: "string",
-              lastName: "Try",
-              address: "data",
-              birthDate: "2002-02-10",
+              firstName: googleFirstName,
+              lastName: googleLastName,
+              address: "string",
+              birthDate: "2001-01-10",
               gender: "MALE",
-              phoneNumber: "0987654321",
-              isOrganizer: false,
+              phoneNumber: "012345678",
+              isOrganizer: true,
               organizerName: "",
             }),
           });
-
-          const data = await response.json();
-          console.log("data", data);
+          const data = await response.json(); // token only
 
           if (response.ok && data.data.token) {
             user.customToken = data.data.token;
@@ -81,22 +108,29 @@ export const {
           return false;
         }
       }
+      if (user?.customToken) {
+        const res = await fetch(`${baseUrl}/profile`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.customToken}`,
+          },
+        });
+        const profile = await res.json();
+        if (profile?.code == 200) {
+          user.role = profile.data.organizer ? "ORGANIZER" : "USER" ?? "";
+          user.userId = profile.data.appUserId;
+        }
+      }
 
       return true;
     },
-
-    // async jwt(token) {
-    //   return token;
-    // },
-    // async session(props) {
-    //   const { token } = props;
-    //   return token.token.user;
-    // },
     async jwt({ token, user }) {
       // On initial sign in
       if (user?.customToken) {
         token.customToken = user.customToken;
         token.userId = user.userId;
+        token.role = user.role;
       }
 
       return token;
@@ -105,7 +139,8 @@ export const {
       // Attach custom values to the session object
       if (token?.customToken) {
         session.customToken = token.customToken;
-        session.userId = token.userId;
+        session.user.userId = token.userId;
+        session.user.role = token.role;
       }
       return session;
     },

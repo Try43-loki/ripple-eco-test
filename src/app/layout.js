@@ -27,7 +27,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await auth();
-  const profile = await getUserProfileAction();
+  console.log("session layout", session);
 
   return (
     <html lang="en">

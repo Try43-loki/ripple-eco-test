@@ -12,39 +12,28 @@ import {
   verifyOtpService,
 } from "@/service/auth/auth.service";
 import { signIn } from "../auth";
+import { Rss } from "lucide-react";
 
 export const loginAction = async (formData) => {
   const email = formData.email;
   const password = formData.password;
-
   try {
-    const res = await loginService({ email, password });
-    // if (res?.status == 400) {
-    //   return {
-    //     success: false,
-    //     message: res?.detail,
-    //   };
-    // }
-    // if (res?.status == 500) {
-    //   return {
-    //     success: false,
-    //     message: "Server error",
-    //   };
-    // }
-    const sign = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-    console.log("sign", sign);
-
-    return { success: true, data: res };
-  } catch (error) {
-    console.error("Error in login:", error);
-    return {
-      success: false,
-      error: error.message,
-    };
+    const loginRes = await loginService(email, password);
+    if (loginRes?.status == 400) {
+      return {
+        success: false,
+        message: loginRes?.detail,
+      };
+    } else {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      return { success: true, data: res };
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 export const registerAction = async (formData) => {
@@ -105,7 +94,7 @@ export const setPasswordAction = async (password, email) => {
         message: res?.detail,
       };
     }
-    console.log(res);
+    console.log("set password action ", res);
     return { success: true, data: res };
   } catch (err) {
     return {

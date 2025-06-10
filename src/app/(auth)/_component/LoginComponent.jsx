@@ -2,32 +2,23 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import clsx from "clsx";
-import { LoginShecma } from "@/lib/zod/LoginShecma";
 import { loginAction } from "@/action/auth-action";
-import { redirect } from "next/navigation";
-import { doSocialLogin } from "@/action/loginSocialAction";
 import LoginSocialComponent from "./LoginSocialComponent";
-import { getUserProfileAction } from "@/action/user-action";
+import { useRouter } from "next/navigation";
+
 function LoginComponent({ onNext }) {
+  const router = useRouter();
   const [message, setMessage] = React.useState("");
   const { handleSubmit, register, reset } = useForm();
 
   const handleLogin = async (formData) => {
     const isLogin = await loginAction(formData);
     if (isLogin?.success) {
-      const profile = await getUserProfileAction();
-      if (profile?.data?.organizer) {
-        redirect("/orgainizer/overview");
-      } else {
-        redirect("/home");
-      }
+      router.push("/");
     } else {
       setMessage(isLogin?.message);
     }
@@ -86,7 +77,7 @@ function LoginComponent({ onNext }) {
                     required
                     type="email"
                     id="email"
-                    placeholder="exaple@gmaill.com"
+                    placeholder="example@gmaill.com"
                     {...register("email")}
                   />
                 </div>

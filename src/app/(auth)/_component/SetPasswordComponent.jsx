@@ -82,13 +82,15 @@ function SetPasswordComponent({ onNext, onPrev, email, otp }) {
       currentPath === "/register"
         ? await setPasswordAction(password, email)
         : await updatePasswordAction(password, email, otp);
-    if (isSet?.success) {
+    if (isSet?.success && currentPath === "/register") {
       const profile = await getUserProfileAction();
       if (profile?.data?.organizer) {
         rounter.push("/organizer/overview");
       } else {
         rounter.push("/home");
       }
+    } else {
+      onNext();
     }
   };
 
@@ -332,7 +334,7 @@ function SetPasswordComponent({ onNext, onPrev, email, otp }) {
             <Button
               type="submit"
               disabled={!isFormValid}
-              className={`w-full text-white rounded-xl mt-4 h-11 text-md ${
+              className={`w-full text-white rounded-xl cursor-pointer mt-4 h-11 text-md ${
                 isFormValid
                   ? "bg-strong-green hover:bg-green-800"
                   : "bg-gray-500 cursor-not-allowed"

@@ -31,7 +31,10 @@ function OTPVerifyComponent({ onNext, onPrev, email, handleOtpChangeParent }) {
 
   const handleOTPChange = (value) => {
     setOtpCode(value);
-    handleOtpChangeParent(value);
+
+    if (currentPath !== "/register") {
+      handleOtpChangeParent(value);
+    }
   };
 
   const handleSendOtp = async () => {
@@ -45,7 +48,10 @@ function OTPVerifyComponent({ onNext, onPrev, email, handleOtpChangeParent }) {
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
     if (otpCode.length === 6) {
-      handleOtpChangeParent(otpCode);
+      if (currentPath !== "/register") {
+        handleOtpChangeParent(otpCode);
+      }
+
       const isSuccess = await verifyOTPAction(email, otpCode, type);
 
       if (isSuccess?.success) {

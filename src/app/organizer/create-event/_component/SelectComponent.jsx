@@ -43,7 +43,6 @@ export function SelectComponent({
     default:
       break;
   }
-  console.log("data ", data);
 
   return (
     <Select value={value} onValueChange={onChange} {...props}>
