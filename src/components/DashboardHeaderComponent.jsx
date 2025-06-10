@@ -7,6 +7,7 @@ import VerifyOrganizerComponent from "./VerifyOrganizerComponent";
 import Image from "next/image";
 
 import CreateTakeActionFormComponent from "./CreateTakeActionFormComponent";
+import PopupTakeActionForm from "@/app/(user)/take-action/_component/PopupTakeActionForm";
 
 const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
   const [showDiscussionModal, setShowDiscussionModal] = useState(false);

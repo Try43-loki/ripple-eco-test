@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { createTakeAction } from "@/action/Take-actionAction";
+import { useRouter } from "next/navigation";
 
 // Zod schema
 
@@ -28,14 +29,14 @@ const PopupTakeActionForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-  });
+  } = useForm({});
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -54,8 +55,13 @@ const PopupTakeActionForm = () => {
       image: imageFile,
     };
     const create = await createTakeAction(formData);
-    reset();
-    setImagePreview(null);
+    if (create?.code == 200) {
+      reset();
+      setImagePreview(null);
+      setShowForm(false);
+      alert("Create action successfully");
+      router.refresh();
+    }
   };
   const handleCancel = () => {
     reset();
@@ -82,7 +88,9 @@ const PopupTakeActionForm = () => {
             <div className="flex flex-col gap-y-3 w-3/5">
               {/* Title */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="title" className="text-sm">Title</Label>
+                <Label htmlFor="title" className="text-sm">
+                  Title
+                </Label>
                 <Input
                   id="title"
                   placeholder="Enter take action title"
@@ -97,7 +105,9 @@ const PopupTakeActionForm = () => {
 
               {/* Send To */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="sendTo" className="text-sm">Send To</Label>
+                <Label htmlFor="sendTo" className="text-sm">
+                  Send To
+                </Label>
                 <Input
                   id="sendTo"
                   placeholder="e.g., @government"
@@ -106,13 +116,17 @@ const PopupTakeActionForm = () => {
                   required
                 />
                 {errors.sendTo && (
-                  <p className="text-red-500 text-xs">{errors.sendTo.message}</p>
+                  <p className="text-red-500 text-xs">
+                    {errors.sendTo.message}
+                  </p>
                 )}
               </div>
 
               {/* Description */}
               <div className="flex flex-col gap-y-1 items-start">
-                <Label htmlFor="description" className="text-sm">Description</Label>
+                <Label htmlFor="description" className="text-sm">
+                  Description
+                </Label>
                 <Textarea
                   id="description"
                   placeholder="Enter take action description"
@@ -121,7 +135,9 @@ const PopupTakeActionForm = () => {
                   required
                 />
                 {errors.description && (
-                  <p className="text-red-500 text-xs">{errors.description.message}</p>
+                  <p className="text-red-500 text-xs">
+                    {errors.description.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -140,7 +156,7 @@ const PopupTakeActionForm = () => {
               <Label
                 htmlFor="file"
                 className={` h-52 w-full ${
-                  imagePreview ? '' : 'border border-dashed border-orange'
+                  imagePreview ? "" : "border border-dashed border-orange"
                 } flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden`}
               >
                 {imagePreview ? (
@@ -169,7 +185,10 @@ const PopupTakeActionForm = () => {
               onCheckedChange={setIsAnonymous}
               className=" w-10 h-5 rounded-full"
             />
-            <Label htmlFor="anonymous" className="text-sm font-medium text-dark-green">
+            <Label
+              htmlFor="anonymous"
+              className="text-sm font-medium text-dark-green"
+            >
               Anonymous
             </Label>
           </div>

@@ -26,6 +26,7 @@ import { getOwnTakeActionService } from "@/service/takeActionService";
 import { getAllOwnDiscussionsService } from "@/service/discussionService";
 import { getAllEcoEventService } from "@/service/ecoEventService";
 import FilterEventHistory from "./_component/FilterEventHistory";
+import { getAllBagdeService } from "@/service/badgeService";
 const ProfilePage = async () => {
   const response2 = await getOwnTakeActionService();
   const ownTakeActionData = response2?.data || [];
@@ -35,6 +36,8 @@ const ProfilePage = async () => {
   const ownDiscussionsData = response3?.data || [];
   const response4 = await getAllEcoEventService();
   const cardData = response4?.data ?? [];
+  const badgeData = await getAllBagdeService();
+  const badge = badgeData?.data;
   const data = null;
   return (
     <main>
@@ -70,7 +73,7 @@ const ProfilePage = async () => {
           </div>
         </div>
         <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
-          <EditprofileComponent title={"Edit Profile"} />
+          <EditprofileComponent title={"Edit Profile"} userData={userData}/>
         </Button>
       </article>
 
@@ -143,34 +146,19 @@ const ProfilePage = async () => {
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
             <section className="flex">
-              <Image
-                src="/badges/Eco Hero.png"
+              {badge?.map((data, index) =>
+              <div className="flex flex-col items-center gap-y-1" key={index}>
+                <Image
+                src={data?.badge?.image}
                 alt="badges"
-                width={200}
-                height={200}
+                width={160}
+                height={50}
                 className=""
-              />
-              <Image
-                src="/badges/Eco Volunteer.png"
-                alt="badges"
-                width={200}
-                height={200}
-                className=""
-              />
-              <Image
-                src="/badges/Green Helper.png"
-                alt="badges"
-                width={200}
-                height={200}
-                className=""
-              />
-              <Image
-                src="/badges/Nature Steward.png"
-                alt="badges"
-                width={200}
-                height={200}
-                className=""
-              />
+                />
+                <h2>{data?.badge?.title}</h2>
+                <p>Point: {data?.badge?.point}</p>
+              </div>
+              )}
             </section>
           </TabsContent>
 
