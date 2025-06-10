@@ -20,7 +20,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
     <Popover>
       <PopoverTrigger asChild>
         {operator === "organizer" ? (
-          <ChevronDown className="text-lighter-green" />
+          <ChevronDown className="text-lighter-green cursor-pointer" />
         ) : (
           <div>
             {img ? (
