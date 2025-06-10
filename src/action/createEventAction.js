@@ -2,6 +2,7 @@
 
 import {
   createEventService,
+  inviteFriendService,
   updateEventService,
 } from "@/service/createEventService";
 
@@ -60,5 +61,15 @@ export const updateEventAction = async (data) => {
     console.log("update ", res);
   } catch (err) {
     console.error("updateEventAction", err);
+  }
+};
+
+export const inviteFriendAction = async (formData) => {
+  try {
+    const response = await inviteFriendService(formData);
+    return { success: true, data: response };
+  } catch (error) {
+    console.error("inviteFriendAction error:", error);
+    return { success: false, error: "Failed to send invite." };
   }
 };
