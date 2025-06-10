@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Mail } from "lucide-react";
 import {
@@ -12,7 +13,12 @@ import {
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 
-const InviteFirendFormComponent = () => {
+const handleClickInvite = (eventId) => {
+  const url = `https://ripple-ui.kshrd.app/eco-event/${eventId}`;
+  console.log("Event URL:", url);
+};
+
+const InviteFirendFormComponent = ({ eventId }) => {
   return (
     <div>
       <Dialog>
@@ -42,13 +48,15 @@ const InviteFirendFormComponent = () => {
 
                   <span className="pt-2">|</span>
                 </span>
-                <textarea
-                  className="flex justify-end items-end pt-2 text-gray-600 bg-lighter-white pl-9 text-label  placeholder:text-strong-gray placeholder:font-light h-10 focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                  required
-                  type="email"
-                  id="email"
-                  placeholder="exaple@gmaill.com"
-                />
+                <form action="">
+                  <textarea
+                    className="flex justify-end items-end pt-2 text-gray-600 bg-lighter-white pl-9 text-label  placeholder:text-strong-gray placeholder:font-light h-10 focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
+                    required
+                    type="email"
+                    id="email"
+                    placeholder="exaple@gmaill.com"
+                  />
+                </form>
               </DialogDescription>
             </div>
           </DialogHeader>
@@ -60,6 +68,7 @@ const InviteFirendFormComponent = () => {
 
             <DialogClose asChild>
               <Button
+                onClick={() => handleClickInvite(eventId)}
                 type="button"
                 // variant="secondary"
                 className="text-white bg-green hover:bg-meduim-green px-8 py-2 rounded-xl cursor-pointer"

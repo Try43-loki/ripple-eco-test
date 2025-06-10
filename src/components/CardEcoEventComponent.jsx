@@ -125,7 +125,9 @@ const CardEcoEventComponent = ({
           </button>
 
           <button className="p-2 bg-light-gray rounded-md">
-            <InviteFirendFormComponent />
+            <InviteFirendFormComponent
+              eventId={"bc941419-995f-4ab7-bf73-9a3f19e5e27a"}
+            />
           </button>
         </div>
       )}
