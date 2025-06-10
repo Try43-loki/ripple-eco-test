@@ -22,3 +22,19 @@ export const updateEventService = async (formData, eventId) => {
     console.log("error", e);
   }
 };
+
+export const inviteFriendService = async (formData) => {
+  try {
+    const token = await getAuthToken();
+    const data = await apiRequest(
+      "/event/share-event",
+      "POST",
+      formData,
+      token
+    );
+    console.log("data", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
