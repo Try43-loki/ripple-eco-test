@@ -93,7 +93,10 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
             levelColor={dynamicColor}
             dataCard={dataProvince.data}
           />
-          <HealthRecommendComponent levelColor={dynamicColor} />
+          <HealthRecommendComponent
+            levelColor={dynamicColor}
+            dataCard={dataDaily.data.heathRecommendation}
+          />
         </div>
       </section>
     </div>

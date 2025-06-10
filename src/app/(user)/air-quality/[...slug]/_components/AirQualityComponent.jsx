@@ -1,17 +1,20 @@
+"use client";
 import clsx from "clsx";
 import { Cloud, Droplet, Wind } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React from "react";
 
-const iconColor = "#f9c300";
-
 const AirQualityComponent = ({ dataCard, levelColor }) => {
+  // For Get Province AQI
+  const pathName = usePathname();
+  const path = pathName.split("/")[2];
   return (
     <article className="w-full flex flex-col gap-7 bg-white/50 rounded-3xl p-6 border-2 text-light-gray">
       {/* Title */}
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Air Quality</h2>
         <p className="text-darker-gray text-lg">
-          What is the current air quality in Phnom Penh?
+          What is the current air quality in {path}?
         </p>
       </div>
       {/* Row Of Card */}
@@ -84,7 +87,10 @@ const AirQualityComponent = ({ dataCard, levelColor }) => {
         <div className="text-base text-dark-gray">
           <p className="flex justify-end">
             PM2.5 concentration is currently
-            <span className="font-bold px-1">1.8</span>times
+            <span className="font-bold px-1">
+              {dataCard.concentrationIndex}
+            </span>
+            times
           </p>
           <p className="flex justify-end">
             the World Health Organization annual PM2.5 guideline value.

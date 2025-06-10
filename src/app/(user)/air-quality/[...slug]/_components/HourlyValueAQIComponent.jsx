@@ -32,11 +32,11 @@ const dynamicColorAqi = (value) => {
 const formatTime = (time) => {
   // Return Hour Only
   const original = new Date(time);
-  // Add 7 hours (in milliseconds)
-  const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
+  // const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
+
   // Get hours and minutes
-  const hours = updatedTime.getHours();
-  const minutes = updatedTime.getMinutes().toString().padStart(2, "0");
+  const hours = original.getHours();
+  const minutes = original.getMinutes().toString().padStart(2, "0");
 
   // Final time string
   const timeString = `${hours}:${minutes}`;
@@ -44,34 +44,44 @@ const formatTime = (time) => {
 };
 
 function getCurrentTime(data) {
-  // Check Current Time with Data Time
+  const inputDate = new Date(data);
+  const now = new Date();
 
-  const currentTime = new Date(data.timestamp).getHours() + 7;
-  const isSameHour = currentTime === new Date().getHours();
+  const isSameHour = inputDate.getHours() === now.getHours();
   const isSameDay =
-    new Date(data.timestamp).getDate() === new Date().getDate() &&
-    new Date(data.timestamp).getMonth() === new Date().getMonth() &&
-    new Date(data.timestamp).getFullYear() === new Date().getFullYear();
-  const hour = isSameHour && isSameDay ? "Now" : formatTime(data.timestamp);
-  return hour;
+    inputDate.getDate() === now.getDate() &&
+    inputDate.getMonth() === now.getMonth() &&
+    inputDate.getFullYear() === now.getFullYear(); // also compare year
+  return isSameHour && isSameDay;
 }
 
+const Weekday = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
 const HourlyValueAQIComponent = ({ data }) => {
-  console.log(data);
+  const now = new Date();
+  now.setMinutes(0, 0, 0);
+
+  const filteredCurrentHours = data.forecastGroupByDay.filter(
+    (entry) => new Date(entry.time) >= now
+  );
 
   return (
     <>
-      {data.forecastGroupByDay.map((value) => (
+      {data.day != Weekday[new Date().getDay() - 1] && (
+        <LineVertical day={data.day} />
+      )}
+      {filteredCurrentHours.map((value, index) => (
         <div
+          key={index}
           className={clsx(
             "w-[200px] **: flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
             {
-              "bg-light-gray px-": getCurrentTime(value?.time) === "Now",
+              "bg-light-gray px-": getCurrentTime(value?.time),
             }
           )}
         >
           <span className="text-lg font-medium text-darker-gray">
-            {formatTime(value?.time)}
+            {getCurrentTime(value?.time) ? "Now" : formatTime(value?.time)}
           </span>
           {/* Image Icon */}
           <Image
@@ -97,7 +107,6 @@ const HourlyValueAQIComponent = ({ data }) => {
           </div>
         </div>
       ))}
-      <LineVertical day={data.day} />
     </>
   );
 };
