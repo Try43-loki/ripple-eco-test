@@ -13,32 +13,57 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePickerComponent() {
-  const [date, setDate] = React.useState();
+export function DatePickerComponent({
+  value,
+  onChange,
+  placeholder = "Pick a date",
+  name,
+  disabled = false,
+  ...props
+}) {
+  // Use the value from props (controlled by react-hook-form) instead of internal state
+  const selectedDate = value;
+
+  const handleDateSelect = (selectedDate) => {
+    // Call the onChange function passed from react-hook-form Controller
+    if (onChange) {
+      onChange(selectedDate);
+    }
+  };
 
   return (
     <Popover>
       <PopoverTrigger
         asChild
-        className="bg-white  border border-light-strok text-gray-600"
+        className="bg-white border border-light-strok text-gray-600"
       >
         <Button
           variant={"outline"}
+          disabled={disabled}
           className={cn(
-            " justify-between bg-lighter-white   !text-gray-600 text-left font-normal border border-light-strok  hover:bg-lighter-white hover:text-gray-600 ",
-            !date && "text-muted-foreground"
+            "w-full justify-between bg-lighter-white !text-gray-600 text-left font-normal border border-light-strok hover:bg-lighter-white hover:text-gray-600",
+            !selectedDate && "text-muted-foreground"
           )}
         >
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
-          <CalendarIcon />
+          {selectedDate ? (
+            format(selectedDate, "PPP")
+          ) : (
+            <span>{placeholder}</span>
+          )}
+          <CalendarIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent
+        className="bg-white border-light-strok w-auto p-0"
+        align="center"
+      >
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={selectedDate}
+          onSelect={handleDateSelect}
           initialFocus
+          disabled={disabled}
+          {...props}
         />
       </PopoverContent>
     </Popover>

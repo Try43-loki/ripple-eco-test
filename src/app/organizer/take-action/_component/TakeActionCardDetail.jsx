@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CalendarDays, Download, Send } from "lucide-react";
+import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
@@ -11,11 +11,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
+import ExcelButton from "./DownloadComponent";
 
-const TakeActionCardDetail = ({ view }) => {
+const TakeActionCardDetail = ({ view , image , description , title , numberOfSupporter, destination, createdAt, userData }) => {
   const isLoading = false;
-
+  const userProfile = userData?.data;
+  const data = {
+    view: view,
+    image: image,
+    description: description,
+    title: title,
+    numberOfSupporter: numberOfSupporter,
+    destination: destination,
+    createdAt: createdAt,
+    userData: userData
+  };
   return (
     <main>
       <Card className="relative py-8 w-full rounded-2xl bg-light-gray border-none">
@@ -33,12 +44,12 @@ const TakeActionCardDetail = ({ view }) => {
               <div className="flex items-center gap-x-4">
                 {/* <Link href=""></Link> */}
                 <img
-                  src="https://i.pinimg.com/736x/e3/cc/19/e3cc196b34603811d13323ee70c31c42.jpg"
-                  alt="user"
+                  src={userProfile?.profileImageUrl}
+                  alt={`${userProfile?.firstName} ${userProfile?.lastName}`}
                   className="h-15 w-15 rounded-full object-cover"
                 />
                 <div className="flex flex-col">
-                  <p className="text-xl font-medium text-gray">KPSxZyXL</p>
+                  <p className="text-xl font-medium text-gray">{`${userProfile?.firstName} ${userProfile?.lastName}`}</p>
                   <p className="text-sm font-normal text-strong-gray">
                     6h agos . Public
                   </p>
@@ -48,7 +59,7 @@ const TakeActionCardDetail = ({ view }) => {
           </div>
 
           <CardTitle className="text-2xl lg:text-3xl text-meduim-green">
-            Reclaim Empty Spaces for Community Gardens
+            {title}
           </CardTitle>
 
           {view == "private" && (
@@ -61,25 +72,25 @@ const TakeActionCardDetail = ({ view }) => {
 
           <article className="flex justify-between items-center">
             <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
-              <p className="text-blue ">@MekongRiver</p>
+              <p className="text-blue ">{destination}</p>
             </div>
           </article>
 
           <article className="space-y-1">
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <CalendarDays className="w-4.5 h-4.5" />
-              <p>16 June, 2025</p>
+              <p>{dayjs(createdAt).format("DD MMM YYYY")}</p>
             </div>
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <Send className="w-4.5 h-4.5" />
-              <p>@government</p>
+              <p>{destination}</p>
             </div>
           </article>
 
           <div className="absolute -top-7 right-16 rounded-2xl border-[12px] border-white bg-white">
             <img
-              src="https://media.licdn.com/dms/image/v2/D5622AQHtEbMVtJpWXQ/feedshare-shrink_800/B56ZYfM_v6GUAo-/0/1744280223718?e=2147483647&v=beta&t=QINX5FJ3qryTBdPm8eqEFXoJx_bFa7PNslMhacdtuaU"
-              alt="card"
+              src={image}
+              alt={title}
               className="w-89 h-62.5 rounded-2xl"
             />
           </div>
@@ -87,47 +98,23 @@ const TakeActionCardDetail = ({ view }) => {
 
         <CardHeader>
           <CardDescription className="text-lg text-strong-gray px-6">
-            In our neighborhood in kompongcham province, there are far too many
-            empty lots and underused spaces that sit untouched for years —
-            becoming nothing more than dumping grounds for trash, overgrown
-            weeds, and forgotten corners of the city. These spaces not only look
-            unappealing but can also make residents feel unsafe and disconnected
-            from their surroundings. But what if we could transform these
-            neglected areas into something vibrant, meaningful, and beneficial
-            for everyone? I'm proposing a community-driven initiative to turn
-            these empty spaces into green community gardens and welcoming
-            mini-parks where neighbors can gather, relax, grow fresh produce,
-            and connect with nature. These small-scale green spaces have the
-            power to do so much: improve air quality, reduce stress, encourage
-            physical activity, support local biodiversity, and even help address
-            food insecurity in our area. This isn't just about planting flowers
-            or setting up benches — it's about building a stronger, healthier,
-            and more connected community. Each garden or park could be
-            co-designed and maintained by local volunteers, including students,
-            families, seniors, and local businesses. We can even partner with
-            schools and environmental groups to offer educational programs on
-            sustainability, gardening, and urban ecology. But we can't do it
-            alone. To bring this vision to life, we need to show local
-            government and decision-makers that there is real community support
-            behind this idea. That means your voice matters. If you believe in
-            transforming wasted space into shared value, please support this
-            initiative. The more of us who come together, the harder it will be
-            for leaders to ignore the call for change.
+            {description}
           </CardDescription>
         </CardHeader>
 
         <CardFooter className="flex  items-start gap-5 justify-between">
           <div className="flex flex-col gap-3.5">
-            <p className="text-3xl font-bold text-green">16,000</p>
-            <p className="text-xl font-semibold text-foreground">SUPPORTERS</p>
+            <p className="text-3xl font-bold text-green">{numberOfSupporter}</p>
+            <p className="text-xl font-semibold text-foreground">{numberOfSupporter > 1 ? "SUPPORTERS": "SUPPORTER"}</p>
           </div>
-          <Button
+          {/* <Button
             type="button"
             className="w-[300px] flex gap-x-2.75 bg-green hover:bg-green-600 border-light-gray text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl  py-5 md:py-6.5"
           >
             <Download className="w-6 h-6 text-white" />
             <p className="text-white">Download PDF</p>
-          </Button>
+          </Button> */}
+          <ExcelButton data={data}/>
         </CardFooter>
       </Card>
     </main>

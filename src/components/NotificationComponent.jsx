@@ -26,9 +26,6 @@ const NotificationItem = () => {
     feedClient.fetch();
   }, [feedClient]);
 
-  console.log("items", items);
-  console.log("metadata", metadata);
-
   const MarkReadAll = () => {
     feedClient.markAllAsRead();
   };

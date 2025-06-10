@@ -7,7 +7,7 @@ const knock = new Knock({
 });
 
 export const sendCommentAction = async (comment) => {
-  console.log("comment ", comment);
+  // console.log("comment ", comment);
 
   try {
     // The key of the workflow (from Knock dashboard)

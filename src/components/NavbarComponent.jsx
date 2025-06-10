@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,10 +20,9 @@ import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
-const NavBarComponent = () => {
-  const [isLoggin, setisLoggin] = useState(true);
+import { signOut } from "../auth";
+const NavBarComponent = ({ profile }) => {
   const currentPath = usePathname();
-
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
@@ -145,14 +144,7 @@ const NavBarComponent = () => {
               </Link>
             </li>
             <li>
-              {!isLoggin && (
-                <Link href="/login">
-                  <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition cursor-pointer">
-                    Sign in
-                  </button>
-                </Link>
-              )}
-              {isLoggin && (
+              {profile ? (
                 <div className="flex gap-x-[20px] items-center w-[100px] justify-end">
                   <KnockProvider
                     apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
@@ -168,12 +160,19 @@ const NavBarComponent = () => {
                       <PopoverTrigger>
                         <ProfileDropdownComponent
                           operator={"user"}
-                          onLogout={() => setisLoggin(false)}
+                          profile={profile}
+                          className="cursor-pointer"
                         />
                       </PopoverTrigger>
                     </Popover>
                   </div>
                 </div>
+              ) : (
+                <Link href="/login">
+                  <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition cursor-pointer">
+                    Sign in
+                  </button>
+                </Link>
               )}
             </li>
           </ul>

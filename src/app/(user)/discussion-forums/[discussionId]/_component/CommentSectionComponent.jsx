@@ -1,7 +1,7 @@
 import React from "react";
 import CommentComponent from "./CommentComponent";
 
-const CommentSectionComponent = ({ discussions }) => {
+const CommentSectionComponent = () => {
   const img = "/assets/tree-planting.png";
   return (
     <main className="w-full mt-3">

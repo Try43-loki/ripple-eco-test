@@ -2,11 +2,37 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import { LoginShecma } from "@/lib/zod/LoginShecma";
+import { loginAction } from "@/action/auth-action";
+import { redirect } from "next/navigation";
+import { doSocialLogin } from "@/action/loginSocialAction";
+import LoginSocialComponent from "./LoginSocialComponent";
+import { getUserProfileAction } from "@/action/user-action";
 function LoginComponent({ onNext }) {
+  const [message, setMessage] = React.useState("");
+  const { handleSubmit, register, reset } = useForm();
+
+  const handleLogin = async (formData) => {
+    const isLogin = await loginAction(formData);
+    if (isLogin?.success) {
+      const profile = await getUserProfileAction();
+      if (profile?.data?.organizer) {
+        redirect("/orgainizer/overview");
+      } else {
+        redirect("/home");
+      }
+    } else {
+      setMessage(isLogin?.message);
+    }
+    reset();
+  };
   const [showPassword, setShowPassword] = React.useState(false);
   // show password
   const handleShowPassword = () => {
@@ -38,7 +64,7 @@ function LoginComponent({ onNext }) {
           <section className="flex justify-center items-center flex-col gap-4 w-[400px]   bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
-              action=""
+              onSubmit={handleSubmit(handleLogin)}
               className="flex justify-center items-center flex-col  w-full  "
             >
               <h5 className="text-3xl text-white">Login</h5>
@@ -61,6 +87,7 @@ function LoginComponent({ onNext }) {
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
+                    {...register("email")}
                   />
                 </div>
                 {/* input password */}
@@ -86,27 +113,24 @@ function LoginComponent({ onNext }) {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="123"
+                    {...register("password")}
                   />
+                  {<p className="text-red text-sm ">{message}</p>}
                 </div>
 
                 <Link
                   href="/forget-password"
-                  className="underline text-end w-full my-2 font-light  text-white text-sub-info "
+                  className="underline text-end self-end my-2 font-light  text-white text-sub-info "
                 >
                   Forgot your password?
                 </Link>
-                <Link
-                  href={"/home"}
-                  className="flex w-full h-10 bg-green items-center justify-center text-white hover:bg-meduim-green text-md cursor-pointer rounded-2xl p-4"
+                <Button
+                  type="submit"
+                  className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
                 >
                   Login
-                  {/* <Button
-                    // onClick={onNext}
-                    className="w-full h-10 bg-green text-white hover:bg-meduim-green text-md text text-center cursor-pointer rounded-2xl p-4"
-                  >
-                    Login
-                  </Button> */}
-                </Link>
+                </Button>
+
                 <div className="flex justify-center items-center gap-x-2 w-full px-2 mt-2">
                   <span className="w-full h-[1.5px] grow bg-light-gray  opacity-50 rounded-3xl"></span>
                   <span className="text-sm text-white">OR</span>
@@ -116,14 +140,7 @@ function LoginComponent({ onNext }) {
             </form>
             {/* login with google */}
 
-            <Button className="w-full text-center cursor-pointer text-title bg-white backdrop-blur-md hover:bg-white  rounded-2xl p-4">
-              <img
-                src="/icons/flat-color-icons_google.png"
-                className="h-5 w-5"
-                alt=""
-              />
-              Login with Google
-            </Button>
+            <LoginSocialComponent />
             <p className="text-[12px] text-light-gray font-light">
               Are you new here?{" "}
               <Link

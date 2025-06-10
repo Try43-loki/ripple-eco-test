@@ -1,49 +1,89 @@
 import HeroSectionComponent from "@/components/HeroSectionComponent";
-import React from "react";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import FilterEcoEventComponent from "./_component/FilterEcoEventComponent";
-import Link from "next/link";
-import { events } from "@/service/mockData";
+import SearchBarComponent from "@/components/SearchBarComponent";
+import {
+  getAllEcoEventService,
+  getEcoEventByTitleService,
+  fetchFilteredEventsService,
+} from "@/service/ecoEventService";
 
-const EcoEventPage = () => {
-  const data = events;
+const EcoEventPage = async ({ searchParams = {} }) => {
+  let cardData = [];
+
+  const searchQuery = searchParams?.search || "";
+  const province = (await searchParams?.provinceId) || "";
+  const eventType = (await searchParams?.eventTypeId) || "";
+  const contributeType = (await searchParams?.contributeTypeId) || "";
+  const category = (await searchParams?.categoryId) || "";
+  const slot = (await searchParams?.slot) || "";
+  const startDate = (await searchParams?.startDate) || "";
+  const endDate = (await searchParams?.endDate) || "";
+
+  const shouldFilter =
+    province ||
+    eventType ||
+    contributeType ||
+    category ||
+    slot ||
+    startDate ||
+    endDate;
+
+  if (searchQuery) {
+    const response = await getEcoEventByTitleService(searchQuery);
+    cardData = response?.data ?? [];
+  } else if (shouldFilter) {
+    const response = await fetchFilteredEventsService({
+      provinceId: province,
+      eventTypeId: eventType,
+      contributeTypeId: contributeType,
+      categoryId: category,
+      slotStatus: slot,
+      startDate,
+      endDate,
+    });
+    cardData = response?.data ?? [];
+  } else {
+    const response = await getAllEcoEventService();
+    cardData = response?.data ?? [];
+  }
+
   const heroSectionText = {
     title: "ECO EVENT",
     description:
       "Join our EcoEvent to share ideas, connect, and act for a healthier planet.",
-    search: true,
+    search: false,
   };
 
   return (
-    <main className="w-full">
-      <article className="flex flex-col justify-center items-center">
-        {/* Hero Secition */}
+    <main className="w-full relative">
+      <article>
         <HeroSectionComponent
           text={heroSectionText.title}
           description={heroSectionText.description}
           showSearchBar={heroSectionText.search}
         />
 
-        {/* Filter Section */}
+        <div className="w-full absolute space-y-3 left-1/2 top-85 -translate-y-1/2 -translate-x-1/2 max-w-5xl px-4 md:px-20 lg:px-[150px] text-white text-center flex flex-col items-center">
+          <SearchBarComponent
+            placeholder="Search Eco Event"
+            pagePath="/eco-event"
+          />
+        </div>
 
-        {/* Card Eco-Event Section */}
-        <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-5">
+        <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-10">
           <FilterEcoEventComponent />
-          <div className="flex flex-wrap gap-5 w-full justify-between">
-            {data?.map((event, index) => (
-              <CardEcoEventComponent
-                key={index}
-                href={"/eco-event/1"}
-                type={event?.eventTypes?.eventType}
-                contribute={event?.contributeTypesResponse?.contributeTypeName}
-                category={event?.category?.categoryName}
-                status={event?.eventStatus}
-                date={event?.startDate}
-                participats={event?.maxSlot}
-                title={event?.title}
-                location={event?.provinces?.provinceName}
-              />
-            ))}
+
+          <div className="flex flex-wrap justify-start gap-5 mt-0">
+            {cardData?.length > 0 ? (
+              cardData.map((event) => (
+                <div key={event?.eventId}>
+                  <CardEcoEventComponent event={event} />
+                </div>
+              ))
+            ) : (
+              <p className="text-red text-center w-full">No events found.</p>
+            )}
           </div>
         </section>
       </article>

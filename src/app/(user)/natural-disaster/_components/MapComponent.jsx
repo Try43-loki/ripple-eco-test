@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import clsx from "clsx";
 
 const MapView = dynamic(() => import("../_components/MapView"), {
-  ssr: false, // Disable SSR for Leaflet (browser-only lib)
+  ssr: false,
 });
 
 const MapComponent = ({ isDashboard }) => {
@@ -26,9 +26,7 @@ const MapComponent = ({ isDashboard }) => {
         <DatePickerDemo order={1} />
         <DatePickerDemo />
       </div>
-      <div className=" h-[500px] z-10 ">
-        <MapView />
-      </div>
+      <div className=" h-[500px] z-10 ">{/* <MapView /> */}</div>
     </article>
   );
 };

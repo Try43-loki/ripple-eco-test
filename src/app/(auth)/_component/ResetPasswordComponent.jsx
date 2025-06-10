@@ -1,11 +1,38 @@
 "use client";
+import {
+  forgetPasswordAction,
+  registerAction,
+  verifyOTPAction,
+} from "@/action/auth-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { LoginShecma } from "@/lib/zod/LoginShecma";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
 
-function ResetPasswordCopmponent({ onNext }) {
+function ResetPasswordCopmponent({ onNext, handleEmailChange }) {
+  const [message, setMessage] = React.useState("");
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const handleEmail = async (formData) => {
+    const res = await forgetPasswordAction(formData);
+    if (res?.success) {
+      handleEmailChange(formData.email);
+      setMessage("");
+      onNext();
+    } else {
+      setMessage(res?.message);
+    }
+    reset();
+  };
+
   return (
     <>
       {/* Container */}
@@ -29,7 +56,7 @@ function ResetPasswordCopmponent({ onNext }) {
           <section className="flex justify-center items-center flex-col gap-3 w-[400px]   bg-linear-to-r/srgb from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md  rounded-2xl p-8">
             {/* form */}
             <form
-              action=""
+              onSubmit={handleSubmit(handleEmail)}
               className="flex justify-center items-center flex-col gap-3  w-full  "
             >
               <h3 className="text-xl font-semibold text-white text-start">
@@ -53,10 +80,12 @@ function ResetPasswordCopmponent({ onNext }) {
                     type="email"
                     id="email"
                     placeholder="exaple@gmaill.com"
+                    {...register("email")}
                   />
+                  <p className="text-red-400 text-sm mt-1">{message}</p>
                 </div>
                 <Button
-                  onClick={onNext}
+                  type="submit"
                   className="w-full text-white text text-center cursor-pointer bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-11 text-lg"
                 >
                   Reset Password

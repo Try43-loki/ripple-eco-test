@@ -8,27 +8,62 @@ import {
 } from "@/components/ui/input-otp";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import {
+  forgetPasswordAction,
+  registerAction,
+  verifyOTPAction,
+} from "@/action/auth-action";
+import clsx from "clsx";
 
-function OTPVerifyComponent({ onNext, onPrev }) {
+function OTPVerifyComponent({ onNext, onPrev, email, handleOtpChangeParent }) {
   const pathName = usePathname();
-  const [otpCode, setOtpCode] = useState();
+  const [otpCode, setOtpCode] = useState("");
   const [resendOtp, setResendOtp] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [isVerified, setIsVerified] = useState(false);
+  const [message, setMessage] = useState("");
+  const currentPath = usePathname();
+  const type = currentPath === "/register" ? "REGISTER" : "FORGOT_PASSWORD";
+
+  const formData = {
+    email: email,
+  };
 
   const handleOTPChange = (value) => {
     setOtpCode(value);
+    handleOtpChangeParent(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSendOtp = async () => {
+    {
+      currentPath === "/register"
+        ? await registerAction(formData)
+        : await forgetPasswordAction(formData);
+    }
+  };
+
+  const handleOTPSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted OTP:", otpCode);
+    if (otpCode.length === 6) {
+      handleOtpChangeParent(otpCode);
+      const isSuccess = await verifyOTPAction(email, otpCode, type);
+
+      if (isSuccess?.success) {
+        setIsVerified(false);
+        onNext();
+      } else {
+        setIsVerified(true);
+        setMessage(isSuccess?.message);
+      }
+    } else {
+      console.log("Please enter complete 6-digit OTP");
+    }
   };
 
   useEffect(() => {
     let timer;
-
     if (resendOtp) {
-      setTimeLeft(5);
+      setTimeLeft(60);
 
       timer = setInterval(() => {
         setTimeLeft((prev) => {
@@ -45,18 +80,15 @@ function OTPVerifyComponent({ onNext, onPrev }) {
     return () => clearInterval(timer);
   }, [resendOtp]);
 
-  const handleSendOtp = () => {
-    setResendOtp(true);
-  };
-
   const formatTime = (sec) => {
     const m = String(Math.floor(sec / 60)).padStart(2, "0");
     const s = String(sec % 60).padStart(2, "0");
     return `${m}:${s}`;
   };
+
   return (
     <section className="h-screen w-full flex justify-center items-center bg-[url('/assets/login_images/bg-login.jpg')] bg-cover bg-no-repeat bg-center">
-      <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20">
+      <section className="w-full h-screen bg-[#00000054] flex justify-center items-center p-10 lg:p-20 gap-15">
         <article className="w-1/4 lg:w-[300px]">
           <h1 className="text-4xl lg:text-5xl mb-2 font-bold text-white">
             Ripple<span className="text-green">Eco</span>
@@ -101,7 +133,7 @@ function OTPVerifyComponent({ onNext, onPrev }) {
 
           {/* Form */}
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleOTPSubmit}
             className="flex flex-col gap-4 w-full px-4"
           >
             <h3 className="text-lg text-white text-center">
@@ -120,18 +152,26 @@ function OTPVerifyComponent({ onNext, onPrev }) {
                     <InputOTPSlot
                       key={idx}
                       index={idx}
-                      className="border caret-white text-lg text-white border-light-gray rounded-md"
+                      className={clsx(
+                        "border caret-white text-lg text-white border-light-gray rounded-md",
+                        {
+                          "border-red-400 text-red": isVerified,
+                        }
+                      )}
                     />
                   ))}
                 </InputOTPGroup>
               </InputOTP>
+              {isVerified && (
+                <p className="text-red-400 text-[12px] mt-2">{message}</p>
+              )}
             </div>
 
             <div className="flex flex-col gap-y-3 w-full">
               <Button
                 type="submit"
-                onClick={onNext}
-                className="w-full text-white  bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-10 text-md cursor-pointer"
+                className="w-full text-white bg-strong-green hover:bg-green-800 rounded-2xl p-4 h-10 text-md cursor-pointer"
+                disabled={otpCode.length !== 6}
               >
                 Verify
               </Button>
@@ -141,7 +181,10 @@ function OTPVerifyComponent({ onNext, onPrev }) {
                 ) : (
                   <Button
                     type="button"
-                    onClick={() => setResendOtp(true)}
+                    onClick={() => {
+                      setResendOtp(true);
+                      handleSendOtp();
+                    }}
                     className="w-full text-white cursor-pointer bg-transparent hover:bg-transparent border border-light-gray rounded-2xl p-4 h-10 text-md"
                   >
                     Resend Code

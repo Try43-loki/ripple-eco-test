@@ -1,140 +1,257 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
   DialogFooter,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ImageIcon } from "lucide-react";
+import { ImagePlus } from "lucide-react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { discussionSchema } from "@/lib/zod/DiscussionSchema";
+import { insertDiscussionAction } from "@/action/DiscussionAction";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
 
 const CreateDiscussionComponent = ({ open, onOpenChange }) => {
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(discussionSchema),
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      description: "",
+      tag: [],
+      image: undefined,
+    },
+  });
+
+  const [imagePreview, setImagePreview] = useState(null);
+  const [tagError, setTagError] = useState("");
+
+  // Handle image file change & preview
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue("image", file, { shouldValidate: true });
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  // Add new tag
+  const addTag = () => {
+    const inputEl = document.getElementById("tag-input");
+    const rawTag = inputEl?.value.trim();
+
+    if (!rawTag) return;
+
+    const tag = rawTag.startsWith("#") ? rawTag : `#${rawTag}`;
+
+    const currentTags = getValues("tag") || [];
+    if (currentTags.includes(tag)) {
+      setTagError("This tag already exists");
+      return;
+    }
+    if (currentTags.length >= 3) {
+      setTagError("You can add up to 3 tags only");
+      return;
+    }
+    const newTags = [...currentTags, tag];
+
+    setValue("tag", newTags, { shouldValidate: true });
+    inputEl.value = "";
+    setTagError("");
+  };
+
+  // Remove a tag
+  const removeTag = (tagToRemove) => {
+    const currentTags = getValues("tag").filter((tag) => tag !== tagToRemove);
+    setValue("tag", currentTags, { shouldValidate: true });
+    setTagError("");
+  };
+
+  // Submit handler
+  const handleAddDiscussion = (data) => {
+    const formatData = {
+      ...data,
+      tag: data.tag,
+    };
+    insertDiscussionAction(formatData);
+    setImagePreview(null);
+    reset();
+    onOpenChange(false);
+  };
+
+  // Reset and close dialog
+  const closeDialog = () => {
+    setImagePreview(null);
+    setTagError("");
+    reset();
+    onOpenChange(false);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* Trigger Button */}
-      {/* <DialogTrigger asChild>
-        <Button
-          variant="default"
-
-          className="py-4 px-5 bg-green text-white rounded-2xl hover:bg-green/80"
-        >
-          Start the Discussion
-        </Button>
-      </DialogTrigger> */}
-
-      {/* Dialog Content */}
-      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white">
+    <Dialog open={open} onOpenChange={closeDialog}>
+      <DialogContent className="w-full lg:min-w-[600px] sm:max-w-[600px] bg-white border border-lightes-white cursor-pointer">
         <DialogHeader>
-          <DialogTitle className="cursor-pointer">
+          <DialogTitle className="text-dark-green">
             Create Discussion
           </DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        {/* Form Fields */}
-        <form>
-          {/* Title Input */}
-          <div className="mb-4">
+        <form
+          onSubmit={handleSubmit(handleAddDiscussion)}
+          encType="multipart/form-data"
+        >
+          {/* Title */}
+          <div className="py-4">
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-dark-green"
             >
-              Title
+              Title <span className="text-red">*</span>
             </label>
             <input
               type="text"
               id="title"
-              name="title"
-              placeholder="Enter discussion title"
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+              placeholder="Environment"
+              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
+              {...register("title")}
             />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.title.message}
+              </p>
+            )}
           </div>
 
-          {/* Tags Input */}
+          {/* Tags */}
           <div className="mb-4 flex flex-col gap-2">
-            <label
-              htmlFor="tags"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Tags
+            <label className="block text-sm font-medium text-dark-green">
+              Tags <span className="text-red">*</span>
             </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                placeholder="Add tags"
-                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+            <div className="flex items-center gap-2">
+              <Input
+                id="tag-input"
+                placeholder="#climate-change"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    addTag();
+                  }
+                }}
+                className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-green placeholder:text-lighter-green"
               />
-              <button
+              <Button
                 type="button"
-                className="bg-green text-white px-4 py-1 rounded-md hover:bg-green/80 transition"
+                className="bg-green hover:bg-green text-white cursor-pointer"
+                onClick={addTag}
               >
                 +
-              </button>
+              </Button>
+            </div>
+
+            {tagError && (
+              <p className="text-red-500 text-sm mt-1">{tagError}</p>
+            )}
+
+            <div className="flex flex-wrap gap-2 mt-2">
+              {getValues("tag")?.map((tag, index) => (
+                <Badge
+                  key={index}
+                  className="flex items-center gap-1 px-3 py-1"
+                >
+                  {tag}
+                  <button onClick={() => removeTag(tag)}>
+                    <X className="w-3 h-3 cursor-pointer" />
+                  </button>
+                </Badge>
+              ))}
             </div>
           </div>
 
-          {/* Description Input */}
+          {/* Description */}
           <div className="mb-4">
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-dark-green"
             >
               Description
             </label>
             <textarea
               id="description"
-              name="description"
-              placeholder="Enter discussion"
+              placeholder="These hands-on initiatives empower locals to remove debris"
               rows={4}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
-            ></textarea>
+              className="mt-1 block w-full border border-lightes-white rounded-md px-3 py-2 focus:outline-none focus:border-dark-green placeholder:text-lighter-green placeholder:text-sm"
+              {...register("description")}
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.description.message}
+              </p>
+            )}
           </div>
 
           {/* Image Upload */}
-          <div className="mb-4">
+          <div className="flex flex-col gap-y-1 items-start w-full h-52 mb-5">
+            <h4 className="text-sm text-dark-green">Image</h4>
+            <input
+              type="file"
+              id="file"
+              className="hidden"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
             <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-700"
+              htmlFor="file"
+              className=" h-full w-full border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
             >
-              Image
+              {imagePreview ? (
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="object-cover h-full w-full"
+                />
+              ) : (
+                <>
+                  <ImagePlus className="mb-2 text-lighter-green w-6 h-6" />
+                  <span className="text-lighter-green text-sm">
+                    Upload Image
+                  </span>
+                </>
+              )}
             </label>
-            <div
-              className="mt-1 relative cursor-pointer border-2 border-dashed border-orange-400 rounded-md px-6 py-10 text-center"
-              style={{ minHeight: "120px" }}
-            >
-              {/* <Image
-                src="/assets/upload-icon.png"
-                alt="Upload icon"
-                width={24}
-                height={24}
-                className="mx-auto mb-2"
-              /> */}
-              <div className="flex flex-col items-center gap-2">
-                <ImageIcon className="h-10 w-10 text-gray-400" />
-                <span className="text-gray-500">Upload image</span>
-              </div>
-            </div>
+            {errors.image && (
+              <span className="text-red text-sm mt-4">
+                {errors.image.message}
+              </span>
+            )}
           </div>
 
-          {/* Submit Buttons */}
+          {/* Buttons */}
           <DialogFooter>
             <Button
-              type="submit"
-              className="hover:bg-lighter-white bg-meduim-white cursor-pointer"
+              type="button"
+              variant="outline"
+              onClick={closeDialog}
+              className="hover:bg-lighter-white bg-light-gray border-none cursor-pointer"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-green text-white hover:bg-green/80 cursor-pointer"
+              className="bg-green text-white hover:bg-green cursor-pointer"
             >
               Create Discussion
             </Button>

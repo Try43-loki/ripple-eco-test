@@ -12,7 +12,7 @@ export const useCommentSocket = (postId) => {
 
     const client = new Client({
       brokerURL: undefined, // SockJS fallback
-      webSocketFactory: () => new SockJS("http://34.101.52.71:8882/comment"),
+      webSocketFactory: () => new SockJS("http://34.101.213.159:8883/comment"),
       reconnectDelay: 5000, // auto reconnect
       connectHeaders: {
         discussionId: postId, // The discussion you're viewing
@@ -22,7 +22,7 @@ export const useCommentSocket = (postId) => {
       onConnect: () => {
         client.subscribe("/topic/comments/" + postId, (message) => {
           const parsed = JSON.parse(message.body);
-          console.log("comment ", parsed);
+          // console.log("comment ", parsed);
 
           if (Array.isArray(parsed)) {
             // Initial fetch
@@ -45,7 +45,7 @@ export const useCommentSocket = (postId) => {
               }
             });
           }
-          console.log(parsed);
+          // console.log(parsed);
         });
         // client.publish({ destination: "/app/fetch-comments." + postId });
       },
@@ -66,8 +66,6 @@ export const useCommentSocket = (postId) => {
   }, [postId]);
 
   const addComment = (content) => {
-    console.log(content);
-
     const client = clientRef.current;
     if (client && client.connected && content) {
       client.publish({

@@ -1,26 +1,89 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  ChevronLeftCircleIcon,
-  CircleCheck,
-  Eye,
-  EyeClosed,
-  Lock,
-} from "lucide-react";
-import { DatePickerComponent } from "./DatePickerComponent";
+import { ChevronLeftCircleIcon } from "lucide-react";
 import { SelectGenderComponent } from "./SelectGenderComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createInfoSchema } from "@/lib/zod/RegisterShecma"; // Use the dynamic schema
+import {
+  addInfamtionAction,
+  loginSocialAction,
+  registerWithGoogleAction,
+} from "@/action/auth-action";
+import { usePathname } from "next/navigation";
+import { auth } from "@/auth";
 import { useRouter } from "next/navigation";
 
-function AdditonalInfoComponent({ onNext, onPrev }) {
+function AdditonalInfoComponent({
+  onNext,
+  onPrev,
+  email,
+  session,
+  operator,
+  image,
+}) {
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const [message, setMessage] = useState("");
   const router = useRouter();
+  const currentPath = usePathname();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    setValue,
+    clearErrors,
+    reset,
+  } = useForm({
+    resolver: zodResolver(createInfoSchema(isOrganizer)),
+    mode: "onChange",
+  });
+  const fullname = session?.name;
+  const [firstname, lastname] = fullname?.split(" ") || ["", ""];
+  // Update form resolver when role changes
+  useEffect(() => {
+    reset(undefined, {
+      keepValues: true,
+      resolver: zodResolver(createInfoSchema(isOrganizer)),
+    });
+  }, [isOrganizer, reset]);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const redirectTo = isOrganizer ? "/organizer/overview" : "/home";
-    router.push(`/login-success?redirectTo=${redirectTo}`);
+  // Handle role change
+  const handleRoleChange = (organizerRole) => {
+    setIsOrganizer(organizerRole);
+
+    // Clear organizerName when switching to volunteer
+    if (!organizerRole) {
+      setValue("organizerName", "");
+      clearErrors("organizerName");
+    }
+  };
+
+  const handleInfomation = async (data) => {
+    const formData = {
+      ...data,
+      isOrganizer: isOrganizer,
+      organizerName: isOrganizer ? data.organizerName : null,
+      email: email || session?.email,
+    };
+    if (session?.image) {
+      formData.profileImageUrl = session?.image;
+    }
+    const isSuccess =
+      operator == "google"
+        ? await registerWithGoogleAction(formData)
+        : await addInfamtionAction(formData);
+
+    if (isSuccess?.success) {
+      router.push("/login-success");
+    } else {
+      setMessage(isSuccess?.message);
+    }
+
+    reset();
   };
 
   return (
@@ -37,13 +100,25 @@ function AdditonalInfoComponent({ onNext, onPrev }) {
             Your impact starts here. Every ripple begins with one drop.
           </p>
         </article>
+
         <section className="flex flex-col justify-center items-center gap-4 w-[400px] bg-gradient-to-r from-[#c4c4c463] to-[#5e5e5e69] backdrop-blur-md rounded-2xl p-8">
           {/* Stepper */}
-          <div className="flex items-center w-full gap-2">
-            <ChevronLeftCircleIcon size={18} color="white" onClick={onPrev} />
-            <div className="flex gap-2 grow">
-              {["1. Verify email", "2. Set Password", "3. Additional Info"].map(
-                (step, index) => (
+          {currentPath == "/register-google" ? (
+            <h1 className="text-lg text-white ">Information</h1>
+          ) : (
+            <div className="flex items-center w-full gap-2">
+              <ChevronLeftCircleIcon
+                size={18}
+                color="white"
+                onClick={onPrev}
+                className="cursor-pointer"
+              />
+              <div className="flex gap-2 grow">
+                {[
+                  "1. Verify email",
+                  "2. Set Password",
+                  "3. Additional Info",
+                ].map((step, index) => (
                   <span
                     key={index}
                     className="flex flex-col gap-[2px] w-full items-start"
@@ -57,114 +132,149 @@ function AdditonalInfoComponent({ onNext, onPrev }) {
                       }`}
                     ></span>
                   </span>
-                )
-              )}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           {/* Form */}
           <form
-            action=""
-            className="flex justify-center items-center flex-col gap-y-4  w-full  "
+            onSubmit={handleSubmit(handleInfomation)}
+            className="flex justify-center items-center flex-col gap-y-4 w-full"
           >
-            <section className="flex justify-center items-center w-full flex-col gap-y-3">
-              <div className="w-full flex justify-center items-center gap-x-3">
-                <div className="grid w-full items-center gap-1.5  ">
+            <section className="flex flex-col gap-y-3 w-full">
+              {/* Name */}
+              <div className="flex gap-x-3">
+                <div className="grid w-full gap-1.5">
                   <Label
                     htmlFor="firstName"
-                    className=" text-label text-light-gray font-light"
+                    className="text-light-gray font-light"
                   >
                     First name
                   </Label>
-
                   <input
-                    required
-                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
                     id="firstName"
+                    defaultValue={
+                      currentPath == "/register-google" ? firstname : ""
+                    }
                     placeholder="Kim"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
+                    {...register("firstName")}
                   />
+                  {errors.firstName && (
+                    <p className="text-red-400 text-xs">
+                      {errors.firstName.message}
+                    </p>
+                  )}
                 </div>
-                <div className="grid w-full items-center gap-1.5  ">
+                <div className="grid w-full gap-1.5">
                   <Label
-                    htmlFor="lastName"
-                    className=" text-label text-light-gray font-light"
+                    htmlFor="lastname"
+                    className="text-light-gray font-light"
                   >
                     Last name
                   </Label>
-
                   <input
-                    required
-                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
                     id="lastName"
+                    defaultValue={
+                      currentPath == "/register-google" ? lastname : ""
+                    }
                     placeholder="Hout"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white placeholder:text-strong-gray border-none rounded-md w-full outline-none"
+                    {...register("lastName")}
                   />
+                  {errors.lastName && (
+                    <p className="text-red-400 text-xs">
+                      {errors.lastName.message}
+                    </p>
+                  )}
                 </div>
               </div>
-              <div className="w-full flex justify-center items-center gap-x-3">
-                <div className="grid w-full items-center gap-1.5  ">
+
+              {/* DOB + Gender */}
+              <div className="flex gap-x-3">
+                <div className="grid w-full gap-1.5">
                   <Label
-                    htmlFor="firstName"
-                    className=" text-label text-light-gray font-light"
+                    htmlFor="birthDate"
+                    className="text-light-gray font-light"
                   >
                     Date of Birth
                   </Label>
-                  <DatePickerComponent />
+                  <input
+                    type="date"
+                    id="birthDate"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white border-none rounded-md w-full outline-none"
+                    {...register("birthDate")}
+                  />
+                  {errors.birthDate && (
+                    <p className="text-red-400 text-xs">
+                      {errors.birthDate.message}
+                    </p>
+                  )}
                 </div>
-                <div className="grid w-full  items-center gap-1.5  ">
+                <div className="grid w-full gap-1.5">
                   <Label
                     htmlFor="gender"
-                    className=" text-label text-light-gray font-light"
+                    className="text-light-gray font-light"
                   >
                     Gender
                   </Label>
-
-                  <SelectGenderComponent />
+                  <SelectGenderComponent control={control} />
+                  {errors.gender && (
+                    <p className="text-red-400 text-xs">
+                      {errors.gender.message}
+                    </p>
+                  )}
                 </div>
               </div>
-              <div className="w-full flex justify-center items-center gap-x-3">
-                <div className="grid w-full items-center gap-1.5  ">
+
+              {/* Address + Phone */}
+              <div className="flex gap-x-3">
+                <div className="grid w-full gap-1.5">
                   <Label
-                    htmlFor="firstName"
-                    className=" text-label text-light-gray font-light"
+                    htmlFor="address"
+                    className="text-light-gray font-light"
                   >
                     Address
                   </Label>
-
                   <input
-                    required
-                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
                     id="address"
                     placeholder="PP"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white border-none rounded-md w-full outline-none"
+                    {...register("address")}
                   />
+                  {errors.address && (
+                    <p className="text-red-400 text-xs">
+                      {errors.address.message}
+                    </p>
+                  )}
                 </div>
-                <div className="grid w-full items-center gap-1.5  ">
-                  <Label
-                    htmlFor="gender"
-                    className=" text-label text-light-gray font-light"
-                  >
+                <div className="grid w-full gap-1.5">
+                  <Label htmlFor="phone" className="text-light-gray font-light">
                     Phone Number
                   </Label>
-
                   <input
-                    required
-                    className="text-gray-500 px-3 text-sub-info h-9   placeholder:text-strong-gray placeholder:font-light  bg-lighter-white focus-visible:ring-[0px] border-none rounded-md w-full outline-none  "
-                    type="text"
-                    id="lastName"
+                    id="phoneNumber"
                     placeholder="012-345-678"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white border-none rounded-md w-full outline-none"
+                    {...register("phoneNumber")}
                   />
+                  {errors.phoneNumber && (
+                    <p className="text-red-400 text-xs">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
                 </div>
               </div>
-              {/* pick role */}
-              <div className="flex justify-center items-center flex-col gap-y-1 w-full ">
-                <p className="self-start text-sub-info text-light-white font-light">
+
+              {/* Role Picker */}
+              <div className="flex flex-col gap-y-1 w-full">
+                <p className="text-sub-info text-light-white font-light">
                   Pick your role
                 </p>
-                <div className="flex justify-center items-center w-full gap-x-4">
+                <div className="flex gap-x-4">
                   <p
-                    onClick={() => setIsOrganizer(true)}
-                    className={`cursor-pointer text-center py-1.5 rounded-3xl text-sub-info grow ${
+                    onClick={() => handleRoleChange(true)}
+                    className={`cursor-pointer text-center py-1.5 rounded-3xl grow ${
                       isOrganizer
                         ? "bg-green text-white"
                         : "bg-lighter-white text-strong-green"
@@ -173,40 +283,49 @@ function AdditonalInfoComponent({ onNext, onPrev }) {
                     I'm an Organizer
                   </p>
                   <p
-                    onClick={() => setIsOrganizer(false)}
-                    className={`cursor-pointer text-center py-1.5 text-sub-info rounded-3xl grow ${
-                      isOrganizer
-                        ? "bg-lighter-white text-strong-green"
-                        : "bg-green text-white"
+                    onClick={() => handleRoleChange(false)}
+                    className={`cursor-pointer text-center py-1.5 rounded-3xl grow ${
+                      !isOrganizer
+                        ? "bg-green text-white"
+                        : "bg-lighter-white text-strong-green"
                     }`}
                   >
                     I'm a Volunteer
                   </p>
                 </div>
               </div>
+
+              {/* Organizer Name (if selected) */}
               {isOrganizer && (
-                <div className="grid w-full items-center gap-1.5">
+                <div className="grid w-full gap-1.5">
                   <Label
                     htmlFor="organizerName"
-                    className="text-label text-light-gray font-light"
+                    className="text-light-gray font-light"
                   >
-                    Organizer's name
+                    Organizer's name *
                   </Label>
                   <input
-                    required
-                    className="text-gray-500 px-3 text-sub-info h-9 placeholder:text-strong-gray placeholder:font-light bg-lighter-white focus-visible:ring-0 border-none rounded-md w-full outline-none"
-                    type="text"
                     id="organizerName"
                     placeholder="HRD Center"
+                    className="text-gray-500 px-3 h-9 bg-lighter-white border-none rounded-md w-full outline-none"
+                    {...register("organizerName")}
                   />
+                  {errors.organizerName && (
+                    <p className="text-red-400 text-xs">
+                      {errors.organizerName.message}
+                    </p>
+                  )}
                 </div>
               )}
+
+              <p className="text-red-400 text-xs">{message}</p>
             </section>
+
             <Button
-              onClick={handleRegister}
-              className="w-full bg-green hover:bg-green-800 text-white rounded-xl subtext-sub-info h-9  text-md"
+              type="submit"
+              className="w-full cursor-pointer bg-green hover:bg-green-800 text-white rounded-xl text-md h-9"
             >
-              Register
+              Submit
             </Button>
           </form>
         </section>
