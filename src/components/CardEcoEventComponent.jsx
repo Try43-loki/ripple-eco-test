@@ -22,7 +22,7 @@ const CardEcoEventComponent = ({
       {/* Top badge & menu */}
       <div className="absolute flex gap-2 flex-wrap z-[1] justify-between w-full p-2">
         <span className="bg-white/90 text-xs text-darker-gray px-2 py-1 rounded-2xl shadow">
-          {`${event?.eventTypes?.eventType} | ${event?.category?.categoryName}`}
+          {`${event?.eventType?.eventType} | ${event?.category?.categoryName}`}
         </span>
         {operator === "organizer" && <ListComponent />}
       </div>
@@ -74,7 +74,7 @@ const CardEcoEventComponent = ({
               {status}
             </p>
           </div>
-          <p className="text-dark-green text-sm">{event?.startDate}</p>
+          <p className="text-dark-green text-sm">{event?.startDateTime}</p>
           <h3 className="text-dark-green text-lg font-bold leading-tight mt-1 line-clamp-1">
             {event?.title}
           </h3>

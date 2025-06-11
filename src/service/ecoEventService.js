@@ -80,15 +80,26 @@ export const getEcoEventByTitleService = async (title) => {
 
 export const fetchFilteredEventsService = async (filters) => {
   try {
-    // const query = new URLSearchParams(filters).toString();
-    const res = await fetch(
-      `${baseUrl}/event/filter?${query}`
-      // , { cache: "no-store", }
-    );
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+    });
+    // console.log("data in service", params.toString());
+    const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await res.json();
-    // console.log("data : ", data);
     return data;
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const getAllFeedbacksByEcoEventId = async (eventid) => {
+  try {
+    const res = await fetch(`${baseUrl}/feedback/${eventid}`);
+    const data = await res.json();
+    // console.log("Data : ", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
   }
 };
