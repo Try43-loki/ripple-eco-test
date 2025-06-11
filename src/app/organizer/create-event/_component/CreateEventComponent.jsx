@@ -150,12 +150,12 @@ export default function CreateEventComponent({
     };
 
     const res = await multipleFileUploadAction(selectedImages);
+    console.log("res", res);
     setFormData({
       ...formData,
       ...finalData,
-      pictures: res?.data,
+      pictures: res,
     });
-
     onNext && onNext(finalData);
   };
 
