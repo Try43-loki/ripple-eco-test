@@ -24,8 +24,8 @@ const CardDiscussionComponent = ({ discussions, currentUserId }) => {
   const [deleteTargetId, setDeleteTargetId] = useState(null);
 
   // Check owner post
-  const postOwner = discussions?.appUser?.appUserId;
-  const isOwner = postOwner === currentUserId;
+  const postOwnerId = discussions?.appUser?.appUserId;
+  const isOwner = postOwnerId === currentUserId;
 
   return (
     <div className="w-full mt-8 space-y-8">

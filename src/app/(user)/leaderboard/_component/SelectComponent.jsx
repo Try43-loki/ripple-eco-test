@@ -15,7 +15,7 @@ import {
   contributeType,
   eventTypes,
   locations,
-} from "@/data";
+} from "@/utils/data";
 export function SelectComponent({ operator }) {
   let data = [];
   switch (operator) {
