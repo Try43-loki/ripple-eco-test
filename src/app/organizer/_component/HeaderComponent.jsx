@@ -35,7 +35,7 @@ function HeaderComponent({ profile }) {
               <NotificationItem />
             </KnockProvider>
           </div>
-          <div className="px-1 h-10 rounded-lg bg-lighter-white flex justify-center items-center gap-x-2">
+          <div className="px-3 h-12 rounded-xl bg-lighter-white flex justify-center items-center gap-x-2">
             <Avatar>
               <AvatarImage src={profile?.data?.profileImageUrl} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>

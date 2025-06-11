@@ -74,7 +74,7 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
         agenda: cleanedAgenda,
       }));
       const res = await createEventAction(formData);
-      console.log("Form data submitted:", res);
+      console.log("Form data submitted agenda :", res);
       performReset();
     } catch (error) {
       console.error("Form submission error:", error);

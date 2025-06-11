@@ -5,43 +5,69 @@ import {
   inviteFriendService,
   updateEventService,
 } from "@/service/createEventService";
+import {
+  categories,
+  contributeType,
+  eventTypes,
+  locations,
+} from "@/utils/data";
+import { format } from "date-fns";
 
 export const createEventAction = async (formData) => {
-  const eventData = {
+  // Format event data
+  const event = {
     title: formData?.title,
-    image: formData?.pictures?.map((pic) => pic?.imageUrl), // ✅ keep as array
-    agendaRequests: [
-      {
-        dateTime: "2025-06-01 09:00",
-        description: "Opening Ceremony",
-      },
-      {
-        dateTime: "2025-06-01 10:00",
-        description: "Keynote: The Future of AI",
-      },
-      {
-        dateTime: "2025-06-02 14:00",
-        description: "Workshop: Building with Web3",
-      },
-      {
-        dateTime: "2025-06-03 16:00",
-        description: "Closing Ceremony and Awards",
-      },
-    ],
-    maxSlot: formData?.volunteer,
-    startDate: "2025-06-07",
-    endDate: "2025-06-07",
-    contributeTypeId: 5,
-    provinceId: "5bac5d0f55865e7073f0e99c",
-    eventTypeId: 1,
-    categoryId: 2,
-    description:
-      "Join industry leaders, innovators, and tech enthusiasts for a 3-day event exploring the future of technology, AI, Web3, and digital innovation.",
-    isProvideCertificate: true,
+    image: formData?.pictures?.map((pic) => pic?.imageUrl),
+    maxSlot: Number(formData?.volunteer),
+    startDate: format(formData?.startDate, "yyyy-MM-dd"),
+    endDate: format(formData?.endDate, "yyyy-MM-dd"),
+    contributeTypeId: contributeType.find(
+      (type) => type.value === formData?.contributeType
+    )?.id,
+    provinceId: locations.find((loc) => loc.value === formData?.location)?.id,
+    eventTypeId: eventTypes.find((type) => type.value === formData?.eventTypes)
+      ?.id,
+    categoryId: categories.find((type) => type.value === formData?.categories)
+      ?.id,
+    description: formData?.description,
+    isProvideCertificate: formData?.certificate === "Yes" ? true : false,
   };
 
+  // Format agenda requests
+  function getDatesInRange(startDateStr, endDateStr) {
+    const startDate = new Date(startDateStr);
+    const endDate = new Date(endDateStr);
+    const dates = [];
+    while (startDate <= endDate) {
+      dates.push(new Date(startDate)); // clone the date
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    return dates;
+  }
+
+  const startDate = event?.startDate;
+  const endDate = event?.endDate;
+
+  const dateRange = getDatesInRange(startDate, endDate);
+
+  const agendaRequests = dateRange.map((dateObj, index) => {
+    const formattedDate = dateObj.toISOString().split("T")[0]; // "YYYY-MM-DD"
+
+    return {
+      dayLabel: `Day ${index + 1}`,
+      date: formattedDate,
+      activitiesList:
+        formData.agenda?.[index]?.activities?.map((activity) => ({
+          time: activity.time,
+          description: activity.task,
+        })) || [],
+    };
+  });
+
+  event.agendaRequests = agendaRequests;
+  console.log("event", event);
   try {
-    const res = await createEventService(eventData);
+    const res = await createEventService(event);
   } catch (err) {
     console.error("createEventAction", err);
   }

@@ -50,8 +50,8 @@ export function SelectComponent({
         <SelectValue placeholder={placeholder || `Choose ${operator}`} />
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-gray-600">
-        {data?.map((item, index) => (
-          <SelectItem key={index} value={item.value}>
+        {data?.map((item) => (
+          <SelectItem key={item?.id} value={item.value}>
             {item.value}
           </SelectItem>
         ))}

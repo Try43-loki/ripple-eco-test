@@ -19,6 +19,7 @@ import {
   locations,
 } from "@/utils/data";
 import { multipleFileUploadAction } from "@/action/FileUploadAction";
+import { format } from "date-fns";
 
 export default function CreateEventComponent({
   formData,
@@ -150,7 +151,6 @@ export default function CreateEventComponent({
     };
 
     const res = await multipleFileUploadAction(selectedImages);
-    console.log("res", res);
     setFormData({
       ...formData,
       ...finalData,
@@ -158,7 +158,7 @@ export default function CreateEventComponent({
     });
     onNext && onNext(finalData);
   };
-
+  console.log("Form data submitted:", formData);
   return (
     <>
       <h1 className="w-full text-lg text-dark-green font-semibold mb-5">
@@ -183,6 +183,7 @@ export default function CreateEventComponent({
           <div className="grid w-full gap-1.5">
             <Label>Categories</Label>
             <SelectComponent
+              setValue={setValue}
               operator="Categories"
               value={formValues.categories}
               onChange={(value) => handleSelectChange("categories", value)}
