@@ -12,7 +12,7 @@ export const contributeType = [];
 export const locations = [];
 export const slots = [];
 const province = await getAllProvincesService();
-province.data.forEach((prov) => {
+province?.data?.forEach((prov) => {
   locations.push({
     label: prov?.provinceName,
     value: prov?.provinceId,

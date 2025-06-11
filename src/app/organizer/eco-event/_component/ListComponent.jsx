@@ -4,8 +4,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { UpdateEventComponent } from "@/components/UpdateEventComponent";
-import { Edit, Ellipsis, OctagonX, Settings } from "lucide-react";
+import UpdateEventComponent from "@/components/UpdateEventComponent";
+import { Ellipsis, OctagonX, Settings } from "lucide-react";
 
 export function ListComponent() {
   return (
