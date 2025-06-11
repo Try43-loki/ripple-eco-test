@@ -9,7 +9,7 @@ const TopRankingComponent = async () => {
 
   const rawUsers = response.data;
 
-  const rankData = rawUsers.map((user) => {
+  const rankData = rawUsers?.map((user) => {
     let leftIcon = null;
     let rightIcon = null;
     let textColor = "text-dark-green";

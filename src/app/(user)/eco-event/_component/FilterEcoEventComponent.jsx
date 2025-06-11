@@ -65,6 +65,7 @@ const FilterEcoEventComponent = () => {
 
     setFilters(updated);
     updateRoute(updated);
+    // console.log("first", value);
   };
 
   const handleSlotChange = (value) => {

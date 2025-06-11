@@ -4,7 +4,7 @@ import CreateEventComponent from "./_component/CreateEventComponent";
 import CreateAgendaComponent from "./_component/CreateAgendaComponent";
 
 function CreateEcoEventPage() {
-  const [currentComponent, setCurrentComponent] = useState(1);
+  const [currentComponent, setCurrentComponent] = useState(2);
   const [formData, setFormData] = useState({});
   const goToNext = () => {
     setCurrentComponent(2);

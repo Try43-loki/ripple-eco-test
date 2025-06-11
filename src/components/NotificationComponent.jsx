@@ -21,8 +21,6 @@ const NotificationItem = () => {
   );
 
   const { items, metadata } = useNotificationStore(feedClient);
-  console.log("items", items);
-  console.log("metadata", metadata);
 
   useEffect(() => {
     feedClient.fetch();
