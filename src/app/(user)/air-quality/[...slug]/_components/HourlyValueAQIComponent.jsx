@@ -24,19 +24,19 @@ const checkIcon = (icon) => {
 };
 
 const dynamicColorAqi = (value) => {
-  if (value < 50) return "bg-air-green";
-  if (value < 100) return "bg-air-yellow";
-  if (value < 150) return "bg-air-orange";
+  if (value <= 50) return "bg-air-green";
+  if (value <= 100) return "bg-air-yellow";
+  if (value <= 150) return "bg-air-orange";
   if (value >= 150) return "bg-air-red";
 };
 const formatTime = (time) => {
   // Return Hour Only
   const original = new Date(time);
-  // const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
+  const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
 
   // Get hours and minutes
-  const hours = original.getHours();
-  const minutes = original.getMinutes().toString().padStart(2, "0");
+  const hours = updatedTime.getHours();
+  const minutes = updatedTime.getMinutes().toString().padStart(2, "0");
 
   // Final time string
   const timeString = `${hours}:${minutes}`;
@@ -65,12 +65,14 @@ const HourlyValueAQIComponent = ({ data }) => {
     (entry) => new Date(entry.time) >= now
   );
 
+  console.log(filteredCurrentHours);
+
   return (
     <>
       {data.day != Weekday[new Date().getDay() - 1] && (
         <LineVertical day={data.day} />
       )}
-      {filteredCurrentHours.map((value, index) => (
+      {data.forecastGroupByDay.map((value, index) => (
         <div
           key={index}
           className={clsx(

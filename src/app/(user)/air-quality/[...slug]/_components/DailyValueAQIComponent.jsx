@@ -44,6 +44,7 @@ const checkIcon = (icon) => {
 
 const DailyValueAQIComponent = ({ day, dataDaily }) => {
   const currentDay = new Date().getDay() - 1;
+  console.log(dataDaily);
 
   return (
     <>
@@ -71,7 +72,7 @@ const DailyValueAQIComponent = ({ day, dataDaily }) => {
           </span>
         </div>
         <span className="text-2xl font-semibold text-darker-gray">
-          {dataDaily.aqi}
+          {Math.min(dataDaily.temperature.min)}
           <sup>o</sup>
         </span>
         {/* Value Of AQI */}
