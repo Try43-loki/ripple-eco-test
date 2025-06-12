@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { SelectComponent } from "./SelectComponent";
 import SearchComponent from "./SearchComponent";
 import { DatePickerComponent } from "@/app/(auth)/_component/DatePickerComponent";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createEventSchemaFromData } from "@/lib/zod/eventShcema";
 import {
@@ -29,6 +29,17 @@ export default function CreateEventComponent({
   const [imagePreviews, setImagePreviews] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
+  // State for form values to track select components
+  const [formValues, setFormValues] = useState({
+    categories: "",
+    eventTypes: "",
+    certificate: "",
+    location: "",
+    contributeType: "",
+    startDate: null,
+    endDate: null,
+  });
+
   const eventSchema = createEventSchemaFromData({
     categories,
     eventTypes,
@@ -39,7 +50,6 @@ export default function CreateEventComponent({
 
   const {
     handleSubmit,
-    control,
     register,
     getValues,
     setValue,
@@ -57,7 +67,7 @@ export default function CreateEventComponent({
       startDate: null,
       endDate: null,
       description: "",
-      pictures: [], // Changed from picture to pictures (array)
+      pictures: [],
     },
   });
 
@@ -109,6 +119,24 @@ export default function CreateEventComponent({
     });
   };
 
+  // Handle select component changes
+  const handleSelectChange = (fieldName, value) => {
+    setValue(fieldName, value);
+    setFormValues((prev) => ({
+      ...prev,
+      [fieldName]: value,
+    }));
+  };
+
+  // Handle date picker changes
+  const handleDateChange = (fieldName, date) => {
+    setValue(fieldName, date);
+    setFormValues((prev) => ({
+      ...prev,
+      [fieldName]: date,
+    }));
+  };
+
   // Get all form values
   const getAllFormValues = () => {
     return getValues();
@@ -122,12 +150,12 @@ export default function CreateEventComponent({
     };
 
     const res = await multipleFileUploadAction(selectedImages);
+    console.log("res", res);
     setFormData({
       ...formData,
       ...finalData,
-      pictures: res?.data,
+      pictures: res,
     });
-
     onNext && onNext(finalData);
   };
 
@@ -154,33 +182,21 @@ export default function CreateEventComponent({
           </div>
           <div className="grid w-full gap-1.5">
             <Label>Categories</Label>
-            <Controller
-              name="categories"
-              control={control}
-              render={({ field }) => (
-                <SelectComponent
-                  operator="Categories"
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Choose category"
-                />
-              )}
+            <SelectComponent
+              operator="Categories"
+              value={formValues.categories}
+              onChange={(value) => handleSelectChange("categories", value)}
+              placeholder="Choose category"
             />
             <p className="text-sm text-red">{errors?.categories?.message}</p>
           </div>
           <div className="grid w-full gap-1.5">
             <Label>Event type</Label>
-            <Controller
-              name="eventTypes"
-              control={control}
-              render={({ field }) => (
-                <SelectComponent
-                  operator="Event_type"
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Choose event type"
-                />
-              )}
+            <SelectComponent
+              operator="Event_type"
+              value={formValues.eventTypes}
+              onChange={(value) => handleSelectChange("eventTypes", value)}
+              placeholder="Choose event type"
             />
             <p className="text-sm text-red">{errors?.eventTypes?.message}</p>
           </div>
@@ -201,17 +217,11 @@ export default function CreateEventComponent({
             </div>
             <div className="grid w-full gap-1.5">
               <Label>Certificate</Label>
-              <Controller
-                name="certificate"
-                control={control}
-                render={({ field }) => (
-                  <SelectComponent
-                    operator="Certificate"
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Choose certificate"
-                  />
-                )}
+              <SelectComponent
+                operator="Certificate"
+                value={formValues.certificate}
+                onChange={(value) => handleSelectChange("certificate", value)}
+                placeholder="Choose certificate"
               />
               <p className="text-sm text-red">{errors?.certificate?.message}</p>
             </div>
@@ -219,33 +229,23 @@ export default function CreateEventComponent({
           <div className="flex w-2/3 gap-x-5">
             <div className="grid w-full gap-1.5">
               <Label>Location</Label>
-              <Controller
-                name="location"
-                control={control}
-                render={({ field }) => (
-                  <SelectComponent
-                    operator="Location"
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Choose location"
-                  />
-                )}
+              <SelectComponent
+                operator="Location"
+                value={formValues.location}
+                onChange={(value) => handleSelectChange("location", value)}
+                placeholder="Choose location"
               />
               <p className="text-sm text-red">{errors?.location?.message}</p>
             </div>
             <div className="grid w-full gap-1.5">
               <Label>Contribute type</Label>
-              <Controller
-                name="contributeType"
-                control={control}
-                render={({ field }) => (
-                  <SelectComponent
-                    operator="contributeType"
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Choose contribution type"
-                  />
-                )}
+              <SelectComponent
+                operator="contributeType"
+                value={formValues.contributeType}
+                onChange={(value) =>
+                  handleSelectChange("contributeType", value)
+                }
+                placeholder="Choose contribution type"
               />
               <p className="text-sm text-red">
                 {errors?.contributeType?.message}
@@ -258,35 +258,23 @@ export default function CreateEventComponent({
         <div className="flex gap-x-5">
           <div className="grid w-full gap-1.5">
             <Label>Start date</Label>
-            <Controller
-              name="startDate"
-              control={control}
-              render={({ field }) => (
-                <DatePickerComponent
-                  name="start_date"
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Select start date"
-                  error={errors?.startDate}
-                />
-              )}
+            <DatePickerComponent
+              name="start_date"
+              value={formValues.startDate}
+              onChange={(date) => handleDateChange("startDate", date)}
+              placeholder="Select start date"
+              error={errors?.startDate}
             />
             <p className="text-sm text-red">{errors?.startDate?.message}</p>
           </div>
           <div className="grid w-full gap-1.5">
             <Label>End date</Label>
-            <Controller
-              name="endDate"
-              control={control}
-              render={({ field }) => (
-                <DatePickerComponent
-                  name="end_date"
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Select end date"
-                  error={errors?.endDate}
-                />
-              )}
+            <DatePickerComponent
+              name="end_date"
+              value={formValues.endDate}
+              onChange={(date) => handleDateChange("endDate", date)}
+              placeholder="Select end date"
+              error={errors?.endDate}
             />
             <p className="text-sm text-red">{errors?.endDate?.message}</p>
           </div>
@@ -298,7 +286,7 @@ export default function CreateEventComponent({
               onChange={handleFileChange}
               className="bg-lighter-white text-gray-600 border-none h-10"
               accept="image/*"
-              multiple // Enable multiple file selection
+              multiple
             />
             <p className="text-sm text-red">{errors?.pictures?.message}</p>
           </div>

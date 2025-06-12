@@ -12,10 +12,10 @@ export const contributeType = [];
 export const locations = [];
 export const slots = [];
 const province = await getAllProvincesService();
-province.data.forEach((prov) => {
+province?.data?.forEach((prov) => {
   locations.push({
-    label: prov?.provinceName,
-    value: prov?.provinceId,
+    value: prov?.provinceName,
+    id: prov?.provinceId,
   });
 });
 function generateHexId(length = 24) {
@@ -31,34 +31,34 @@ let i = 1;
 const categoriesData = await getAllEventCategoriesService();
 categoriesData.data.forEach((prov) => {
   categories.push({
-    label: prov?.categoryName,
-    value: generateHexId(),
+    value: prov?.categoryName,
+    id: prov?.categoryId,
   });
 });
 
 const contributeData = await getAllContributeTypesService();
 contributeData.data.forEach((prov) => {
   contributeType.push({
-    label: prov?.contributeTypeName,
-    value: generateHexId(),
+    value: prov?.contributeTypeName,
+    id: prov?.contributeTypeId,
   });
 });
 
 const eventTypeData = await getAllEventTypesService();
 eventTypeData.data.forEach((prov) => {
   eventTypes.push({
-    label: prov?.eventType,
-    value: prov?.eventTypeId,
+    value: prov?.eventType,
+    id: prov?.eventTypeId,
   });
 });
 
 certificates.push(
   {
-    label: "Yes",
-    value: generateHexId(),
+    value: "Yes",
+    id: 1,
   },
   {
-    label: "No",
-    value: generateHexId(),
+    value: "No",
+    id: 2,
   }
 );

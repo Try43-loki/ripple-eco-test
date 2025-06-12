@@ -2,6 +2,7 @@
 
 import {
   createEventService,
+  inviteFriendService,
   updateEventService,
 } from "@/service/createEventService";
 
@@ -46,8 +47,7 @@ export const createEventAction = async (formData) => {
   }
 };
 
-export const updateEventAction = async (data) => {
-  const eventId = "25d73c5c-8ca9-4f6b-b174-320a3f97fb38";
+export const updateEventAction = async (data, eventId) => {
   const formData = {
     title: data?.title,
     image: data?.images?.map((pic) => pic?.imageUrl),
@@ -60,5 +60,15 @@ export const updateEventAction = async (data) => {
     console.log("update ", res);
   } catch (err) {
     console.error("updateEventAction", err);
+  }
+};
+
+export const inviteFriendAction = async (formData) => {
+  try {
+    const response = await inviteFriendService(formData);
+    return { success: true, data: response };
+  } catch (error) {
+    console.error("inviteFriendAction error:", error);
+    return { success: false, error: "Failed to send invite." };
   }
 };

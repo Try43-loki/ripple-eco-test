@@ -125,7 +125,13 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
 
   return (
     <>
-      <section className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 w-full">
+      <section className=" mb-10  w-full">
+        {/* Header */}
+        <header className=" text-dark-green mb-4">
+          <h1 className="text-2xl font-semibold">Event Agenda</h1>
+        </header>
+
+        {/* Main Content */}
         <div className="w-full mx-auto">
           {/* Action Buttons */}
           <div className="flex justify-start items-center gap-4  mb-10">

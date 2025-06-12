@@ -20,13 +20,12 @@ import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
-import { signOut } from "../auth";
 const NavBarComponent = ({ profile }) => {
   const currentPath = usePathname();
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
-        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-lightes-white backdrop-blur-sm rounded-xl ">
+        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#ffffff1e] backdrop-blur-sm rounded-xl ">
           <ul className="flex flex-row justify-between items-center w-full">
             <li>
               <Link href="/home" className="text-white text-2xl font-semibold">
@@ -144,7 +143,7 @@ const NavBarComponent = ({ profile }) => {
               </Link>
             </li>
             <li>
-              {profile ? (
+              {profile?.code == 200 ? (
                 <div className="flex gap-x-[20px] items-center w-[100px] justify-end">
                   <KnockProvider
                     apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
@@ -155,7 +154,7 @@ const NavBarComponent = ({ profile }) => {
                     </div>
                   </KnockProvider>
 
-                  <div className="flex items-center h-full">
+                  <div className="flex items-center h-full cursor-pointer">
                     <Popover>
                       <PopoverTrigger>
                         <ProfileDropdownComponent

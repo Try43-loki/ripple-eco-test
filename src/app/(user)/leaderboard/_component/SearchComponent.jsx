@@ -18,7 +18,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { locations } from "@/data";
+import { locations } from "@/utils/data";
+// import { locations } from "@/data";
 
 export default function SearchComponent() {
   const [open, setOpen] = React.useState(false);

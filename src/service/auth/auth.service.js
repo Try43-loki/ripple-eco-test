@@ -3,7 +3,7 @@ import { baseUrl } from "../constants";
 import headerToken from "@/utils/headerToken";
 import { apiRequest } from "@/utils/api";
 
-export const loginService = async ({ email, password }) => {
+export const loginService = async (email, password) => {
   try {
     const res = await fetch(`${baseUrl}/auths/login`, {
       method: "POST",
@@ -16,9 +16,6 @@ export const loginService = async ({ email, password }) => {
       }),
     });
     const data = await res.json();
-    if (!data) {
-      redirect("/login");
-    }
     return data;
   } catch (e) {
     console.log(e);
@@ -53,7 +50,6 @@ export const verifyOtpService = async (formData, type) => {
       body: JSON.stringify(formData),
     });
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (e) {
     console.log(e);
@@ -134,3 +130,4 @@ export const registerWithGoogleService = async (formData) => {
     console.log(e);
   }
 };
+

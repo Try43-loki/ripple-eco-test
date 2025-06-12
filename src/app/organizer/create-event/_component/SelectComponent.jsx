@@ -43,7 +43,6 @@ export function SelectComponent({
     default:
       break;
   }
-  console.log("data ", data);
 
   return (
     <Select value={value} onValueChange={onChange} {...props}>
@@ -53,7 +52,7 @@ export function SelectComponent({
       <SelectContent className="bg-white border border-light-strok text-gray-600">
         {data?.map((item, index) => (
           <SelectItem key={index} value={item.value}>
-            {item.label}
+            {item.value}
           </SelectItem>
         ))}
       </SelectContent>

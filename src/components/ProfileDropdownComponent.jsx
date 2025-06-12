@@ -11,8 +11,7 @@ import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
 export function ProfileDropdownComponent({ operator, profile }) {
-  // console.log(profile);
-  const img = profile?.data?.profileImage;
+  const img = profile?.data?.profileImageUrl;
   const first = profile?.data?.firstName.charAt(0);
   const last = profile?.data?.lastName.charAt(0);
   const name = first + last;
@@ -21,7 +20,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
     <Popover>
       <PopoverTrigger asChild>
         {operator === "organizer" ? (
-          <ChevronDown className="text-lighter-green" />
+          <ChevronDown className="text-lighter-green cursor-pointer" />
         ) : (
           <div>
             {img ? (
@@ -49,7 +48,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
           </Link>
           <Button
             onClick={dologout}
-            className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
+            className="flex cursor-pointer justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <LogOut className="text-lighter-green" />
             <h3 className="text-lighter-green text-lg">Logout</h3>

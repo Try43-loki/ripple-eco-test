@@ -4,7 +4,9 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Toast } from "primereact/toast";
-import { BadgeCheck, Download } from "lucide-react";
+import { BadgeCheck } from "lucide-react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -14,42 +16,38 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { submitTakeActionAnswer } from "@/action/Take-actionAction";
 
-const FormTakeActionComponent = ({ open, onOpenChange }) => {
+// 🧾 Zod schema for form validation
+const formSchema = z.object({
+  description: z
+    .string()
+    .min(10, "Description must be at least 10 characters")
+    .max(1000, "Description must be under 1000 characters"),
+});
+
+const FormTakeActionComponent = ({takeActionId}) => {
+  const router = useRouter();
+  const toastCenter = useRef(null);
+
+  // ⚙️ Initialize the form with react-hook-form and zod validation
   const form = useForm({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       description: "",
     },
   });
 
-  const router = useRouter();
-  const toastCenter = useRef(null);
-
+  // ✅ Display a centered success toast
   const showCustomCenterToast = (content) => {
-    toastCenter.current.show({
+    toastCenter.current?.show({
       severity: "success",
       life: 3000,
       content,
     });
   };
 
-  const handleDownloadClick = () => {
-    showCustomCenterToast(
-      <div className="w-auto">
-        <article className="flex flex-col gap-y-4 w-125 rounded-2xl p-5 items-center justify-center bg-white shadow-lg">
-          <BadgeCheck className="w-10 h-10 text-green" />
-          <h4 className="text-[35px] font-semibold">Download Successfully!</h4>
-          <p className="text-base text-muted-foreground">
-            Your Take Action has been downloaded
-          </p>
-        </article>
-      </div>
-    );
-    setTimeout(() => {
-      router.push("/organizer/take-action");
-    }, 1000);
-  };
-
+  // 📦 Handle successful form submission
   const handleSubmitClick = () => {
     showCustomCenterToast(
       <div className="w-auto">
@@ -62,19 +60,29 @@ const FormTakeActionComponent = ({ open, onOpenChange }) => {
         </article>
       </div>
     );
+
+    // ⏱️ Redirect after a short delay
     setTimeout(() => {
       router.push("/organizer/take-action");
-    }, 1000);
+    }, 1500);
   };
 
-  const onSubmit = (data) => {
-    handleSubmitClick(); // or include actual API logic here
-  };
+  // 🚀 Handle form submission
+    const onSubmit = async (data) => {
+      const isSubmit = await submitTakeActionAnswer(data, takeActionId)
+      if(isSubmit?.code === 201){
+        form.reset();
+        handleSubmitClick()
+      }
+    };
+ 
 
   return (
     <main className="p-5 rounded-2xl border border-light-gray relative">
+      {/* 🔁 Zod-enhanced form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* 📝 Description Textarea */}
           <FormField
             control={form.control}
             name="description"
@@ -93,7 +101,11 @@ const FormTakeActionComponent = ({ open, onOpenChange }) => {
               </FormItem>
             )}
           />
+
+          {/* 🔔 Center Toast Message */}
           <Toast ref={toastCenter} position="center" closable={false} />
+
+          {/* 📤 Submit Button */}
           <div className="flex items-center justify-end gap-x-4">
             <Button
               type="submit"

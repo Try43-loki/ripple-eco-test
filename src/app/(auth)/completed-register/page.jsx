@@ -1,7 +1,7 @@
 import React from "react";
 import LoginSuccessComponent from "../_component/LoginSuccessComponent";
 
-const LoginSuccessPage = () => {
+const LoginSuccessPage = async () => {
   return (
     <>
       <LoginSuccessComponent />

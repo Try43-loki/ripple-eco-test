@@ -53,17 +53,12 @@ const TakeActionDetailPage =  async ( { params , searchParams}) => {
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5">
         <TakeActionDetailCard
           userData={userData}
+          cardDetail={cardDetail}
           view={view}
-          image={cardDetail?.data?.image}
-          description={cardDetail?.data?.description}
-          title={cardDetail?.data?.title}
-          numberOfSupporter={cardDetail?.data?.numberOfSupporter}
-          destination={cardDetail?.data?.destinationPerson}
-          createdAt={cardDetail?.data?.createdAt}
         />
       </section>
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5 mt-12 mb-24">
-        {owner == "false" && <TakeActionFormComponent />}
+        {owner == "false" && <TakeActionFormComponent takeActionId={id}/>}
       </section>
       <section className="w-full flex flex-col gap-5 my-6 px-6 md:px-20 lg:px-37.5">
         {owner == "true" && (

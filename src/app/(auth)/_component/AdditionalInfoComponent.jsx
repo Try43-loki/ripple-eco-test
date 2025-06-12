@@ -8,27 +8,17 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createInfoSchema } from "@/lib/zod/RegisterShecma"; // Use the dynamic schema
-import {
-  addInfamtionAction,
-  loginSocialAction,
-  registerWithGoogleAction,
-} from "@/action/auth-action";
+import { addInfamtionAction } from "@/action/auth-action";
 import { usePathname } from "next/navigation";
-import { auth } from "@/auth";
 import { useRouter } from "next/navigation";
+import { updateProfileAction } from "@/action/userAction";
+import { auth } from "@/auth";
 
-function AdditonalInfoComponent({
-  onNext,
-  onPrev,
-  email,
-  session,
-  operator,
-  image,
-}) {
+function AdditonalInfoComponent({ onPrev, email, profile, operator }) {
   const [isOrganizer, setIsOrganizer] = useState(false);
   const [message, setMessage] = useState("");
-  const router = useRouter();
   const currentPath = usePathname();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -41,9 +31,12 @@ function AdditonalInfoComponent({
     resolver: zodResolver(createInfoSchema(isOrganizer)),
     mode: "onChange",
   });
-  const fullname = session?.name;
-  const [firstname, lastname] = fullname?.split(" ") || ["", ""];
-  // Update form resolver when role changes
+
+  let type = profile?.data?.organizer ? "organizer" : "user";
+  console.log(type);
+  const firstname = profile?.data?.firstName;
+  const lastname = profile?.data?.lastName;
+
   useEffect(() => {
     reset(undefined, {
       keepValues: true,
@@ -67,18 +60,20 @@ function AdditonalInfoComponent({
       ...data,
       isOrganizer: isOrganizer,
       organizerName: isOrganizer ? data.organizerName : null,
-      email: email || session?.email,
+      email: email || profile?.data?.email,
     };
-    if (session?.image) {
-      formData.profileImageUrl = session?.image;
+    if (profile?.data?.profileImageUrl) {
+      formData.profileImageUrl = profile?.data?.profileImageUrl;
+    }
+    if (formData?.isOrganizer) {
+      type = "organizer";
     }
     const isSuccess =
       operator == "google"
-        ? await registerWithGoogleAction(formData)
+        ? await updateProfileAction(formData, type) // check role and push
         : await addInfamtionAction(formData);
-
     if (isSuccess?.success) {
-      router.push("/login-success");
+      router.push("/completed-register");
     } else {
       setMessage(isSuccess?.message);
     }
