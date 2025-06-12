@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -27,6 +27,7 @@ import { createEventAction } from "@/action/createEventAction";
 // Main Component
 function CreateAgendaComponent({ setFormData, formData, onBack }) {
   const [showResetDialog, setShowResetDialog] = useState(false);
+  const [dateRange, setDateRang] = useState();
 
   const {
     register,

@@ -1,22 +1,10 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eclipse, Ellipsis } from "lucide-react";
 import Image from "next/image";
 import { NotificationManageComponent } from "./NotificatonManageComponent";
 
 export default function NotificationTabs({ messages }) {
   const unreadItems = messages?.filter((item) => item.read_at === null);
-  const readItems = messages?.filter((item) => item.read_at !== null);
+
   return (
     <Tabs defaultValue="account" className="w-full mt-4 h-96 overflow-y-auto">
       <TabsList className="flex justify-between items-center w-full text-dark-green rounded-none  ">
