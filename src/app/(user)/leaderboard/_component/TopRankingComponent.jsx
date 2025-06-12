@@ -26,10 +26,10 @@ const TopRankingComponent = async () => {
       rightIcon = "/assets/leaderboard/laurel-wreath-right-03.png";
       textColor = "text-red";
     }
-
     return {
       rank: user.ranking,
-      username: `${user.firstName} ${user.lastName}`,
+      image:user.appUserResponse.profileImageUrl,
+      username: `${user.appUserResponse.firstName.trim()} ${user.appUserResponse.lastName.trim()}`,
       score: user.totalEvents,
       hashtag: "#Tree planting",
       leftIcon,
@@ -91,14 +91,16 @@ const TopRankingComponent = async () => {
               <article className="flex flex-row justify-between w-full bg-white border border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
                 <div className="flex items-center gap-4">
                   <Image
-                    src="/assets/leaderboard/image.jpg"
+                    src={data.image}
                     alt="user image"
                     width={40}
                     height={40}
-                    className="rounded-full"
+                    objectFit="cover"
+                    className="rounded-full h-[40px]"
                   />
                   <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                     {data.username}
+                    
                   </h2>
                 </div>
 

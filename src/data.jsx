@@ -81,112 +81,112 @@ export const contributeType = [
   },
 ];
 
-export const locations = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Phnom Penh",
-    value: "phnom-penh",
-  },
-  {
-    label: "Kandal",
-    value: "kandal",
-  },
-  {
-    label: "Banteay Meanchey",
-    value: "banteay-meanchey",
-  },
-  {
-    label: "Battambang",
-    value: "battambang",
-  },
-  {
-    label: "Kampong Cham",
-    value: "kampong-cham",
-  },
-  {
-    label: "Kampong Chhnang",
-    value: "kampong-chhnang",
-  },
-  {
-    label: "Kampong Speu",
-    value: "kampong-speu",
-  },
-  {
-    label: "Kampong Thom",
-    value: "kampong-thom",
-  },
-  {
-    label: "Kampot",
-    value: "kampot",
-  },
-  {
-    label: "Kep",
-    value: "kep",
-  },
-  {
-    label: "Koh Kong",
-    value: "koh-kong",
-  },
-  {
-    label: "Kratié",
-    value: "kratie",
-  },
-  {
-    label: "Mondulkiri",
-    value: "mondulkiri",
-  },
-  {
-    label: "Oddar Meanchey",
-    value: "oddar-meanchey",
-  },
-  {
-    label: "Pailin",
-    value: "pailin",
-  },
-  {
-    label: "Preah Sihanouk",
-    value: "preah-sihanouk",
-  },
-  {
-    label: "Preah Vihear",
-    value: "preah-vihear",
-  },
-  {
-    label: "Prey Veng",
-    value: "prey-veng",
-  },
-  {
-    label: "Pursat",
-    value: "pursat",
-  },
-  {
-    label: "Ratanakiri",
-    value: "ratanakiri",
-  },
-  {
-    label: "Siem Reap",
-    value: "siem-reap",
-  },
-  {
-    label: "Stung Treng",
-    value: "stung-treng",
-  },
-  {
-    label: "Svay Rieng",
-    value: "svay-rieng",
-  },
-  {
-    label: "Takeo",
-    value: "takeo",
-  },
-  {
-    label: "Tboung Khmum",
-    value: "tboung-khmum",
-  },
-];
+// export const locations = [
+//   {
+//     label: "All",
+//     value: "all",
+//   },
+//   {
+//     label: "Phnom Penh",
+//     value: "phnom-penh",
+//   },
+//   {
+//     label: "Kandal",
+//     value: "kandal",
+//   },
+//   {
+//     label: "Banteay Meanchey",
+//     value: "banteay-meanchey",
+//   },
+//   {
+//     label: "Battambang",
+//     value: "battambang",
+//   },
+//   {
+//     label: "Kampong Cham",
+//     value: "kampong-cham",
+//   },
+//   {
+//     label: "Kampong Chhnang",
+//     value: "kampong-chhnang",
+//   },
+//   {
+//     label: "Kampong Speu",
+//     value: "kampong-speu",
+//   },
+//   {
+//     label: "Kampong Thom",
+//     value: "kampong-thom",
+//   },
+//   {
+//     label: "Kampot",
+//     value: "kampot",
+//   },
+//   {
+//     label: "Kep",
+//     value: "kep",
+//   },
+//   {
+//     label: "Koh Kong",
+//     value: "koh-kong",
+//   },
+//   {
+//     label: "Kratié",
+//     value: "kratie",
+//   },
+//   {
+//     label: "Mondulkiri",
+//     value: "mondulkiri",
+//   },
+//   {
+//     label: "Oddar Meanchey",
+//     value: "oddar-meanchey",
+//   },
+//   {
+//     label: "Pailin",
+//     value: "pailin",
+//   },
+//   {
+//     label: "Preah Sihanouk",
+//     value: "preah-sihanouk",
+//   },
+//   {
+//     label: "Preah Vihear",
+//     value: "preah-vihear",
+//   },
+//   {
+//     label: "Prey Veng",
+//     value: "prey-veng",
+//   },
+//   {
+//     label: "Pursat",
+//     value: "pursat",
+//   },
+//   {
+//     label: "Ratanakiri",
+//     value: "ratanakiri",
+//   },
+//   {
+//     label: "Siem Reap",
+//     value: "siem-reap",
+//   },
+//   {
+//     label: "Stung Treng",
+//     value: "stung-treng",
+//   },
+//   {
+//     label: "Svay Rieng",
+//     value: "svay-rieng",
+//   },
+//   {
+//     label: "Takeo",
+//     value: "takeo",
+//   },
+//   {
+//     label: "Tboung Khmum",
+//     value: "tboung-khmum",
+//   },
+// ];
 export const slots = [
   {
     label: "All",

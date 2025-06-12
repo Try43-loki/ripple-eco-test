@@ -25,7 +25,17 @@ export default function SearchComponent() {
   const [value, setValue] = React.useState("");
 
   const data = locations;
-
+ React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getUserFilterService();
+        setData(result);
+      } catch (err) {
+        console.error("Failed to fetch filter data", err);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <Popover open={open} onOpenChange={setOpen} className="w-full border-none">
       <PopoverTrigger asChild>
@@ -33,11 +43,12 @@ export default function SearchComponent() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          onClick={() => setOpen(!open)}
           className="  justify-between border-none font-light bg-lighter-white text-gray-600 hover:bg-lighter-white hover:text-gray-600"
         >
           {value
-            ? data?.find((data) => data?.value === value)?.label
-            : "Select Province"}
+            ? data.find((item) => item.value === value)?.label
+            : "Select Province"} 
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -47,20 +58,21 @@ export default function SearchComponent() {
           <CommandList>
             <CommandEmpty>No Province found.</CommandEmpty>
             <CommandGroup>
-              {data?.map((item, index) => (
+              {data?.map((item) => (
                 <CommandItem
-                  key={index}
-                  value={item?.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  key={item.value}
+                  value={item.value}
+                  onSelect={() => {
+                    setValue(item.value);
                     setOpen(false);
+                    console.log("Selected Province:", item.value);
                   }}
                 >
                   {item?.label}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === item?.value ? "opacity-100" : "opacity-0"
+                      value === item.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

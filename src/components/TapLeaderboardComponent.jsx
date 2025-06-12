@@ -5,8 +5,14 @@ import Image from "next/image";
 import { Building, Users2 } from "lucide-react";
 import TopRankingComponent from "@/app/(user)/leaderboard/_component/TopRankingComponent";
 import { TopRankingOrgComponent } from "@/app/organizer/leaderboard/_component/TopRankingOrgComponent";
+import { getAllUserRankingService } from "@/service/leaderboardService";
 
 export const TapLeaderboardComponent = () => {
+  const TopRankingComponent = async () => {
+  const response = await getAllUserRankingService();
+  const data = response.data;
+  console.log("leader", data);
+  }
   return (
     <Tabs defaultValue="user" className="w-full">
       {/* Tab Buttons */}
