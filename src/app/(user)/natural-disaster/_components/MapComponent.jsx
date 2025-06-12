@@ -113,6 +113,8 @@ const disastersWithCoords = [
   },
 ];
 
+const typeOfDisaster = ["Earthquakes"];
+
 const MapComponent = ({ isDashboard }) => {
   return (
     <article

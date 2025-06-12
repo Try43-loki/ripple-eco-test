@@ -26,15 +26,35 @@ import {
 export function BtnSelectType() {
   return (
     <Select>
-      <SelectTrigger className="w-[180px] !text-dark-gray border bg-white">
+      <SelectTrigger className="w-full border-none bg-lighter-white !text-dark-gray">
         <SelectValue placeholder="Select Type" />
       </SelectTrigger>
-      <SelectContent className={"bg-white"}>
+      <SelectContent className="bg-white border border-light-strok text-dark-gray">
         <SelectGroup>
-          <SelectItem value="earthquakes">Earthquakes</SelectItem>
-          <SelectItem value="floods">Floods</SelectItem>
-          <SelectItem value="typhoons">Typhoons</SelectItem>
-          <SelectItem value="wildfires">Wildfires</SelectItem>
+          <SelectItem
+            className="!hover:bg-light-gray cursor-pointer"
+            value="earthquakes"
+          >
+            Earthquakes
+          </SelectItem>
+          <SelectItem
+            className="!hover:bg-light-gray cursor-pointer"
+            value="floods"
+          >
+            Floods
+          </SelectItem>
+          <SelectItem
+            className="!hover:bg-light-gray cursor-pointer"
+            value="typhoons"
+          >
+            Typhoons
+          </SelectItem>
+          <SelectItem
+            className="!hover:bg-light-gray cursor-pointer"
+            value="wildfires"
+          >
+            Wildfires
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
