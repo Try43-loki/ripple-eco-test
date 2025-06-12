@@ -4,6 +4,7 @@ import {
   BtnSelectSeverity,
   BtnSelectType,
   DatePickerDemo,
+  DateRangComponent,
 } from "./SelectButtonComponent";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
@@ -126,8 +127,7 @@ const MapComponent = ({ isDashboard }) => {
         <span className="font-medium text-base text-dark-gray">Filter by:</span>
         <BtnSelectType />
         <BtnSelectSeverity />
-        <DatePickerDemo order={1} />
-        <DatePickerDemo />
+        <DateRangComponent />
       </div>
       <GoogleMap disasters={disastersWithCoords} />
     </article>

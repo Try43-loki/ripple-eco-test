@@ -5,15 +5,11 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-import * as React from "react";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -23,35 +19,51 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+
 export function BtnSelectType() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleChange = (value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set("type", value);
+    } else {
+      params.delete("type");
+    }
+    router.push(`?${params.toString()}`);
+  };
+
   return (
-    <Select>
-      <SelectTrigger className="w-full border-none bg-lighter-white !text-dark-gray">
+    <Select onValueChange={handleChange}>
+      <SelectTrigger className="border-none bg-lighter-white !text-dark-gray">
         <SelectValue placeholder="Select Type" />
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-dark-gray">
         <SelectGroup>
           <SelectItem
             className="!hover:bg-light-gray cursor-pointer"
-            value="earthquakes"
+            value="EARTHQUAKE"
           >
             Earthquakes
           </SelectItem>
           <SelectItem
             className="!hover:bg-light-gray cursor-pointer"
-            value="floods"
+            value="FLOOD"
           >
             Floods
           </SelectItem>
           <SelectItem
             className="!hover:bg-light-gray cursor-pointer"
-            value="typhoons"
+            value="TYPHOONS"
           >
             Typhoons
           </SelectItem>
           <SelectItem
             className="!hover:bg-light-gray cursor-pointer"
-            value="wildfires"
+            value="WILDFIRE"
           >
             Wildfires
           </SelectItem>
@@ -62,52 +74,91 @@ export function BtnSelectType() {
 }
 
 export function BtnSelectSeverity() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleChange = (value) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set("severity", value);
+    } else {
+      params.delete("severity");
+    }
+    router.push(`?${params.toString()}`);
+  };
+
   return (
-    <Select>
-      <SelectTrigger className="w-[180px] !text-dark-gray border bg-white">
+    <Select onValueChange={handleChange}>
+      <SelectTrigger className="border-none bg-lighter-white !text-dark-gray">
         <SelectValue placeholder="Severity" />
       </SelectTrigger>
-      <SelectContent className={"bg-white"}>
+      <SelectContent className="bg-white border border-light-strok text-dark-gray">
         <SelectGroup>
-          {/* <SelectLabel>Fruits</SelectLabel> */}
-          <SelectItem value="low">Low</SelectItem>
-          <SelectItem value="medium">Medium</SelectItem>
-          <SelectItem value="high">High</SelectItem>
+          <SelectItem value="LOW">Low</SelectItem>
+          <SelectItem value="MEDIUM">Medium</SelectItem>
+          <SelectItem value="HIGH">High</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
   );
 }
 
-export function DatePickerDemo({ order }) {
-  const [date, setDate] = React.useState();
+export function DateRangComponent({ className }) {
+  const [date, setDate] = useState({
+    from: new Date(2022, 0, 20),
+    to: addDays(new Date(2022, 0, 20), 20),
+  });
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal  !text-dark-gray border bg-white",
-            !date && "text-muted-foreground"
-          )}
+    <div className={cn("grid gap-2", className)}>
+      <Popover>
+        <PopoverTrigger
+          className="bg-lighter-white border-light-strok hover:bg-lighter-white text-gray-600"
+          asChild
         >
-          <CalendarIcon />
-          {date ? (
-            format(date, "PPP")
-          ) : (
-            <span> {order === 1 ? "Start Date" : "End Date"}</span>
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 bg-white">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-        />
-      </PopoverContent>
-    </Popover>
+          <Button
+            id="date"
+            variant="outline"
+            className={cn(
+              "w-[320px] justify-start text-left font-normal",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date?.from ? (
+              date.to ? (
+                <>
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
+                </>
+              ) : (
+                format(date.from, "LLL dd, y")
+              )
+            ) : (
+              <span>Pick a date</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="w-auto p-0 bg-white border border-light-strok"
+          align="start"
+        >
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={date?.from}
+            selected={date}
+            onSelect={setDate}
+            numberOfMonths={2}
+            modifiersClassNames={{
+              range_start: "bg-green-600 text-white",
+              range_end: "bg-green-600 text-white",
+              range_middle: "bg-green-100 text-green-800",
+              selected: "bg-green-500 text-white",
+            }}
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 }
