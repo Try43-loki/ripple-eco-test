@@ -31,7 +31,6 @@ export function BtnSelectType() {
       </SelectTrigger>
       <SelectContent className={"bg-white"}>
         <SelectGroup>
-          {/* <SelectLabel>Fruits</SelectLabel> */}
           <SelectItem value="earthquakes">Earthquakes</SelectItem>
           <SelectItem value="floods">Floods</SelectItem>
           <SelectItem value="typhoons">Typhoons</SelectItem>

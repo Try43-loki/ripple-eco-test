@@ -1,4 +1,3 @@
-import React from "react";
 import HeroSectionNaturalDisasterComponent from "./_components/HeroSectionNaturalDisasterComponent";
 import { clsx } from "clsx";
 import MapComponent from "./_components/MapComponent";
@@ -19,7 +18,7 @@ const NaturalDisasterPage = () => {
         <HeroSectionNaturalDisasterComponent />
       </section>
       {/* Section Map */}
-      <section className="flex flex-col   w-full h-[200px] md:h-[300px] lg:h-fit">
+      <section className="flex flex-col w-full h-[200px] md:h-[300px] lg:h-fit">
         <MapComponent />
       </section>
 

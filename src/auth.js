@@ -90,7 +90,7 @@ export const {
               birthDate: "2001-01-10",
               gender: "MALE",
               phoneNumber: "012345678",
-              isOrganizer: true,
+              isOrganizer: false,
               organizerName: "",
             }),
           });

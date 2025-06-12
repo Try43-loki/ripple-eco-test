@@ -19,7 +19,7 @@ const gabarito = Gabarito({
 export const metadata = {
   title: "RippleEco",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.png",
   },
   description:
     "RippleEco platform is to serve as a bridge between event organizers and participants. The platform enables users to easily browse and join volunteer eco-events, engage in meaningful discussions, and receive real-time alerts with the latest information on air quality and natural disasters.",
