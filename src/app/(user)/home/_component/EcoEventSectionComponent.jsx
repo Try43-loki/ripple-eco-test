@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getAllEcoEventService } from "@/service/ecoEventService";
 
 const EcoEventSectionComponent = async () => {
-  const response = await getAllEcoEventService();
+  const response = getAllEcoEventService();
   const events = response?.data ?? [];
   // console.log("first", events);
 

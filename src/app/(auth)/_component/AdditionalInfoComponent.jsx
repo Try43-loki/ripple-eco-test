@@ -8,13 +8,16 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createInfoSchema } from "@/lib/zod/RegisterShecma"; // Use the dynamic schema
-import { addInfamtionAction } from "@/action/auth-action";
+import {
+  addInfamtionAction,
+  registerWithGoogleAction,
+} from "@/action/auth-action";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { updateProfileAction } from "@/action/userAction";
 import { auth } from "@/auth";
 
-function AdditonalInfoComponent({ onPrev, email, profile, operator }) {
+function AdditonalInfoComponent({ onPrev, email, session, operator, profile }) {
   const [isOrganizer, setIsOrganizer] = useState(false);
   const [message, setMessage] = useState("");
   const currentPath = usePathname();
@@ -31,12 +34,12 @@ function AdditonalInfoComponent({ onPrev, email, profile, operator }) {
     resolver: zodResolver(createInfoSchema(isOrganizer)),
     mode: "onChange",
   });
+  const [firstname, lastname] = session.user.name.split(" ");
 
-  let type = profile?.data?.organizer ? "organizer" : "user";
-  console.log(type);
-  const firstname = profile?.data?.firstName;
-  const lastname = profile?.data?.lastName;
-
+  // handle route
+  if (profile?.code == 200) {
+    router.push("/");
+  }
   useEffect(() => {
     reset(undefined, {
       keepValues: true,
@@ -60,24 +63,22 @@ function AdditonalInfoComponent({ onPrev, email, profile, operator }) {
       ...data,
       isOrganizer: isOrganizer,
       organizerName: isOrganizer ? data.organizerName : null,
-      email: email || profile?.data?.email,
+      email: email || session?.user?.email,
     };
-    if (profile?.data?.profileImageUrl) {
-      formData.profileImageUrl = profile?.data?.profileImageUrl;
-    }
-    if (formData?.isOrganizer) {
-      type = "organizer";
+    if (session?.user?.image) {
+      formData.profileImageUrl = session?.user?.image;
     }
     const isSuccess =
       operator == "google"
-        ? await updateProfileAction(formData, type) // check role and push
+        ? await registerWithGoogleAction(formData)
         : await addInfamtionAction(formData);
+    console.log("Register : ", isSuccess?.data);
     if (isSuccess?.success) {
+      localStorage.setItem("authToken", result.token);
       router.push("/completed-register");
     } else {
       setMessage(isSuccess?.message);
     }
-
     reset();
   };
 

@@ -124,10 +124,36 @@ export const registerWithGoogleService = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-    const data = await res.json();
+
+    const data = res.json();
+
     return data;
   } catch (e) {
     console.log(e);
   }
 };
 
+export const loginWithGoogleService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/google-login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const userData = await res.json();
+
+    if (res.ok && userData.data.token) {
+      // 1. Store the token
+      localStorage.setItem("authToken", userData.data.token);
+      // 2. Set to user object (optional, for easy access)
+      user.customToken = userData.data.token;
+      return true;
+    }
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
