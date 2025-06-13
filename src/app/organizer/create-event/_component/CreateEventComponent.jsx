@@ -129,7 +129,7 @@ export default function CreateEventComponent({
 
     setFormData({
       ...formData,
-      pictures: newImages,
+      [name]: type === "file" ? files[0] : value,
     });
   };
 
@@ -196,19 +196,18 @@ export default function CreateEventComponent({
 
   return (
     <>
-      <h1 className="w-full text-lg text-dark-green font-semibold mb-5">
+      <h1 className="text-lg text-dark-green font-semibold mb-5">
         Event details
       </h1>
-      <form
-        onSubmit={handleSubmit(handleEventSubmit)}
-        className="flex w-full flex-col gap-y-8"
-      >
+      <form onSubmit={handleNext} className="flex flex-col gap-y-8">
         {/* Section 1 */}
         <div className="flex w-full gap-x-5 justify-between items-start">
           <div className=" w-full gap-1.5">
             <Label htmlFor="title">Title</Label>
             <Input
               name="title"
+              value={formData.title || ""}
+              onChange={handleChange}
               placeholder="Tree planting"
               className="bg-lighter-white text-gray-600 border-none h-10 mt-2"
               {...register("title")}
@@ -273,11 +272,12 @@ export default function CreateEventComponent({
               </Label>
               <Input
                 name="volunteer"
+                value={formData.volunteer || ""}
+                onChange={handleChange}
                 placeholder="1000"
                 type="number"
                 min="1"
                 className="bg-lighter-white text-gray-600 border-none h-10"
-                {...register("volunteer")}
               />
               {errors?.volunteer && (
                 <p className="text-sm text-red flex items-start gap-1">
@@ -382,7 +382,7 @@ export default function CreateEventComponent({
               Minimum start date: {minStartDate.toLocaleDateString()}
             </p>
           </div>
-          <div className="grid w-full gap-1.5">
+          <div className="grid w-full max-w-sm gap-1.5">
             <Label>End date</Label>
             <Controller
               name="endDate"
@@ -411,8 +411,8 @@ export default function CreateEventComponent({
             </Label>
             <Input
               type="file"
-              name="pictures"
-              onChange={handleFileChange}
+              name="picture"
+              onChange={handleChange}
               className="bg-lighter-white text-gray-600 border-none h-10"
               accept="image/jpeg,image/jpg,image/png"
               multiple
@@ -477,9 +477,10 @@ export default function CreateEventComponent({
           <Textarea
             name="description"
             rows={5}
+            value={formData.description || ""}
+            onChange={handleChange}
             placeholder="Details about your event."
             className="h-40 border border-light-strok bg-lighter-white text-gray-600"
-            {...register("description")}
           />
           {errors?.description && (
             <p className="text-sm text-red flex items-start gap-1">
