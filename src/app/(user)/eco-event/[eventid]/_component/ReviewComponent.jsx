@@ -4,10 +4,19 @@ import React, { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllFeedbacksByEcoEventId } from "@/service/ecoEventService";
+import {
+  getAllFeedbacksByEcoEventId,
+  getOverallRatingOfEvent,
+} from "@/service/ecoEventService";
+import { useTimeFormat } from "@/hooks/dayjs";
 
 const ReviewComponent = ({ operator, eventid }) => {
   const [feedbacks, setFeedbacks] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState([]);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const formatTime = useTimeFormat();
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -23,51 +32,80 @@ const ReviewComponent = ({ operator, eventid }) => {
   };
 
   useEffect(() => {
-    const fetchFeedbacks = async () => {
-      const res = await getAllFeedbacksByEcoEventId(eventid);
-      if (res?.data?.userFeedbackRates) {
-        setFeedbacks(res.data.userFeedbackRates);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Fetch feedbacks
+        const feedbackRes = await getAllFeedbacksByEcoEventId(eventid);
+        if (feedbackRes?.data?.userFeedbackRates) {
+          setFeedbacks(feedbackRes.data.userFeedbackRates);
+        }
+
+        // Fetch overall rating
+        const ratingRes = await getOverallRatingOfEvent(eventid);
+        console.log("Rating Response:", ratingRes);
+        if (ratingRes?.data) {
+          setAverageRating(ratingRes.data.averageRating || 0);
+          setRatingCount(ratingRes.data.ratingCount || []);
+          const total = ratingRes.data.ratingCount.reduce(
+            (sum, item) => sum + (item.count || 0),
+            0
+          );
+          setTotalReviews(total);
+        } else {
+          console.log("No data in rating response:", ratingRes);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchFeedbacks();
+    fetchData();
   }, [eventid]);
+
+  const maxCount = Math.max(...ratingCount.map((item) => item.count || 0), 1);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <article className="w-full mx-auto p-8 bg-white rounded-3xl">
       {/* Rating Summary */}
       <div className="flex items-start gap-8 md:gap-16 lg:gap-24 mb-8">
-        {/* Left side - Placeholder Rating bars */}
+        {/* Left side - Rating bars */}
         <div className="space-y-1">
-          {/* Example bars — You can later calculate based on feedback */}
-          {[5, 4, 3, 2, 1].map((rating, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <span className="text-sm text-dark-green w-2">{rating}</span>
-              <div className="w-32 md:w-40 lg:w-48 bg-light-gray rounded-full h-2">
-                <div
-                  className={`bg-strong-yellow h-full rounded-full w-${
-                    rating === 5
-                      ? "full"
-                      : rating === 4
-                      ? "3/4"
-                      : rating === 3
-                      ? "1/3"
-                      : rating === 2
-                      ? "1/2"
-                      : "1/4"
-                  }`}
-                />
+          {[5, 4, 3, 2, 1].map((rating) => {
+            const ratingItem = ratingCount.find(
+              (item) => item.ratingPoint === rating
+            ) || { count: 0 };
+            const widthPercentage = (ratingItem.count / maxCount) * 100; // Corrected to 100%
+            return (
+              <div key={rating} className="flex items-center gap-2">
+                <span className="text-sm text-dark-green w-2">{rating}</span>
+                <div className="w-32 md:w-40 lg:w-48 bg-light-gray rounded-full h-2">
+                  <div
+                    className="bg-strong-yellow h-full rounded-full"
+                    style={{ width: `${widthPercentage}%` }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Right side - Example Overall rating */}
+        {/* Right side - Overall rating */}
         <div className="text-center">
           <div className="text-6xl md:text-7xl lg:text-8xl font-bold text-dark-green mb-2">
-            4.0
+            {averageRating.toFixed(2)}
           </div>
-          <div className="flex justify-center gap-1 mb-1">{renderStars(4)}</div>
+          <div className="flex justify-center gap-1 mb-1">
+            {renderStars(averageRating)}{" "}
+            {/* Changed from feedbacks.averageRating */}
+          </div>
+
           <div className="text-xs md:text-sm lg:text-base text-dark-green">
             {feedbacks.length} reviews
           </div>
@@ -94,12 +132,11 @@ const ReviewComponent = ({ operator, eventid }) => {
                 <div className="flex items-center gap-3">
                   <Link
                     href={
-                      operator == "organizer"
+                      operator === "organizer"
                         ? `/organizer/view-profile/volunteer/${feedback.user.appUserId}`
                         : `/view-profile/volunteer/${feedback.user.appUserId}`
                     }
                   >
-                    {/* Profile image */}
                     {feedback.user.profileImageUrl ? (
                       <Image
                         src={feedback.user.profileImageUrl}
@@ -132,7 +169,7 @@ const ReviewComponent = ({ operator, eventid }) => {
                   </div>
                 </div>
                 <div className="text-xs md:text-sm lg:text-lg text-lighter-green">
-                  Just now
+                  {formatTime(feedback.createdAt)}
                 </div>
               </div>
 

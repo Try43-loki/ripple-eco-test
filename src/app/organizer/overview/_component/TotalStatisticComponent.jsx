@@ -5,17 +5,17 @@ function TotalStatisticComponent({ total }) {
     {
       title: "Total Badge",
       icon: <Award size={20} />,
-      total: total.totalBadges ? total.totalBadges : 0,
+      total: total?.totalBadges ? total?.totalBadges : 0,
     },
     {
       title: "Total Participants",
       icon: <Users size={20} />,
-      total: total.totalParticipants ? total.totalParticipants : 0,
+      total: total?.totalParticipants ? total?.totalParticipants : 0,
     },
     {
       title: "Total Donation",
       icon: <CircleDollarSign size={20} />,
-      total: total.totalDonation ? total.totalDonation : 0,
+      total: total?.totalDonation ? total?.totalDonation : 0,
     },
   ];
   return (

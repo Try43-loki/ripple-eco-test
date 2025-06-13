@@ -46,13 +46,15 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
 
   return (
     <article
-      className={clsx("flex h-[150px] w-fit gap-5 p-5 rounded-3xl ", bg)}
+      className={clsx("flex h-[150px] w-fit gap-5 py-5 px-7 rounded-3xl", bg)}
       aria-label="Air Quality Information Card"
     >
       {/* AQI Value */}
-      <div className="flex flex-col gap-2 px-3 items-center ">
-        <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
-        <p className="text-base text-darker-gray ">{path || "PhnomPenh"} AQI</p>
+      <div className="flex flex-col gap-2 pr-3 items-center ">
+        <h2 className={clsx("text-7xl font-bold", text)}>{aqi}</h2>
+        <p className="text-base text-darker-gray">
+          {path || "PhnomPenh"} AQI <sup>+</sup>
+        </p>
       </div>
 
       {/* AQI Details */}

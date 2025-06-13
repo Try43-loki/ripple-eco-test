@@ -1,63 +1,77 @@
-import * as React from "react";
+// "use client";
 
 import {
   Select,
+  SelectTrigger,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
-  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  categories,
-  certificates,
-  contributeType,
-  eventTypes,
-  locations,
-  slots,
-} from "@/utils/data";
+import { useState } from "react";
 
-export function SelectComponent({ operator }) {
+// slot options
+export const slots = [
+  { label: "Available", value: "available" },
+  { label: "Unavailable", value: "unavailable" },
+];
+
+export function SelectComponent({ operator, values, onChange }) {
+  const [selectValue, setSelectValue] = useState("");
+
   let data = [];
   switch (operator) {
-    case "Event type":
-      data = eventTypes;
+    case "eventType":
+    case "category":
+    case "province":
+    case "contributeType":
+      data = values || [];
       break;
-    case "Categories":
-      data = categories;
-
-      break;
-    case "Certificate":
-      data = certificates;
-      break;
-    case "Location":
-      data = locations;
-
-      break;
-    case "Contribute type":
-      data = contributeType;
-      break;
-    case "Slot":
+    case "slot":
       data = slots;
       break;
     default:
-      break;
+      data = [];
   }
+
+  // Helper functions
+  const getValue = (item) =>
+    item.name ||
+    item.provinceName ||
+    item.eventType ||
+    item.contributeTypeName ||
+    item.label ||
+    item.categoryName ||
+    "";
+
+  const getId = (item) =>
+    item.id ||
+    item.provinceId ||
+    item.eventTypeId ||
+    item.contributeTypeId ||
+    item.categoryId ||
+    item.value ||
+    "";
+
+  const handleSelectChange = (value) => {
+    setSelectValue(value);
+    if (onChange) onChange(operator, value);
+  };
+
   return (
-    <Select>
-      <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
+    <Select value={selectValue} onValueChange={handleSelectChange}>
+      <SelectTrigger className="w-full border-none bg-lighter-white !text-dark-gray">
         <SelectValue placeholder={`Choose ${operator}`} />
       </SelectTrigger>
-      <SelectContent className="bg-white  border border-light-strok text-gray-600">
-        <SelectGroup className="">
-          {data?.map((item, index) => (
+      <SelectContent className="bg-white border border-light-strok text-dark-gray">
+        <SelectGroup>
+          {data.map((item) => (
             <SelectItem
-              key={index}
-              value={item.value}
-              className=" !hover:bg-light-gray  cursor-pointer transition ease-in duration-200"
+              key={`${operator}-${getId(item)}`}
+              value={String(getId(item))}
+              className="!hover:bg-light-gray cursor-pointer"
             >
-              {item.label}
+              {getValue(item)}
             </SelectItem>
           ))}
         </SelectGroup>

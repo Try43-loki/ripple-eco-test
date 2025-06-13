@@ -26,6 +26,7 @@ export function RequestFormComponent({ contribute }) {
           ></Image>
 
           <p className="text-sm text-dark-green font-bold cursor-pointer">
+            {/* {contribute == "Donation" ? "Going" : "Join Event"} */}
             {contribute == "Donation" ? "Donation" : "Going"}
           </p>
         </div>
