@@ -6,7 +6,7 @@ import TagCardComponent from "../../discussion-forums/_component/TagCardComponen
 const CardDiscussion = ({ discussions }) => {
   return (
     <>
-      {discussions.map((data, index) => (
+      {discussions?.map((data, index) => (
         <article key={index} className="w-full mt-8">
           <div className="flex flex-col gap-4">
             {/* User Info */}

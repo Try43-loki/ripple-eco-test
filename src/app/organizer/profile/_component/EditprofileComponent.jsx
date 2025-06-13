@@ -64,170 +64,171 @@ const EditprofileComponent = ({ title = "", userData }) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="border-none shadow-none">
-          {title || <SquarePen className="w-8 h-8 text-strong-gray" />}
-        </Button>
-      </DialogTrigger>
+    <section>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline" className="border-none shadow-none">
+            <span>
+              {title || <SquarePen className="w-8 h-8 text-strong-gray" />}
+            </span>
+            
+          </Button>
+        </DialogTrigger>
 
-      {showForm && (
-        <DialogContent className="lg:w-[600px] border-1 bg-white border-white">
-          <DialogHeader className="mx-auto text-dark-gray w-full flex flex-row justify-between items-center">
-            <DialogTitle>Edit profile</DialogTitle>
-          </DialogHeader>
+        {showForm && (
+          <DialogContent className="lg:w-[600px] border-1 bg-white border-white">
+            <DialogHeader className="mx-auto text-dark-gray w-full flex flex-row justify-between items-center">
+              <DialogTitle>Edit profile</DialogTitle>
+            </DialogHeader>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-y-3 py-4 text-strong-gray w-full"
-          >
-            <div className="flex flex-row items-center gap-x-2 w-full">
-              <div className="flex flex-col items-start gap-y-2 w-1/2">
-                <Label>First Name</Label>
-                <Input
-                  placeholder={userData?.firstName}
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("firstName")}
-                />
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-y-3 py-4 text-strong-gray w-full"
+            >
+              <div className="flex flex-row items-center gap-x-2 w-full">
+                <div className="flex flex-col items-start gap-y-2 w-1/2">
+                  <Label>First Name</Label>
+                  <Input
+                    placeholder={userData?.firstName}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("firstName")}
+                  />
+                </div>
+                <div className="flex flex-col items-start gap-y-2 w-1/2">
+                  <Label>Last Name</Label>
+                  <Input
+                    placeholder={userData?.lastName}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("lastName")}
+                  />
+                </div>
               </div>
-              <div className="flex flex-col items-start gap-y-2 w-1/2">
-                <Label>Last Name</Label>
-                <Input
-                  placeholder={userData?.lastName}
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("lastName")}
-                />
-              </div>
-            </div>
 
-            <div>
-              <Label>Date of Birth</Label>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  placeholder={dayjs(userData?.birthDate).format("DD")}
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("dobDay")}
-                />
-                <Input
-                  placeholder={dayjs(userData?.birthDate).format("MM")}
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("dobMonth")}
-                />
-                <Input
-                  placeholder={dayjs(userData?.birthDate).format("YYYY")}
-                  
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("dobYear")}
-                />
+              <div>
+                <Label>Date of Birth</Label>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    placeholder={dayjs(userData?.birthDate).format("DD")}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("dobDay")}
+                  />
+                  <Input
+                    placeholder={dayjs(userData?.birthDate).format("MM")}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("dobMonth")}
+                  />
+                  <Input
+                    placeholder={dayjs(userData?.birthDate).format("YYYY")}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("dobYear")}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="flex flex-row items-center gap-x-2 w-full">
-              <div className="flex flex-col items-start gap-y-2 w-1/2">
-                <Label>Address</Label>
-                <Input
-                  placeholder={userData?.address}
-                  
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("address")}
-                />
+              <div className="flex flex-row items-center gap-x-2 w-full">
+                <div className="flex flex-col items-start gap-y-2 w-1/2">
+                  <Label>Address</Label>
+                  <Input
+                    placeholder={userData?.address}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("address")}
+                  />
+                </div>
+                <div className="flex flex-col items-start gap-y-2 w-1/2">
+                  <Label>Phone Number</Label>
+                  <Input
+                    placeholder={userData?.phoneNumber}
+                    className="bg-light-gray border-none placeholder:text-lighter-green"
+                    {...register("phoneNumber")}
+                  />
+                </div>
               </div>
-              <div className="flex flex-col items-start gap-y-2 w-1/2">
-                <Label>Phone Number</Label>
-                <Input
-                  placeholder={userData?.phoneNumber}
-                 
-                  className="bg-light-gray border-none placeholder:text-lighter-green"
-                  {...register("phoneNumber")}
-                />
-              </div>
-            </div>
 
-            <div className="flex flex-row items-start gap-x-3 w-full">
-              <div className="w-2/5">
-                <div className="flex flex-col gap-y-2 items-start w-full h-full">
-                  <Label className="text-sm">Image</Label>
-                  <div className="flex flex-col gap-y-1 items-center w-full h-full">
-                    <Input
-                      type="file"
-                      id="file"
-                      className="hidden"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                    />
-                    <Label
-                      htmlFor="file"
-                      className="h-32 w-32 border-2 border-strong-gray flex flex-col justify-center items-center cursor-pointer rounded-full overflow-hidden"
-                    >
-                      {imagePreview ? (
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className="object-cover h-full w-full"
-                        />
-                      ) : (
-                        <>
-                          {/* <ImagePlus className="mb-2 text-description w-6 h-6" />
-                    <span className="text-description text-sm">
-                      Upload Image
-                    </span> */}
+              <div className="flex flex-row items-start gap-x-3 w-full">
+                <div className="w-2/5">
+                  <div className="flex flex-col gap-y-2 items-start w-full h-full">
+                    <Label className="text-sm">Image</Label>
+                    <div className="flex flex-col gap-y-1 items-center w-full h-full">
+                      <Input
+                        type="file"
+                        id="file"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                      />
+                      <Label
+                        htmlFor="file"
+                        className="h-32 w-32 border-2 border-strong-gray flex flex-col justify-center items-center cursor-pointer rounded-full overflow-hidden"
+                      >
+                        {imagePreview ? (
                           <img
-                            src={userData?.profileImageUrl}
+                            src={imagePreview}
                             alt="Preview"
                             className="object-cover h-full w-full"
                           />
-                        </>
-                      )}
-                    </Label>
+                        ) : (
+                          <>
+                            {/* <ImagePlus className="mb-2 text-description w-6 h-6" />
+                    <span className="text-description text-sm">
+                      Upload Image
+                    </span> */}
+                            <img
+                              src={userData?.profileImageUrl}
+                              alt="Preview"
+                              className="object-cover h-full w-full"
+                            />
+                          </>
+                        )}
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-3/5 flex flex-col items-center gap-y-2">
+                  <div className="flex flex-col items-start gap-y-2 w-full">
+                    <Label>Password</Label>
+                    <Input
+                      type="password"
+                      placeholder="your password"
+                      className="bg-light-gray border-none placeholder:text-lighter-green"
+                      {...register("password")}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start gap-y-2 w-full">
+                    <Label>Bio</Label>
+                    <Textarea
+                      placeholder={userData?.bio}
+                      className="bg-light-gray border-none placeholder:text-lighter-green"
+                      {...register("bio")}
+                    />
                   </div>
                 </div>
               </div>
 
-              <div className="w-3/5 flex flex-col items-center gap-y-2">
-                <div className="flex flex-col items-start gap-y-2 w-full">
-                  <Label>Password</Label>
-                  <Input
-                    type="password"
-                    placeholder="your password"
-                    className="bg-light-gray border-none placeholder:text-lighter-green"
-                    {...register("password")}
-                  />
-                </div>
-                <div className="flex flex-col items-start gap-y-2 w-full">
-                  <Label>Bio</Label>
-                  <Textarea
-                    placeholder={userData?.bio}
-                    
-                    className="bg-light-gray border-none placeholder:text-lighter-green"
-                    {...register("bio")}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <DialogFooter className="flex justify-end pt-4">
-              <div className="flex flex-row gap-x-5 w-1/2 justify-end">
-                <DialogClose asChild>
+              <DialogFooter className="flex justify-end pt-4">
+                <div className="flex flex-row gap-x-5 w-1/2 justify-end">
+                  <DialogClose asChild>
+                    <Button
+                      type="button"
+                      className="border-1 border-red text-red"
+                      onClick={handleCancel}
+                    >
+                      Cancel
+                    </Button>
+                  </DialogClose>
                   <Button
-                    type="button"
-                    className="border-1 border-red text-red"
-                    onClick={handleCancel}
+                    type="submit"
+                    className="text-green border-1 border-green"
                   >
-                    Cancel
+                    Save changes
                   </Button>
-                </DialogClose>
-                <Button
-                  type="submit"
-                  className="text-green border-1 border-green"
-                >
-                  Save changes
-                </Button>
-              </div>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      )}
-    </Dialog>
+                </div>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        )}
+      </Dialog>
+    </section>
   );
 };
 

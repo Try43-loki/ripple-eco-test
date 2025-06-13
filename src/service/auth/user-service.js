@@ -7,8 +7,8 @@ export const getUserProfileService = async () => {
 };
 
 export const updateProfileService = async (formData, type) => {
-  console.log("formData:", formData);
-  console.log("type:", type);
+  // console.log("formData:", formData);
+  // console.log("type:", type);
   const token = await getAuthToken();
   const data = await apiRequest(
     `/profile/update/${type}`,
@@ -16,7 +16,7 @@ export const updateProfileService = async (formData, type) => {
     formData,
     token
   );
-  console.log("update profile:", data);
+  // console.log("update profile:", data);
 
   return data;
 };

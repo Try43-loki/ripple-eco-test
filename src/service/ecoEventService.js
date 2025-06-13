@@ -1,5 +1,6 @@
 import { apiRequest } from "@/utils/api";
 import { baseUrl } from "./constants";
+import { getAuthToken } from "@/utils/auth-api";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6dHJ1ZSwiaXNHb29nbGUiOnRydWUsImZ1bGxOYW1lIjoiU28gY2hldHJhIiwiaWQiOiJmMDQ5ZWJjYy05NDI2LTQ4MWMtYWMzYy02YTE5YzgwNjk5MzMiLCJlbWFpbCI6Im5vcm5zb2NoZXRyYUBnbWFpbC5jb20iLCJzdWIiOiJub3Juc29jaGV0cmFAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDM0NTQ4LCJleHAiOjE3NDk2OTM3NDh9.f-9Ah2WM581RrmcMTM4FiSzSz6JoOh2Inpt51okO13Y";
 export const getAllEcoEventService = async () => {
@@ -86,9 +87,31 @@ export const fetchFilteredEventsService = async (filters) => {
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
+    // console.log("params", params.toString());
     // console.log("data in service", params.toString());
     const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const fetchFilteredEventsHistoryService = async (userID,filters) => {
+  try {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+    });
+    // console.log("params", params.toString());
+    // console.log("data in service", params.toString());
+    // const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
+    const data = await apiRequest(
+      `/event/${userID}/filter-event-history?${params.toString()}`,
+      "GET",
+      null,
+      token
+    );
     return data;
   } catch (e) {
     console.log(e);
@@ -108,8 +131,39 @@ export const getAllFeedbacksByEcoEventId = async (eventid) => {
 
 // Get upcoming event
 export const getOwnUpComingEventService = async () => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest("/event/own-upcoming", "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllEventHistoryService = async () => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest("/event/own-history", "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllOwnEventService = async () => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest("/event/own", "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllEcoEventByUserIDService = async (userID) => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest(`/event/${userID}/all`, "GET", null, token);
     return data;
   } catch (e) {
     console.log(e);

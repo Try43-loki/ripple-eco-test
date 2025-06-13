@@ -1,41 +1,120 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import clsx from "clsx";
+import { RequestFormComponent } from "@/components/RequesFormComponent";
+import DonationFormComponent from "@/components/DonationFormComponent";
+import { ListComponent } from "@/app/organizer/eco-event/_component/ListComponent";
+import InviteFriendFormComponent from "@/components/InviteFirendFormComponent";
 
-const CardEndedEcoEvent = () => {
+
+const CardEndedEcoEventComponent = ({
+  operator,
+  type,
+  contribute,
+  eventStatus,
+  event,
+}) => {
+  const status = event?.eventStatus || eventStatus;
+
   return (
-    <main>
-      <div className="overflow-x-auto scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden scrollbar-none border-1 border-[#E4E8ED] rounded-[20px]">
-        <div className="flex gap-8 w-max">
-          <div className="w-full h-full pb-6 bg-white rounded-2xl snap-start shrink-0">
-            <img
-              src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSlJ1CyI7O6QyGxZqGwepPYFoAEP0vm2NiOZE2iOr3HTMhxDTPB"
-              alt="Event Image"
-              className="rounded-t-2xl "
-              height={110}
-            />
-            <div className="px-5">
-              <p className="text-ongoing text-sm pt-2">. Finish</p>
-              <p className="text-status-volunteer text-md">
-                Mon, 12 May at 8 AM
-              </p>
-              <h3 className="text-title text-2xl/7 font-bold">
-                Green Oasis going <span className="block">Miyawaki</span>{" "}
-              </h3>
-              <p className="text-cancel text-sm pt-1">Phnom Penh, Cambodia</p>
-              <p className="text-description text-sm pt-1">100 going</p>
+    <div className="relative w-[250px] md:w-[270px] lg:w-[340px] pb-6 border border-black/8 bg-white rounded-2xl shadow-md">
+      {/* Top badge & menu */}
+      <div className="absolute flex gap-2 flex-wrap z-[1] justify-between w-full p-2">
+        <span className="bg-white/90 text-xs text-darker-gray px-2 py-1 rounded-2xl shadow">
+          {`${event?.eventType?.eventType} | ${event?.category?.categoryName}`}
+        </span>
+        {operator === "organizer" && <ListComponent />}
+      </div>
 
-              <div className="pt-4 flex w-full">
-                <button className="py-2 w-full px-10 bg-light-gray rounded-md flex gap-2 items-center text-center justify-center">
-                  <p className="text-md text-title font-bold">Event Ended</p>
-                </button>
+      <Link
+        href={
+          operator === "organizer"
+            ? `/organizer/eco-event/${event?.eventId}`
+            : `/eco-event/${event?.eventId}`
+        }
+        className="cursor-pointer"
+      >
+        {/* Image section */}
+        <div className="relative w-full h-[170px]">
+          <Image
+            src={
+              Array.isArray(event?.image) && event?.image?.[0]
+                ? event.image[0]
+                : "/assets/eventImage.png"
+            }
+            alt="Event"
+            fill
+            priority
+            className="w-full h-full object-cover rounded-t-2xl brightness-75"
+          />
+        </div>
 
-               
-              </div>
-            </div>
+        {/* Event details */}
+        <div className="px-5 text-left">
+          <div className="flex items-center gap-2 pt-2 pb-1">
+            <span
+              className={clsx(
+                "w-2 h-2 rounded-full inline-block",
+                { "bg-meduim-green": status === "Finished" },
+                { "bg-meduim-gray": status === "Cancel" },
+                { "bg-blue": status === "Ongoing" },
+                { "bg-orange": status === "Upcoming" }
+              )}
+            ></span>
+            <p
+              className={clsx(
+                "text-sm font-semibold",
+                { "text-meduim-green": status === "Finished" },
+                { "text-meduim-gray": status === "Cancel" },
+                { "text-blue": status === "Ongoing" },
+                { "text-orange": status === "Upcoming" }
+              )}
+            >
+              {status}
+            </p>
+          </div>
+          <p className="text-dark-green text-sm">{event?.startDateTime}</p>
+          <h3 className="text-dark-green text-lg font-bold leading-tight mt-1 line-clamp-1">
+            {event?.title}
+          </h3>
+          <p className="text-light-green text-sm mt-1">
+            {event?.provinces?.provinceName}, Cambodia
+          </p>
+          <p className="text-light-green text-sm mt-1 mb-3">
+            {event?.maxSlot} going
+          </p>
+        </div>
+      </Link>
+
+      {/* Footer actions */}
+      {status === "Finished" ? (
+        <div className="flex pt-2 justify-between gap-x-2 w-full px-5">
+          <div className="font-semibold text-gray-600 py-2 px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center">
+            Event Ended
           </div>
         </div>
-      </div>
-    </main>
+      ) : (
+        <div className="flex pt-2 justify-between gap-x-2 w-full px-5">
+          <RequestFormComponent className="grow" contribute={contribute} />
+          {!(
+            type === "Seminar" ||
+            contribute === "Volunteer" ||
+            contribute === "Donation"
+          ) && (
+            <div className="p-2 bg-light-gray rounded-md">
+              <DonationFormComponent />
+            </div>
+          )}
+          <div className="p-2 bg-light-gray rounded-md">
+            <InviteFriendFormComponent
+              eventId={"bc941419-995f-4ab7-bf73-9a3f19e5e27a"}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default CardEndedEcoEvent;
+export default CardEndedEcoEventComponent;

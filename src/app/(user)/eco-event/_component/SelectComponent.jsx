@@ -12,28 +12,34 @@ import { useState } from "react";
 
 // slot options
 export const slots = [
-  { label: "Available", value: "available" },
-  { label: "Unavailable", value: "unavailable" },
+  { label: "Available", value: "AVAILABLE" , id:1},
+  { label: "Unavailable", value: "UNAVAILABLE", id:2 },
 ];
 
 export function SelectComponent({ operator, values, onChange }) {
   const [selectValue, setSelectValue] = useState("");
-
   // Determine data source
   let data = [];
   switch (operator) {
     case "eventType":
+      data = values || [];
+      break;
     case "category":
+      data = values || [];
+      break;
     case "province":
+      data = values || [];
+      break;
     case "contributeType":
       data = values || [];
       break;
     case "slot":
-      data = slots;
+      data = values || [];
       break;
     default:
       data = [];
   }
+
 
   // Helper functions
   const getValue = (item) =>
@@ -45,7 +51,7 @@ export function SelectComponent({ operator, values, onChange }) {
     item.categoryName ||
     "";
 
-  const getId = (item) =>
+  const getId = (item) => 
     item.id ||
     item.provinceId ||
     item.eventTypeId ||
@@ -66,15 +72,17 @@ export function SelectComponent({ operator, values, onChange }) {
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-dark-gray">
         <SelectGroup>
-          {data.map((item) => (
+          {data.map((item , index) => (
             <SelectItem
-              key={`${operator}-${getId(item)}`}
+              // key={`${operator}-${getId(item)}`}
+              key={index}
               value={String(getId(item))}
               className="!hover:bg-light-gray cursor-pointer"
             >
               {getValue(item)}
             </SelectItem>
-          ))}
+          ))
+          }
         </SelectGroup>
       </SelectContent>
     </Select>
