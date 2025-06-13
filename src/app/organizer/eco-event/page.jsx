@@ -3,6 +3,7 @@ import React from "react";
 import EcoeventFilterComponent from "./_component/EcoeventFilterComponent";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import {
+  fetchFilteredEventsService,
   getAllEcoEventService,
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
@@ -12,19 +13,50 @@ export default async function EcoEventPage({
   searchParams: searchParamsPromise,
 }) {
   let cardData = [];
-  const searchParams = (await searchParamsPromise) || null;
+  const searchParams = searchParamsPromise || null;
   const searchQuery = searchParams?.search || "";
+  const province = searchParams?.provinceId || "";
+  const eventType = searchParams?.eventTypeId || "";
+  const contributeType = searchParams?.contributeTypeId || "";
+  const category = searchParams?.categoryId || "";
+  const slot = searchParams?.slot || "";
+  const startDate = searchParams?.startDate || "";
+  const endDate = searchParams?.endDate || "";
+
+  const shouldFilter =
+    province ||
+    eventType ||
+    contributeType ||
+    category ||
+    slot ||
+    startDate ||
+    endDate;
 
   if (searchQuery !== "") {
     const response = await getEcoEventByTitleService(searchQuery);
+    cardData = response?.data ?? [];
+  } else if (shouldFilter) {
+    const response = await fetchFilteredEventsService({
+      provinceId: province,
+      eventTypeId: eventType,
+      contributeTypeId: contributeType,
+      categoryId: category,
+      slotStatus: slot,
+      startDate,
+      endDate,
+    });
     cardData = response?.data ?? [];
   } else {
     const response = await getAllEcoEventService();
     cardData = response?.data ?? [];
   }
+  cardData.sort(
+    (a, b) => new Date(b.startDateTime) - new Date(a.startDateTime)
+  );
 
-  const response = await getAllEcoEventService();
-  const events = response?.data ?? [];
+  // const response = await getAllEcoEventService();
+  // const events = response?.data ?? [];
+  // console.log("first", events);
 
   const headerSection = {
     title: "Eco‑Event",

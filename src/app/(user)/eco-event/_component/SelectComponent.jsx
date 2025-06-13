@@ -8,67 +8,50 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
 
-// slot options
-export const slots = [
-  { label: "Available", value: "available" },
-  { label: "Unavailable", value: "unavailable" },
-];
-
-export function SelectComponent({ operator, values, onChange }) {
-  const [selectValue, setSelectValue] = useState("");
-
-  // Determine data source
-  let data = [];
-  switch (operator) {
-    case "eventType":
-    case "category":
-    case "province":
-    case "contributeType":
-      data = values || [];
-      break;
-    case "slot":
-      data = slots;
-      break;
-    default:
-      data = [];
-  }
-
-  // Helper functions
+export function SelectComponent({ operator, values, onChange, value }) {
+  console.log("values", values);
   const getValue = (item) =>
-    item.name ||
     item.provinceName ||
-    item.eventType ||
+    item.eventType || //  here
     item.contributeTypeName ||
-    item.label ||
     item.categoryName ||
-    "";
+    item.label ||
+    "All";
 
   const getId = (item) =>
-    item.id ||
     item.provinceId ||
     item.eventTypeId ||
     item.contributeTypeId ||
     item.categoryId ||
     item.value ||
-    "";
+    "all";
 
-  const handleSelectChange = (value) => {
-    setSelectValue(value);
-    if (onChange) onChange(operator, value);
+  const handleSelectChange = (val) => {
+    const mappedValue = val === "all" ? "" : val;
+    if (onChange) onChange(operator, mappedValue);
+    console.log("vallll", val);
   };
 
   return (
-    <Select value={selectValue} onValueChange={handleSelectChange}>
+    <Select value={value || ""} onValueChange={handleSelectChange}>
       <SelectTrigger className="w-full border-none bg-lighter-white !text-dark-gray">
-        <SelectValue placeholder={`Choose ${operator}`} />
+        <SelectValue
+          placeholder={`Choose ${
+            operator.charAt(0).toUpperCase() + operator.slice(1)
+          }`}
+        >
+          {value &&
+            getValue(
+              values.find((item) => String(getId(item)) === String(value))
+            )}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-dark-gray">
         <SelectGroup>
-          {data.map((item) => (
+          {values.map((item, index) => (
             <SelectItem
-              key={`${operator}-${getId(item)}`}
+              key={`${operator}-${getId(item)}-${index}`}
               value={String(getId(item))}
               className="!hover:bg-light-gray cursor-pointer"
             >

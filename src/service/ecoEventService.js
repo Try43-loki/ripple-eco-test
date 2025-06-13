@@ -12,6 +12,7 @@ export const getAllEcoEventService = async () => {
   }
 };
 
+// get Eco Event by id
 export const getEcoEventByIdService = async (eventid) => {
   try {
     const res = await fetch(`${baseUrl}/event/${eventid}`);
@@ -23,6 +24,7 @@ export const getEcoEventByIdService = async (eventid) => {
   }
 };
 
+// get all provinces
 export const getAllProvincesService = async () => {
   try {
     // const res = await fetch(`${baseUrl}/provinces/all`);
@@ -35,6 +37,7 @@ export const getAllProvincesService = async () => {
   }
 };
 
+// get all EventTypes
 export const getAllEventTypesService = async () => {
   try {
     const res = await fetch(`${baseUrl}/event-types/all`);
@@ -46,6 +49,7 @@ export const getAllEventTypesService = async () => {
   }
 };
 
+// get all Event Categories
 export const getAllEventCategoriesService = async () => {
   try {
     const res = await fetch(`${baseUrl}/event-categories/all`);
@@ -57,17 +61,19 @@ export const getAllEventCategoriesService = async () => {
   }
 };
 
+// get all ContributeTypes
 export const getAllContributeTypesService = async () => {
   try {
     const res = await fetch(`${baseUrl}/contribute-types/all`);
     const data = await res.json();
-    // console.log("data : ", data);
+    console.log("data : ", data);
     return data;
   } catch (e) {
     console.log(e);
   }
 };
 
+// get Eco Event by tilte
 export const getEcoEventByTitleService = async (title) => {
   try {
     const res = await fetch(`${baseUrl}/event/search?title=${title}`);
@@ -79,13 +85,15 @@ export const getEcoEventByTitleService = async (title) => {
   }
 };
 
+// filter Event
 export const fetchFilteredEventsService = async (filters) => {
   try {
+    console.log("filterss", filters);
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
-    // console.log("data in service", params.toString());
+    console.log("data in service", params.toString());
     const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await res.json();
     return data;
@@ -94,11 +102,24 @@ export const fetchFilteredEventsService = async (filters) => {
   }
 };
 
+// get all feedbacks by Eco Event id
 export const getAllFeedbacksByEcoEventId = async (eventid) => {
   try {
     const res = await fetch(`${baseUrl}/feedback/${eventid}`);
     const data = await res.json();
     // console.log("Data : ", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
+
+// get overall rating stats of an event
+export const getOverallRatingOfEvent = async (eventid) => {
+  try {
+    const res = await fetch(`${baseUrl}/feedback/rating/${eventid}`);
+    const data = await res.json();
+    console.log("Data : ", data);
     return data;
   } catch (e) {
     console.log("error", e);
@@ -112,6 +133,34 @@ export const getOwnUpComingEventService = async () => {
     return data;
   } catch (e) {
     console.log(e);
+  }
+};
+
+// Post feedback with event id
+export const postFeedbackById = async (eventid) => {
+  try {
+    const res = await fetch(`${baseUrl}/feedback/${eventid}`);
+    const data = await res.json();
+    console.log("Data : ", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
+
+export const checkUserJoinedEventService = async (eventId, userId) => {
+  try {
+    // const token = localStorage.getItem("token");
+    const data = await fetch(
+      `${baseUrl}/eco-event/${eventId}/joined?userId=${userId}`,
+      "GET",
+      null,
+      token
+    );
+    return data;
+  } catch (error) {
+    console.error("Error checking user participation:", error);
+    return { joined: false };
   }
 };
 
