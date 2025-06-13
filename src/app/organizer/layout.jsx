@@ -2,7 +2,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import HeaderComponent from "./_component/HeaderComponent";
 import { getUserProfileAction } from "@/action/user-action";
-
+import { Toaster } from "react-hot-toast";
 export default async function Layout({ children }) {
   const profile = await getUserProfileAction();
   // console.log("profile org", profile);
@@ -15,6 +15,7 @@ export default async function Layout({ children }) {
           <section className="flex justify-center items-center flex-col gap-y-5 w-full pl-4 pr-8">
             <HeaderComponent profile={profile} className="w-full" />
             {children}
+            <Toaster />
           </section>
         </section>
       </main>

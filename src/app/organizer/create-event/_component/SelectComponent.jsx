@@ -32,7 +32,6 @@ export function SelectComponent({
       break;
     case "Certificate":
       data = certificates;
-
       break;
     case "Location":
       data = locations;
@@ -43,9 +42,10 @@ export function SelectComponent({
     default:
       break;
   }
+  console.log("Select Component", value);
 
   return (
-    <Select value={value} onValueChange={onChange} {...props}>
+    <Select disabled={true} value={value} onValueChange={onChange} {...props}>
       <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
         <SelectValue placeholder={placeholder || `Choose ${operator}`} />
       </SelectTrigger>

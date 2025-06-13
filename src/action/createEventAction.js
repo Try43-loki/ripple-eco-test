@@ -12,6 +12,7 @@ import {
   locations,
 } from "@/utils/data";
 import { format } from "date-fns";
+import { revalidateTag } from "next/cache";
 
 export const createEventAction = async (formData) => {
   // Format event data
@@ -65,9 +66,13 @@ export const createEventAction = async (formData) => {
   });
 
   event.agendaRequests = agendaRequests;
-  console.log("event", event);
   try {
     const res = await createEventService(event);
+    if (res?.code == 201) {
+      // revalidateTag
+      return { success: true, data: res?.data };
+    }
+    return { success: false, error: "Failed to create event." };
   } catch (err) {
     console.error("createEventAction", err);
   }
