@@ -12,16 +12,17 @@ const ProfilePage = async () => {
   }
   return (
     <>
-      <section className="flex flex-row gap-x-4 items-start">
-        <div className="basis-[60%]">
+      <section className="flex flex-row w-full gap-x-4 items-start">
+        <div className="w- basis-[60%]">
           <OrganizerProfileComponent
             operator={isOrganizer}
             organizerData={organizerData}
+            isViewProfile={false}
           />
         </div>
 
         <div className="basis-[40%] h-180">
-          <SideComponent />
+          <SideComponent operator={isOrganizer} userId={organizerData} isViewProfile={false}/>
         </div>
       </section>
     </>

@@ -88,8 +88,30 @@ export const fetchFilteredEventsService = async (filters) => {
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
+    console.log("data in service", params.toString());
     const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const fetchFilteredEventsHistoryService = async (userID, filters) => {
+  try {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+    });
+    // console.log("params", params.toString());
+    // console.log("data in service", params.toString());
+    // const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
+    const data = await apiRequest(
+      `/event/${userID}/filter-event-history?${params.toString()}`,
+      "GET",
+      null,
+      token
+    );
     return data;
   } catch (e) {
     console.log(e);
@@ -134,6 +156,7 @@ export const postFeedbackById = async (eventid) => {
   try {
     const res = await fetch(`${baseUrl}/feedback/${eventid}`);
     const data = await res.json();
+    console.log("Data : ", data);
     return data;
   } catch (e) {
     console.log("error", e);
@@ -164,5 +187,36 @@ export const rateFeedbackService = async (formData, eventId) => {
     formData,
     token
   );
+  console.log("rate feedback:", data);
   return data;
+};
+
+export const getAllEventHistoryService = async () => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest("/event/own-history", "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllOwnEventService = async () => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest("/event/own", "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllEcoEventByUserIDService = async (userID) => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest(`/event/${userID}/all`, "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };

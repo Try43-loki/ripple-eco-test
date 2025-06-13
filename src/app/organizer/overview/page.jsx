@@ -27,11 +27,9 @@ export default async function OverviewPage() {
           />
           {/* total statistic */}
           <TotalStatisticComponent total={data?.data?.totals} />
-          <TotalStatisticComponent total={data?.data?.totals} />
           <section className="flex justify-center items-start gap-x-5 mt-5">
             {/* chart */}
             <ChartComponent
-              eventTypeStats={data?.data?.eventTypeStats}
               eventTypeStats={data?.data?.eventTypeStats}
               className="h-full"
             />

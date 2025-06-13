@@ -1,8 +1,8 @@
 import { apiRequest } from "@/utils/api";
+import { getAuthToken } from "@/utils/auth-api";
 
-import { baseUrl } from "./constants";
-const token = "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjp0cnVlLCJmdWxsTmFtZSI6IktpbSBMb25nIFNSQyIsImlkIjoiZDhmYWMxMjEtMTViMC00MGNiLTk5NWEtOTY4YzEwMzIzMjg2IiwiZW1haWwiOiJ0aHVuZGVyZ29kdGhvcjk2NkBnbWFpbC5jb20iLCJzdWIiOiJ0aHVuZGVyZ29kdGhvcjk2NkBnbWFpbC5jb20iLCJpYXQiOjE3NDk1MjYwMzQsImV4cCI6MTc0OTc4NTIzNH0.D_5TDFbLoGcgQiLQnVD7La9zHsRwo8b5r3zpvaKfKtI"
 export const getAllTakeActionService = async () => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest("/takeActions/all", "GET", null, token);
     return data;
@@ -11,6 +11,7 @@ export const getAllTakeActionService = async () => {
   }
 };
 export const getTakeActionByIDService = async (takeActionID) => {
+  const token = await getAuthToken();
     try {
       const data = await apiRequest(`/takeActions/${takeActionID}`, "GET", null, token);
       return data;
@@ -19,6 +20,7 @@ export const getTakeActionByIDService = async (takeActionID) => {
     }
   };
 export const getTakeActionByTitleService = async (title) => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(`/takeActions/search/${title}`, "GET", null, token);
     return data;
@@ -27,6 +29,7 @@ export const getTakeActionByTitleService = async (title) => {
   }
 };
 export const getOwnTakeActionService = async () => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(`/takeActions/own`, "GET", null, token);
     return data;
@@ -35,6 +38,7 @@ export const getOwnTakeActionService = async () => {
   }
 };
 export const markAsCompletedTakeActionService = async (takeActionId) => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(
       `/takeActions/${takeActionId}`,
@@ -49,6 +53,7 @@ export const markAsCompletedTakeActionService = async (takeActionId) => {
 };
 
 export const deleteTakeActionService = async (takeActionId) => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(
       `/takeActions/${takeActionId}`,
@@ -64,6 +69,7 @@ export const deleteTakeActionService = async (takeActionId) => {
 };
 
 export const createTakeActionService = async (takeActionData) => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(
       `/takeActions`,
@@ -78,6 +84,7 @@ export const createTakeActionService = async (takeActionData) => {
 };
 
 export const submitTakeActionAnswerService = async (answerData) => {
+  const token = await getAuthToken();
   try {
     const data = await apiRequest(
       `/takeActionAnswer`,
