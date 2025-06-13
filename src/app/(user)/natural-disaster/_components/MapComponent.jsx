@@ -1,11 +1,6 @@
 "use client";
 import React from "react";
-import {
-  BtnSelectSeverity,
-  BtnSelectType,
-  DatePickerDemo,
-  DateRangComponent,
-} from "./SelectButtonComponent";
+import { FilterPanel } from "./FilterPanelNaturalDisaster";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 
@@ -114,8 +109,6 @@ const disastersWithCoords = [
   },
 ];
 
-const typeOfDisaster = ["Earthquakes"];
-
 const MapComponent = ({ isDashboard }) => {
   return (
     <article
@@ -124,10 +117,7 @@ const MapComponent = ({ isDashboard }) => {
       })}
     >
       <div className="flex gap-3 items-center z-20 ">
-        <span className="font-medium text-base text-dark-gray">Filter by:</span>
-        <BtnSelectType />
-        <BtnSelectSeverity />
-        <DateRangComponent />
+        <FilterPanel />
       </div>
       <GoogleMap disasters={disastersWithCoords} />
     </article>
