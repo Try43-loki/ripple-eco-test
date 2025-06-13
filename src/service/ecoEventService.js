@@ -1,5 +1,6 @@
 import { apiRequest } from "@/utils/api";
 import { baseUrl } from "./constants";
+import { getAuthToken } from "@/utils/auth-api";
 export const getAllEcoEventService = async () => {
   try {
     const res = await fetch(`${baseUrl}/event/all`);
@@ -112,4 +113,16 @@ export const getOwnUpComingEventService = async () => {
   } catch (e) {
     console.log(e);
   }
+};
+
+export const rateFeedbackService = async (formData, eventId) => {
+  const token = await getAuthToken();
+  const data = await apiRequest(
+    `/feedback/${eventId}`,
+    "POST",
+    formData,
+    token
+  );
+  console.log("rate feedback:", data);
+  return data;
 };

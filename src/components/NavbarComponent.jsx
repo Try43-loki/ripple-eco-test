@@ -18,7 +18,7 @@ import {
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
-import NotificationItem from "./NotificationComponent";
+import { NotificationItem } from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
 const NavBarComponent = ({ profile }) => {
   const currentPath = usePathname();

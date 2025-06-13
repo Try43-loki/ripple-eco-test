@@ -5,6 +5,7 @@ import {
   inviteFriendService,
   updateEventService,
 } from "@/service/createEventService";
+import { rateFeedbackService } from "@/service/ecoEventService";
 import {
   categories,
   contributeType,
@@ -101,5 +102,44 @@ export const inviteFriendAction = async (formData) => {
   } catch (error) {
     console.error("inviteFriendAction error:", error);
     return { success: false, error: "Failed to send invite." };
+  }
+};
+
+export const rateFeedbackAction = async (rateData, eventId) => {
+  const formData = {
+    feedback: rateData?.feedback,
+    image: rateData?.file,
+    ratingPointRequestList: [
+      {
+        questionId: 1,
+        ratingPoint: rateData?.rating1,
+      },
+      {
+        questionId: 2,
+        ratingPoint: rateData?.rating2,
+      },
+      {
+        questionId: 3,
+        ratingPoint: rateData?.rating3,
+      },
+      {
+        questionId: 4,
+        ratingPoint: rateData?.rating4,
+      },
+      {
+        questionId: 5,
+        ratingPoint: rateData?.rating5,
+      },
+    ],
+  };
+  try {
+    const data = await rateFeedbackService(formData, eventId);
+
+    if (data?.code == 201) {
+      return { success: true, message: "Feedback submitted successfully." };
+    }
+    return { success: false, message: "Failed to submit feedback." };
+  } catch (e) {
+    console.log("errors", e);
   }
 };
