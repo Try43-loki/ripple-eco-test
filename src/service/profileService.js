@@ -35,3 +35,13 @@ export const editUserProfileService = async (userData) => {
     console.log("error", e);
   }
 };
+
+export const verifyOrganizerService = async (formData) => {
+  const token = getAuthToken();
+  try {
+    const data = await apiRequest(`/auths/verify-org`, "POST", formData, token);
+    return data;
+  } catch (e) {
+    console.log("errors", e);
+  }
+};

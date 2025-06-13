@@ -1,5 +1,6 @@
 import QRCodeGenerator from "@/components/QRCodeGenerator";
 import UpdateEventComponent from "@/components/UpdateEventComponent";
+import VerifyOrganizerComponent from "@/components/VerifyOrganizerComponent";
 import Link from "next/link";
 import React from "react";
 
@@ -15,6 +16,7 @@ function page() {
         <h1>QR Code for Event</h1>
         <QRCodeGenerator value="https://www.youtube.com/watch?v=4S2FA_yMqEI" />
       </div> */}
+      <VerifyOrganizerComponent />
     </>
   );
 }
