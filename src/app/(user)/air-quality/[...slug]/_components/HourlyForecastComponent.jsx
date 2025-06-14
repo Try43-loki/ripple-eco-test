@@ -5,6 +5,7 @@ import HourlyValueAQIComponent from "./HourlyValueAQIComponent";
 
 import DragScroll from "react-indiana-drag-scroll";
 import { usePathname } from "next/navigation";
+import { splitCamelCase } from "@/utils/format";
 
 const HourlyForecastComponent = ({ hourlyData }) => {
   const data = hourlyData?.data?.forecastDetail;
@@ -19,7 +20,8 @@ const HourlyForecastComponent = ({ hourlyData }) => {
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Hourly Forecast</h2>
         <p className="text-darker-gray text-lg">
-          {path || "Phnom Penh"} Air Quality Index (AQI) Forecast
+          {splitCamelCase(path) || "Phnom Penh"} Air Quality Index (AQI)
+          Forecast
         </p>
       </div>
       {/* Row Of Hourly */}

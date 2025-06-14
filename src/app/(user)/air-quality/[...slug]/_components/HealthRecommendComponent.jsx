@@ -1,4 +1,5 @@
 "use client";
+import { splitCamelCase } from "@/utils/format";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -18,7 +19,7 @@ const HealthRecommendComponent = ({ levelColor, dataCard }) => {
           Health Recommendation
         </h2>
         <p className="text-darker-gray text-lg">
-          What is the current air quality in {path}?
+          What is the current air quality in {splitCamelCase(path)}?
         </p>
       </div>
       {/* Warning Icon and Guideline */}

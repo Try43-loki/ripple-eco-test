@@ -1,4 +1,5 @@
 "use client";
+import { splitCamelCase } from "@/utils/format";
 import clsx from "clsx";
 import { Cloud, Droplet, Wind } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -14,7 +15,7 @@ const AirQualityComponent = ({ dataCard, levelColor }) => {
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Air Quality</h2>
         <p className="text-darker-gray text-lg">
-          What is the current air quality in {path}?
+          What is the current air quality in {splitCamelCase(path)}?
         </p>
       </div>
       {/* Row Of Card */}

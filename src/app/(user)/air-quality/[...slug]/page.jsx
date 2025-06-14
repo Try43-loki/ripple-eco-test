@@ -11,7 +11,7 @@ import {
 } from "@/service/airQualityService";
 
 const switchColor = (value) => {
-  if (value < 50)
+  if (value <= 50)
     return {
       title: "Green",
       bg: "bg-air-lighter-green",
@@ -19,7 +19,7 @@ const switchColor = (value) => {
       label: "#048D4C",
       bgRaw: "#CDE8DB",
     };
-  if (value < 100)
+  if (value <= 100)
     return {
       title: "Yellow",
       bg: "bg-air-lighter-yellow",
@@ -27,7 +27,7 @@ const switchColor = (value) => {
       label: "#f9c300",
       bgRaw: "#FAF0CC",
     };
-  if (value < 150)
+  if (value <= 150)
     return {
       title: "Orange",
       bg: "bg-air-lighter-orange",
@@ -87,7 +87,7 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
 
       {/* Section 3 Daily Forecast And AirQuality With HealthRecommend */}
       <section className="flex justify-center gap-10 px-6  text-white lg:px-[180px]">
-        <DailyForecastComponent dataDaily={dataDaily.data.forecastDetail} />
+        <DailyForecastComponent dataDaily={dataDaily?.data?.forecastDetail} />
         <div className="flex flex-col w-full gap-10">
           <AirQualityComponent
             levelColor={dynamicColor}
@@ -95,7 +95,7 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
           />
           <HealthRecommendComponent
             levelColor={dynamicColor}
-            dataCard={dataDaily.data.heathRecommendation}
+            dataCard={dataDaily?.data?.heathRecommendation}
           />
         </div>
       </section>
