@@ -1,5 +1,6 @@
 "use client";
 
+import { abbreviateLocation } from "@/utils/format";
 import clsx from "clsx";
 import { Cloud, Droplet, Wind } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -38,22 +39,22 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
   // const bgRed = "#FECDD6";
 
   const checkLevel = (value) => {
-    if (value < 50) return "Good";
-    if (value < 100) return "Moderate";
-    if (value < 150) return "Unhealthy for sensitive groups";
+    if (value <= 50) return "Good";
+    if (value <= 100) return "Moderate";
+    if (value <= 150) return "Unhealthy for sensitive groups";
     if (value >= 150) return "Unhealthy";
   };
 
   return (
     <article
-      className={clsx("flex h-[150px] w-fit gap-5 py-5 px-7 rounded-3xl", bg)}
+      className={clsx("flex h-[150px] w-fit gap-5 py-5 px-7  rounded-3xl ", bg)}
       aria-label="Air Quality Information Card"
     >
       {/* AQI Value */}
-      <div className="flex flex-col gap-2 pr-3 items-center ">
-        <h2 className={clsx("text-7xl font-bold", text)}>{aqi}</h2>
-        <p className="text-base text-darker-gray">
-          {path || "PhnomPenh"} AQI <sup>+</sup>
+      <div className="flex flex-col gap-2 px-3 items-center ">
+        <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
+        <p className="text-base text-darker-gray ">
+          {abbreviateLocation(path) || "PP"} AQI
         </p>
       </div>
 

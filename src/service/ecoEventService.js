@@ -1,7 +1,6 @@
 import { apiRequest } from "@/utils/api";
 import { baseUrl } from "./constants";
 import { getAuthToken } from "@/utils/auth-api";
-import { getAuthToken } from "@/utils/auth-api";
 export const getAllEcoEventService = async () => {
   try {
     const res = await fetch(`${baseUrl}/event/all`);
@@ -83,7 +82,6 @@ export const getEcoEventByTitleService = async (title) => {
 // filter Event
 export const fetchFilteredEventsService = async (filters) => {
   try {
-    console.log("filterss", filters);
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
@@ -187,7 +185,7 @@ export const rateFeedbackService = async (formData, eventId) => {
     formData,
     token
   );
-  console.log("rate feedback:", data);
+
   return data;
 };
 
