@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { format } from "date-fns";
+import { addMonths, format } from "date-fns";
 import { ChevronDownIcon, RotateCcwIcon, CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -27,8 +27,8 @@ export function FilterPanel() {
 
   const [type, setType] = useState("");
   const [severity, setSeverity] = useState("");
-  const [startDate, setStartDate] = useState(undefined);
-  const [endDate, setEndDate] = useState(undefined);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [openStart, setOpenStart] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
 
@@ -89,10 +89,10 @@ export function FilterPanel() {
             updateQuery("disasterType", val);
           }}
         >
-          <SelectTrigger className="border border-gray-300 bg-white text-gray-700 min-w-[180px]">
+          <SelectTrigger className="border border-gray-300 bg-white text-gray-900 min-w-[160px] rounded-md">
             <SelectValue placeholder="Select Type" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white text-gray-900 border border-gray-200 shadow-md rounded-md">
             <SelectGroup>
               <SelectItem value="EARTHQUAKE">Earthquakes</SelectItem>
               <SelectItem value="FLOOD">Floods</SelectItem>
@@ -115,14 +115,14 @@ export function FilterPanel() {
             updateQuery("severityType", val);
           }}
         >
-          <SelectTrigger className="border border-gray-300 bg-white text-gray-700 min-w-[160px]">
+          <SelectTrigger className="border border-gray-300 bg-white text-gray-900 min-w-[160px] rounded-md">
             <SelectValue placeholder="Select Severity" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white text-gray-900 border border-gray-200 shadow-md rounded-md">
             <SelectGroup>
-              <SelectItem value="LOW">Low</SelectItem>
-              <SelectItem value="MEDIUM">Medium</SelectItem>
-              <SelectItem value="HIGH">High</SelectItem>
+              <SelectItem value="GREEN">Low</SelectItem>
+              <SelectItem value="ORANGE">Medium</SelectItem>
+              <SelectItem value="RED">High</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

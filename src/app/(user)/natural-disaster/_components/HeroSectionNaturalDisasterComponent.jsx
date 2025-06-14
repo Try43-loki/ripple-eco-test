@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import CardCurrentDisasterComponent from "./CardCurrentDisasterComponent";
 
-const HeroSectionNaturalDisasterComponent = () => {
+const HeroSectionNaturalDisasterComponent = ({ naturalData }) => {
   const disaster = [
     {
       id: 1,
@@ -57,13 +57,7 @@ const HeroSectionNaturalDisasterComponent = () => {
               Current Disaster
             </h2>
             <div className="flex justify-between gap-3">
-              {/* Row Cards */}
-              {disaster.map((disaster) => (
-                <CardCurrentDisasterComponent
-                  key={disaster.id}
-                  informDisaster={disaster}
-                />
-              ))}
+              <CardCurrentDisasterComponent naturalData={naturalData} />
             </div>
           </div>
         </article>

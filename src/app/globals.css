@@ -319,6 +319,16 @@
   border-radius: 20px;
 }
 
+/* Fix Popup Google Map Icon */
+.gm-style-iw {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
+.gm-style-iw-d {
+  overflow: visible !important;
+  padding: 0 !important;
+  margin-top: -50px !important;  /* Pull content closer to top */
+}
 
 

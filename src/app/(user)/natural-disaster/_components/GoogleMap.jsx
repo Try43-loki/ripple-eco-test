@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Droplet, Flame, Waves, Wind } from "lucide-react";
 import { renderToString } from "react-dom/server";
+import ReactDOMServer from "react-dom/server";
+import clsx from "clsx";
+import { cleanAddress, getProvinceFromComponents } from "@/utils/format";
 
 const highwayOnlyStyle = [
   { featureType: "road.arterial", stylers: [{ visibility: "off" }] },
@@ -23,23 +26,68 @@ const getIconByType = (type) => {
   const base =
     "bg-white text-green  rounded-full w-[36px] h-[36px] flex items-center justify-center";
   switch (type) {
-    case "Flood":
+    case "FL":
       return <Droplet className={base} />;
-    case "Wildfires":
+    case "WF":
       return <Flame className={base} />;
-    case "Earthquakes":
+    case "EQ":
       return <Waves className={base} />;
-    case "Typhoons":
+    case "TC":
       return <Wind className={base} />;
     default:
       return null;
   }
 };
 
+const getFullNameDisaster = (type) => {
+  switch (type) {
+    case "FL":
+      return "Floods";
+    case "WF":
+      return "Wildfires";
+    case "EQ":
+      return "Earthquakes";
+    case "TC":
+      return "Typhoons";
+    default:
+      return null;
+  }
+};
+
+const InfoWindowContent = ({ disaster }) => (
+  <div className="font-sans text-sm text-dark-gray max-w-[350px] p-4 rounded-xl shadow-lg bg-white">
+    <div className="flex justify-between items-center mb-2">
+      <strong className="text-lg font-semibold text-green ">
+        {getFullNameDisaster(disaster?.eventType)}
+      </strong>
+    </div>
+    <div className="mb-1.5 text-start">
+      <strong className="font-semibold">Description:</strong>{" "}
+      {disaster?.description}
+    </div>
+    <div className="mb-1.5 text-start">
+      <strong className="font-semibold">Location:</strong> {disaster?.location}
+    </div>
+    <div className="flex self-start w-full">
+      <strong className="font-semibold pr-0.5">Severity:</strong>
+      <p
+        className={clsx(
+          "px-2 rounded-lg text-white text-sm",
+          { "bg-green": disaster?.alertLevel === "Green" },
+          { "bg-orange": disaster?.alertLevel === "Yellow" },
+          { "bg-red": disaster?.alertLevel === "Red" }
+        )}
+      >
+        {" "}
+        {disaster?.alertLevel}
+      </p>
+    </div>
+  </div>
+);
+
 export default function GoogleMap({ disasters }) {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
-  const [infoWindow, setInfoWindow] = useState(null);
 
   useEffect(() => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API;
@@ -63,45 +111,49 @@ export default function GoogleMap({ disasters }) {
         styles: highwayOnlyStyle,
       });
 
+      let infoWindow = new google.maps.InfoWindow();
+
       // Display All Disaster Data
       disasters.forEach((disaster) => {
         const iconDiv = document.createElement("div");
         iconDiv.className = "bg-white rounded-full p-1 shadow";
-        iconDiv.innerHTML = renderToString(getIconByType(disaster.type));
+        iconDiv.innerHTML = renderToString(getIconByType(disaster.eventType));
 
         const marker = new window.google.maps.marker.AdvancedMarkerElement({
-          position: { lat: disaster.coords[0], lng: disaster.coords[1] },
+          position: {
+            lat: disaster.geometry.latitude,
+            lng: disaster.geometry.longitude,
+          },
           content: iconDiv,
           map: gmap,
         });
 
-        // For Marker Pop Up
-        marker.addListener("click", () => {
-          if (infoWindow) infoWindow.close();
-          const infowin = new window.google.maps.InfoWindow({
-            content: `
-  <div style="
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 14px;
-    color: #1f2937;
-    max-width: 300px;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    background: white;
-  ">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-      <strong style="font-size: 18px; font-weight: 600;">${disaster.type}</strong>
-    </div>
-    <div style="margin-bottom: 6px;"><strong>Description:</strong> ${disaster.description}</div>
-    <div style="margin-bottom: 6px;"><strong>Location:</strong> ${disaster.location}</div>
-    <div style="margin-bottom: 6px;"><strong>Date:</strong> ${disaster.date}</div>
-    <div><strong>Severity:</strong> ${disaster.severity}</div>
-  </div>
-`,
+        // ⬇️ Perform reverse geocoding to get readable location
+        const geocoder = new window.google.maps.Geocoder();
+        const latlng = {
+          lat: disaster.geometry.latitude,
+          lng: disaster.geometry.longitude,
+        };
+
+        geocoder.geocode({ location: latlng }, (results, status) => {
+          let province = "Unknown Province";
+
+          if (status === "OK" && results[0]) {
+            province = getProvinceFromComponents(results[0].address_components);
+          }
+
+          // Inject address into the disaster object
+          const enrichedDisaster = { ...disaster, location: province };
+
+          // ⬇️ Now render InfoWindow content with address
+          const htmlString = ReactDOMServer.renderToString(
+            <InfoWindowContent disaster={enrichedDisaster} />
+          );
+
+          marker.addListener("click", () => {
+            infoWindow.setContent(htmlString);
+            infoWindow.open(gmap, marker);
           });
-          infowin.open(gmap, marker);
-          setInfoWindow(infowin);
         });
       });
 

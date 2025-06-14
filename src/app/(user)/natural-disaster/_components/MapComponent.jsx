@@ -109,7 +109,7 @@ const disastersWithCoords = [
   },
 ];
 
-const MapComponent = ({ isDashboard }) => {
+const MapComponent = ({ isDashboard, naturalData }) => {
   return (
     <article
       className={clsx(" flex gap-8 text-white text-center lg:flex-col ", {
@@ -119,7 +119,7 @@ const MapComponent = ({ isDashboard }) => {
       <div className="flex gap-3 items-center z-20 ">
         <FilterPanel />
       </div>
-      <GoogleMap disasters={disastersWithCoords} />
+      <GoogleMap disasters={naturalData} />
     </article>
   );
 };

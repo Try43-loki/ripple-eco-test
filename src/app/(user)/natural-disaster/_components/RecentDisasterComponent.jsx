@@ -8,9 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getDirectionProvinceByLatLng } from "@/service/naturalDisasterService";
+import { getProvinceFromComponents } from "@/utils/format";
 import clsx from "clsx";
 import { MapPin, Waves, X, Droplet, Flame, Wind } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const disasters = [
   {
@@ -106,13 +108,13 @@ const disasters = [
 // Map disaster types to icons
 function getIconByType(type) {
   switch (type) {
-    case "Earthquakes":
+    case "ER":
       return <Waves className="h-4 w-4 text-green" />;
-    case "Flood":
+    case "FL":
       return <Droplet className="h-4 w-4 text-green" />;
-    case "Typhoons":
+    case "TC":
       return <Wind className="h-4 w-4 text-green" />;
-    case "Wildfires":
+    case "WF":
       return <Flame className="h-4 w-4 text-green" />;
     default:
       return null;
@@ -121,19 +123,61 @@ function getIconByType(type) {
 
 function getSeverityColor(severity) {
   switch (severity) {
-    case "High":
+    case "Red":
       return "bg-red-600 hover:bg-red-700";
-    case "Medium":
+    case "Orange":
       return "bg-orange-500 hover:bg-orange-600";
-    case "Low":
+    case "Green":
       return "bg-green-600 hover:bg-green-700";
     default:
       return "bg-gray-500";
   }
 }
 
-const RecentDisasterComponent = ({ isDashboard }) => {
+const getFullNameDisaster = (type) => {
+  switch (type) {
+    case "FL":
+      return "Floods";
+    case "WF":
+      return "Wildfires";
+    case "EQ":
+      return "Earthquakes";
+    case "TC":
+      return "Typhoons";
+    default:
+      return null;
+  }
+};
+
+const RecentDisasterComponent = ({ isDashboard, naturalData }) => {
   const [selectedDisaster, setSelectedDisaster] = useState(null);
+  const [processedDisasters, setProcessedDisasters] = useState([]);
+
+  useEffect(() => {
+    async function enrichDisasters() {
+      const enriched = await Promise.all(
+        naturalData.map(async (disaster) => {
+          const coords = `${disaster.geometry.latitude},${disaster.geometry.longitude}`;
+          const geoData = await getDirectionProvinceByLatLng(coords);
+
+          let province = "Unknown";
+          if (geoData?.status === "OK" && geoData.results[0]) {
+            province = getProvinceFromComponents(
+              geoData.results[0].address_components
+            );
+          }
+
+          return {
+            ...disaster,
+            location: province,
+          };
+        })
+      );
+      setProcessedDisasters(enriched);
+    }
+
+    enrichDisasters();
+  }, [naturalData]);
 
   return (
     <article
@@ -160,7 +204,7 @@ const RecentDisasterComponent = ({ isDashboard }) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {disasters.slice(0, 10).map((disaster) => (
+                {processedDisasters.map((disaster) => (
                   <TableRow
                     key={disaster.id}
                     className="hover:bg-gray-50 cursor-pointer"
@@ -168,34 +212,38 @@ const RecentDisasterComponent = ({ isDashboard }) => {
                   >
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        {getIconByType(disaster.type)}
-                        <span className="text-gray-700">{disaster.type}</span>
+                        {getIconByType(disaster?.eventType)}
+                        <span className="text-gray-700">
+                          {getFullNameDisaster(disaster?.eventType)}
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="text-gray-700">
-                        {disaster.description}
+                      <span className="text-gray-700 w-[250px] line-clamp-1 truncate">
+                        {disaster?.description}
                       </span>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-gray-500" />
                         <span className="text-gray-700">
-                          {disaster.location}
+                          {disaster?.location}
                         </span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="text-gray-700">{disaster.date}</span>
+                      <span className="text-gray-700">
+                        {disaster?.fromDate}
+                      </span>
                     </TableCell>
                     <TableCell>
                       <div
                         className={clsx(
                           "text-white border-0 font-medium px-3 py-1 text-center rounded-lg",
-                          getSeverityColor(disaster.severity)
+                          getSeverityColor(disaster?.alertLevel)
                         )}
                       >
-                        {disaster.severity}
+                        {disaster?.alertLevel}
                       </div>
                     </TableCell>
                   </TableRow>
