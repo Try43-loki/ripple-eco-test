@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { splitCamelCase } from "@/utils/format";
 
 const DailyForecastComponent = ({ dataDaily }) => {
-  console.log(dataDaily);
-
   // For Get Province AQI
   const pathName = usePathname();
   const path = pathName.split("/")[2];

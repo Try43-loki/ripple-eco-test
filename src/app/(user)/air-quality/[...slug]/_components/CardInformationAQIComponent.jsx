@@ -54,7 +54,7 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
       <div className="flex flex-col gap-2 px-3 items-center ">
         <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
         <p className="text-base text-darker-gray ">
-          {abbreviateLocation(path) || "PP"} AQI
+          {(path && abbreviateLocation(path)) || "PP"} AQI
         </p>
       </div>
 

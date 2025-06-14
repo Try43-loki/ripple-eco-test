@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getAllEcoEventService } from "@/service/ecoEventService";
