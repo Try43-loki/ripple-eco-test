@@ -10,6 +10,7 @@ import {
 import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import dayjs from "dayjs";
+import moment from "moment";
 
 
 const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
@@ -38,7 +39,7 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
                 <div className="flex flex-col">
                   <p className="text-xl font-medium text-gray">{`${ownerData?.firstName} ${ownerData?.lastName}`}</p>
                   <p className="text-sm font-normal text-strong-gray">
-                    6h agos . Public
+                  {moment(cardDetail?.data?.createdAt).fromNow()} . {cardDetail?.data?.anonymous ? "Public" : "Private"}
                   </p>
                 </div>
               </div>
@@ -58,8 +59,8 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
           )}
 
           <article className="flex justify-between items-center">
-            <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
-              <p>@{cardDetail?.data?.description}</p>
+            <div className="mt-1 text-xs md:text-sm lg:text-base w-fit rounded-full py-1.5 px-2.5 md:px-3 bg-lighter-blue text-strong-gray">
+              <p>@{cardDetail?.data?.destinationPerson}</p>
             </div>
           </article>
 

@@ -42,7 +42,7 @@ const SearchBarComponent = ({
       onSubmit={(e) => e.preventDefault()}
       className="flex w-full items-center
              border border-lightes-white rounded-lg md:rounded-2xl 
-             bg-light-gray px-3 py-1 md:py-1.5
+             bg-light-gray px-3 py-1 md:py-3
              focus-within:ring-2 focus-within:ring-green
                  "
     >

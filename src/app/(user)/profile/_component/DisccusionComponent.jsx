@@ -1,9 +1,14 @@
 import React from "react";
 import CardDiscussion from "./CardDisscussion";
-import { getAllOwnDiscussionsService } from "@/service/discussionService";
+import { getAllDiscussionByUserIdService, getAllOwnDiscussionsService } from "@/service/discussionService";
 
-const DisccusionComponent = async () => {
-  const ownDiscussionsData = await getAllOwnDiscussionsService();
+const DisccusionComponent = async ({userId}) => {
+  let ownDiscussionsData = [];
+  if(userId){
+    ownDiscussionsData = await getAllDiscussionByUserIdService(userId);
+  } else {
+    ownDiscussionsData = await getAllOwnDiscussionsService();
+  }
   return (
     <main>
       <section className="flex flex-wrap justify-start items-start gap-2.5">

@@ -14,17 +14,17 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import TakeActionComponent from "./_component/TakeActionComponent";
-import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
-import DisccusionComponent from "./_component/DisccusionComponent";
-import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
-import { getCurrentUserProfileService } from "@/service/profileService"; 
+import { viewUserProfileService } from "@/service/profileService"; 
 import { getAllBagdeService, getBadgeByUserIDService } from "@/service/badgeService";
-import EvenHistoryComponent from "./_component/EvenHistoryComponent";
 import BadgeComponent from "@/app/organizer/profile/_component/BadgeComponent";
-const ProfilePage = async () => {
-  const userData = await getCurrentUserProfileService() ;
-  const userID = userData?.data?.appUserId;
+import OwnFeedBackComponent from "../../profile/_component/OwnFeedBackComponent";
+import DisccusionComponent from "../../profile/_component/DisccusionComponent";
+import TakeActionComponent from "../../profile/_component/TakeActionComponent";
+import EvenHistoryComponent from "../../profile/_component/EvenHistoryComponent";
+const ViewProfilePage = async ({params}) => {
+  const userID = params?.userId
+  const userData = await viewUserProfileService(userID);
+  
   const badgeData = await getAllBagdeService();
   const totalBadgesTotal = await getBadgeByUserIDService(userID);
 
@@ -62,9 +62,9 @@ const ProfilePage = async () => {
             </div>
           </div>
         </div>
-        <div className="bg-meduim-green hover:bg-green text-white px-5 py-1 rounded-xl text-base">
+        {/* <div className="bg-meduim-green hover:bg-green text-white px-5 py-1 rounded-xl text-base">
           <EditprofileComponent title={"Edit Profile"} userData={userData}/>
-        </div>
+        </div> */}
       </article>
 
       <section className="mt-12 mx-36">
@@ -127,11 +127,11 @@ const ProfilePage = async () => {
           </TabsContent>
 
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
-            <DisccusionComponent />
+            <DisccusionComponent userId={userID}/>
           </TabsContent>
 
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-            <TakeActionComponent />
+            <TakeActionComponent userId={userID}/>
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
@@ -149,4 +149,4 @@ const ProfilePage = async () => {
   );
 };
 
-export default ProfilePage;
+export default ViewProfilePage;

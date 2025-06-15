@@ -4,28 +4,28 @@ import { Progress } from "@/components/ui/progress";
 export default function ProgressComponent({ totalEvents, eventCategoryStats }) {
   const eventData = [
     {
-      name: eventCategoryStats.eventCategoriesPercentage[0].type,
-      percentage: eventCategoryStats.eventCategoriesPercentage[0].percentage,
+      name: eventCategoryStats?.eventCategoriesPercentage[0].type,
+      percentage: eventCategoryStats?.eventCategoriesPercentage[0].percentage,
       eventCount: totalEvents,
     },
     {
-      name: eventCategoryStats.eventCategoriesPercentage[1].type,
-      percentage: eventCategoryStats.eventCategoriesPercentage[1].percentage,
+      name: eventCategoryStats?.eventCategoriesPercentage[1].type,
+      percentage: eventCategoryStats?.eventCategoriesPercentage[1].percentage,
       eventCount: totalEvents,
     },
     {
-      name: eventCategoryStats.eventCategoriesPercentage[2].type,
-      percentage: eventCategoryStats.eventCategoriesPercentage[2].percentage,
+      name: eventCategoryStats?.eventCategoriesPercentage[2].type,
+      percentage: eventCategoryStats?.eventCategoriesPercentage[2].percentage,
       eventCount: totalEvents,
     },
     {
-      name: eventCategoryStats.eventCategoriesPercentage[3].type,
-      percentage: eventCategoryStats.eventCategoriesPercentage[3].percentage,
+      name: eventCategoryStats?.eventCategoriesPercentage[3].type,
+      percentage: eventCategoryStats?.eventCategoriesPercentage[3].percentage,
       eventCount: totalEvents,
     },
     {
-      name: eventCategoryStats.eventCategoriesPercentage[4].type,
-      percentage: eventCategoryStats.eventCategoriesPercentage[4].percentage,
+      name: eventCategoryStats?.eventCategoriesPercentage[4].type,
+      percentage: eventCategoryStats?.eventCategoriesPercentage[4].percentage,
       eventCount: totalEvents,
     },
   ];

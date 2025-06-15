@@ -4,6 +4,7 @@ const token =
 
 // Get all discussion
 import { baseUrl } from "./constants";
+import { getAuthToken } from "@/utils/auth-api";
 export const getAllDiscussionsService = async () => {
   try {
     const res = await fetch(`${baseUrl}/discussions/all`, {
@@ -110,6 +111,21 @@ export const deleteDiscussionService = async (discussionId) => {
     const data = await apiRequest(
       `/discussions/${discussionId}`,
       "DELETE",
+      null,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllDiscussionByUserIdService = async (userId) => {
+  const token = await getAuthToken(); // Assuming you have a function to get the token
+  try {
+    const data = await apiRequest(
+      `/discussions/${userId}/all`,
+      "GET",
       null,
       token
     );

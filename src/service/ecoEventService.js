@@ -1,7 +1,6 @@
 import { apiRequest } from "@/utils/api";
 import { baseUrl } from "./constants";
 import { getAuthToken } from "@/utils/auth-api";
-import { getAuthToken } from "@/utils/auth-api";
 export const getAllEcoEventService = async () => {
   try {
     const res = await fetch(`${baseUrl}/event/all`);
@@ -103,9 +102,6 @@ export const fetchFilteredEventsHistoryService = async (userID, filters) => {
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
-    // console.log("params", params.toString());
-    // console.log("data in service", params.toString());
-    // const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await apiRequest(
       `/event/${userID}/filter-event-history?${params.toString()}`,
       "GET",
