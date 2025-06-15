@@ -20,6 +20,7 @@ import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
+import NotificationComponent from "./NotificationComponent";
 const NavBarComponent = ({ profile }) => {
   const currentPath = usePathname();
   return (
@@ -150,7 +151,7 @@ const NavBarComponent = ({ profile }) => {
                     userId={3}
                   >
                     <div className="mt-1">
-                      <NotificationItem />
+                      <NotificationComponent />
                     </div>
                   </KnockProvider>
 

@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import NotificationTabs from "./NotificationTabComponent";
 import { Bell } from "lucide-react";
 
-const NotificationItem = () => {
+const NotificationComponent = () => {
   const knockClient = useKnockClient();
   const feedClient = useNotifications(
     knockClient,
@@ -35,24 +35,14 @@ const NotificationItem = () => {
   const MarkRead = (item) => {
     feedClient.markAsRead(item);
   };
-  {
-    /* {items?.map((item) => (
-              <div key={item.id}>
-                <div
-                  onClick={Archived}
-                  dangerouslySetInnerHTML={{ __html: item.blocks[0].rendered }}
-                />
-              </div>
-            ))} */
-  }
+
   return (
     <div className="notifications">
       <Popover>
         <PopoverTrigger>
           <Bell className="cursor-pointer text-light-green" size={20} />
         </PopoverTrigger>
-        <PopoverContent className="w-96 border border-light-strok bg-white">
-          You have {metadata?.unread_count} Items
+        <PopoverContent className="w-[400px] border border-light-strok bg-white">
           <section className="w-full">
             <div className="flex justify-between items-center">
               <h1 className="text-meduim-green text-xl font-semibold">
@@ -69,4 +59,4 @@ const NotificationItem = () => {
     </div>
   );
 };
-export default NotificationItem;
+export default NotificationComponent;
