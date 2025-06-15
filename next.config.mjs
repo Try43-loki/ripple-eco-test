@@ -24,8 +24,8 @@ const nextConfig = {
   },
   env: {
     // NEXT_APIURL: "http://34.101.213.159:8883/api/v1",
-    NEXT_APIURL: "https://ripple-api.kshrd.app/api/v1",
-    // NEXT_APIURL: "http://localhost:8080/api/v1",
+    // NEXT_APIURL: "https://ripple-api.kshrd.app/api/v1",
+    NEXT_APIURL: "http://localhost:8080/api/v1",
   },
 };
 

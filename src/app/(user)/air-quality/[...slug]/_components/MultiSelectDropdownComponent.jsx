@@ -14,7 +14,7 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function MultiSelectDropdown({ provincesList }) {
+export default function MultiSelectDropdown({ districtList }) {
   const [selected, setSelected] = useState(null);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -49,7 +49,7 @@ export default function MultiSelectDropdown({ provincesList }) {
         align="start"
         className="bg-white text-black shadow-lg border border-gray-200 rounded-xl w-[670px] h-[300px] mt-2 scrollbar-hide"
       >
-        {provincesList?.data?.map((value) => (
+        {districtList?.data?.map((value) => (
           <DropdownMenuSub key={value.provinceId}>
             <DropdownMenuSubTrigger className=" hover:cursor-pointer hover:bg-blue-200 rounded-md px-2 py-1.5 flex justify-between w-full">
               <span>{value.provinceName}</span>
