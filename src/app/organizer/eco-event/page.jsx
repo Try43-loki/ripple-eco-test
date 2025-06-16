@@ -8,7 +8,7 @@ import {
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
-import { getUserProfileAction } from "@/action/user-action";
+import { getUserProfileService } from "@/service/auth/user-service";
 
 export default async function EcoEventPage({ searchParams: ParamsPromise }) {
   let cardData = [];
@@ -49,6 +49,9 @@ export default async function EcoEventPage({ searchParams: ParamsPromise }) {
     const response = await getAllEcoEventService();
     cardData = response?.data ?? [];
   }
+
+  const profileData = await getUserProfileService();
+
   cardData.sort(
     (a, b) => new Date(b.startDateTime) - new Date(a.startDateTime)
   );
@@ -80,14 +83,14 @@ export default async function EcoEventPage({ searchParams: ParamsPromise }) {
             />
           </div>
 
-          <EcoeventFilterComponent className="w-full" />
+          <EcoeventFilterComponent />
         </div>
 
-        <div className="flex flex-wrap justify-start gap-5 mt-6">
+        <div className="flex flex-wrap justify-between gap-5 mt-6">
           {cardData?.length > 0 ? (
             cardData.map((event) => (
               <div key={event?.eventId}>
-                <CardEcoEventComponent event={event} />
+                <CardEcoEventComponent event={event} role={profileData} />
               </div>
             ))
           ) : (

@@ -1,4 +1,3 @@
-import { getAllVolunteerRequestAction } from "@/action/VolunteerAction";
 import VolunteerWrapperComponent from "../_component/VolunteerWrapperComponent";
 
 const EventVolunteerPage = async ({ params }) => {

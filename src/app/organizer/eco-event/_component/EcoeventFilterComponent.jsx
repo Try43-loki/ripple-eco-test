@@ -221,13 +221,6 @@ const EcoEventFilterComponent = () => {
           </div>
         </div>
       </div>
-
-      {/* Label */}
-      {/* <span className="hidden md:inline font-semibold text-sm text-muted-foreground">
-        Filter:
-      </span> */}
-
-      {/* Filter dropdowns */}
     </section>
   );
 };

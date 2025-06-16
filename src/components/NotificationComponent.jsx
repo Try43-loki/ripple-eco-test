@@ -37,11 +37,9 @@ const NotificationComponent = () => {
     knockClient,
     process.env.NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID
   );
-  console.log("feedClient", feedClient);
 
   const { items = [], metadata } = useNotificationStore(feedClient);
-  console.log(items);
-  console.log(metadata);
+
   const [filteredNotifications, setFilteredNotifications] = useState({
     all: [],
     unread: [],

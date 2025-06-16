@@ -1,5 +1,5 @@
 const NotificationItem = ({ item, onMarkAsRead, onArchive }) => {
-  const isUnread = !item.read_at;
+  const isUnread = !null;
 
   return (
     <article
