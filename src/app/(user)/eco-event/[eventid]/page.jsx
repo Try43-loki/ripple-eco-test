@@ -22,10 +22,9 @@ export default async function EcoEventDetailPage({ params }) {
   const event = res?.data ?? [];
 
   const userId = "current-user-id";
-  const participation = await checkUserJoinedEventService(eventid, userId);
+  const participation = await checkUserJoinedEventService(userId);
   const userJoined = participation?.joined || false;
 
-  const btnRquestJoin = "Join";
   const breadcrumbSection = {
     back: "Eco Event",
     current: event?.title,

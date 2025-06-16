@@ -8,9 +8,9 @@ import {
   fetchFilteredEventsService,
 } from "@/service/ecoEventService";
 
-const EcoEventPage = async ({ searchParams: searchParamsPromise }) => {
+const EcoEventPage = async ({ searchParams: ParamsPromise }) => {
   let cardData = [];
-  const searchParams = searchParamsPromise || null;
+  const searchParams = (await ParamsPromise) || null;
   const searchQuery = searchParams?.search || "";
   const province = searchParams?.provinceId || "";
   const eventType = searchParams?.eventTypeId || "";

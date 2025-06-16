@@ -18,7 +18,6 @@ const CardEcoEventComponent = ({
   const status = event?.eventStatus || eventStatus;
   const eventType = event?.eventType?.eventType;
 
-  // Determine available contribute types based on eventType or event data
   const availableContributeTypes =
     event?.eventType?.contributeTypes ||
     (event?.contributeTypesResponse ? [event.contributeTypesResponse] : []);
@@ -36,8 +35,8 @@ const CardEcoEventComponent = ({
       <Link
         href={
           operator === "organizer"
-            ? `/eco-event/${event?.eventId}`
-            : `/organizer/eco-event/${event?.eventId}`
+            ? `/organizer/eco-event/${event?.eventId}`
+            : `/eco-event/${event?.eventId}`
         }
         className="cursor-pointer"
       >

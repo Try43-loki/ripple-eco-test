@@ -1,4 +1,5 @@
 import { Send } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -9,7 +10,12 @@ const FooterComponent = () => {
         <div className="flex items-start justify-between px-40">
           <aside className="flex flex-col items-start gap-y-[20px]">
             <Link href="/home" className="text-[24px]">
-              ripple<span className="text-[#048d4c]">Eco</span>
+              <Image
+                src="assets/ripple-eco-logo-light.png"
+                alt="Ripple Eco Logo"
+                width={120}
+                height={120}
+              ></Image>
             </Link>
             <p>
               Create ripples of positive environmental change
