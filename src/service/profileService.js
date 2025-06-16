@@ -7,6 +7,7 @@ const token =
 // console.log("token",token);
 export const getCurrentUserProfileService = async () => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest("/profile", "GET", null, token);
     return data;
   } catch (e) {
@@ -15,6 +16,7 @@ export const getCurrentUserProfileService = async () => {
 };
 export const viewUserProfileService = async (userId) => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest(`/profile/${userId}`, "GET", null, token);
     return data;
   } catch (e) {
@@ -23,6 +25,7 @@ export const viewUserProfileService = async (userId) => {
 };
 export const editUserProfileService = async (userData) => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest(
       `/profile/update/user`,
       "PUT",

@@ -1,6 +1,7 @@
 import { apiRequest } from "@/utils/api";
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6dHJ1ZSwiaXNHb29nbGUiOnRydWUsImZ1bGxOYW1lIjoiU28gY2hldHJhIiwiaWQiOiJmMDQ5ZWJjYy05NDI2LTQ4MWMtYWMzYy02YTE5YzgwNjk5MzMiLCJlbWFpbCI6Im5vcm5zb2NoZXRyYUBnbWFpbC5jb20iLCJzdWIiOiJub3Juc29jaGV0cmFAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDM0NTQ4LCJleHAiOjE3NDk2OTM3NDh9.f-9Ah2WM581RrmcMTM4FiSzSz6JoOh2Inpt51okO13Y";
+import { getAuthToken } from "@/utils/auth-api";
+// const token =
+//   "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6dHJ1ZSwiaXNHb29nbGUiOnRydWUsImZ1bGxOYW1lIjoiU28gY2hldHJhIiwiaWQiOiJmMDQ5ZWJjYy05NDI2LTQ4MWMtYWMzYy02YTE5YzgwNjk5MzMiLCJlbWFpbCI6Im5vcm5zb2NoZXRyYUBnbWFpbC5jb20iLCJzdWIiOiJub3Juc29jaGV0cmFAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDM0NTQ4LCJleHAiOjE3NDk2OTM3NDh9.f-9Ah2WM581RrmcMTM4FiSzSz6JoOh2Inpt51okO13Y";
 
 // get all volunteer requests
 export const getAllVolunteerRequestService = async (eventId) => {
@@ -47,5 +48,17 @@ export const rejectVolunteerRequestService = async (requestId) => {
     return data;
   } catch (e) {
     console.log(e);
+  }
+};
+
+// create volunteer request
+export const createVolunteerRequestService = async (formData) => {
+  try {
+    const token = await getAuthToken();
+    const data = await apiRequest(`/volunteer`, "POST", formData, token);
+    return data;
+  } catch (e) {
+    console.error("Error creating volunteer request:", e);
+    throw e; // Re-throw to handle in action
   }
 };

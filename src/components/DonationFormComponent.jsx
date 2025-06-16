@@ -38,12 +38,6 @@ const DonationFormComponent = ({ operator }) => {
             <hr className="text-meduim-gray my-2" />
 
             <DialogDescription className="flex flex-col gap-7 items-center justify-center my-10">
-              {/* <Image
-                src="/assets/donation_form/qr.jpg"
-                alt="qr"
-                width={250}
-                height={200}
-              ></Image> */}
               <QRCodeGenerator value="https://pay.ababank.com/VFTh4u6u7AfUNkTb9" />
               <Image
                 src="/assets/donation_form/WeBill365.jpg"

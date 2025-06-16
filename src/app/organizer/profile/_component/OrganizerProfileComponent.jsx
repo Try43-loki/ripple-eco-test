@@ -1,14 +1,7 @@
-
 import { TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import {
-  Clock,
-  Mail,
-  MapPin,
-  MessagesSquare,
-  Phone,
-} from "lucide-react";
+import { Clock, Mail, MapPin, MessagesSquare, Phone } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import ArchivesComponent from "./ArchivesComponent";
@@ -19,7 +12,6 @@ const OrganizerProfileComponent = async ({ operator, organizerData }) => {
   const badgeData = await getAllBagdeService();
   const badge = badgeData?.data;
   return (
-<<<<<<< HEAD
     <>
       <section className="rounded-2xl px-5 py-6 w-full border-light-gray border-1 drop-shadow-lg">
         <div className="flex items-start justify-between">
@@ -42,30 +34,6 @@ const OrganizerProfileComponent = async ({ operator, organizerData }) => {
           ) : (
             <h2 className="text-xl"></h2>
           )}
-=======
-  <>
-    <section className="rounded-2xl px-5 py-6 flex flex-col min-w-2xs border-light-gray border-1 drop-shadow-lg">
-      <div className="flex items-start justify-between">
-        <Image
-          src={organizerData?.profileImageUrl}
-          alt={`${organizerData?.firstName} ${organizerData?.lastName}`}
-          width={110}
-          height={110}
-          className="rounded-full"
-        />
-        {operator ? (
-          <EditprofileComponent operator={operator} title={""} />
-        ) : (
-          ""
-        )}
-      </div>
-      <article className="flex flex-col items-start gap-y-2 mt-2.5">
-        {operator ? (
-          <h2 className="text-xl">{`${organizerData?.firstName} ${organizerData?.lastName}`}</h2>
-        ) : (
-          <h2 className="text-xl"></h2>
-        )}
->>>>>>> 62a0f07dd7ae4bd1bfff530d1b246c637bc4e326
 
           <p className="text-strong-gray text-sm">{organizerData?.bio}</p>
         </article>

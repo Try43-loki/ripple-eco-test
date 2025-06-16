@@ -2,6 +2,7 @@
 
 import {
   approveVolunteerRequestService,
+  createVolunteerRequestService,
   rejectVolunteerRequestService,
 } from "@/service/volunteerService";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -27,3 +28,13 @@ export const rejectVolunteerAction = async (requestId) => {
     return { success: false, message: error.message };
   }
 };
+
+export const createVolunteerAction = async (formData) => {
+  try {
+    const data = await createVolunteerRequestService(formData);
+    revalidateTag("volunteers");
+    return { success: true, message: "Volunteer request created successfully", data };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}
