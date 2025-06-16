@@ -1,18 +1,14 @@
 "use client";
 import React from "react";
-import {
-  BtnSelectSeverity,
-  BtnSelectType,
-  DatePickerDemo,
-} from "./SelectButtonComponent";
-import dynamic from "next/dynamic";
+import { FilterPanel } from "./FilterPanelNaturalDisaster";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 
-const MapView = dynamic(() => import("../_components/MapView"), {
+const GoogleMap = dynamic(() => import("../_components/GoogleMap"), {
   ssr: false,
 });
 
-const MapComponent = ({ isDashboard }) => {
+const MapComponent = ({ isDashboard, naturalData }) => {
   return (
     <article
       className={clsx(" flex gap-8 text-white text-center lg:flex-col ", {
@@ -20,13 +16,9 @@ const MapComponent = ({ isDashboard }) => {
       })}
     >
       <div className="flex gap-3 items-center z-20 ">
-        <span className="font-medium text-base text-dark-gray">Filter by:</span>
-        <BtnSelectType />
-        <BtnSelectSeverity />
-        <DatePickerDemo order={1} />
-        <DatePickerDemo />
+        <FilterPanel />
       </div>
-      <div className=" h-[500px] z-10 ">{/* <MapView /> */}</div>
+      <GoogleMap disasters={naturalData} />
     </article>
   );
 };

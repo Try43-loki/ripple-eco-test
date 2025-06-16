@@ -1,6 +1,5 @@
 import React from "react";
 import HeroSectionNaturalDisasterDashboardComponent from "./_component/HeroSectionNaturalDisasterDashboardComponent";
-import MapComponent from "@/app/(user)/natural-disaster/_components/MapComponent";
 import RecentDisasterComponent from "@/app/(user)/natural-disaster/_components/RecentDisasterComponent";
 
 function NaturalDisaster() {
@@ -8,7 +7,6 @@ function NaturalDisaster() {
     <section className="flex w-full flex-col gap-9">
       <HeroSectionNaturalDisasterDashboardComponent />
       {/* Section Map */}
-      <MapComponent isDashboard={true} />
 
       {/* Section Recently */}
       <RecentDisasterComponent isDashboard={true} />

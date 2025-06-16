@@ -12,10 +12,16 @@ import { checkAqiInformation } from "@/utils/airQuality";
 
 const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
   const { search: districtId } = await ParamsPromise;
-
-  const dataProvince = await getCurrentAirPollutionByDistrictId(districtId);
+  const dataProvinces = await getAllDistricts();
+  const dataProvince = await getCurrentAirPollutionByDistrictId(
+    districtId ?? "Qpmt7iC423kyhanrm"
+  );
+  const dataHourly = await getForecastAirPollutionByDistrictId(
+    districtId ?? "Qpmt7iC423kyhanrm",
+    "HOURLY"
+  );
   const dataDaily = await getForecastAirPollutionByDistrictId(
-    districtId || "Qpmt7iC423kyhanrm",
+    districtId ?? "Qpmt7iC423kyhanrm",
     "DAILY"
   );
 
