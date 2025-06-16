@@ -161,15 +161,16 @@ export const postFeedbackById = async (eventid) => {
   }
 };
 
-export const checkUserJoinedEventService = async (eventId, userId) => {
+export const checkUserJoinedEventService = async (userId) => {
   try {
     // const token = localStorage.getItem("token");
-    const data = await fetch(
-      `${baseUrl}/eco-event/${eventId}/joined?userId=${userId}`,
-      "GET",
-      null,
-      token
+    const res = await fetch(
+      `${baseUrl}/event/joining?userId=${userId}`
+      // "GET",
+      // null,
+      // token
     );
+    const data = await res.json();
     return data;
   } catch (error) {
     console.error("Error checking user participation:", error);

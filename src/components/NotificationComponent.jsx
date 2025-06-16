@@ -49,7 +49,7 @@ const NotificationItem = () => {
     <div className="notifications">
       <Popover>
         <PopoverTrigger>
-          <Bell className="cursor-pointer text-light-green" size={20} />
+          <Bell className="cursor-pointer text-light-green" size={26} />
         </PopoverTrigger>
         <PopoverContent className="w-96 border border-light-strok bg-white">
           You have {metadata?.unread_count} Items

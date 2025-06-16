@@ -10,11 +10,9 @@ import {
 import SearchBarComponent from "@/components/SearchBarComponent";
 import { getUserProfileAction } from "@/action/user-action";
 
-export default async function EcoEventPage({
-  searchParams: searchParamsPromise,
-}) {
+export default async function EcoEventPage({ searchParams: ParamsPromise }) {
   let cardData = [];
-  const searchParams = searchParamsPromise || null;
+  const searchParams = (await ParamsPromise) || null;
   const searchQuery = searchParams?.search || "";
   const province = searchParams?.provinceId || "";
   const eventType = searchParams?.eventTypeId || "";
