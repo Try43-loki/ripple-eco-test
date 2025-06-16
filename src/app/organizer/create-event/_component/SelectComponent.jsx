@@ -32,7 +32,6 @@ export function SelectComponent({
       break;
     case "Certificate":
       data = certificates;
-
       break;
     case "Location":
       data = locations;
@@ -43,15 +42,16 @@ export function SelectComponent({
     default:
       break;
   }
+  console.log("Select Component", value);
 
   return (
-    <Select value={value} onValueChange={onChange} {...props}>
+    <Select disabled={true} value={value} onValueChange={onChange} {...props}>
       <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
         <SelectValue placeholder={placeholder || `Choose ${operator}`} />
       </SelectTrigger>
       <SelectContent className="bg-white border border-light-strok text-gray-600">
-        {data?.map((item, index) => (
-          <SelectItem key={index} value={item.value}>
+        {data?.map((item) => (
+          <SelectItem key={item?.id} value={item.value}>
             {item.value}
           </SelectItem>
         ))}

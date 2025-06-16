@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import moment from "moment";
+import dayjs from "dayjs";
 
 
 const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
@@ -66,7 +66,7 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
           <article className="space-y-1">
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <CalendarDays className="w-4.5 h-4.5" />
-              <p>{moment(cardDetail?.data?.createdAt).format("DD MMM YYYY")}</p>
+              <p>{dayjs(cardDetail?.data?.createdAt).format("DD MMM YYYY")}</p>
             </div>
             <div className="flex items-center gap-x-3 px-2 text-strong-gray text-base">
               <Send className="w-4.5 h-4.5" />

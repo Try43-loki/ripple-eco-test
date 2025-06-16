@@ -62,7 +62,7 @@ export function DatePickerComponent({
           selected={selectedDate}
           onSelect={handleDateSelect}
           initialFocus
-          disabled={disabled}
+          disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
           {...props}
         />
       </PopoverContent>

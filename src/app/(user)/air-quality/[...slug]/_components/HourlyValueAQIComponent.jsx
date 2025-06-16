@@ -2,13 +2,6 @@ import { clsx } from "clsx";
 import Image from "next/image";
 import React from "react";
 
-const LineVertical = ({ day }) => (
-  <div className="flex flex-col justify-center text-light-gray items-center">
-    {day && <span className="text-dark-gray">{day}</span>}
-    <hr className="w-px h-36 border-1 " />
-  </div>
-);
-
 const listOfImageWeather = {
   sun: "Sun",
   rain: "Rain",
@@ -24,56 +17,59 @@ const checkIcon = (icon) => {
 };
 
 const dynamicColorAqi = (value) => {
-  if (value < 50) return "bg-air-green";
-  if (value < 100) return "bg-air-yellow";
-  if (value < 150) return "bg-air-orange";
+  if (value <= 50) return "bg-air-green";
+  if (value <= 100) return "bg-air-yellow";
+  if (value <= 150) return "bg-air-orange";
   if (value >= 150) return "bg-air-red";
 };
 const formatTime = (time) => {
-  // Return Hour Only
   const original = new Date(time);
-  // Add 7 hours (in milliseconds)
-  const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000);
-  // Get hours and minutes
+  const updatedTime = new Date(original.getTime() + 7 * 60 * 60 * 1000); // Add 7 hours for Cambodia Time zone
+
   const hours = updatedTime.getHours();
   const minutes = updatedTime.getMinutes().toString().padStart(2, "0");
 
-  // Final time string
   const timeString = `${hours}:${minutes}`;
   return timeString;
 };
 
 function getCurrentTime(data) {
-  // Check Current Time with Data Time
-
-  const currentTime = new Date(data.timestamp).getHours() + 7;
-  const isSameHour = currentTime === new Date().getHours();
+  const inputDate = new Date(data);
+  const now = new Date();
+  const isSameHour = inputDate.getHours() === now.getHours() - 7;
   const isSameDay =
-    new Date(data.timestamp).getDate() === new Date().getDate() &&
-    new Date(data.timestamp).getMonth() === new Date().getMonth() &&
-    new Date(data.timestamp).getFullYear() === new Date().getFullYear();
-  const hour = isSameHour && isSameDay ? "Now" : formatTime(data.timestamp);
-  return hour;
+    inputDate.getDate() === now.getDate() &&
+    inputDate.getMonth() === now.getMonth() &&
+    inputDate.getFullYear() === now.getFullYear();
+  return isSameHour && isSameDay;
 }
 
 const HourlyValueAQIComponent = ({ data }) => {
-  console.log(data);
+  return data.forecastGroupByDay.map((value, index) => {
+    const formattedTime = formatTime(value?.time);
+    const showDayLine = formattedTime === "0:00";
 
-  return (
-    <>
-      {data.forecastGroupByDay.map((value) => (
+    return (
+      <React.Fragment key={index}>
+        {showDayLine && (
+          <div className="flex flex-col justify-center items-center px-3">
+            <span className="text-dark-gray text-sm">{data.day}</span>
+            <div className="w-px h-32 bg-gray-300 my-1" />
+          </div>
+        )}
+
         <div
           className={clsx(
-            "w-[200px] **: flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
+            "w-[200px] flex flex-col items-center gap-3 px-6 py-4 rounded-xl",
             {
-              "bg-light-gray px-": getCurrentTime(value?.time) === "Now",
+              "first:bg-light-gray px-1": index === 0,
             }
           )}
         >
           <span className="text-lg font-medium text-darker-gray">
-            {formatTime(value?.time)}
+            {getCurrentTime(value?.time) ? "Now" : formattedTime}
           </span>
-          {/* Image Icon */}
+
           <Image
             src={`/assets/air_quality_images/${checkIcon(
               value?.cloudIcon
@@ -86,20 +82,19 @@ const HourlyValueAQIComponent = ({ data }) => {
             {value?.temperature?.current}
             <sup>o</sup>
           </span>
-          {/* Value Of AQI */}
+
           <div
             className={clsx(
-              " rounded-lg w-[60px] h-[30px] leading-[30px] ",
+              "rounded-lg w-[60px] h-[30px] leading-[30px]",
               dynamicColorAqi(value?.aqi)
             )}
           >
             <p className="text-center font-medium text-white">{value?.aqi}</p>
           </div>
         </div>
-      ))}
-      <LineVertical day={data.day} />
-    </>
-  );
+      </React.Fragment>
+    );
+  });
 };
 
 export default HourlyValueAQIComponent;

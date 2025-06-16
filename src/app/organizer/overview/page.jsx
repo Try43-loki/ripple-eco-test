@@ -21,35 +21,35 @@ export default async function OverviewPage() {
         {/* content */}
         <section className="grow">
           <HeaderComponent
-            title={headerSection.title}
-            text={headerSection.text}
-            buttonAction={headerSection.buttonAction}
+            title={headerSection?.title}
+            text={headerSection?.text}
+            buttonAction={headerSection?.buttonAction}
           />
           {/* total statistic */}
-          <TotalStatisticComponent total={data.data.totals} />
+          <TotalStatisticComponent total={data?.data?.totals} />
           <section className="flex justify-center items-start gap-x-5 mt-5">
             {/* chart */}
             <ChartComponent
-              eventTypeStats={data.data.eventTypeStats}
+              eventTypeStats={data?.data?.eventTypeStats}
               className="h-full"
             />
             {/*progress bar  */}
             <ProgressComponent
-              totalEvents={data.data.eventTypeStats.totalEvents}
-              eventCategoryStats={data.data.eventCategoryStats}
+              totalEvents={data?.data?.eventTypeStats.totalEvents}
+              eventCategoryStats={data?.data?.eventCategoryStats}
               className="h-full"
             />
           </section>
           {/* list volunteer */}
           <ListVolunteerComponent
-            latestVolunteersRequest={data.data.latestVolunteersRequest}
+            latestVolunteersRequest={data?.data?.latestVolunteersRequest}
           />
         </section>
         {/* side right content */}
         <section className="w-2/9">
           <CurrentDayComponent />
           {/* up comming event */}
-          <UpcomingEventComponent upcomingEvent={data.data.upcomingEvent} />
+          <UpcomingEventComponent upcomingEvent={data?.data?.upcomingEvent} />
         </section>
       </section>
     </>
