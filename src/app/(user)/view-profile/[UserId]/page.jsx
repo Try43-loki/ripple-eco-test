@@ -15,19 +15,18 @@ import {
 } from "lucide-react";
 
 import { viewUserProfileService } from "@/service/profileService"; 
-import { getAllBagdeService, getBadgeByUserIDService } from "@/service/badgeService";
+import { getAllBagdeByIDService, getAllBagdeService, getBadgeByUserIDService } from "@/service/badgeService";
 import BadgeComponent from "@/app/organizer/profile/_component/BadgeComponent";
 import OwnFeedBackComponent from "../../profile/_component/OwnFeedBackComponent";
 import DisccusionComponent from "../../profile/_component/DisccusionComponent";
 import TakeActionComponent from "../../profile/_component/TakeActionComponent";
 import EvenHistoryComponent from "../../profile/_component/EvenHistoryComponent";
 const ViewProfilePage = async ({params}) => {
-  const userID = params?.userId
+  const userID = await params?.UserId;
   const userData = await viewUserProfileService(userID);
   
-  const badgeData = await getAllBagdeService();
-  const totalBadgesTotal = await getBadgeByUserIDService(userID);
-
+  const badgeData = await getAllBagdeByIDService(userID);
+  const totalBadgesTotal = await getBadgeByUserIDService(userID) || [];
   const badge = badgeData?.data;
   return (
     <main>
@@ -123,7 +122,7 @@ const ViewProfilePage = async ({params}) => {
           </TabsList>
 
           <TabsContent value="own-feedback" className="w-full mt-5 mb-10">
-            <OwnFeedBackComponent />
+            <OwnFeedBackComponent userId={userID}/>
           </TabsContent>
 
           <TabsContent value="discussion" className="w-full mt-5 mb-10">

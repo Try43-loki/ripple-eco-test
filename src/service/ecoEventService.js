@@ -97,6 +97,7 @@ export const fetchFilteredEventsService = async (filters) => {
 };
 
 export const fetchFilteredEventsHistoryService = async (userID, filters) => {
+  const token = await getAuthToken();
   try {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {

@@ -11,8 +11,12 @@ import Image from "next/image";
 import React from "react";
 import { DeleteComponent } from "../app/(user)/take-action/_component/DeleteComponent";
 import Link from "next/link";
+import { getCurrentUserProfileService } from "@/service/profileService";
 
-const TakeActionCard = ({ cardData, isOwner, isOrganizer, layout }) => {
+const TakeActionCard = async ({ cardData, isOwner, isOrganizer, layout }) => {
+  const currentUser = await getCurrentUserProfileService();
+  const currentUserId = currentUser?.data?.appUserId;
+  const ottherUserId = cardData?.map((data) => data?.appUser?.appUserId);
   return (
     <main>
       <section className="flex flex-wrap gap-11 justify-start items-start w-full">
@@ -33,14 +37,21 @@ const TakeActionCard = ({ cardData, isOwner, isOrganizer, layout }) => {
                 height={150}
                 className="rounded-t-xl h-40 object-cover"
               />
-              <div className="absolute top-0 left-0 flex justify-between items-center p-3 w-full">
+              {isOwner && currentUserId == ottherUserId ? (
+                <div className="absolute top-0 left-0 flex justify-between items-center p-3 w-full">
                 <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
-                  {data?.completed ? "Completed" : "Action"}
+                  {data?.anonymous ? "Anonymous" : "Public"}
                 </p>
-                {isOwner ? (
                   <DeleteComponent cardId={data?.takeActionId} />
-                ) : null}
               </div>
+              ):
+              <div className="absolute top-0 left-0 flex justify-end items-center p-3 w-full">
+                <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
+                  {data?.anonymous ? "Anonymous" : "Public"}
+                </p>
+              </div>
+              }
+              
             </CardContent>
 
             {layout === "col" ? (

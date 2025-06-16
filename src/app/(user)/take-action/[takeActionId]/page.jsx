@@ -18,9 +18,9 @@ const TakeActionDetailPage =  async ( { params , searchParams}) => {
   // const query = useSearchParams();
   // const view = query.get("view");
   // const owner = query.get("owner");
-  const view = searchParams?.view;
-  const owner = searchParams?.owner;
-  const id = params?.takeActionId;
+  const view = await searchParams?.view;
+  const owner = await searchParams?.owner;
+  const id = await params?.takeActionId;
   const cardDetail = await getTakeActionByIDService(id);
   const userData = await viewUserProfileService(cardDetail?.data?.appUser?.appUserId);
   return (

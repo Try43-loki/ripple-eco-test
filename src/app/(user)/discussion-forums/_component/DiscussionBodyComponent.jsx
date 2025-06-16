@@ -13,7 +13,9 @@ const DiscussionBodyComponent = ({
   totalDiscussion,
   popularDiscussion,
   search,
-  currentUserId,
+  otherUserId,
+  otherUser,
+  currentUser,
 }) => {
   const buttonText = "Create Discussion";
   const [open, setOpen] = useState(false);
@@ -43,7 +45,9 @@ const DiscussionBodyComponent = ({
               <div className="cursor-pointer" key={data.discussionId}>
                 <CardDiscussionComponent
                   discussions={data}
-                  currentUserId={currentUserId}
+                  otherUserId={otherUserId}
+                  otherUser={otherUser}
+                  currentUser={currentUser}
                 />
               </div>
             ))

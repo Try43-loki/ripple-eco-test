@@ -9,3 +9,13 @@ export const getAllOwnFeedBackService = async () => {
       console.log("error", e);
     }
 };
+
+export const getAllFeedBackByUserIDService = async (userID) => {
+    const token = await getAuthToken();
+    try {
+      const data = await apiRequest(`/feedback/${userID}/all`, "GET", null, token);
+      return data;
+    } catch (e) {
+      console.log("error", e);
+    }
+};

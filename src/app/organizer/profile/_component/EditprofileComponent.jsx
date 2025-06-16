@@ -178,8 +178,8 @@ const EditprofileComponent = ({ title = "", userData }) => {
                         )}
                       </Label>
                       <span className="absolute bottom-27 left-40 bg-strong-gray p-1 rounded-full shadow-md cursor-pointer hover:bg-gray text-white">
-                         <RefreshCcw className="w-4 h-4 text-white" />
-                        </span>
+                        <RefreshCcw className="w-4 h-4 text-white" />
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,10 @@ const EditprofileComponent = ({ title = "", userData }) => {
                     <Label>Bio</Label>
                     <Textarea
                       placeholder={userData?.bio}
-                      className="bg-light-gray border-none placeholder:text-lighter-green"
+                      className="bg-light-gray border-none placeholder:text-lighter-green
+                                w-full h-[60px] px-3 py-2 rounded-lg resize-none placeholder:text-sm 
+                                focus-visible:ring-1 focus-visible:ring-meduim-green
+                                whitespace-pre-wrap break-words overflow-y-auto scrollbar-hide"
                       {...register("bio")}
                     />
                   </div>
