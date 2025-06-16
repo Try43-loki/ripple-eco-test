@@ -7,7 +7,7 @@ import { getFilterDisaster } from "@/service/naturalDisasterService";
 const NaturalDisasterPage = async ({ searchParams: ParamsPromise }) => {
   const { disasterType, severityType, startDate, endDate } =
     await ParamsPromise;
-  const naturalData = await await getFilterDisaster(
+  const naturalData = await getFilterDisaster(
     disasterType,
     severityType,
     startDate,

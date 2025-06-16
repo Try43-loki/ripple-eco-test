@@ -10,100 +10,10 @@ import {
 } from "@/components/ui/table";
 import { getDirectionProvinceByLatLng } from "@/service/naturalDisasterService";
 import { getProvinceFromComponents } from "@/utils/format";
+import { getFullNameDisaster, getSeverityColor } from "@/utils/naturalDisaster";
 import clsx from "clsx";
 import { MapPin, Waves, X, Droplet, Flame, Wind } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
-const disasters = [
-  {
-    id: "1",
-    type: "Earthquakes",
-    description:
-      "A moderate 5.2 magnitude earthquake shook the northern region...",
-    location: "Preah Vihear, Cambodia",
-    date: "March 12, 2025",
-    severity: "Medium",
-  },
-  {
-    id: "2",
-    type: "Flood",
-    description:
-      "Heavy rains caused flooding in low-lying areas of Phnom Penh...",
-    location: "Phnom Penh, Cambodia",
-    date: "April 8, 2025",
-    severity: "High",
-  },
-  {
-    id: "3",
-    type: "Typhoons",
-    description:
-      "Strong typhoon winds caused damage along the coastal provinces...",
-    location: "Kampot, Cambodia",
-    date: "May 15, 2025",
-    severity: "Medium",
-  },
-  {
-    id: "4",
-    type: "Wildfires",
-    description: "Forest fires spread rapidly in the Cardamom Mountains...",
-    location: "Koh Kong, Cambodia",
-    date: "February 20, 2025",
-    severity: "High",
-  },
-  {
-    id: "5",
-    type: "Flood",
-    description: "Flash floods affected rural villages near Tonle Sap lake...",
-    location: "Siem Reap, Cambodia",
-    date: "June 3, 2025",
-    severity: "Low",
-  },
-  {
-    id: "6",
-    type: "Earthquakes",
-    description:
-      "A minor tremor was recorded near the Cambodian-Laos border...",
-    location: "Ratanakiri, Cambodia",
-    date: "January 28, 2025",
-    severity: "Low",
-  },
-  {
-    id: "7",
-    type: "Typhoons",
-    description:
-      "Typhoon caused heavy rains and flooding along the Mekong River...",
-    location: "Kampong Cham, Cambodia",
-    date: "April 25, 2025",
-    severity: "High",
-  },
-  {
-    id: "8",
-    type: "Wildfires",
-    description:
-      "Dry season fires destroyed several hectares of protected forest...",
-    location: "Mondulkiri, Cambodia",
-    date: "March 9, 2025",
-    severity: "Medium",
-  },
-  {
-    id: "9",
-    type: "Flood",
-    description:
-      "Seasonal floods displaced hundreds in the southern provinces...",
-    location: "Takeo, Cambodia",
-    date: "May 5, 2025",
-    severity: "Medium",
-  },
-  {
-    id: "10",
-    type: "Earthquakes",
-    description:
-      "Seismic activity detected near the Cardamom Mountains region...",
-    location: "Pursat, Cambodia",
-    date: "February 14, 2025",
-    severity: "Low",
-  },
-];
 
 // Map disaster types to icons
 function getIconByType(type) {
@@ -120,34 +30,6 @@ function getIconByType(type) {
       return null;
   }
 }
-
-function getSeverityColor(severity) {
-  switch (severity) {
-    case "Red":
-      return "bg-red-600 hover:bg-red-700";
-    case "Orange":
-      return "bg-orange-500 hover:bg-orange-600";
-    case "Green":
-      return "bg-green-600 hover:bg-green-700";
-    default:
-      return "bg-gray-500";
-  }
-}
-
-const getFullNameDisaster = (type) => {
-  switch (type) {
-    case "FL":
-      return "Floods";
-    case "WF":
-      return "Wildfires";
-    case "EQ":
-      return "Earthquakes";
-    case "TC":
-      return "Typhoons";
-    default:
-      return null;
-  }
-};
 
 const RecentDisasterComponent = ({ isDashboard, naturalData }) => {
   const [selectedDisaster, setSelectedDisaster] = useState(null);
@@ -181,78 +63,110 @@ const RecentDisasterComponent = ({ isDashboard, naturalData }) => {
 
   return (
     <article
-      className={clsx(" flex gap-8 w-full text-light-gray lg:flex-col", {
+      className={clsx("flex gap-8 w-full text-light-gray lg:flex-col ", {
         "lg:px-[180px] px-6 ": !isDashboard,
       })}
     >
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-xl text-dark-gray font-semibold">
-            Recent Disaster
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-gray-600">Type</TableHead>
-                  <TableHead className="text-gray-600">Description</TableHead>
-                  <TableHead className="text-gray-600">Location</TableHead>
-                  <TableHead className="text-gray-600">Date</TableHead>
-                  <TableHead className="text-gray-600">Severity</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {processedDisasters.map((disaster) => (
-                  <TableRow
-                    key={disaster.id}
-                    className="hover:bg-gray-50 cursor-pointer"
-                    onClick={() => setSelectedDisaster(disaster)}
-                  >
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {getIconByType(disaster?.eventType)}
-                        <span className="text-gray-700">
-                          {getFullNameDisaster(disaster?.eventType)}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-gray-700 w-[250px] line-clamp-1 truncate">
-                        {disaster?.description}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-gray-500" />
-                        <span className="text-gray-700">
-                          {disaster?.location}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-gray-700">
-                        {disaster?.fromDate}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <div
-                        className={clsx(
-                          "text-white border-0 font-medium px-3 py-1 text-center rounded-lg",
-                          getSeverityColor(disaster?.alertLevel)
-                        )}
-                      >
-                        {disaster?.alertLevel}
-                      </div>
-                    </TableCell>
+      {/* Table List */}
+      {processedDisasters.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl text-dark-gray font-semibold">
+              {processedDisasters.length || 0} Recently Disaster
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="w-full">
+              <Table className="w-full table-fixed">
+                <TableHeader className=" sticky top-0 z-10">
+                  <TableRow>
+                    <TableHead className="w-[60px] text-gray-600">
+                      Type
+                    </TableHead>
+                    <TableHead className="w-[100px] text-gray-600">
+                      Name
+                    </TableHead>
+                    <TableHead className="w-[40%] text-gray-600">
+                      Description
+                    </TableHead>
+                    <TableHead className="w-[25%] text-gray-600">
+                      Location
+                    </TableHead>
+                    <TableHead className="w-[150px] text-gray-600">
+                      Date
+                    </TableHead>
+                    <TableHead className="w-[100px] text-gray-600">
+                      Severity
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                </TableHeader>
+              </Table>
+
+              <div className="max-h-[480px] overflow-y-auto">
+                <Table className="w-full table-fixed">
+                  <TableBody>
+                    {processedDisasters.map((disaster, index) => (
+                      <TableRow
+                        key={index}
+                        className="hover:bg-gray-50 cursor-pointer"
+                        onClick={() => setSelectedDisaster(disaster)}
+                      >
+                        <TableCell className="w-[60px] whitespace-nowrap px-2 py-2">
+                          <div className="flex items-center justify-start">
+                            {getIconByType(disaster?.eventType)}
+                          </div>
+                        </TableCell>
+
+                        <TableCell className="w-[100px] whitespace-nowrap px-2 py-2">
+                          <span className="text-gray-700">
+                            {getFullNameDisaster(disaster?.eventType)}
+                          </span>
+                        </TableCell>
+
+                        <TableCell
+                          className="w-[40%] px-2 py-2 truncate"
+                          title={disaster?.description}
+                        >
+                          <span className="text-gray-700 block truncate">
+                            {disaster?.description}
+                          </span>
+                        </TableCell>
+
+                        <TableCell className="w-[25%] px-2 py-2 truncate">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="h-4 w-4 text-gray-500 shrink-0" />
+                            <span className="text-gray-700 truncate block">
+                              {disaster?.location}
+                            </span>
+                          </div>
+                        </TableCell>
+
+                        <TableCell className="w-[150px] whitespace-nowrap px-2 py-2">
+                          <span className="text-gray-700">
+                            {disaster?.fromDate}
+                          </span>
+                        </TableCell>
+
+                        <TableCell className="w-[100px] whitespace-nowrap px-2 py-2">
+                          <div
+                            className={clsx(
+                              "text-white text-sm font-medium px-3 py-1 text-center rounded-lg",
+                              getSeverityColor(disaster?.alertLevel).bg
+                            )}
+                          >
+                            {getSeverityColor(disaster?.alertLevel).text}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Modal Popup */}
       {selectedDisaster && (
@@ -264,26 +178,47 @@ const RecentDisasterComponent = ({ isDashboard, naturalData }) => {
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-2xl font-semibold mb-4">
-              {selectedDisaster.type}
+
+            <h2 className="text-2xl font-semibold mb-4 text-green">
+              {getFullNameDisaster(selectedDisaster?.eventType)}
             </h2>
-            <div className="space-y-2 text-sm">
-              <p>
-                <span className="font-medium text-gray-700">Description:</span>{" "}
-                {selectedDisaster.description}
-              </p>
-              <p>
-                <span className="font-medium text-gray-700">Location:</span>{" "}
-                {selectedDisaster.location}
-              </p>
-              <p>
-                <span className="font-medium text-gray-700">Date:</span>{" "}
-                {selectedDisaster.date}
-              </p>
-              <p>
-                <span className="font-medium text-gray-700">Severity:</span>{" "}
-                {selectedDisaster.severity}
-              </p>
+
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">Description:</span>
+                <span className="text-right">
+                  {selectedDisaster.description}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">Location:</span>
+                <span>{selectedDisaster.location}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">
+                  Affected Country:
+                </span>
+                <span>{selectedDisaster?.affectedCountry?.join(", ")}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">From Date:</span>
+                <span>{selectedDisaster?.fromDate}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">To Date:</span>
+                <span>{selectedDisaster?.toDate}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-gray-700">Severity:</span>
+                <span
+                  className={clsx(
+                    "text-white border-0 font-medium px-3  text-center rounded-lg",
+                    getSeverityColor(selectedDisaster?.alertLevel).bg
+                  )}
+                >
+                  {getSeverityColor(selectedDisaster?.alertLevel).text}
+                </span>
+              </div>
             </div>
           </div>
         </div>
