@@ -49,14 +49,14 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
   const { search: districtId } = await ParamsPromise;
   const dataProvinces = await getAllDistricts();
   const dataProvince = await getCurrentAirPollutionByDistrictId(
-    districtId || "Qpmt7iC423kyhanrm"
+    districtId ?? "Qpmt7iC423kyhanrm"
   );
   const dataHourly = await getForecastAirPollutionByDistrictId(
-    districtId || "Qpmt7iC423kyhanrm",
+    districtId ?? "Qpmt7iC423kyhanrm",
     "HOURLY"
   );
   const dataDaily = await getForecastAirPollutionByDistrictId(
-    districtId || "Qpmt7iC423kyhanrm",
+    districtId ?? "Qpmt7iC423kyhanrm",
     "DAILY"
   );
   const dynamicColor = switchColor(dataProvince.data.aqi);
@@ -72,7 +72,7 @@ const AirQualityPage = async ({ searchParams: ParamsPromise }) => {
       ></div>
 
       {/* Hero Section */}
-      <section className="relative   flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center ">
+      <section className="relative flex w-full h-[200px] md:h-[300px] lg:h-[400px] justify-center items-center ">
         <HeroSectionAirDisasterComponent
           provincesList={dataProvinces}
           provinceData={dataProvince.data}

@@ -39,7 +39,7 @@ export function FilterPanel() {
     } else {
       params.delete(key);
     }
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleReset = () => {
@@ -54,7 +54,7 @@ export function FilterPanel() {
     params.delete("startDate");
     params.delete("endDate");
 
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleStartDateSelect = (date) => {

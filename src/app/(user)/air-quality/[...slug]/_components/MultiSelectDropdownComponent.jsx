@@ -31,7 +31,9 @@ export default function MultiSelectDropdown({ provincesList }) {
     }
     const basePath = pathname.split("/").slice(0, 2).join("/");
     const newDistrictName = districtName.replace(/\s+/g, "");
-    replace(`${basePath}/${newDistrictName.toString()}?${params.toString()}`);
+    replace(`${basePath}/${newDistrictName.toString()}?${params.toString()}`, {
+      scroll: false,
+    });
   }
 
   return (
