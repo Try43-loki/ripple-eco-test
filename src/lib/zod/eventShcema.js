@@ -3,7 +3,7 @@ import { z } from "zod";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const MIN_IMAGE = 1;
-const MAX_IMAGES = 15;
+const MAX_IMAGES = 5;
 
 export const createMultiImageSchema = (
   maxFileSize = MAX_FILE_SIZE,

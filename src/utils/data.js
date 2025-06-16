@@ -18,15 +18,6 @@ province?.data?.forEach((prov) => {
     id: prov?.provinceId,
   });
 });
-function generateHexId(length = 24) {
-  const chars = "abcdef0123456789";
-  let id = "";
-  for (let i = 0; i < length; i++) {
-    id += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return id;
-}
-let i = 1;
 
 const categoriesData = await getAllEventCategoriesService();
 categoriesData.data.forEach((prov) => {
@@ -52,6 +43,8 @@ eventTypeData.data.forEach((prov) => {
   });
 });
 
+console.log("event type : ", eventTypes);
+
 certificates.push(
   {
     value: "Yes",
@@ -62,3 +55,30 @@ certificates.push(
     id: 2,
   }
 );
+export const contributeTypeRestrictions = [
+  {
+    contributeTypeId: 3,
+    contributeTypeName: "donation",
+    eventTypeId: 1,
+  },
+  {
+    contributeTypeId: 2,
+    contributeTypeName: "free",
+    eventTypeId: 2,
+  },
+  {
+    contributeTypeId: 1,
+    contributeTypeName: "fee",
+    eventTypeId: 2,
+  },
+  {
+    contributeTypeId: 4,
+    contributeTypeName: "volunteer",
+    eventTypeId: 1,
+  },
+  {
+    contributeTypeId: 5,
+    contributeTypeName: "donation and volunteer",
+    eventTypeId: 1,
+  },
+];
