@@ -8,6 +8,7 @@ import SearchBarComponent from "@/components/SearchBarComponent";
 import CreateDiscussionComponent from "@/components/CreateDiscussionComponent";
 import { useState } from "react";
 import { getUserProfileService } from "@/service/auth/user-service";
+import { usePathname } from "next/navigation";
 
 const DiscussionBodyComponent = ({
   totalDiscussion,
@@ -15,6 +16,8 @@ const DiscussionBodyComponent = ({
   search,
   currentUserId,
 }) => {
+  const currentPath = usePathname();
+  const path = currentPath.split("/")[1];
   const buttonText = "Create Discussion";
   const [open, setOpen] = useState(false);
   return (
@@ -23,7 +26,11 @@ const DiscussionBodyComponent = ({
       <article className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-6 md:px-20 lg:px-[150px] my-6 w-full">
         <SearchBarComponent
           placeholder="Search Title or Tag"
-          pagePath={`/discussion-forums`}
+          pagePath={`${
+            path === "organizer"
+              ? "/organizer/discussion-forums"
+              : "/discussion-forums"
+          }`}
         />
         <div onClick={() => setOpen(true)}>
           <DiscussionButtonComponent text={buttonText} />

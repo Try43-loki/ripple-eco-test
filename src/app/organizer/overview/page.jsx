@@ -7,9 +7,11 @@ import { ChartComponent } from "./_component/ChartComponent";
 import ProgressComponent from "./_component/ProgressComponent";
 import ListVolunteerComponent from "./_component/ListVolunteerComponent";
 import { getDashboardDataService } from "@/service/dashboardService";
+import { getUserProfileAction } from "@/action/user-action";
 
 export default async function OverviewPage() {
   const data = await getDashboardDataService();
+  const profile = await getUserProfileAction();
   const headerSection = {
     title: "Welcome back, Earth Hero!",
     text: "The Earth is lucky to have you. Let’s keep making choices that lead to a brighter, cleaner future.",
@@ -24,6 +26,7 @@ export default async function OverviewPage() {
             title={headerSection?.title}
             text={headerSection?.text}
             buttonAction={headerSection?.buttonAction}
+            profile={profile}
           />
           {/* total statistic */}
           <TotalStatisticComponent total={data?.data?.totals} />

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import CreateDiscussionComponent from "./CreateDiscussionComponent";
 import VerifyOrganizerComponent from "./VerifyOrganizerComponent";
 import Image from "next/image";
@@ -9,21 +9,21 @@ import Image from "next/image";
 import CreateTakeActionFormComponent from "./CreateTakeActionFormComponent";
 import PopupTakeActionForm from "@/app/(user)/take-action/_component/PopupTakeActionForm";
 
-const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
+const DashboardHeaderComponent = ({ title, text, buttonAction, profile }) => {
   const [showDiscussionModal, setShowDiscussionModal] = useState(false);
   const [showTakeActionModal, setShowTakeActionModal] = useState(false);
   const router = useRouter();
+  const currentPath = usePathname();
+  const path = currentPath.split("/")[2];
 
-  const handleVerificationSuccess = () => {
-    if (buttonAction === "create-discussion") {
-      setShowDiscussionModal(true);
-    } else if (buttonAction === "create-event") {
-      router.push("/organizer/create-event");
-    } else if (buttonAction === "create-take_action") {
-      setShowTakeActionModal(true);
-    }
-  };
-
+  let type =
+    path === "eco-event"
+      ? "Create Eco-Event"
+      : path === "discussion-forums"
+      ? "Create Discussion"
+      : path === "take-action"
+      ? "Create Take-Action"
+      : "";
   return (
     <>
       <section className="w-full">
@@ -32,21 +32,12 @@ const DashboardHeaderComponent = ({ title, text, buttonAction }) => {
             {title || "Welcome back, Earth Hero!"} 🌿🌍
           </h1>
           <p className="text-light-green w-xl">
-            {text ||
-              `The Earth is lucky to have you. Let’s keep making choices that lead to a brighter, cleaner future.`}
+            The Earth is lucky to have you. Let’s keep making choices that lead
+            to a brighter, cleaner future.
           </p>
 
           <div>
-            <VerifyOrganizerComponent
-              text={
-                buttonAction === "create-discussion"
-                  ? "Create Discussion"
-                  : buttonAction === "create-event"
-                  ? "Create Eco-Event"
-                  : "Create Survey"
-              }
-              buttonAction={handleVerificationSuccess}
-            />
+            <VerifyOrganizerComponent text={type} profile={profile} />
           </div>
           <Image
             src="/badges/hero-section-dashboard.png"

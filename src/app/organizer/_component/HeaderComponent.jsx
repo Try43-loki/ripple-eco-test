@@ -10,7 +10,7 @@ import { KnockProvider } from "@knocklabs/react";
 // Format route path into readable title
 const formatRouteTitle = (path) => {
   const segments = path.split("/").filter(Boolean);
-  const lastSegment = segments[1];
+  const lastSegment = segments[1] || "";
   // regex
   return lastSegment
     .replace(/-/g, " ")

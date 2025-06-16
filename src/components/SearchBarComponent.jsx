@@ -17,7 +17,6 @@ const SearchBarComponent = ({
   const [debouncedQuery, setDebouncedQuery] = useState(""); // state to hold debounced value
   const router = useRouter();
   const pathName = usePathname();
-
   useEffect(() => {
     const handler = setTimeout(() => {
       const trimmedQuery = searchQuery.trim();

@@ -16,9 +16,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { verifyOrganizerSchema } from "@/lib/zod/VerifyOrganizerSchema";
 import { verifyOrganizerAction } from "@/action/user-action";
+import { useRouter } from "next/navigation";
 
-const VerifyOrganizerComponent = ({ text, buttonAction }) => {
+const VerifyOrganizerComponent = ({ text, profile }) => {
   const [open, setOpen] = useState(false);
+  const isVerifyOrganizer = profile?.data?.isVerifiedOrganizer;
+  const rounter = useRouter();
   const {
     register,
     handleSubmit,
@@ -27,12 +30,18 @@ const VerifyOrganizerComponent = ({ text, buttonAction }) => {
   } = useForm({
     resolver: zodResolver(verifyOrganizerSchema),
   });
-
-  const handleVerify = async (formData) => {
-    setOpen(false);
-    if (typeof buttonAction === "function") {
-      buttonAction();
+  // handle check verify Organizer
+  const handleCheckVerifyOrganizer = () => {
+    if (isVerifyOrganizer) {
+      setOpen(false);
+      if (text === "eco-event") {
+        rounter.push("/organizer/create-event");
+      }
+    } else {
+      setOpen(true);
     }
+  };
+  const handleVerify = async (formData) => {
     const data = await verifyOrganizerAction(formData);
     if (data?.success) {
       console.log(data?.message);
@@ -40,13 +49,13 @@ const VerifyOrganizerComponent = ({ text, buttonAction }) => {
     reset();
   };
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open}>
       <DialogTrigger asChild>
         <Button
-          onClick={() => setOpen(true)}
+          onClick={handleCheckVerifyOrganizer}
           className="bg-green cursor-pointer text-white rounded-xl px-6 py-3 hover:bg-green/80"
         >
-          {text || "Verify Organizer"}
+          {text}
         </Button>
       </DialogTrigger>
 

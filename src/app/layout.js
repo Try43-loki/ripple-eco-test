@@ -10,6 +10,7 @@ import FooterComponent from "@/components/FooterComponent";
 import { auth } from "../auth";
 import { getUserProfileAction } from "@/action/user-action";
 import { redirect } from "next/navigation";
+import { Provider } from "@/service/context/provider";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700"],
@@ -26,14 +27,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await auth();
-  console.log("session layout", session);
-  const profile = await getUserProfileAction();
-  console.log("profile layout", profile);
+  // const session = await auth();
+  // console.log("session layout", session);
+  // const profile = await getUserProfileAction();
+  // console.log("profile layout", profile);
 
   return (
     <html lang="en">
-      <body className={gabarito.className}>{children}</body>
+      <body className={gabarito.className}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

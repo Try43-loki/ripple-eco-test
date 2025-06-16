@@ -4,7 +4,6 @@ import {
   getAllEventTypesService,
   getAllProvincesService,
 } from "@/service/ecoEventService";
-import { get } from "react-hook-form";
 export const eventTypes = [];
 export const categories = [];
 export const certificates = [];
@@ -42,8 +41,6 @@ eventTypeData.data.forEach((prov) => {
     id: prov?.eventTypeId,
   });
 });
-
-console.log("event type : ", eventTypes);
 
 certificates.push(
   {

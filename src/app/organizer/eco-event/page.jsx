@@ -8,6 +8,7 @@ import {
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
+import { getUserProfileAction } from "@/action/user-action";
 
 export default async function EcoEventPage({
   searchParams: searchParamsPromise,
@@ -53,16 +54,13 @@ export default async function EcoEventPage({
   cardData.sort(
     (a, b) => new Date(b.startDateTime) - new Date(a.startDateTime)
   );
-
-  // const response = await getAllEcoEventService();
-  // const events = response?.data ?? [];
-  // console.log("first", events);
-
   const headerSection = {
     title: "Eco‑Event",
     text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
     link: "Create Eco‑Event",
   };
+
+  const profile = await getUserProfileAction();
 
   return (
     <main className="w-full">
@@ -71,6 +69,7 @@ export default async function EcoEventPage({
           title={headerSection.title}
           text={headerSection.text}
           link={headerSection.link}
+          profile={profile}
           buttonAction="create-event"
         />
 
