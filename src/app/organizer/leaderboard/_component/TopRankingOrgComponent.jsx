@@ -36,7 +36,8 @@ const StarRating = ({ score }) => {
   return <div className="flex gap-1">{stars}</div>;
 };
 
-export const TopRankingOrgComponent = async () => {
+export const TopRankingOrgComponent = async ({searchQuery}) => {
+  const {provinceId,categoryId} = searchQuery;
   const organizerData = await getAllOrganizerRankingService();
   const orgData = organizerData.data;
 

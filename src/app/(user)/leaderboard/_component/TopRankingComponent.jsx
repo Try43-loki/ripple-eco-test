@@ -1,18 +1,13 @@
 
 import Image from "next/image";
 import { getAllUserRankingService, getUserRankingFilterService } from "@/service/leaderboardService";
-import { SelectComponent } from "@/app/organizer/create-event/_component/SelectComponent";
 import FilterPanelComponent from "./FilterPanelComponent";
-import { filterLeaderboardAction } from "@/action/LeaderboardAction";
 
 
-const TopRankingComponent = async ({ searchParams : ParamPromise}) => {
-  const {provinceId,categoryId} = await ParamPromise || {};
-  console.log("Province ID:", provinceId);
-  console.log("Category ID:", categoryId);
-  
+const TopRankingComponent = async ({searchQuery}) => {
+  const {provinceId,categoryId} = searchQuery;
   const response = await getAllUserRankingService();
-  const filterUser = await getUserRankingFilterService(provinceId, categoryId);
+  const filterUser = await getUserRankingFilterService(provinceId,categoryId);
    const rawUsers = response.data;
 
   const rankData = filterUser?.data?.map((user) => {
@@ -45,7 +40,6 @@ const TopRankingComponent = async ({ searchParams : ParamPromise}) => {
     };
   });
 
-  console.log(rankData);
   
   return (
     <>

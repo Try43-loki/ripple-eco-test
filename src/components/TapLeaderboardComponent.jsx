@@ -7,7 +7,7 @@ import TopRankingComponent from "@/app/(user)/leaderboard/_component/TopRankingC
 import { TopRankingOrgComponent } from "@/app/organizer/leaderboard/_component/TopRankingOrgComponent";
 import { getAllUserRankingService } from "@/service/leaderboardService";
 
-export const TapLeaderboardComponent = () => {
+export const TapLeaderboardComponent = ({searchQuery}) => {
   // const TopRanking = async () => {
   // const response = await getAllUserRankingService();
   // const data = response.data;
@@ -155,13 +155,13 @@ export const TapLeaderboardComponent = () => {
       {/* Tab Contents */}
       <TabsContent value="user">
         <div className="space-y-2 mt-10">
-          <TopRankingComponent />
+          <TopRankingComponent searchQuery={searchQuery}/>
         </div>
       </TabsContent>
 
       <TabsContent value="organizer">
         <div className="space-y-2 mt-10">
-          <TopRankingOrgComponent />
+          <TopRankingOrgComponent searchQuery={searchQuery}/>
         </div>
       </TabsContent>
     </Tabs>

@@ -33,7 +33,7 @@ const FilterComponent = ({ provinceData, categoryData }) => {
     }
 
     const queryString = params.toString();
-    router.push(`/leaderboard?${queryString}`);
+    router.replace(`/leaderboard?${queryString}`,{scroll:false});
   }, [province, category]);
 
   return (
