@@ -21,9 +21,9 @@ export default async function OverviewPage() {
         {/* content */}
         <section className="grow">
           <HeaderComponent
-            title={headerSection.title}
-            text={headerSection.text}
-            buttonAction={headerSection.buttonAction}
+            title={headerSection?.title}
+            text={headerSection?.text}
+            buttonAction={headerSection?.buttonAction}
           />
           {/* total statistic */}
           <TotalStatisticComponent total={data?.data?.totals} />

@@ -135,7 +135,7 @@ export const TapLeaderboardComponent = () => {
                   className="rounded-full"
                 />
                 <Image
-                  src="/assets/leaderboard/laurel-wreath-right03.png"
+                  src="/assets/leaderboard/laurel-wreath-right-03.png"
                   alt=""
                   width={20}
                   height={64}

@@ -26,6 +26,7 @@ const nextConfig = {
     // NEXT_APIURL: "http://34.101.52.71:8883/api/v1",
     // NEXT_APIURL: "http://192.168.42.98:8883/api/v1",
     NEXT_APIURL: "https://ripple-api.kshrd.app/api/v1",
+    // NEXT_APIURL: "http://localhost:8080/api/v1",
   },
 };
 

@@ -27,15 +27,15 @@ function HeaderComponent({ profile }) {
       <div className="flex w-full justify-between items-center mb-2">
         <h1 className="text-2xl  font-bold text-green">{dynamicTitle}</h1>
         <article className="flex  justify-center items-center gap-x-4">
-          <div className="p-2 rounded-xl h-10 w-10  bg-lighter-white flex justify-center items-center">
+          {/* <div className="p-2 rounded-xl h-10 w-10  bg-lighter-white flex justify-center items-center">
             <KnockProvider
               apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY}
               userId={3}
             >
               <NotificationItem />
             </KnockProvider>
-          </div>
-          <div className="px-1 h-10 rounded-lg bg-lighter-white flex justify-center items-center gap-x-2">
+          </div> */}
+          <div className="px-3 h-12 rounded-xl bg-lighter-white flex justify-center items-center gap-x-2">
             <Avatar>
               <AvatarImage src={profile?.data?.profileImageUrl} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>

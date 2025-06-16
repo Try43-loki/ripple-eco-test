@@ -1,13 +1,19 @@
 import React from "react";
 import CardArchivesComponent from "./CardArchivesComponent";
 
-const ArchivesComponent = () => {
+const ArchivesComponent = async ({ cardData }) => {
   return (
-    <div className="flex flex-col gap-5 overflow-y-scroll">
-      <CardArchivesComponent />
-      <CardArchivesComponent />
-      <CardArchivesComponent />
-    </div>
+    <>
+      <div className="flex flex-col gap-5 overflow-y-scroll h-[350px]">
+        {cardData?.map((data, index) => (
+          <CardArchivesComponent
+            key={index}
+            cardData={data}
+            cardId={data?.eventId}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

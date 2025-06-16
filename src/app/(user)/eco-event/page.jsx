@@ -8,17 +8,17 @@ import {
   fetchFilteredEventsService,
 } from "@/service/ecoEventService";
 
-const EcoEventPage = async ({ searchParams = {} }) => {
+const EcoEventPage = async ({ searchParams: searchParamsPromise }) => {
   let cardData = [];
-
+  const searchParams = searchParamsPromise || null;
   const searchQuery = searchParams?.search || "";
-  const province = (await searchParams?.provinceId) || "";
-  const eventType = (await searchParams?.eventTypeId) || "";
-  const contributeType = (await searchParams?.contributeTypeId) || "";
-  const category = (await searchParams?.categoryId) || "";
-  const slot = (await searchParams?.slot) || "";
-  const startDate = (await searchParams?.startDate) || "";
-  const endDate = (await searchParams?.endDate) || "";
+  const province = searchParams?.provinceId || "";
+  const eventType = searchParams?.eventTypeId || "";
+  const contributeType = searchParams?.contributeTypeId || "";
+  const category = searchParams?.categoryId || "";
+  const slot = searchParams?.slot || "";
+  const startDate = searchParams?.startDate || "";
+  const endDate = searchParams?.endDate || "";
 
   const shouldFilter =
     province ||
@@ -47,6 +47,11 @@ const EcoEventPage = async ({ searchParams = {} }) => {
     const response = await getAllEcoEventService();
     cardData = response?.data ?? [];
   }
+  cardData.sort(
+    (a, b) => new Date(b.startDateTime) - new Date(a.startDateTime)
+  );
+  // const eventTypesResponse = await getAllEventTypesService();
+  // const eventTypes = eventTypesResponse?.data ?? [];
 
   const heroSectionText = {
     title: "ECO EVENT",
@@ -71,10 +76,10 @@ const EcoEventPage = async ({ searchParams = {} }) => {
           />
         </div>
 
-        <section className="px-4 md:px-20 lg:px-[150px] pb-12 mt-10">
+        <section className="px-4 md:px-20 lg:px-[180px] pb-12 mt-10">
           <FilterEcoEventComponent />
 
-          <div className="flex flex-wrap justify-start gap-5 mt-0">
+          <div className="flex flex-wrap justify-start gap-5">
             {cardData?.length > 0 ? (
               cardData.map((event) => (
                 <div key={event?.eventId}>

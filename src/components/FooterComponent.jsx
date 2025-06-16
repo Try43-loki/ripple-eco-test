@@ -76,7 +76,7 @@ const FooterComponent = () => {
         </div>
         <hr className="mt-10" />
         <div className="text-right mt-7 px-40">
-          <p>© 2025 RippleEco. All rights reserved.</p>
+          <p>Copyright © 2025 RippleEco. All rights reserved.</p>
         </div>
       </footer>
     </>

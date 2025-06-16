@@ -1,19 +1,17 @@
 import { apiRequest } from "@/utils/api";
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6dHJ1ZSwiaXNHb29nbGUiOnRydWUsImZ1bGxOYW1lIjoiU28gY2hldHJhIiwiaWQiOiJmMDQ5ZWJjYy05NDI2LTQ4MWMtYWMzYy02YTE5YzgwNjk5MzMiLCJlbWFpbCI6Im5vcm5zb2NoZXRyYUBnbWFpbC5jb20iLCJzdWIiOiJub3Juc29jaGV0cmFAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDM0NTQ4LCJleHAiOjE3NDk2OTM3NDh9.f-9Ah2WM581RrmcMTM4FiSzSz6JoOh2Inpt51okO13Y";
+import { getAuthToken } from "@/utils/auth-api";
 
 // get all volunteer requests
 export const getAllVolunteerRequestService = async (eventId) => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest(
       `/volunteer/all/${eventId}`,
-      "GET",
+      "GET", // method
       null,
-      token,
-      {
-        next: { tags: ["volunteers"] },
-      }
+      token
     );
+
     return data;
   } catch (e) {
     console.error("Error fetching volunteers:", e);
@@ -23,6 +21,7 @@ export const getAllVolunteerRequestService = async (eventId) => {
 // Approve a volunteer request
 export const approveVolunteerRequestService = async (requestId) => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest(
       `/volunteer/${requestId}`,
       "PUT",
@@ -38,6 +37,7 @@ export const approveVolunteerRequestService = async (requestId) => {
 // Reject volunteer request
 export const rejectVolunteerRequestService = async (requestId) => {
   try {
+    const token = await getAuthToken();
     const data = await apiRequest(
       `/volunteer/${requestId}`,
       "DELETE",

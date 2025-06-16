@@ -1,8 +1,10 @@
 import { z } from "zod";
+
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 const MIN_IMAGE = 1;
 const MAX_IMAGES = 15;
+
 export const createMultiImageSchema = (
   maxFileSize = MAX_FILE_SIZE,
   acceptedTypes = ACCEPTED_IMAGE_TYPES
@@ -23,15 +25,37 @@ export const createMultiImageSchema = (
   return customSingleImageSchema;
 };
 
+// Create pictures array schema
+export const createPicturesArraySchema = (
+  minImages = MIN_IMAGE,
+  maxImages = MAX_IMAGES,
+  maxFileSize = MAX_FILE_SIZE,
+  acceptedTypes = ACCEPTED_IMAGE_TYPES
+) => {
+  const singleImageSchema = createMultiImageSchema(maxFileSize, acceptedTypes);
+
+  return z
+    .array(singleImageSchema)
+    .min(
+      minImages,
+      `At least ${minImages} image${minImages > 1 ? "s" : ""} required`
+    )
+    .max(maxImages, `Maximum ${maxImages} images allowed`);
+};
+
 export const createEventSchemaFromData = (dataArrays) => {
-  const {
-    categories,
-    eventTypes,
-    certificates,
-    locations,
-    contributeType,
-    pictures,
-  } = dataArrays;
+  const { categories, eventTypes, certificates, locations, contributeType } =
+    dataArrays;
+
+  // Calculate the minimum date (7 days from today)
+  const getMinStartDate = () => {
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 7);
+    // Reset time to start of day for accurate comparison
+    minDate.setHours(0, 0, 0, 0);
+    return minDate;
+  };
 
   return z
     .object({
@@ -69,15 +93,109 @@ export const createEventSchemaFromData = (dataArrays) => {
         { errorMap: () => ({ message: "Please select contribution type" }) }
       ),
 
-      startDate: z.date({ required_error: "Start date is required" }),
+      startDate: z.date({ required_error: "Start date is required" }).refine(
+        (date) => {
+          const minDate = getMinStartDate();
+          return date >= minDate;
+        },
+        {
+          message: "Start date must be at least 7 days from today",
+        }
+      ),
+
       endDate: z.date({ required_error: "End date is required" }),
+
+      // Add pictures validation
+      pictures: createPicturesArraySchema(MIN_IMAGE, MAX_IMAGES),
     })
     .refine((data) => data.endDate >= data.startDate, {
       message: "End date must be after start date",
       path: ["endDate"],
-    });
+    })
+    .refine(
+      (data) => {
+        // Additional validation: end date should be reasonable (not too far in future)
+        const maxFutureDate = new Date();
+        maxFutureDate.setFullYear(maxFutureDate.getFullYear() + 2); // 2 years from now
+        return data.endDate <= maxFutureDate;
+      },
+      {
+        message: "End date cannot be more than 2 years in the future",
+        path: ["endDate"],
+      }
+    );
 };
 
+// Helper function to get minimum start date (for UI display)
+export const getMinimumStartDate = () => {
+  const today = new Date();
+  const minDate = new Date(today);
+  minDate.setDate(today.getDate() + 8);
+  return minDate;
+};
+
+// Helper function to format the minimum date for display
+export const getMinimumStartDateString = () => {
+  const minDate = getMinimumStartDate();
+  return minDate.toLocaleDateString();
+};
+
+// Validation helper for pictures (can be used for real-time validation)
+export const validatePicturesArray = (files) => {
+  if (!files || !Array.isArray(files)) {
+    return { isValid: false, errors: ["Pictures must be an array"] };
+  }
+
+  if (files.length < MIN_IMAGE) {
+    return {
+      isValid: false,
+      errors: [
+        `At least ${MIN_IMAGE} image${MIN_IMAGE > 1 ? "s" : ""} required`,
+      ],
+    };
+  }
+
+  if (files.length > MAX_IMAGES) {
+    return {
+      isValid: false,
+      errors: [`Maximum ${MAX_IMAGES} images allowed`],
+    };
+  }
+
+  const errors = [];
+
+  files.forEach((file, index) => {
+    if (!(file instanceof File)) {
+      errors.push(`Item ${index + 1} is not a valid file`);
+      return;
+    }
+
+    // Check file size
+    if (file.size > MAX_FILE_SIZE) {
+      errors.push(
+        `File ${index + 1} (${file.name}) exceeds ${
+          MAX_FILE_SIZE / (1024 * 1024)
+        }MB limit`
+      );
+    }
+
+    // Check file type
+    if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
+      errors.push(
+        `File ${index + 1} (${
+          file.name
+        }) format not supported. Only ${ACCEPTED_IMAGE_TYPES.map(
+          (type) => type.split("/")[1]
+        ).join(", ")} allowed`
+      );
+    }
+  });
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+};
 export const inviteFriendSchema = z.object({
   email: z
     .string()

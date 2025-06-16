@@ -21,18 +21,18 @@ import {
 export function ChartComponent({ eventTypeStats }) {
   const chartData = [
     {
-      handsOnEvent: eventTypeStats.eventTypeCount[0].eventCount,
-      seminar: eventTypeStats.eventTypeCount[1].eventCount,
+      handsOnEvent: eventTypeStats?.eventTypeCount[0]?.eventCount,
+      seminar: eventTypeStats?.eventTypeCount[1]?.eventCount,
     },
   ];
 
   const chartConfig = {
     handsOnEvent: {
-      label: eventTypeStats.eventTypeCount[0].type,
+      label: eventTypeStats?.eventTypeCount[0]?.type,
       color: "hsl(var(--chart-1))",
     },
     seminar: {
-      label: eventTypeStats.eventTypeCount[0].type,
+      label: eventTypeStats?.eventTypeCount[0]?.type,
       color: "hsl(var(--chart-2))",
     },
   };

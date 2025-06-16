@@ -1,6 +1,5 @@
 import React from "react";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { TabsContent } from "@radix-ui/react-tabs";
@@ -20,25 +19,17 @@ import TakeActionComponent from "./_component/TakeActionComponent";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
 import DisccusionComponent from "./_component/DisccusionComponent";
 import EditprofileComponent from "@/app/organizer/profile/_component/EditprofileComponent";
-import CardEcoEventComponent from "@/components/CardEcoEventComponent";
-import { getCurrentUserProfileService } from "@/service/profileService";
-import { getOwnTakeActionService } from "@/service/takeActionService";
-import { getAllOwnDiscussionsService } from "@/service/discussionService";
-import { getAllEcoEventService } from "@/service/ecoEventService";
-import FilterEventHistory from "./_component/FilterEventHistory";
-import { getAllBagdeService } from "@/service/badgeService";
+import { getCurrentUserProfileService } from "@/service/profileService"; 
+import { getAllBagdeService, getBadgeByUserIDService } from "@/service/badgeService";
+import EvenHistoryComponent from "./_component/EvenHistoryComponent";
+import BadgeComponent from "@/app/organizer/profile/_component/BadgeComponent";
 const ProfilePage = async () => {
-  const response2 = await getOwnTakeActionService();
-  const ownTakeActionData = response2?.data || [];
-  const response = await getCurrentUserProfileService();
-  const userData = response?.data || [];
-  const response3 = await getAllOwnDiscussionsService();
-  const ownDiscussionsData = response3?.data || [];
-  const response4 = await getAllEcoEventService();
-  const cardData = response4?.data ?? [];
+  const userData = await getCurrentUserProfileService() ;
+  const userID = userData?.data?.appUserId;
   const badgeData = await getAllBagdeService();
+  const totalBadgesTotal = await getBadgeByUserIDService(userID);
+
   const badge = badgeData?.data;
-  const data = null;
   return (
     <main>
       <HeroSectionComponent
@@ -49,32 +40,32 @@ const ProfilePage = async () => {
       <article className="flex items-end gap-10 rounded-3xl mx-36 justify-end pr-10 py-7 relative -mt-28 bg-white shadow-lg">
         <div className="w-1/4">
           <img
-            src={userData?.profileImageUrl}
-            alt={`${userData?.firstName} ${userData?.lastName}`}
+            src={userData?.data?.profileImageUrl}
+            alt={`${userData?.data?.firstName} ${userData?.lastName}`}
             className="w-[170px] h-[170px] rounded-full absolute -top-10 left-20"
           />
         </div>
         <div className="space-y-2 w-3/4">
-          <h2 className="text-[30px] text-green">{`${userData?.firstName} ${userData?.lastName}`}</h2>
-          <p className="text-[20px] text-black">{userData?.bio}</p>
+          <h2 className="text-[30px] text-green">{`${userData?.data?.firstName} ${userData?.data?.lastName}`}</h2>
+          <p className="text-[20px] text-black">{userData?.data?.bio}</p>
           <div className="flex items-center gap-10">
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <Phone className="w-4.5 h-4.5" />
-              <p>{userData?.phoneNumber}</p>
+              <p>{userData?.data?.phoneNumber}</p>
             </div>
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <MapPin className="w-4.5 h-4.5" />
-              <p>{userData?.address}</p>
+              <p>{userData?.data?.address}</p>
             </div>
             <div className="flex items-center text-sub-info text-strong-gray gap-1.5">
               <Mail className="w-4.5 h-4.5" />
-              <p>{userData?.email}</p>
+              <p>{userData?.data?.email}</p>
             </div>
           </div>
         </div>
-        <Button className="bg-meduim-green hover:bg-green text-white px-5 py-3.5 rounded-xl text-base">
+        <div className="bg-meduim-green hover:bg-green text-white px-5 py-1 rounded-xl text-base">
           <EditprofileComponent title={"Edit Profile"} userData={userData}/>
-        </Button>
+        </div>
       </article>
 
       <section className="mt-12 mx-36">
@@ -137,47 +128,21 @@ const ProfilePage = async () => {
           </TabsContent>
 
           <TabsContent value="discussion" className="w-full mt-5 mb-10">
-            <DisccusionComponent disccusionData={ownDiscussionsData} />
+            <DisccusionComponent />
           </TabsContent>
 
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-            <TakeActionComponent cardData={ownTakeActionData} />
+            <TakeActionComponent/>
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">
             <section className="flex">
-              {badge?.map((data, index) =>
-              <div className="flex flex-col items-center gap-y-1" key={index}>
-                <Image
-                src={data?.badge?.image}
-                alt="badges"
-                width={160}
-                height={50}
-                className=""
-                />
-                <h2>{data?.badge?.title}</h2>
-                <p>Point: {data?.badge?.point}</p>
-              </div>
-              )}
+              <BadgeComponent badge={badge} totalBadges={totalBadgesTotal}/>
             </section>
           </TabsContent>
 
-          <TabsContent value="event-history" className="px-4 md:px-20 lg:px-[150px] pb-12 mt-10 w-full  mb-10">
-              <FilterEventHistory/>
-
-              <div className="flex flex-wrap justify-start gap-5 mt-0">
-                {cardData?.length > 0 ? (
-                  cardData.map((event) => (
-                    <div key={event?.eventId}>
-                      <CardEcoEventComponent event={event} />
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-red text-center w-full">
-                    No events found.
-                  </p>
-                )}
-              </div>
+          <TabsContent value="event-history" className=" pb-12 mt-10 w-full mb-10">
+            <EvenHistoryComponent userID={userID}/>
           </TabsContent>
         </Tabs>
       </section>

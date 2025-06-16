@@ -5,6 +5,7 @@ import {
   forgetPasswordService,
   loginService,
   loginSocialService,
+  loginWithGoogleService,
   registerService,
   registerWithGoogleService,
   setPasswordService,
@@ -162,6 +163,7 @@ export const updatePasswordAction = async (password, email, otp) => {
 export const registerWithGoogleAction = async (formData) => {
   try {
     const res = await registerWithGoogleService(formData);
+
     if (res?.status == 409) {
       return {
         success: false,
@@ -169,13 +171,25 @@ export const registerWithGoogleAction = async (formData) => {
       };
     }
 
-    console.log("res: ", res);
     return { success: true, data: res };
   } catch (err) {
     console.error("Registration error:", err);
     return {
       success: false,
       message: "Google registration failed.",
+    };
+  }
+};
+export const loginWithGoogleAction = async (formData) => {
+  try {
+    const res = await loginWithGoogleService(formData);
+    console.log("res: ", res);
+    return { success: true, data: res };
+  } catch (err) {
+    console.error("login error:", err);
+    return {
+      success: false,
+      message: "Google login failed.",
     };
   }
 };
