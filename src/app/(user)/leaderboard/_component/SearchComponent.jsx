@@ -18,13 +18,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { locations } from "@/data";
+import { getAllProvincesService } from "@/service/ecoEventService";
+import { getUserFilterService } from "@/service/leaderboardService";
+// import { locations } from "@/data";
 
 export default function SearchComponent() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [data, setData] = React.useState([]); 
+  // const [loading, setLoading] = React.useState(true);
 
-  const data = locations;
  React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,51 +39,26 @@ export default function SearchComponent() {
     };
     fetchData();
   }, []);
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
-    <Popover open={open} onOpenChange={setOpen} className="w-full border-none">
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          className="  justify-between border-none font-light bg-lighter-white text-gray-600 hover:bg-lighter-white hover:text-gray-600"
-        >
-          {value
-            ? data.find((item) => item.value === value)?.label
-            : "Select Province"} 
-          <ChevronsUpDown className="opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-full p-0 border border-light-strok text-gray-600">
-        <Command className=" bg-white">
-          <CommandInput placeholder="Search Province..." className="h-9 " />
-          <CommandList>
-            <CommandEmpty>No Province found.</CommandEmpty>
-            <CommandGroup>
-              {data?.map((item) => (
-                <CommandItem
-                  key={item.value}
-                  value={item.value}
-                  onSelect={() => {
-                    setValue(item.value);
-                    setOpen(false);
-                    console.log("Selected Province:", item.value);
-                  }}
-                >
-                  {item?.label}
-                  <Check
-                    className={cn(
-                      "ml-auto",
-                      value === item.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+    // <Popover open={open} onOpenChange={setOpen} className="w-full border-none">
+    //   <PopoverTrigger asChild>
+    //     <Button
+    //       variant="outline"
+    //       role="combobox"
+    //       aria-expanded={open}
+    //       onClick={() => setOpen(!open)}
+    //       className="  justify-between border-none font-light bg-lighter-white text-gray-600 hover:bg-lighter-white hover:text-gray-600"
+    //     >
+    //       {value
+    //         ? data.find((item) => item.value === value)?.label
+    //         : "Select Province"} 
+    //       <ChevronsUpDown className="opacity-50" />
+    //     </Button>
+    //   </PopoverTrigger>
+    // </Popover>
+    <p>hello!!!</p>
   );
 }

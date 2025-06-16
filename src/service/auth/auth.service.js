@@ -3,7 +3,7 @@ import { baseUrl } from "../constants";
 import headerToken from "@/utils/headerToken";
 import { apiRequest } from "@/utils/api";
 
-export const loginService = async ({ email, password }) => {
+export const loginService = async (email, password) => {
   try {
     const res = await fetch(`${baseUrl}/auths/login`, {
       method: "POST",
@@ -16,9 +16,6 @@ export const loginService = async ({ email, password }) => {
       }),
     });
     const data = await res.json();
-    if (!data) {
-      redirect("/login");
-    }
     return data;
   } catch (e) {
     console.log(e);
@@ -42,9 +39,9 @@ export const registerService = async (registerData) => {
   }
 };
 
-export const verifyOtpService = async (formData) => {
+export const verifyOtpService = async (formData, type) => {
   try {
-    const res = await fetch(`${baseUrl}/auths/verify-otp?type=REGISTER`, {
+    const res = await fetch(`${baseUrl}/auths/verify-otp?type=${type}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,24 +90,44 @@ export const addInfomationService = async (formData) => {
   }
 };
 
-// export const registerWithGoogleService = async (formData) => {
-//   try {
-//     const res = await fetch(`${baseUrl}/auths/google-signup`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Accept: "*/*",
-//       },
-//       body: JSON.stringify(formData),
-//     });
-//     const data = await res.json();
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
-// services/authService.js
-export const registerWithGoogleService = async (formData) => {
-  return await apiRequest("/auths/google-signup", "POST", formData);
+export const forgetPasswordService = async (email) => {
+  try {
+    const data = await apiRequest(
+      `/auths/forgot-password?email=${email}`,
+      "POST",
+      {
+        email: email,
+      }
+    );
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };
+
+export const updatePasswordService = async (formData) => {
+  try {
+    const data = await apiRequest("/auths/reset-password", "PUT", formData);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const registerWithGoogleService = async (formData) => {
+  try {
+    const res = await fetch(`${baseUrl}/auths/google-signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+

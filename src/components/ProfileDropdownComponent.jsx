@@ -1,5 +1,4 @@
 import { dologout } from "@/action/loginSocialAction";
-import { getUserProfileAction } from "@/action/user-action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +11,7 @@ import { ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
 
 export function ProfileDropdownComponent({ operator, profile }) {
-  const img = profile?.data?.profileImage;
+  const img = profile?.data?.profileImageUrl;
   const first = profile?.data?.firstName.charAt(0);
   const last = profile?.data?.lastName.charAt(0);
   const name = first + last;
@@ -20,15 +19,21 @@ export function ProfileDropdownComponent({ operator, profile }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        {img ? (
-          <img
-            src={img}
-            alt="avatar"
-            className="w-[30px] h-[30px] rounded-full cursor-pointer"
-          />
+        {operator === "organizer" ? (
+          <ChevronDown className="text-lighter-green cursor-pointer" />
         ) : (
-          <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">
-            <p>{name || "N"}</p>
+          <div>
+            {img ? (
+              <img
+                src={img}
+                alt="avatar"
+                className="w-[30px] h-[30px] rounded-full cursor-pointer"
+              />
+            ) : (
+              <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">
+                <p>{name || "N"}</p>
+              </div>
+            )}
           </div>
         )}
       </PopoverTrigger>
@@ -43,7 +48,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
           </Link>
           <Button
             onClick={dologout}
-            className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
+            className="flex cursor-pointer justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <LogOut className="text-lighter-green" />
             <h3 className="text-lighter-green text-lg">Logout</h3>

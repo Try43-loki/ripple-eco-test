@@ -1,13 +1,16 @@
 import React from "react";
-import SearchComponent from "./SearchComponent";
-import { SelectComponent } from "./SelectComponent";
+
 import Image from "next/image";
-import { getAllUserRankingService } from "@/service/leaderboardService";
+import { getAllUserRankingService, getUserRankingFilterService } from "@/service/leaderboardService";
+import { SelectComponent } from "@/app/organizer/create-event/_component/SelectComponent";
+import FilterPanelComponent from "./FilterPanelComponent";
+
 
 const TopRankingComponent = async () => {
   const response = await getAllUserRankingService();
+ const user = await getUserRankingFilterService();
+   const rawUsers = response.data;
 
-  const rawUsers = response.data;
   const rankData = rawUsers.map((user) => {
     let leftIcon = null;
     let rightIcon = null;
@@ -39,7 +42,7 @@ const TopRankingComponent = async () => {
   });
   return (
     <>
-      <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
+      <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between ">
         {/* Header */}
         <div>
           <h2 className="text-lg lg:text-xl xl:text-2xl text-dark-green font-bold">
@@ -47,13 +50,8 @@ const TopRankingComponent = async () => {
           </h2>
         </div>
 
-        <article className="flex gap-3 text-md md:text-lg lg:text-xl items-center justify-start">
-          <div className="w-full">
-            <p className="text-green">Filter by:</p>
-          </div>
-          <SearchComponent />
-          <SelectComponent operator={"Categories"} />
-        </article>
+        <FilterPanelComponent/>
+        
       </section>
 
       <section className="pt-10 bg-white mb-15">

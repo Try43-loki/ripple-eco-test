@@ -53,7 +53,10 @@ export function DatePickerComponent({
           <CalendarIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent
+        className="bg-white border-light-strok w-auto p-0"
+        align="center"
+      >
         <Calendar
           mode="single"
           selected={selectedDate}

@@ -1,12 +1,22 @@
-import SearchBarComponent from "@/components/SearchBarComponent";
-import { ChevronDown } from "lucide-react";
+"use client";
+
 import Image from "next/image";
 import React from "react";
-import CardInformationAQI from "./CardInformationAQIComponent";
 import MultiSelectDropdown from "./MultiSelectDropdownComponent";
-import { formatValue } from "@/utils/format";
+import { usePathname, useSearchParams } from "next/navigation";
+import CardInformationAQIComponent from "./CardInformationAQIComponent";
 
-const HeroSectionAirDisasterComponent = ({ provincesList }) => {
+const HeroSectionAirDisasterComponent = ({
+  provincesList,
+  provinceData,
+  levelColor,
+}) => {
+  const { mainPollution } = provinceData;
+
+  // Get Current Province or District
+  const pathName = usePathname();
+  const path = pathName.split("/")[2];
+
   return (
     <>
       <Image
@@ -20,11 +30,11 @@ const HeroSectionAirDisasterComponent = ({ provincesList }) => {
           <div className="flex flex-col gap-8 w-full justify-between">
             <div className="flex flex-col gap-1 items-start">
               <h2 className="font-bold  text-2xl lg:text-4xl">
-                Air Quality In {formatValue()}
+                Air Quality In {path || "Phnom Penh"}
               </h2>
               <p className="text-sm lg:text-xl max-w-xl">
-                Air quality index (AQI*) and {formatValue()} air pollution in{" "}
-                {formatValue()}
+                Air quality index (AQI*) and {mainPollution || "Phnom Penh"} air
+                pollution in {path || "Phnom Penh"}
               </p>
             </div>
             <div className="w-2xl text-dark-gray ">
@@ -32,10 +42,10 @@ const HeroSectionAirDisasterComponent = ({ provincesList }) => {
             </div>
           </div>
           <div className="flex-shrink-0">
-            {/* <CardInformationAQI
-              dataCard={props.dataCard}
-              levelColor={props.levelColor}
-            /> */}
+            <CardInformationAQIComponent
+              provinceData={provinceData}
+              levelColor={levelColor}
+            />
           </div>
         </article>
       </div>

@@ -1,8 +1,10 @@
 "use client";
-import { setPasswordAction } from "@/action/auth-action";
+import { setPasswordAction, updatePasswordAction } from "@/action/auth-action";
+import { getUserProfileAction } from "@/action/user-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { setPasswordSchema } from "@/lib/zod/setPasswordShecma";
+import { checkRole } from "@/utils/check";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronLeftCircleIcon,
@@ -16,7 +18,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-function SetPasswordComponent({ onNext, onPrev, email }) {
+function SetPasswordComponent({ onNext, onPrev, email, otp }) {
+  const rounter = useRouter();
   const pathName = usePathname();
   const [showPassword, setShowPassword] = useState(false);
   const [showCfPassword, setShowCfPassword] = useState(false);
@@ -30,6 +33,7 @@ function SetPasswordComponent({ onNext, onPrev, email }) {
     passwordsMatch: false,
   });
   const router = useRouter();
+  const currentPath = usePathname();
 
   const {
     register,
@@ -73,8 +77,19 @@ function SetPasswordComponent({ onNext, onPrev, email }) {
 
   const handelPassword = async (formData) => {
     const password = formData.password;
-    const isSuccess = await setPasswordAction(password, email);
-    if (isSuccess?.success) {
+
+    const isSet =
+      currentPath === "/register"
+        ? await setPasswordAction(password, email)
+        : await updatePasswordAction(password, email, otp);
+    if (isSet?.success && currentPath === "/register") {
+      const profile = await getUserProfileAction();
+      if (profile?.data?.organizer) {
+        rounter.push("/organizer/overview");
+      } else {
+        rounter.push("/home");
+      }
+    } else {
       onNext();
     }
   };
@@ -87,7 +102,6 @@ function SetPasswordComponent({ onNext, onPrev, email }) {
     setShowCfPassword(!showCfPassword);
   };
 
-  // Check if all validations pass
   const isFormValid = Object.values(validationState).every(Boolean);
 
   return (
@@ -320,7 +334,7 @@ function SetPasswordComponent({ onNext, onPrev, email }) {
             <Button
               type="submit"
               disabled={!isFormValid}
-              className={`w-full text-white rounded-xl mt-4 h-11 text-md ${
+              className={`w-full text-white rounded-xl cursor-pointer mt-4 h-11 text-md ${
                 isFormValid
                   ? "bg-strong-green hover:bg-green-800"
                   : "bg-gray-500 cursor-not-allowed"

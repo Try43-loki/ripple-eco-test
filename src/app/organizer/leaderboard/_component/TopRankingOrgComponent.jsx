@@ -1,11 +1,10 @@
 import React from "react";
 import { Star } from "lucide-react";
 
-// import SearchComponent from "./SearchComponent";
 import Image from "next/image";
-import SearchComponent from "@/app/(user)/leaderboard/_component/SearchComponent";
 import { SelectComponent } from "../../create-event/_component/SelectComponent";
 import { getAllOrganizerRankingService } from "@/service/leaderboardService";
+import FilterPanelComponent from "@/app/(user)/leaderboard/_component/FilterPanelComponent";
 
 export const TopRankingOrgComponent = async() => {
   const organizerData = await getAllOrganizerRankingService();
@@ -51,16 +50,7 @@ export const TopRankingOrgComponent = async() => {
           </h2>
         </div>
 
-        <article className="flex gap-3 text-md md:text-lg lg:text-xl items-center justify-start ">
-          <div className="w-full">
-            <p className=" text-green ">Filter by:</p>
-          </div>
-          {/* province */}
-          <SearchComponent />
-
-          {/* category type */}
-          <SelectComponent operator={"Categories"} />
-        </article>
+        <FilterPanelComponent />
       </section>
 
       <section className="pt-10 bg-white mb-15">

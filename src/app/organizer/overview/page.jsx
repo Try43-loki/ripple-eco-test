@@ -6,8 +6,10 @@ import UpcomingEventComponent from "./_component/UpcomingEventComponent";
 import { ChartComponent } from "./_component/ChartComponent";
 import ProgressComponent from "./_component/ProgressComponent";
 import ListVolunteerComponent from "./_component/ListVolunteerComponent";
+import { getDashboardDataService } from "@/service/dashboardService";
 
-function OverviewPage() {
+export default async function OverviewPage() {
+  const data = await getDashboardDataService();
   const headerSection = {
     title: "Welcome back, Earth Hero!",
     text: "The Earth is lucky to have you. Let’s keep making choices that lead to a brighter, cleaner future.",
@@ -24,25 +26,32 @@ function OverviewPage() {
             buttonAction={headerSection.buttonAction}
           />
           {/* total statistic */}
-          <TotalStatisticComponent />
+          <TotalStatisticComponent total={data?.data?.totals} />
           <section className="flex justify-center items-start gap-x-5 mt-5">
             {/* chart */}
-            <ChartComponent className="h-full" />
+            <ChartComponent
+              eventTypeStats={data?.data?.eventTypeStats}
+              className="h-full"
+            />
             {/*progress bar  */}
-            <ProgressComponent className="h-full" />
+            <ProgressComponent
+              totalEvents={data?.data?.eventTypeStats.totalEvents}
+              eventCategoryStats={data?.data?.eventCategoryStats}
+              className="h-full"
+            />
           </section>
           {/* list volunteer */}
-          <ListVolunteerComponent />
+          <ListVolunteerComponent
+            latestVolunteersRequest={data?.data?.latestVolunteersRequest}
+          />
         </section>
         {/* side right content */}
         <section className="w-2/9">
           <CurrentDayComponent />
           {/* up comming event */}
-          <UpcomingEventComponent />
+          <UpcomingEventComponent upcomingEvent={data?.data?.upcomingEvent} />
         </section>
       </section>
     </>
   );
 }
-
-export default OverviewPage;

@@ -1,7 +1,10 @@
 import { apiRequest } from "@/utils/api";
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJzbyBjaGV0cmEiLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDkxMTAwOTIsImV4cCI6MTc0OTM2OTI5Mn0.EuDDPgDyThOKXpbJPzqMh-g-TgBuXzHQmO2fNP9CYZg";
+import { getAuthToken } from "@/utils/auth-api";
 
+// const token = getAuthToken();
+const token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJpc09yZ2FuaXplciI6ZmFsc2UsImlzR29vZ2xlIjpmYWxzZSwiZnVsbE5hbWUiOiJTbyBDaGV0cmEga2siLCJpZCI6IjFjYzQxYzM0LTllZDgtNGI2MS04ODI1LTJiNjM3MGJmZDJlYSIsImVtYWlsIjoieWFuZWthaDQwMEBjaWdpZGVhLmNvbSIsInN1YiI6InlhbmVrYWg0MDBAY2lnaWRlYS5jb20iLCJpYXQiOjE3NDk0Mzc5NDgsImV4cCI6MTc0OTY5NzE0OH0.mWHvh3k2gjC5U8MJQZ2tWHN2s3KIFhj0CYirya2jKhU";
+// console.log("token",token);
 export const getCurrentUserProfileService = async () => {
   try {
     const data = await apiRequest("/profile", "GET", null, token);
@@ -21,11 +24,12 @@ export const viewUserProfileService = async (userId) => {
 export const editUserProfileService = async (userData) => {
   try {
     const data = await apiRequest(
-      "/profile/update/user",
+      `/profile/update/user`,
       "PUT",
       userData,
       token
     );
+
     return data;
   } catch (e) {
     console.log("error", e);

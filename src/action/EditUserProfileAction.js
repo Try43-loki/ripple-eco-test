@@ -17,7 +17,7 @@ export const getEditUserProfileData = async (formData) => {
             bio: formData.bio,
         };
         const edit =  await editUserProfileService(userData);
-        return { success: true, message: 'Student added successfully' }
+        return edit;
     } catch (e){
         console.log( "error",e);
     }

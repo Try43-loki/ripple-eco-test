@@ -1,4 +1,9 @@
 "use client";
+import {
+  forgetPasswordAction,
+  registerAction,
+  verifyOTPAction,
+} from "@/action/auth-action";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { LoginShecma } from "@/lib/zod/LoginShecma";
@@ -8,14 +13,23 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function ResetPasswordCopmponent({ onNext }) {
+function ResetPasswordCopmponent({ onNext, handleEmailChange }) {
+  const [message, setMessage] = React.useState("");
   const {
     handleSubmit,
     register,
     formState: { errors },
     reset,
   } = useForm();
-  const handleEmail = (formData) => {
+  const handleEmail = async (formData) => {
+    const res = await forgetPasswordAction(formData);
+    if (res?.success) {
+      handleEmailChange(formData.email);
+      setMessage("");
+      onNext();
+    } else {
+      setMessage(res?.message);
+    }
     reset();
   };
 
@@ -68,6 +82,7 @@ function ResetPasswordCopmponent({ onNext }) {
                     placeholder="exaple@gmaill.com"
                     {...register("email")}
                   />
+                  <p className="text-red-400 text-sm mt-1">{message}</p>
                 </div>
                 <Button
                   type="submit"

@@ -17,9 +17,11 @@ const formatRouteTitle = (path) => {
     .replace(/\b\w/g, (l) => l.toUpperCase());
 };
 
-function HeaderComponent() {
+function HeaderComponent({ profile }) {
   const pathname = usePathname();
   const dynamicTitle = formatRouteTitle(pathname);
+  const fullName = profile?.data?.firstName + " " + profile?.data?.lastName;
+
   return (
     <>
       <div className="flex w-full justify-between items-center mb-2">
@@ -35,11 +37,11 @@ function HeaderComponent() {
           </div>
           <div className="px-1 h-10 rounded-lg bg-lighter-white flex justify-center items-center gap-x-2">
             <Avatar>
-              <AvatarImage src="/icons/UNEP.png" alt="@shadcn" />
+              <AvatarImage src={profile?.data?.profileImageUrl} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <h2 className="truncate w-32 text-md font-semibold text-light-green">
-              United Nations Environment Program (UNEP)
+              {fullName}
             </h2>
 
             <ProfileDropdownComponent operator={"organizer"} />

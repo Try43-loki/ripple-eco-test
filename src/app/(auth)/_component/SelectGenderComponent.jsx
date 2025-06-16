@@ -27,9 +27,9 @@ export function SelectGenderComponent({ control }) {
               </SelectGroup>
             </SelectContent>
           </Select>
-          {fieldState.error && (
+          {/* {fieldState.error && (
             <p className="text-red-500 text-xs">{fieldState.error.message}</p>
-          )}
+          )} */}
         </div>
       )}
     />

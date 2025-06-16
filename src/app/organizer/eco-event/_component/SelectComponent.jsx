@@ -16,7 +16,7 @@ import {
   eventTypes,
   locations,
   slots,
-} from "@/data";
+} from "@/utils/data";
 
 export function SelectComponent({ operator }) {
   let data = [];

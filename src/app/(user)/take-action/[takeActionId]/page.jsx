@@ -11,7 +11,7 @@ import {
 import TakeActionDetailCard from "../_component/TakeActionDetailCard";
 import TakeActionFormComponent from "../_component/TakeActionFormComponent";
 import TakeActionNoImageCardComponent from "@/app/organizer/take-action/_component/TakeActionNoImageCardComponent";
-import { getAllTakeActionService } from "@/service/takeActionService";
+import { getAllTakeActionService, getTakeActionByIDService } from "@/service/takeActionService";
 import { viewUserProfileService } from "@/service/profileService";
 const TakeActionDetailPage =  async ( { params , searchParams}) => {
   // const pathName = usePathname();
@@ -21,9 +21,8 @@ const TakeActionDetailPage =  async ( { params , searchParams}) => {
   const view = searchParams?.view;
   const owner = searchParams?.owner;
   const id = params?.takeActionId;
-  const cardData = await getAllTakeActionService();
-  const cardDetail = cardData?.data?.find((item) => item.takeActionId === id);
-  const userData = await viewUserProfileService(cardDetail?.appUserId);
+  const cardDetail = await getTakeActionByIDService(id);
+  const userData = await viewUserProfileService(cardDetail?.data?.appUser?.appUserId);
   return (
     <main>
       <HeroSectionComponent
@@ -45,7 +44,7 @@ const TakeActionDetailPage =  async ( { params , searchParams}) => {
             ></BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink className="text-green">
-                {cardDetail?.title}
+                {cardDetail?.data?.title}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -54,17 +53,12 @@ const TakeActionDetailPage =  async ( { params , searchParams}) => {
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5">
         <TakeActionDetailCard
           userData={userData}
+          cardDetail={cardDetail}
           view={view}
-          image={cardDetail?.image}
-          description={cardDetail?.description}
-          title={cardDetail?.title}
-          numberOfSupporter={cardDetail?.numberOfSupporter}
-          destination={cardDetail?.destinationPerson}
-          createdAt={cardDetail?.createdAt}
         />
       </section>
       <section className="w-full my-6 px-6 md:px-20 lg:px-37.5 mt-12 mb-24">
-        {owner == "false" && <TakeActionFormComponent />}
+        {owner == "false" && <TakeActionFormComponent takeActionId={id}/>}
       </section>
       <section className="w-full flex flex-col gap-5 my-6 px-6 md:px-20 lg:px-37.5">
         {owner == "true" && (

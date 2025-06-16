@@ -5,20 +5,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { deleteTakeActionService } from "@/service/takeActionService";
 
 import { Ellipsis, OctagonX } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const DeleteComponent = ({ cardId }) => {
   const router = useRouter();
+  
   const handleDelete = async () => {
-    try {
-      await deleteTakeActionService(cardId);
-      router.refresh()
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await deleteTakeAction(cardId);
+    console.log("Heees",res);
+    router.refresh();
   };
   return (
     <Popover>

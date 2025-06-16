@@ -37,7 +37,7 @@ const AirQualityComponent = ({ dataCard, levelColor }) => {
             <h3 className="text-dark-gray text-lg">Humidity</h3>
           </div>
           <p className="flex justify-end items-center gap-1.5 text-2xl font-semibold text-dark-gray w-full">
-            {dataCard?.humidity} <span className="text-2xl">%</span>
+            {dataCard?.humidityPercent} <span className="text-2xl">%</span>
           </p>
         </div>
         {/* Card 3 */}
@@ -72,7 +72,7 @@ const AirQualityComponent = ({ dataCard, levelColor }) => {
             </h2>
             <div className="flex gap-1.5 items-center">
               <span className=" text-dark-gray text-2xl font-semibold">
-                {dataCard?.pollutant} - {dataCard?.pollutantValue}
+                {dataCard?.mainPollution} - {dataCard?.concentration}
               </span>
               <span className=" text-dark-gray text-xl font-medium">
                 µg/m<sup>3</sup>

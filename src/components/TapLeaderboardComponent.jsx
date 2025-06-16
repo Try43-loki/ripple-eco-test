@@ -8,12 +8,13 @@ import { TopRankingOrgComponent } from "@/app/organizer/leaderboard/_component/T
 import { getAllUserRankingService } from "@/service/leaderboardService";
 
 export const TapLeaderboardComponent = () => {
-  const TopRankingComponent = async () => {
-  const response = await getAllUserRankingService();
-  const data = response.data;
-  console.log("leader", data);
-  }
+  // const TopRanking = async () => {
+  // const response = await getAllUserRankingService();
+  // const data = response.data;
+  // console.log("leader", data);
+  // }
   return (
+    
     <Tabs defaultValue="user" className="w-full">
       {/* Tab Buttons */}
       <TabsList className="relative h-auto bg-white rounded-3xl border border-light-gray  shadow-sm overflow-visible flex flex-col w-full md:flex-row lg:flex-col p-6 sm:p-8 md:p-10 lg:p-12">
@@ -164,5 +165,6 @@ export const TapLeaderboardComponent = () => {
         </div>
       </TabsContent>
     </Tabs>
+   
   );
 };
