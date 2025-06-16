@@ -71,7 +71,7 @@ const PopupTakeActionForm = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-auto bg-green cursor-pointer hover:bg-strong-green text-light-white hover:text-lighter-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:px-5 md:py-4">
+        <Button className="w-auto bg-green cursor-pointer hover:bg-strong-green text-light-white hover:text-lighter-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:px-5 md:py-6">
           Create Take Action
         </Button>
       </DialogTrigger>
