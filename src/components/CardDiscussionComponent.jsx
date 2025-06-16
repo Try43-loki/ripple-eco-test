@@ -16,8 +16,14 @@ import Link from "next/link";
 
 import UpdateDiscussionComponent from "./UpdateDiscussionComponent";
 import DeleteDiscussionComponent from "./DeleteDiscussionComponent";
+import { viewUserProfileService } from "@/service/profileService";
 
-const CardDiscussionComponent = ({ discussions, currentUserId }) => {
+const CardDiscussionComponent = ({
+  discussions,
+  otherUserId,
+  otherUser,
+  currentUser,
+}) => {
   const formatTime = useTimeFormat();
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -25,7 +31,11 @@ const CardDiscussionComponent = ({ discussions, currentUserId }) => {
 
   // Check owner post
   const postOwnerId = discussions?.appUser?.appUserId;
-  const isOwner = postOwnerId === currentUserId;
+  const isOwner = postOwnerId === otherUserId;
+  const isOrgOther = otherUser?.data?.organizer;
+  const currentUserId = currentUser?.data?.appUserId;
+  const isOrganizer = currentUser?.data?.organizer;
+  // console.log("first", currentUser?.data?.organizer);
 
   return (
     <div className="w-full mt-8 space-y-8">
@@ -35,14 +45,20 @@ const CardDiscussionComponent = ({ discussions, currentUserId }) => {
           <div className="flex justify-between items-start w-full">
             <div className="flex gap-4">
               {discussions?.appUser?.profileImageUrl && (
-                <div className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full bg-gray-300 relative overflow-hidden">
+                <Link
+                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-full bg-gray-300 relative overflow-hidden"
+                  href={
+                    currentUserId === otherUserId ? (isOrganizer ? '/organizer/profile' : '/profile')
+                    : (isOrgOther ? `/organizer/view-profile/${otherUserId}` : `/view-profile/${otherUserId}`)
+                  }
+                >
                   <Image
                     src={discussions?.appUser?.profileImageUrl}
                     alt="Profile"
                     fill
                     className="object-cover"
                   />
-                </div>
+                </Link>
               )}
               <div className="flex flex-col justify-start">
                 <h2 className="text-sm md:text-base lg:text-lg font-semibold text-dark-green">

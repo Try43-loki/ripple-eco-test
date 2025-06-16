@@ -10,10 +10,19 @@ import {
 import { CalendarDays, Send } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import dayjs from "dayjs";
+import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
+import { getCurrentUserProfileService, viewUserProfileService } from "@/service/profileService";
 
-
-const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
+const TakeActionDetailCard = async ({ cardDetail, userData, view }) => {
+  const currentUserData = await getCurrentUserProfileService();
   const isLoading = false;
+  const otherUserData = userData?.data;
+  const isOrgOther = userData?.data?.organizer;
+  const isOrganizer = currentUserData?.data?.organizer;
+  const currentUserId = currentUserData?.data?.appUserId;
+  const otherUserId = otherUserData?.appUserId;
   const ownerData = userData.data;
   return (
     <main>
@@ -30,15 +39,26 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
               </div>
             ) : (
               <div className="flex items-center space-x-4">
-                <img
-                  src={ownerData?.profileImageUrl}
-                  alt={`${ownerData?.firstName} ${ownerData?.lastName}`}
-                  className="h-15 w-15 rounded-full object-cover"
-                />
+                <Link
+                 href={
+                  currentUserId === otherUserId ? (isOrganizer ? '/organizer/profile' : '/profile')    // viewing your own profile
+                    : (isOrgOther ? `/organizer/view-profile/${otherUserId}`   // organizer viewing someone else
+                    : `/view-profile/${otherUserId}`)      // regular user viewing someone else
+                }
+                 className="h-15 w-15"
+                >
+                  <img
+                    src={ownerData?.profileImageUrl}
+                    alt={`${ownerData?.firstName} ${ownerData?.lastName}`}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                </Link>
+
                 <div className="flex flex-col">
                   <p className="text-xl font-medium text-gray">{`${ownerData?.firstName} ${ownerData?.lastName}`}</p>
                   <p className="text-sm font-normal text-strong-gray">
-                    6h agos . Public
+                    {moment(cardDetail?.data?.createdAt).fromNow()} .{" "}
+                    {cardDetail?.data?.anonymous ? "Public" : "Private"}
                   </p>
                 </div>
               </div>
@@ -58,8 +78,8 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
           )}
 
           <article className="flex justify-between items-center">
-            <div className="mt-1 text-xs md:text-sm lg:text-base bg-light-gray w-fit rounded-full py-1 px-2 md:px-3">
-              <p>@{cardDetail?.data?.description}</p>
+            <div className="mt-1 text-xs md:text-sm lg:text-base w-fit rounded-full py-1.5 px-2.5 md:px-3 bg-lighter-blue text-strong-gray">
+              <p>@{cardDetail?.data?.destinationPerson}</p>
             </div>
           </article>
 
@@ -75,9 +95,19 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
           </article>
 
           <div className="absolute -top-7 right-16 rounded-2xl border-[12px] border-white bg-white">
-            <img
-              src={cardDetail?.data?.image}
+            <Image
+              // src={cardDetail?.data?.image}
+              src={
+                cardDetail?.data?.image?.includes("temp-file")
+                  ? cardDetail?.data.image.replace(
+                      "temp-file",
+                      "permanent-file"
+                    )
+                  : cardDetail?.data?.image
+              }
               alt={cardDetail?.data?.title}
+              width={356}
+              height={250}
               className="w-[356px] h-[250px] rounded-2xl"
             />
           </div>
@@ -91,8 +121,14 @@ const TakeActionDetailCard = ({ cardDetail,  userData, view}) => {
 
         <CardFooter className="flex  items-start gap-5 justify-between">
           <div className="flex flex-col gap-3.5">
-            <p className="text-3xl font-bold text-green">{cardDetail?.data?.numberOfSupporter}</p>
-            <p className="text-xl font-semibold text-foreground">{ (cardDetail?.data?.numberOfSupporter > 1) ? "SUPPORTERS" : "SUPPORTER"}</p>
+            <p className="text-3xl font-bold text-green">
+              {cardDetail?.data?.numberOfSupporter}
+            </p>
+            <p className="text-xl font-semibold text-foreground">
+              {cardDetail?.data?.numberOfSupporter > 1
+                ? "SUPPORTERS"
+                : "SUPPORTER"}
+            </p>
           </div>
           {/* <Button
             type="button"

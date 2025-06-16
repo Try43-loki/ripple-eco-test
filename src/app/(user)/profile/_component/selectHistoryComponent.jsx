@@ -9,8 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectComponent({ operator, values, onChange, value }) {
-  console.log("values", values);
+export function SelectHistoryComponent({ operator, values, onChange, value }) {
   const getValue = (item) =>
     item.provinceName ||
     item.eventType || //  here
@@ -34,7 +33,7 @@ export function SelectComponent({ operator, values, onChange, value }) {
 
   return (
     <Select value={value || ""} onValueChange={handleSelectChange}>
-      <SelectTrigger className="w-full border-none bg-lighter-white !text-dark-gray">
+      <SelectTrigger className="w-full border-none bg-lighter-white text-black">
         <SelectValue
           placeholder={`Choose ${
             operator.charAt(0).toUpperCase() + operator.slice(1)
@@ -46,7 +45,7 @@ export function SelectComponent({ operator, values, onChange, value }) {
             )}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent className="bg-white border border-light-strok text-dark-gray">
+      <SelectContent className="bg-white border border-light-strok text-black">
         <SelectGroup>
           {values.map((item, index) => (
             <SelectItem

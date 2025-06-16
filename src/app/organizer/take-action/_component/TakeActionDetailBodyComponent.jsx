@@ -6,7 +6,7 @@ import FormTakeActionComponent from "./FormTakeActionComponent";
 import TakeActionNoImageCardComponent from "./TakeActionNoImageCardComponent";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const TakeActionDetailBodyComponent = ({userData, cardDetail, takeActionId}) => {
+const TakeActionDetailBodyComponent = ({ otherUser, cardDetail, takeActionId, currentUser}) => {
   const pathName = usePathname();
   const query = useSearchParams();
   const view = query.get("view");
@@ -16,9 +16,10 @@ const TakeActionDetailBodyComponent = ({userData, cardDetail, takeActionId}) => 
     <>
       <section className="w-full my-6">
         <TakeActionCardDetail 
-        userData={userData}
+        otherUser={otherUser}
         cardDetail={cardDetail}
         view={view}
+        currentUser={currentUser}
          />
       </section>
       <section className="w-full my-6  mt-12">

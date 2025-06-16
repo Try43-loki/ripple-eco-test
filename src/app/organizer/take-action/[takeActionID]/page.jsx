@@ -3,14 +3,15 @@ import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 import TakeActionDetailBodyComponent from "../_component/TakeActionDetailBodyComponent";
 import { getTakeActionByIDService } from "@/service/takeActionService";
-import { viewUserProfileService } from "@/service/profileService";
+import { getCurrentUserProfileService, viewUserProfileService } from "@/service/profileService";
 
-const TakeActionDetailPage = async ( {params , searchParams}) => {
-  const view = searchParams?.view;
-  const owner = searchParams?.owner;
-  const id = params?.takeActionID;
+const TakeActionDetailPage = async ( { params , searchParams}) => {
+  const view = await searchParams?.view;
+  const owner = await searchParams?.owner;
+  const id = await params?.takeActionID;
   const cardDetail = await getTakeActionByIDService(id);
-  const userData = await viewUserProfileService(cardDetail?.data?.appUser?.appUserId);
+  const otherUser = await viewUserProfileService(cardDetail?.data?.appUser?.appUserId);
+  const currentUser = await getCurrentUserProfileService();
   return (
     <>
       <section className="w-full">
@@ -25,7 +26,7 @@ const TakeActionDetailPage = async ( {params , searchParams}) => {
           />
         </section>
 
-        <TakeActionDetailBodyComponent  userData={userData} cardDetail={cardDetail} takeActionID={id}/>
+        <TakeActionDetailBodyComponent  otherUser={otherUser} cardDetail={cardDetail} takeActionID={id} currentUser={currentUser}/>
       </section>
     </>
   );

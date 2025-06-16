@@ -96,14 +96,12 @@ export const fetchFilteredEventsService = async (filters) => {
 };
 
 export const fetchFilteredEventsHistoryService = async (userID, filters) => {
+  const token = await getAuthToken();
   try {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
-    // console.log("params", params.toString());
-    // console.log("data in service", params.toString());
-    // const res = await fetch(`${baseUrl}/event/filter?${params.toString()}`);
     const data = await apiRequest(
       `/event/${userID}/filter-event-history?${params.toString()}`,
       "GET",

@@ -19,3 +19,13 @@ export const getAllBagdeService = async () => {
     console.log("error", e);
   }
 };
+
+export const getAllBagdeByIDService = async (badgeID) => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest(`/badge/${badgeID}`, "GET", null, token);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};

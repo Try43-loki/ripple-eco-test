@@ -7,6 +7,7 @@ import {
 } from "@/service/discussionService";
 import DiscussionBodyComponent from "./_component/DiscussionBodyComponent";
 import { getUserProfileService } from "@/service/auth/user-service";
+import { viewUserProfileService } from "@/service/profileService";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -24,8 +25,9 @@ const DiscussionPage = async ({ searchParams: searchParamsPromise }) => {
       getTotalDiscussionService(),
       getUserProfileService(),
     ]);
-
-  const currentUserId = currentUser?.data?.appUserId;
+  // console.log("this is it", discussions?.data?.map((item) => item.appUser?.appUserId));
+  const otherUserId = discussions?.data?.map((item) => item.appUser?.appUserId);
+  const userData = await viewUserProfileService(otherUserId);
 
   // Search Card Query
   const searchParams = (await searchParamsPromise) || null;
@@ -54,7 +56,9 @@ const DiscussionPage = async ({ searchParams: searchParamsPromise }) => {
         totalDiscussion={displayData}
         popularDiscussion={limitPopularDiscussion}
         search={cardData}
-        currentUserId={currentUserId}
+        otherUserId={otherUserId}
+        otherUser={userData}
+        currentUser={currentUser}
       />
     </main>
   );

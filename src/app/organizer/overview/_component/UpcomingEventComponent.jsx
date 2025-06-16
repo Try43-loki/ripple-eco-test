@@ -5,16 +5,16 @@ import Link from "next/link";
 import React from "react";
 
 function transformUpcomingEvents(upcomingEvents) {
-  return upcomingEvents.map((event) => {
-    const startDate = new Date(event.startDate);
+  return upcomingEvents?.map((event) => {
+    const startDate = new Date(event?.startDate);
     const day = startDate.toLocaleString("en-US", { weekday: "short" }); // e.g. "Tue"
     const date = startDate.getDate().toString(); // e.g. "12"
 
     // Compose startTime from agenda[0] day and first activity time, if available
     let startTime = "N/A";
-    if (event.agenda?.length && event.agenda[0].activitiesList?.length) {
-      const dateStr = event.agenda[0].date; // e.g. "2025-06-10"
-      const timeStr = event.agenda[0].activitiesList[0].time; // e.g. "09:00"
+    if (event?.agenda?.length && event.agenda[0].activitiesList?.length) {
+      const dateStr = event?.agenda[0].date; // e.g. "2025-06-10"
+      const timeStr = event?.agenda[0].activitiesList[0].time; // e.g. "09:00"
       const dateTime = new Date(`${dateStr}T${timeStr}:00`);
       startTime = dateTime.toLocaleTimeString("en-US", {
         hour: "numeric",
@@ -47,8 +47,8 @@ function formatSnakeToTitleCase(text) {
 }
 
 function UpcomingEventComponent({ upcomingEvent }) {
-  const firstCard = upcomingEvent[0];
-  const nextCards = upcomingEvent.slice(1, 4);
+  const firstCard = upcomingEvent;
+  const nextCards = upcomingEvent?.slice(1, 4);
   return (
     <>
       <section>
@@ -77,7 +77,7 @@ function UpcomingEventComponent({ upcomingEvent }) {
             />
           )}
         </div>
-        {transformUpcomingEvents(nextCards).map((event, index) => {
+        {transformUpcomingEvents(nextCards)?.map((event, index) => {
           const isOdd = index % 2 !== 0;
 
           return (

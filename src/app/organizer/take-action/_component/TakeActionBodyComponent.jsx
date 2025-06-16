@@ -38,7 +38,7 @@ const TakeActionBodyComponent = async ( {cardData , ownCardData} ) => {
 
           <TabsContent
             value="all"
-            className="flex flex-wrap justify-start gap-8 mt-5"
+            className="flex flex-wrap w-294 justify-start gap-8 mt-5"
           >
             
               <TakeActionCard
@@ -52,11 +52,11 @@ const TakeActionBodyComponent = async ( {cardData , ownCardData} ) => {
           {/* Own */}
           <TabsContent
             value="own-post"
-            className="w-291 flex flex-wrap gap-8 mt-5"
+            className="w-294 flex flex-wrap gap-8 mt-5"
           >
               <TakeActionCard
               isOwner={true}
-              cardData={cardData}
+              cardData={ownCardData}
               layout={"col"}
               isOrganizer={userData?.data?.organizer}
               />

@@ -71,7 +71,7 @@ const PopupTakeActionForm = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-auto bg-green cursor-pointer hover:bg-strong-green text-light-white hover:text-lighter-white text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-5 md:px-5 md:py-6">
+        <Button className="w-auto bg-green cursor-pointer text-xs md:text-sm lg:text-base rounded-lg md:rounded-2xl px-4 py-4 md:py-6 lg:py-6 text-white hover:bg-green">
           Create Take Action
         </Button>
       </DialogTrigger>
@@ -130,10 +130,15 @@ const PopupTakeActionForm = () => {
                 <Textarea
                   id="description"
                   placeholder="Enter take action description"
-                  className="border-none px-3 py-2 bg-light-gray rounded-lg placeholder:text-sm placeholder:text-strong-gray focus-visible:ring-1 focus-visible:ring-meduim-green"
+                  className="w-full h-[60px] px-3 py-2 border-none
+                            bg-light-gray rounded-lg resize-none
+                            placeholder:text-sm placeholder:text-strong-gray
+                            focus-visible:ring-1 focus-visible:ring-meduim-green
+                            whitespace-pre-wrap break-words overflow-y-auto scrollbar-hide"
                   {...register("description")}
                   required
                 />
+
                 {errors.description && (
                   <p className="text-red-500 text-xs">
                     {errors.description.message}
