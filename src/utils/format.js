@@ -15,8 +15,6 @@ export const abbreviateLocation = (name) => {
     .join("");
 };
 
-const splitCamelCase = (name) => {
+export const splitCamelCase = (name) => {
   return name.replace(/([a-z])([A-Z])/g, "$1 $2");
 };
-
-export { splitCamelCase, abbreviateLocation };
