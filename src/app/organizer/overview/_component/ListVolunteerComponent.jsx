@@ -9,7 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 function transformRequests(latestVolunteersRequest) {
-  return latestVolunteersRequest.map((req) => ({
+  return latestVolunteersRequest?.map((req) => ({
     id: req.requestId,
     date: req.requestedTime.split(" ")[0].replaceAll("-", "/"),
     name: `${req.firstName} ${req.lastName}`,

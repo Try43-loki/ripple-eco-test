@@ -3,9 +3,17 @@ import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getAllEcoEventService } from "@/service/ecoEventService";
 
 const EcoEventSectionComponent = async () => {
-  const response = await getAllEcoEventService();
+  const response = getAllEcoEventService();
   const events = response?.data ?? [];
-  // console.log("first", events);
+
+  const currentDate = new Date();
+  const upcomingAndOngoingEvents = events.filter((item) => {
+    const eventDate = new Date(item.startDateTime);
+    return (
+      item.eventStatus === "Upcoming" ||
+      (eventDate <= currentDate && item.eventStatus !== "Finished")
+    );
+  });
 
   return (
     <div>
@@ -25,13 +33,17 @@ const EcoEventSectionComponent = async () => {
           {/* Card List */}
           <div className="mt-10 overflow-x-auto [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
             <div className="flex gap-6 w-max">
-              {events?.map((item, index) => (
-                <CardEcoEventComponent
-                  key={index}
-                  operator="user"
-                  event={item}
-                />
-              ))}
+              {upcomingAndOngoingEvents.length > 0 ? (
+                upcomingAndOngoingEvents.map((item) => (
+                  <CardEcoEventComponent
+                    key={item.eventId}
+                    operator="user"
+                    event={item}
+                  />
+                ))
+              ) : (
+                <p className="text-dark-green">No upcoming events available.</p>
+              )}
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ const LineVertical = () => (
   </div>
 );
 
-const Weekly = [
+const Weekdays = [
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -42,22 +42,23 @@ const checkIcon = (icon) => {
   if (icon === "night-rain") return listOfImageWeather.nightRain;
 };
 
-const DailyValueAQIComponent = ({ day, dataDaily }) => {
-  const currentDay = new Date().getDay() - 1;
-
+const DailyValueAQIComponent = ({ dataDaily }) => {
   return (
-    <>
+    <React.Fragment>
       <div
         className={clsx(
           "w-full flex justify-between items-center gap-3 px-6 py-4 rounded-xl",
           {
-            "bg-light-gray px-": day === currentDay,
+            "first:bg-light-gray px-": true,
           }
         )}
       >
         <span className="text-lg w-2.5 font-medium text-darker-gray">
-          {Weekly[day]}
+          {Weekdays[new Date().getDay() - 1] == dataDaily?.day
+            ? "Today"
+            : dataDaily?.day}
         </span>
+        {/* Icon */}
         <div className="flex gap-5 justify-center items-center">
           <span className="text-lg text-darker-gray font-medium">
             <Image
@@ -70,8 +71,14 @@ const DailyValueAQIComponent = ({ day, dataDaily }) => {
             />
           </span>
         </div>
+        {/* Temperature Min*/}
+        <span className="text-2xl font-semibold text-darker-gray opacity-50">
+          {Math.min(dataDaily?.temperature.min)}
+          <sup>o</sup>
+        </span>
+        {/* Temperature Max*/}
         <span className="text-2xl font-semibold text-darker-gray">
-          {dataDaily.aqi}
+          {Math.min(dataDaily?.temperature.max)}
           <sup>o</sup>
         </span>
         {/* Value Of AQI */}
@@ -81,11 +88,11 @@ const DailyValueAQIComponent = ({ day, dataDaily }) => {
             dynamicColorAqi(dataDaily.aqi)
           )}
         >
-          <p className="text-center font-medium text-white">{dataDaily.aqi}</p>
+          <p className="text-center font-medium text-white">{dataDaily?.aqi}</p>
         </div>
       </div>
-      {day == "Sunday" || <LineVertical />}
-    </>
+      <LineVertical />
+    </React.Fragment>
   );
 };
 

@@ -1,13 +1,24 @@
+import { getEcoEventByIdService } from "@/service/ecoEventService";
+import FormattedDate from "@/utils/FomattedDate";
 import React from "react";
 
-const TotalVolunteerComponent = () => {
+const TotalVolunteerComponent = async ({ eventId, totalParticipants }) => {
+  let dateToFormat = new Date();
+
+  if (eventId) {
+    const currentEvent = await getEcoEventByIdService(eventId);
+    if (currentEvent?.data?.startDateTime) {
+      dateToFormat = new Date(currentEvent.data.startDateTime);
+    }
+  }
+
   return (
     <article className="flex justify-between items-center">
       <h2 className="text-dark-green font-semibold text-lg">
-        Total Volunteers : 100 volunteers
+        Total Participant(s): {totalParticipants} participants
       </h2>
       <div className="py-3 px-4 bg-green rounded-2xl text-white">
-        <p>Friday, 10/05/2025</p>
+        <FormattedDate isoString={dateToFormat} format="weekdaySlash" />
       </div>
     </article>
   );

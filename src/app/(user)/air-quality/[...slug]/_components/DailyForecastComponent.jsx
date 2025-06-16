@@ -2,8 +2,11 @@
 import React from "react";
 import DailyValueAQIComponent from "./DailyValueAQIComponent";
 import { usePathname } from "next/navigation";
+import { splitCamelCase } from "@/utils/format";
 
 const DailyForecastComponent = ({ dataDaily }) => {
+  console.log(dataDaily);
+
   // For Get Province AQI
   const pathName = usePathname();
   const path = pathName.split("/")[2];
@@ -13,13 +16,13 @@ const DailyForecastComponent = ({ dataDaily }) => {
       <div className="flex flex-col">
         <h2 className="text-black text-xl font-semibold">Daily Forecast</h2>
         <p className="text-darker-gray text-lg">
-          {path} Air Quality Index (AQI) Forecast
+          {splitCamelCase(path)} Air Quality Index (AQI) Forecast
         </p>
       </div>
       {/* Column Of Week */}
       <div className="flex flex-col gap-3">
         {dataDaily.map((value, index) => (
-          <DailyValueAQIComponent key={index} day={index} dataDaily={value} />
+          <DailyValueAQIComponent key={index} dataDaily={value} />
         ))}
       </div>
     </article>

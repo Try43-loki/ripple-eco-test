@@ -1,16 +1,13 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import ActionVolunteerComponent from "./ActionVolunteerComponent";
-import VolunteerRequestProfileComponent from "@/components/VolunteerRequestProfileComponent";
+import { getAllVolunteerRequestAction } from "@/action/VolunteerAction";
+import {
+  getEcoEventByIdService,
+  getOwnUpComingEventService,
+} from "@/service/ecoEventService";
 
-export default function VolunteerRequestComponent({
-  isPending,
-  selectedEvent,
-  volunteerRequests,
-}) {
-  const [selectedVolunteer, setSelectedVolunteer] = useState(null);
-
-  if (!selectedEvent) {
+export default async function VolunteerRequestComponent({ eventId }) {
+  if (!eventId) {
     return (
       <p className="text-lighter-green">
         Please select an event to see volunteer requests.
@@ -18,45 +15,25 @@ export default function VolunteerRequestComponent({
     );
   }
 
+  const eventData = await getEcoEventByIdService(eventId);
+  const volunteerList = await getAllVolunteerRequestAction(eventId);
+  const { data } = volunteerList;
   return (
     <section className="flex flex-col">
       <p className="text-base text-dark-green pb-5 font-medium">
-        Volunteer Request: {volunteerRequests.length}/100
+        Volunteer Request: {data?.length || 0}/{eventData?.data?.maxSlot || 0}
       </p>
 
-      {/* Table Header */}
       <div className="w-full flex py-3 px-4 justify-between text-lighter-green font-medium border border-lightes-white rounded-2xl items-center">
         <p className="min-w-[140px]">Volunteer Name</p>
-        <p className="min-w-[170px]">Requested Date</p>
-        <p className="min-w-[140px]">Status</p>
-        <p className="min-w-[120px] text-center">Action</p>
+        <p className="min-w-[210px]">Requested Date</p>
+        <p className="min-w-[120px]">Status</p>
+        <p className="min-w-[220px] text-center">Action</p>
       </div>
 
-      {/* Rows */}
-      {isPending ? (
-        <p className="text-lighter-green italic">
-          Loading volunteer requests...
-        </p>
-      ) : (
-        <div className="mt-5 space-y-2">
-          {volunteerRequests.map((volunteer, i) => (
-            <ActionVolunteerComponent
-              key={volunteer.requestId}
-              volunteer={volunteer}
-              isAlternateRow={i % 2 === 1}
-              onClick={() => setSelectedVolunteer(volunteer)}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Modal */}
-      {selectedVolunteer && (
-        <VolunteerRequestProfileComponent
-          volunteer={selectedVolunteer}
-          onClose={() => setSelectedVolunteer(null)}
-        />
-      )}
+      <div className="mt-5 space-y-2">
+        <ActionVolunteerComponent volunteerList={data} />
+      </div>
     </section>
   );
 }
