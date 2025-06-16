@@ -1,21 +1,17 @@
 "use client";
 
+import {
+  checkAqiInformation,
+  checkLevelAQI,
+  IconLabel,
+} from "@/utils/airQuality";
 import { abbreviateLocation } from "@/utils/format";
+import { useCurrentPathSegment } from "@/utils/pathUtils";
 import clsx from "clsx";
 import { Cloud, Droplet, Wind } from "lucide-react";
-import { usePathname } from "next/navigation";
 import React from "react";
 
-const IconLabel = ({ icon: Icon, label, color }) => {
-  return (
-    <span className="flex items-center gap-1.5 text-[#636A74] text-lg">
-      <Icon color={color} fill={color} />
-      <p>{label}</p>
-    </span>
-  );
-};
-
-const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
+const CardInformationAQIComponent = ({ provinceData }) => {
   const {
     aqi,
     cloudIcon,
@@ -27,23 +23,17 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
     windSpeed,
   } = provinceData;
 
-  const { bg, label, text, bgRaw } = levelColor;
+  // Check Color Level With AQI
+  const { bg, label, text, bgRaw } = checkAqiInformation(aqi);
 
-  // For Get Province AQI
-  const pathName = usePathname();
-  const path = pathName.split("/")[2];
+  // For Get District AQI
+  const districtPath = useCurrentPathSegment(2);
 
-  // const bgGreen = "#CDE8DB";
-  // const bgYellow = "#FAF0CC";
-  // const bgOrange = "#FFE2CF";
-  // const bgRed = "#FECDD6";
-
-  const checkLevel = (value) => {
-    if (value <= 50) return "Good";
-    if (value <= 100) return "Moderate";
-    if (value <= 150) return "Unhealthy for sensitive groups";
-    if (value >= 150) return "Unhealthy";
-  };
+  // abbreviate District And PP mean default For Phnom penh
+  const abbreviateDistrict =
+    (districtPath && abbreviateLocation(districtPath)) || "PP";
+  // Check Level AQI
+  const levelOfAQI = checkLevelAQI(aqi);
 
   return (
     <article
@@ -53,15 +43,13 @@ const CardInformationAQIComponent = ({ provinceData, levelColor }) => {
       {/* AQI Value */}
       <div className="flex flex-col gap-2 px-3 items-center ">
         <h2 className={clsx("text-7xl  font-bold", text)}>{aqi}</h2>
-        <p className="text-base text-darker-gray ">
-          {abbreviateLocation(path) || "PP"} AQI
-        </p>
+        <p className="text-base text-darker-gray ">{abbreviateDistrict} AQI</p>
       </div>
 
       {/* AQI Details */}
       <div className="flex flex-col  gap-3">
         <h2 className="text-2xl font-semibold text-darker-gray flex justify-start">
-          {checkLevel(aqi)}
+          {levelOfAQI}
         </h2>
         <div className="flex justify-between min-w-sm">
           <p className="text-lg text-darker-gray">

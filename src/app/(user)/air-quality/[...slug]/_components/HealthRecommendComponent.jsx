@@ -1,27 +1,18 @@
-"use client";
-import { splitCamelCase } from "@/utils/format";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import React from "react";
+import TitleAirQualityAndHealthComponent from "./TitleAirQualityAndHealthComponent";
+import { checkAqiInformation } from "@/utils/airQuality";
 
-const HealthRecommendComponent = ({ levelColor, dataCard }) => {
-  const { exercise, windows, mask, airPurifier } = dataCard;
+const HealthRecommendComponent = ({ dataDaily, dataProvince }) => {
+  const { exercise, windows, mask, airPurifier } =
+    dataDaily.heathRecommendation;
+  const title = "Health Recommendation";
 
-  // For Get Province AQI
-  const pathName = usePathname();
-  const path = pathName.split("/")[2];
+  const currentLevel = checkAqiInformation(dataProvince?.aqi);
 
   return (
     <article className="w-full flex flex-col h-full gap-7 bg-white rounded-3xl p-6 border-2 text-light-gray">
-      {/* Title */}
-      <div className="flex flex-col">
-        <h2 className="text-black text-xl font-semibold">
-          Health Recommendation
-        </h2>
-        <p className="text-darker-gray text-lg">
-          What is the current air quality in {splitCamelCase(path)}?
-        </p>
-      </div>
+      <TitleAirQualityAndHealthComponent title={title} />
       {/* Warning Icon and Guideline */}
       <div className="flex flex-col gap-2">
         {/* Bike */}
@@ -31,7 +22,7 @@ const HealthRecommendComponent = ({ levelColor, dataCard }) => {
               alt="Bike-Yellow"
               width={36}
               height={36}
-              src={`/assets/air_quality_images/Bike-${levelColor?.title}.svg`}
+              src={`/assets/air_quality_images/Bike-${currentLevel?.title}.svg`}
             />
             <span className="text-dark-gray text-lg">{exercise?.text}</span>
           </div>
@@ -44,7 +35,7 @@ const HealthRecommendComponent = ({ levelColor, dataCard }) => {
               alt="Bike-Yellow"
               width={36}
               height={36}
-              src={`/assets/air_quality_images/Mask-${levelColor?.title}.svg`}
+              src={`/assets/air_quality_images/Mask-${currentLevel?.title}.svg`}
             />
             <span className="text-dark-gray text-lg">{mask?.text}</span>
           </div>
@@ -57,7 +48,7 @@ const HealthRecommendComponent = ({ levelColor, dataCard }) => {
               alt="Bike-Yellow"
               width={36}
               height={36}
-              src={`/assets/air_quality_images/Fan-${levelColor?.title}.svg`}
+              src={`/assets/air_quality_images/Fan-${currentLevel?.title}.svg`}
             />
             <span className="text-dark-gray text-lg">{airPurifier?.text}</span>
           </div>
@@ -70,7 +61,7 @@ const HealthRecommendComponent = ({ levelColor, dataCard }) => {
               alt="Bike-Yellow"
               width={36}
               height={36}
-              src={`/assets/air_quality_images/Windows-${levelColor?.title}.svg`}
+              src={`/assets/air_quality_images/Windows-${currentLevel?.title}.svg`}
             />
             <span className="text-dark-gray text-lg">{windows?.text}</span>
           </div>
