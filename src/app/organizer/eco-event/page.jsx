@@ -7,6 +7,7 @@ import {
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
+import { getUserProfileService } from "@/service/auth/user-service";
 
 export default async function EcoEventPage({
   searchParams: searchParamsPromise,
@@ -23,8 +24,7 @@ export default async function EcoEventPage({
     cardData = response?.data ?? [];
   }
 
-  const response = await getAllEcoEventService();
-  const events = response?.data ?? [];
+  const profileData = await getUserProfileService();
 
   const headerSection = {
     title: "Eco‑Event",
@@ -51,14 +51,14 @@ export default async function EcoEventPage({
             />
           </div>
 
-          <EcoeventFilterComponent className="w-full" />
+          <EcoeventFilterComponent />
         </div>
 
-        <div className="flex flex-wrap justify-start gap-5 mt-6">
+        <div className="flex flex-wrap justify-between gap-5 mt-6">
           {cardData?.length > 0 ? (
             cardData.map((event) => (
               <div key={event?.eventId}>
-                <CardEcoEventComponent event={event} />
+                <CardEcoEventComponent event={event} role={profileData} />
               </div>
             ))
           ) : (

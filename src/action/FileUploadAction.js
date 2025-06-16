@@ -32,7 +32,6 @@ export const fileUploadAction = async (file) => {
 export const multipleFileUploadAction = async (files) => {
   const formData = new FormData();
   files.forEach((file) => formData.append("file", file));
-
   try {
     const response = await mutilpleFileUploadService(formData);
     return response?.data;

@@ -6,40 +6,37 @@ import { DateRangComponent } from "./DateRangComponent";
 
 const EcoEventFilterComponent = () => {
   return (
-    <section className="w-full py-4 flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
-      {/* Search bar */}
-      <div className="flex w-full items-center justify-between gap-x-7">
-        {/* <div className="grid w-[500px] gap-1.5">
-          <SearchBarComponent className="grow" />
-        </div> */}
-        <div className="flex items-center w-full justify-between">
-          <div className="grid w-[200px] gap-1.5">
-            <SearchComponent className="w-[400px]" operator={"dashboard"} />
-          </div>
-          <div className="grid w-[200px] gap-1.5">
-            <SelectComponent className="w-full" operator="Event type" />
-          </div>
-          <div className="grid w-[200px] gap-1.5">
-            <SelectComponent operator="Contribute type" />
-          </div>
-          <div className="grid w-[200px] gap-1.5">
-            <SelectComponent operator="Categories" />
-          </div>
-          <div className="grid w-[200px] gap-1.5">
-            <SelectComponent operator="Slot" />
-          </div>
-          <div className="grid  gap-1.5">
-            <DateRangComponent />
-          </div>
-        </div>
+    <section className="w-full py-4 flex flex-wrap gap-4 items-center">
+      <div className="w-full md:max-w-40">
+        <SearchComponent
+          className="w-full cursor-pointer"
+          operator="dashboard"
+        />
       </div>
-
-      {/* Label */}
-      {/* <span className="hidden md:inline font-semibold text-sm text-muted-foreground">
-        Filter:
-      </span> */}
-
-      {/* Filter dropdowns */}
+      <div className="w-full md:max-w-42 ">
+        <SelectComponent
+          className="w-full cursor-pointer"
+          operator="Event type"
+        />
+      </div>
+      <div className="w-full md:max-w-48 ">
+        <SelectComponent
+          className="w-full cursor-pointer"
+          operator="Contribute type"
+        />
+      </div>
+      <div className="w-full md:max-w-48 ">
+        <SelectComponent
+          className="w-full cursor-pointer"
+          operator="Categories"
+        />
+      </div>
+      <div className="w-full md:max-w-40 ">
+        <SelectComponent className="w-full cursor-pointer" operator="Slot" />
+      </div>
+      <div className="w-full md:max-w-32">
+        <DateRangComponent className="cursor-pointer" />
+      </div>
     </section>
   );
 };

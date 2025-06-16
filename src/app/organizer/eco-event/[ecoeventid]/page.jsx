@@ -6,20 +6,34 @@ import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_componen
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
 import PostActivityComponent from "./_component/PostActivityComponent";
 import { getEcoEventByIdService } from "@/service/ecoEventService";
+import ActivityDisplayComponent from "./_component/ActivityDisplayComponent";
+import { getPostActivityService } from "@/service/PostActivityService";
+import { getUserProfileService } from "@/service/auth/user-service";
 
 export default async function EcoEventDetailPage({ params }) {
   const { ecoeventid } = await params;
   const event = await getEcoEventByIdService(ecoeventid);
-  // console.log("Event : ", event);
-
-  if (!ecoeventid) {
-    return <p className="p-6 text-red-600">Event not found.</p>;
+  const activityEvent = await getPostActivityService(ecoeventid);
+  const userData = await getUserProfileService();
+  const eventId = event?.data?.eventId;
+  if (!event) {
+    return <p className="p-6 text-red">Event not found.</p>;
   }
   const breadcrumb = {
     back: "Eco Event",
     current: "hi",
     link: "/organizer/eco-event",
   };
+
+  const summaryList = activityEvent?.data?.summaryList;
+  const isOwner =
+    userData?.data?.appUserId === event?.data?.appUserResponse?.appUserId;
+
+  const shouldRenderPostActivity =
+    isOwner && (!Array.isArray(summaryList) || summaryList.length === 0);
+
+  const shouldRenderActivityDisplay =
+    isOwner && Array.isArray(summaryList) && summaryList.length > 0;
 
   return (
     <main className="w-full">
@@ -104,7 +118,15 @@ export default async function EcoEventDetailPage({ params }) {
 
           {/* Tabs & Posts */}
           <TabEcoeventComponent operator="organizer" />
-          <PostActivityComponent />
+          {shouldRenderPostActivity && (
+            <PostActivityComponent eventId={eventId} />
+          )}
+          {shouldRenderActivityDisplay && (
+            <ActivityDisplayComponent
+              data={activityEvent?.data}
+              userData={userData?.data}
+            />
+          )}
         </div>
       </article>
     </main>
