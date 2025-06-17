@@ -10,6 +10,7 @@ import FooterComponent from "@/components/FooterComponent";
 import { auth } from "../auth";
 import { getUserProfileAction } from "@/action/user-action";
 import { redirect } from "next/navigation";
+import { Provider } from "@/service/context/provider";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700"],
@@ -19,21 +20,23 @@ const gabarito = Gabarito({
 export const metadata = {
   title: "RippleEco",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/logo/EcoLogoPlant.png",
   },
   description:
     "RippleEco platform is to serve as a bridge between event organizers and participants. The platform enables users to easily browse and join volunteer eco-events, engage in meaningful discussions, and receive real-time alerts with the latest information on air quality and natural disasters.",
 };
 
 export default async function RootLayout({ children }) {
-  const session = await auth();
-  console.log("session layout", session);
-  const profile = await getUserProfileAction();
-  console.log("profile layout", profile);
+  // const session = await auth();
+  // console.log("session layout", session);
+  // const profile = await getUserProfileAction();
+  // console.log("profile layout", profile);
 
   return (
     <html lang="en">
-      <body className={gabarito.className}>{children}</body>
+      <body className={gabarito.className}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

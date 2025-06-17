@@ -20,18 +20,23 @@ import { usePathname } from "next/navigation";
 import { ProfileDropdownComponent } from "./ProfileDropdownComponent";
 import NotificationItem from "./NotificationComponent";
 import { KnockProvider } from "@knocklabs/react";
+import NotificationComponent from "./NotificationComponent";
+import Image from "next/image";
 const NavBarComponent = ({ profile }) => {
   const currentPath = usePathname();
   return (
     <>
       <div className="px-[180px] w-full absolute top-5 z-20">
-        <nav className="flex  items-center justify-between px-[40px] h-14 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#ffffff1e] backdrop-blur-sm rounded-xl ">
+        <nav className="flex items-center justify-between px-[40px] h-16 w-full bg-[#e3dfdf2e] border-[0.5px] border-[#ffffff1e] backdrop-blur-sm rounded-xl ">
           <ul className="flex flex-row justify-between items-center w-full">
             <li>
-              <Link href="/home" className="text-white text-2xl font-semibold">
-                <h1>
-                  Ripple<span className="text-[#048d4c]">Eco</span>
-                </h1>
+              <Link href="/home" className="bg-white text-2xl font-semibold">
+                <Image
+                  src="assets/ripple-eco-logo-light.png"
+                  alt="Ripple Eco Logo"
+                  width={120}
+                  height={120}
+                ></Image>
               </Link>
             </li>
             <li className="flex justify-between items-center gap-x-8 text-meduim-gray ">
@@ -150,7 +155,7 @@ const NavBarComponent = ({ profile }) => {
                     userId={3}
                   >
                     <div className="mt-1">
-                      <NotificationItem />
+                      <NotificationComponent />
                     </div>
                   </KnockProvider>
 

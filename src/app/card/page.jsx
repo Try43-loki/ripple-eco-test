@@ -1,11 +1,17 @@
-import RateComponent from "@/components/RateComponent";
+"use client";
+import NotificationItem from "@/components/NotificationItem";
+import { KnockProvider } from "@knocklabs/react";
 
 import React from "react";
 
 function page() {
   return (
     <>
-      <RateComponent />
+      <KnockProvider apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY} userId={3}>
+        <div className="mt-1">
+          <NotificationItem />
+        </div>
+      </KnockProvider>
     </>
   );
 }

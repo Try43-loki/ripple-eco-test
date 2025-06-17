@@ -1,7 +1,11 @@
 import React from "react";
 import TakeActionBodyComponent from "./_component/TakeActionBodyComponent";
 import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
-import { getAllTakeActionService, getOwnTakeActionService } from "@/service/takeActionService";
+import {
+  getAllTakeActionService,
+  getOwnTakeActionService,
+} from "@/service/takeActionService";
+import { getUserProfileAction } from "@/action/user-action";
 
 const TakeActionPage = async () => {
   const response = await getAllTakeActionService();
@@ -13,6 +17,7 @@ const TakeActionPage = async () => {
     text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
     buttonAction: "create-take_action",
   };
+  const profile = await getUserProfileAction();
   return (
     <>
       <section className="w-full">
@@ -20,13 +25,17 @@ const TakeActionPage = async () => {
           title={headerSection.title}
           text={headerSection.text}
           buttonAction={headerSection.buttonAction}
+          profile={profile}
         />
       </section>
       <section>
-        <TakeActionBodyComponent cardData={cardData} ownCardData ={ownCardData }/>
+        <TakeActionBodyComponent
+          cardData={cardData}
+          ownCardData={ownCardData}
+        />
       </section>
     </>
   );
-}
+};
 
 export default TakeActionPage;

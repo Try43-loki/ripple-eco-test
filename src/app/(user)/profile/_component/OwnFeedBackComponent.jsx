@@ -1,10 +1,15 @@
 import React from "react";
 import OwnFeedBackCardComponent from "./OwnFeedBackCardComponent";
 import Link from "next/link";
-import { getAllOwnFeedBackService } from "@/service/feedBackService";
+import { getAllFeedBackByUserIDService, getAllOwnFeedBackService } from "@/service/feedBackService";
 
-const OwnFeedBackComponent = async () => {
-  const ownFeedbackData = await getAllOwnFeedBackService();
+const OwnFeedBackComponent = async ({userId}) => {
+  let ownFeedbackData = [];await getAllOwnFeedBackService();
+  if(userId){
+    ownFeedbackData = await getAllFeedBackByUserIDService(userId);
+  } else {
+    ownFeedbackData = await getAllOwnFeedBackService();
+  }
   return (
     <main>
       <section className="flex flex-col gap-y-5 items-center w-full">

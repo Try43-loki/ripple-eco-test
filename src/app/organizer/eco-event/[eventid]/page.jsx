@@ -4,7 +4,6 @@ import StatusButtonComponent from "@/components/StatusButtonComponent";
 import { CalendarDays, MapPin } from "lucide-react";
 import JoinEventButtonComponent from "@/app/(user)/eco-event/[eventid]/_component/JoinEventButtonComponent";
 import TabEcoeventComponent from "@/components/TabEcoeventComponent";
-import PostActivityComponent from "./_component/PostActivityComponent";
 import {
   checkUserJoinedEventService,
   getEcoEventByIdService,

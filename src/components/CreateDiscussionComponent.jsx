@@ -130,9 +130,7 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               {...register("title")}
             />
             {errors.title && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.title.message}
-              </p>
+              <p className="text-red text-sm mt-1">{errors.title.message}</p>
             )}
           </div>
 
@@ -197,7 +195,7 @@ const CreateDiscussionComponent = ({ open, onOpenChange }) => {
               {...register("description")}
             />
             {errors.description && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red text-sm mt-1">
                 {errors.description.message}
               </p>
             )}

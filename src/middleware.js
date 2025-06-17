@@ -8,7 +8,7 @@ export const middleware = async (req) => {
 
   // Get user profile
   const profile = await getUserProfileAction();
-
+  const isVerifyOrganizer = profile?.data?.isVerifiedOrganizer;
   // Check if the user is an organizer
   const isOrganizer = profile?.data?.organizer;
   // Check if the user don't have session
@@ -30,11 +30,14 @@ export const middleware = async (req) => {
     "/profile",
     "/view-profile",
     "/take-action",
-    "leaderboard",
-    "discussion-forums",
+    "/leaderboard",
+    "/discussion-forums",
   ];
   if (isOrganizer && groupRoute.includes(pathname)) {
     return NextResponse.redirect(new URL("/organizer", req.url));
+  }
+  if (!isVerifyOrganizer && pathname.startsWith("/organizer/create-event")) {
+    return NextResponse.redirect(new URL("/organizer/eco-event", req.url));
   }
 
   // If try to login

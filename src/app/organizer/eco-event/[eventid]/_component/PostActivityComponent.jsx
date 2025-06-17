@@ -1,119 +1,220 @@
 "use client";
+
 import React, { useState } from "react";
-import Image from "next/image";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { ImagePlus } from "lucide-react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { postActivitySchema } from "@/lib/zod/PostActivitySchema";
+import { insertPostActivityAction } from "@/action/PostActivityAction";
 
-const PostActivityComponent = () => {
-  // State to manage form visibility
-  const [isOpen, setIsOpen] = useState(false);
+const PostActivityComponent = ({ eventId }) => {
+  const [imagePreview, setImagePreview] = useState([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Function to toggle form visibility
-  const toggleForm = () => {
-    setIsOpen(!isOpen);
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(postActivitySchema),
+    defaultValues: {
+      title: "",
+      activity: [],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "activity",
+  });
+  const handleFileChange = (e, index) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const newPreviews = [...imagePreview];
+      newPreviews[index] = URL.createObjectURL(file);
+      setImagePreview(newPreviews);
+      setValue(`activity.${index}.image`, file, { shouldValidate: true });
+    }
   };
 
+  const handleAddActivity = (data) => {
+    insertPostActivityAction(data, eventId);
+    setImagePreview([]);
+    reset();
+  };
   return (
     <main>
-      {/* Button to open the form */}
+      {/* Header Section */}
       <article className="flex items-center justify-between w-full bg-white py-4 px-5 mt-10 rounded-2xl">
         <p className="text-dark-green font-medium">Event Activity</p>
-        <button
-          className="bg-green text-white py-3 px-5 rounded-2xl hover:bg-green/80 transition"
-          onClick={toggleForm}
+
+        <Dialog
+          open={isDialogOpen}
+          onOpenChange={(open) => {
+            setIsDialogOpen(open);
+            if (open && fields.length === 0) {
+              append({ title: "", image: "", description: "" });
+            }
+            if (!open) {
+              reset();
+              setImagePreview([]);
+            }
+          }}
         >
-          Post Activity
-        </button>
-      </article>
-
-      {/* Modal for the form */}
-      {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
-          <div
-            className="bg-white p-6 rounded-lg shadow-md max-w-md w-full"
-            style={{ maxWidth: "400px" }}
-          >
-            {/* Close button */}
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-              onClick={toggleForm}
-            >
-              ×
+          <DialogTrigger asChild>
+            <button className="bg-green text-white py-3 px-5 rounded-3xl hover:bg-green/80 transition cursor-pointer">
+              Post Activity
             </button>
+          </DialogTrigger>
 
-            {/* Form Title */}
-            <h2 className="text-xl font-bold text-green mb-4">
-              Post Take Activity
-            </h2>
+          <DialogContent className="!min-w-[500px] max-h-[100vh] px-8 overflow-y-scroll scrollbar-hide overflow-x-hidden bg-white border-green">
+            <DialogHeader>
+              <DialogTitle className="text-green font-semibold">
+                Post Take Activity
+              </DialogTitle>
+              <DialogDescription></DialogDescription>
+            </DialogHeader>
 
-            {/* Form Fields */}
-            <form>
-              {/* Title Input */}
-              <div className="mb-4">
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-dark-green"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="RippleEco"
-                  className="mt-1 block w-full bg-lighter-white placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
-                />
-              </div>
+            <form
+              className="space-y-4"
+              onSubmit={handleSubmit(handleAddActivity)}
+              encType="multipart/form-data"
+            >
+              {fields?.map((field, index) => (
+                <div key={field.id} className="mb-4 relative">
+                  {/* Close button in top-right */}
+                  {index > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => remove(index)}
+                      className="absolute top-0 right-0 bg-red text-white rounded-full w-4 h-4 flex items-center justify-center text-sm hover:bg-red cursor-pointer"
+                      title="Remove activity"
+                    >
+                      ×
+                    </button>
+                  )}
 
-              {/* Image Upload */}
-              <div className="mb-4">
-                <label
-                  htmlFor="image"
-                  className="block text-sm font-medium text-dark-green"
-                >
-                  Image
-                </label>
-                <div
-                  className="mt-1 relative cursor-pointer border-2 border-dashed border-strong-orange rounded-md px-6 py-10 text-center"
-                  style={{ minHeight: "120px" }}
-                >
-                  <Image
-                    src="/assets/upload-icon.png"
-                    alt="Upload icon"
-                    width={24}
-                    height={24}
-                    className="mx-auto mb-2"
-                  />
-                  <p className="text-sm text-lighter-green">Upload image</p>
+                  {/* Title Input */}
+                  {index === 0 && (
+                    <div>
+                      <label
+                        htmlFor={`title-${index}`}
+                        className="block text-sm font-medium text-dark-green"
+                      >
+                        Title<span className="text-red">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id={`title-${index}`}
+                        placeholder="RippleEco"
+                        className="mt-1 block w-full bg-lighter-white placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+                        {...register(`activity.${index}.title`)}
+                      />
+                      {errors?.activity?.[index]?.title && (
+                        <p className="text-red text-xs mt-1">
+                          {errors?.activity?.[index]?.title.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Image and Description */}
+                  <div className="flex gap-4 mt-4">
+                    {/* Image Upload */}
+                    <div className="flex flex-col">
+                      <h4 className="text-sm text-dark-green">Image</h4>
+                      <input
+                        type="file"
+                        id={`file-${index}`}
+                        className="hidden"
+                        accept="image/*"
+                        onChange={(e) => handleFileChange(e, index)}
+                      />
+                      <label
+                        htmlFor={`file-${index}`}
+                        className="h-42 w-52 mt-1 border border-dashed border-orange flex flex-col justify-center items-center cursor-pointer rounded-md overflow-hidden"
+                      >
+                        {imagePreview[index] ? (
+                          <img
+                            src={imagePreview[index]}
+                            alt="Preview"
+                            className="object-cover h-full w-full"
+                          />
+                        ) : (
+                          <>
+                            <ImagePlus className="mb-2 text-lighter-green w-6 h-6" />
+                            <span className="text-lighter-green text-sm">
+                              Upload Image
+                            </span>
+                          </>
+                        )}
+                      </label>
+                      {errors?.activity?.[index]?.image && (
+                        <span className="text-red text-xs mt-4">
+                          {errors.activity[index].image.message}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                      <label
+                        htmlFor={`description-${index}`}
+                        className="block text-sm font-medium text-dark-green"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        id={`description-${index}`}
+                        placeholder="This event is amazing"
+                        rows={6}
+                        className="h-42 w-52 mt-1 block bg-lighter-white placeholder:text-sm text-sm resize-y placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+                        {...register(`activity.${index}.description`)}
+                      ></textarea>
+                      {errors?.activity?.[index]?.description && (
+                        <p className="text-red text-xs mt-1">
+                          {errors.activity[index].description.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              {/* Description Input */}
-              <div className="mb-4">
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-dark-green"
+              {/* add activity */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => append({ image: "", description: "" })}
+                  className="py-2 text-green text-sm cursor-pointer"
                 >
-                  Description
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  placeholder="This event is amazing"
-                  rows={6}
-                  className="mt-1 block w-full bg-lighter-white placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
-                ></textarea>
+                  + Add more activity
+                </button>
               </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="bg-green text-white px-4 py-2 rounded-md hover:bg-green/80"
-              >
-                Submit
-              </button>
+              {/* Submit */}
+              <div className="text-right">
+                <button
+                  type="submit"
+                  className="bg-green text-white px-4 py-2 rounded-md hover:bg-green/80 cursor-pointer"
+                >
+                  Submit
+                </button>
+              </div>
             </form>
-          </div>
-        </div>
-      )}
+          </DialogContent>
+        </Dialog>
+      </article>
     </main>
   );
 };

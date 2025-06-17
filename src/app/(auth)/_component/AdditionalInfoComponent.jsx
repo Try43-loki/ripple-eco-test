@@ -14,8 +14,6 @@ import {
 } from "@/action/auth-action";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { updateProfileAction } from "@/action/Action";
-import { auth } from "@/auth";
 
 function AdditonalInfoComponent({ onPrev, email, session, operator, profile }) {
   const [isOrganizer, setIsOrganizer] = useState(false);

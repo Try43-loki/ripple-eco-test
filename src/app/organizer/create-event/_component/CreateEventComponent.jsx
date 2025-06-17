@@ -19,6 +19,7 @@ import {
   categories,
   certificates,
   contributeType,
+  contributeTypeRestrictions,
   eventTypes,
   locations,
 } from "@/utils/data";
@@ -70,19 +71,35 @@ export default function CreateEventComponent({
     },
   });
 
-  // Watch start date to set minimum end date
   const watchStartDate = watch("startDate");
+  const watchEventTypes = watch("eventTypes");
+  const watchContributeType = watch("contributeType");
+  useEffect(() => {
+    if (watchEventTypes && watchContributeType) {
+      const eventType = eventTypes.find((et) => et.value === watchEventTypes);
+      const eventTypeId = eventType ? eventType.id : null;
 
-  // Handle multiple file input with validation
+      if (eventTypeId) {
+        const isValidContributeType = contributeTypeRestrictions.some(
+          (restriction) =>
+            restriction.eventTypeId === eventTypeId &&
+            restriction.contributeTypeName === watchContributeType
+        );
+
+        if (!isValidContributeType) {
+          setValue("contributeType", "");
+        }
+      }
+    }
+  }, [watchEventTypes, setValue, watchContributeType]);
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setFileValidationError("");
 
     if (files.length > 0) {
-      // Add new files to existing ones
       const allFiles = [...selectedImages, ...files];
 
-      // Validate the complete array
       const validation = validatePicturesArray(allFiles);
 
       if (!validation.isValid) {
@@ -110,7 +127,6 @@ export default function CreateEventComponent({
     }
   };
 
-  // Remove specific image
   const removeImage = (indexToRemove) => {
     const newPreviews = imagePreviews.filter(
       (_, index) => index !== indexToRemove
@@ -129,13 +145,11 @@ export default function CreateEventComponent({
 
     setFormData({
       ...formData,
-      [name]: type === "file" ? files[0] : value,
+      pictures: newImages,
     });
   };
 
-  // Clear all images
   const clearAllImages = () => {
-    // Clean up all URLs
     imagePreviews.forEach((preview) => {
       URL.revokeObjectURL(preview.url);
     });
@@ -151,7 +165,6 @@ export default function CreateEventComponent({
     });
   };
 
-  // Cleanup URLs on unmount
   useEffect(() => {
     return () => {
       imagePreviews.forEach((preview) => {
@@ -162,7 +175,6 @@ export default function CreateEventComponent({
 
   const handleEventSubmit = async (data) => {
     try {
-      // Final validation before submission
       const validation = validatePicturesArray(selectedImages);
       if (!validation.isValid) {
         setFileValidationError(validation.errors.join(", "));
@@ -196,18 +208,19 @@ export default function CreateEventComponent({
 
   return (
     <>
-      <h1 className="text-lg text-dark-green font-semibold mb-5">
+      <h1 className="w-full text-lg text-dark-green font-semibold mb-5">
         Event details
       </h1>
-      <form onSubmit={handleNext} className="flex flex-col gap-y-8">
+      <form
+        onSubmit={handleSubmit(handleEventSubmit)}
+        className="flex w-full flex-col gap-y-8"
+      >
         {/* Section 1 */}
         <div className="flex w-full gap-x-5 justify-between items-start">
           <div className=" w-full gap-1.5">
             <Label htmlFor="title">Title</Label>
             <Input
               name="title"
-              value={formData.title || ""}
-              onChange={handleChange}
               placeholder="Tree planting"
               className="bg-lighter-white text-gray-600 border-none h-10 mt-2"
               {...register("title")}
@@ -272,12 +285,11 @@ export default function CreateEventComponent({
               </Label>
               <Input
                 name="volunteer"
-                value={formData.volunteer || ""}
-                onChange={handleChange}
                 placeholder="1000"
                 type="number"
                 min="1"
                 className="bg-lighter-white text-gray-600 border-none h-10"
+                {...register("volunteer")}
               />
               {errors?.volunteer && (
                 <p className="text-sm text-red flex items-start gap-1">
@@ -331,7 +343,7 @@ export default function CreateEventComponent({
               )}
             </div>
             <div className=" w-full gap-1.5">
-              <Label className="mb-2"> Contribute type</Label>
+              <Label className="mb-2">Contribute type</Label>
               <Controller
                 name="contributeType"
                 control={control}
@@ -340,7 +352,13 @@ export default function CreateEventComponent({
                     operator="contributeType"
                     value={field.value}
                     onChange={field.onChange}
-                    placeholder="Choose contribution type"
+                    placeholder={
+                      watchEventTypes
+                        ? "Choose contribution type"
+                        : "Select event type first"
+                    }
+                    selectedEventType={watchEventTypes}
+                    disabled={!watchEventTypes}
                   />
                 )}
               />
@@ -348,6 +366,12 @@ export default function CreateEventComponent({
                 <p className="text-sm text-red flex items-start gap-1">
                   <AlertCircle size={12} className="mt-1" />
                   {errors.contributeType.message}
+                </p>
+              )}
+              {!watchEventTypes && (
+                <p className="text-xs text-gray-500 mt-1">
+                  Please select an event type first to see available
+                  contribution options.
                 </p>
               )}
             </div>
@@ -382,7 +406,7 @@ export default function CreateEventComponent({
               Minimum start date: {minStartDate.toLocaleDateString()}
             </p>
           </div>
-          <div className="grid w-full max-w-sm gap-1.5">
+          <div className="grid w-full gap-1.5">
             <Label>End date</Label>
             <Controller
               name="endDate"
@@ -407,12 +431,12 @@ export default function CreateEventComponent({
           </div>
           <div className="grid w-full gap-1.5">
             <Label htmlFor="pictures">
-              Pictures ({selectedImages.length}/15)
+              Pictures ({selectedImages.length}/5)
             </Label>
             <Input
               type="file"
-              name="picture"
-              onChange={handleChange}
+              name="pictures"
+              onChange={handleFileChange}
               className="bg-lighter-white text-gray-600 border-none h-10"
               accept="image/jpeg,image/jpg,image/png"
               multiple
@@ -425,7 +449,7 @@ export default function CreateEventComponent({
             )}
             <p className="text-xs text-gray-500">
               Supported formats: JPG, JPEG, PNG • Max size: 5MB per image • Max
-              15 images
+              5 images
             </p>
           </div>
         </div>
@@ -477,10 +501,9 @@ export default function CreateEventComponent({
           <Textarea
             name="description"
             rows={5}
-            value={formData.description || ""}
-            onChange={handleChange}
             placeholder="Details about your event."
             className="h-40 border border-light-strok bg-lighter-white text-gray-600"
+            {...register("description")}
           />
           {errors?.description && (
             <p className="text-sm text-red flex items-start gap-1">

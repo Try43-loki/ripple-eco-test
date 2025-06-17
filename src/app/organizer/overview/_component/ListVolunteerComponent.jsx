@@ -49,7 +49,7 @@ export default function ListVolunteerComponent({ latestVolunteersRequest }) {
           </TableHeader>
 
           <TableBody>
-            {transformRequests(latestVolunteersRequest).map(
+            {transformRequests(latestVolunteersRequest)?.map(
               (request, index) => (
                 <TableRow key={request.id} className="border-[#00000020]">
                   <TableCell>{index + 1}</TableCell>

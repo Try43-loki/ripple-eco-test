@@ -22,15 +22,15 @@ export const DateComponent = ({ className }) => {
     <div className={cn("grid gap-2 w-full", className)}>
       <Popover>
         <PopoverTrigger
-          className="bg-lighter-white border-light-strok hover:bg-lighter-white text-gray-600"
+          className="bg-lighter-white border-light-strok hover:bg-lighter-white text-black"
           asChild
         >
           <Button
             id="date"
             variant="outline"
             className={cn(
-              "w-[320px] justify-start text-left font-normal",
-              !date && "text-muted-foreground"
+              "w-[220px] justify-start text-left font-normal",
+              !date && "text-black"   //text-muted-foreground
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

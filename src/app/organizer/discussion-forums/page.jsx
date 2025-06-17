@@ -1,17 +1,16 @@
 import React from "react";
-import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
-import SearchBarComponent from "@/components/SearchBarComponent";
-import PostComponent from "@/app/(user)/discussion-forums/_component/PostComponent";
-import DiscussionTabComponent from "./_component/DiscussionTabComponent";
-import { MessageCircleQuestion } from "lucide-react";
+
 import {
   getAllDiscussionsService,
   getAllPopularDiscussionService,
+  getSearchDiscussionService,
   getTotalDiscussionService,
 } from "@/service/discussionService";
 import { getUserProfileService } from "@/service/auth/user-service";
 import HeroSectionComponent from "@/components/HeroSectionComponent";
 import DiscussionBodyComponent from "@/app/(user)/discussion-forums/_component/DiscussionBodyComponent";
+import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
+import { getUserProfileAction } from "@/action/user-action";
 
 const heroSectionText = {
   title: "DISCUSSION FORUMS",
@@ -44,15 +43,28 @@ const DiscussioForumsPage = async ({ searchParams: searchParamsPromise }) => {
     cardData = discussions?.data ?? [];
     displayData = totalDiscussion?.data?.total;
   }
+  const headerSection = {
+    title: "Discussion Forums",
+    text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
+    link: "Create Discussion",
+  };
+  const profile = await getUserProfileAction();
 
   const limitPopularDiscussion = popularDiscussion?.data?.slice(0, 10) || [];
   return (
     <main className="w-full h-full flex flex-col">
       {/* Hero Section */}
-      <HeroSectionComponent
+      {/* <HeroSectionComponent
         text={heroSectionText.title}
         description={heroSectionText.description}
         showSearchBar={heroSectionText.search}
+      /> */}
+      <DashboardHeaderComponent
+        title={headerSection.title}
+        text={headerSection.text}
+        link={headerSection.link}
+        profile={profile}
+        buttonAction="create-event"
       />
       <DiscussionBodyComponent
         totalDiscussion={displayData}

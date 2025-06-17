@@ -27,7 +27,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
               <img
                 src={img}
                 alt="avatar"
-                className="w-[30px] h-[30px] rounded-full cursor-pointer"
+                className="w-[35px] h-[35px] rounded-full cursor-pointer"
               />
             ) : (
               <div className="w-9 h-9 bg-green rounded-full p-1 border border-light-gray flex justify-center items-center text-white font-semibold">

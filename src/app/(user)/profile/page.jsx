@@ -13,7 +13,6 @@ import {
   Phone,
   Sparkles,
 } from "lucide-react";
-import Image from "next/image";
 
 import TakeActionComponent from "./_component/TakeActionComponent";
 import OwnFeedBackComponent from "./_component/OwnFeedBackComponent";
@@ -132,7 +131,7 @@ const ProfilePage = async () => {
           </TabsContent>
 
           <TabsContent value="take-action" className="w-full mt-5 mb-10">
-            <TakeActionComponent/>
+            <TakeActionComponent />
           </TabsContent>
 
           <TabsContent value="earned-badge" className="w-full mt-5 mb-10">

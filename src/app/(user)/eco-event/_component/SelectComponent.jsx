@@ -30,7 +30,6 @@ export function SelectComponent({ operator, values, onChange, value }) {
   const handleSelectChange = (val) => {
     const mappedValue = val === "all" ? "" : val;
     if (onChange) onChange(operator, mappedValue);
-    console.log("vallll", val);
   };
 
   return (

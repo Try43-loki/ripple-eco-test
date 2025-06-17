@@ -8,12 +8,11 @@ import {
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
+import { getUserProfileService } from "@/service/auth/user-service";
 
-export default async function EcoEventPage({
-  searchParams: searchParamsPromise,
-}) {
+export default async function EcoEventPage({ searchParams: ParamsPromise }) {
   let cardData = [];
-  const searchParams = searchParamsPromise || null;
+  const searchParams = (await ParamsPromise) || null;
   const searchQuery = searchParams?.search || "";
   const province = searchParams?.provinceId || "";
   const eventType = searchParams?.eventTypeId || "";
@@ -50,19 +49,19 @@ export default async function EcoEventPage({
     const response = await getAllEcoEventService();
     cardData = response?.data ?? [];
   }
+
+  const profileData = await getUserProfileService();
+
   cardData.sort(
     (a, b) => new Date(b.startDateTime) - new Date(a.startDateTime)
   );
-
-  // const response = await getAllEcoEventService();
-  // const events = response?.data ?? [];
-  // console.log("first", events);
-
   const headerSection = {
     title: "Eco‑Event",
     text: "Speak up for nature by contacting your elected officials or pledging to take action. Make a difference for conservation—we can’t do it without you!",
     link: "Create Eco‑Event",
   };
+
+  const profile = await getUserProfileAction();
 
   return (
     <main className="w-full">
@@ -71,6 +70,7 @@ export default async function EcoEventPage({
           title={headerSection.title}
           text={headerSection.text}
           link={headerSection.link}
+          profile={profile}
           buttonAction="create-event"
         />
 
@@ -83,14 +83,14 @@ export default async function EcoEventPage({
             />
           </div>
 
-          <EcoeventFilterComponent className="w-full" />
+          <EcoeventFilterComponent />
         </div>
 
-        <div className="flex flex-wrap justify-start gap-5 mt-6">
+        <div className="flex flex-wrap justify-between gap-5 mt-6">
           {cardData?.length > 0 ? (
             cardData.map((event) => (
               <div key={event?.eventId}>
-                <CardEcoEventComponent event={event} />
+                <CardEcoEventComponent event={event} role={profileData} />
               </div>
             ))
           ) : (

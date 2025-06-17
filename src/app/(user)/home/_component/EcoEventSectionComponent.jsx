@@ -3,8 +3,8 @@ import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import { getAllEcoEventService } from "@/service/ecoEventService";
 
 const EcoEventSectionComponent = async () => {
-  const response = getAllEcoEventService();
-  const events = response?.data ?? [];
+  const response = await getAllEcoEventService();
+  const events = await response?.data;
 
   const currentDate = new Date();
   const upcomingAndOngoingEvents = events.filter((item) => {

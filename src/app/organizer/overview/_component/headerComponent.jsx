@@ -5,13 +5,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-function HeaderComponent({ title, text, buttonAction }) {
+function HeaderComponent({ title, text, buttonAction, profile }) {
   const [showDiscussionModal, setShowDiscussionModal] = useState(false);
   const router = useRouter();
-
+  const isVerifiedOrganizer = profile?.data?.isVerifiedOrganizer;
   const handleVerificationSuccess = () => {
     if (buttonAction === "create-discussion") {
-      setShowDiscussionModal(true);
+      setShowDiscussionModal(false);
     } else if (buttonAction === "create-event") {
       router.push("/organizer/create-event");
     } else if (buttonAction === "create-take_action") {
