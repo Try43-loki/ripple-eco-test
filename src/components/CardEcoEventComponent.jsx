@@ -119,7 +119,7 @@ const CardEcoEventComponent = ({
             (ct) => ct.contributeTypeName === "donation"
           ) && (
             <button className="p-2 bg-light-gray rounded-md">
-              <DonationFormComponent />
+              <DonationFormComponent eventId={event?.eventId} />
             </button>
           )}
           <button className="p-2 bg-light-gray rounded-md">

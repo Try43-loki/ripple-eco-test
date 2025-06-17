@@ -76,11 +76,13 @@ const InviteFriendFormComponent = ({ eventId }) => {
                 <span className="pt-2">|</span>
               </span>
 
-              <textarea
+              <input
+                type="email"
+                name="email"
                 id="email"
                 placeholder="example@gmail.com"
                 {...register("email")}
-                className="flex justify-end items-end pt-2 text-gray-600 bg-lighter-white pl-9 text-label placeholder:text-strong-gray placeholder:font-light h-10 focus-visible:ring-0 border-none rounded-md w-full outline-none"
+                className=" py-2 flex justify-end items-end pt-2 text-gray-600 bg-lighter-white pl-9 text-label placeholder:text-strong-gray placeholder:font-light h-10 focus-visible:ring-0 border-none rounded-md w-full outline-none"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">
