@@ -52,6 +52,7 @@ const PostActivityComponent = ({ eventId }) => {
     insertPostActivityAction(data, eventId);
     setImagePreview([]);
     reset();
+    setIsDialogOpen(false);
   };
   return (
     <main>
@@ -118,7 +119,7 @@ const PostActivityComponent = ({ eventId }) => {
                         type="text"
                         id={`title-${index}`}
                         placeholder="RippleEco"
-                        className="mt-1 block w-full bg-lighter-white placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+                        className="mt-1 block w-full bg-lighter-white placeholder:text-lighter-green text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
                         {...register(`activity.${index}.title`)}
                       />
                       {errors?.activity?.[index]?.title && (
@@ -179,7 +180,7 @@ const PostActivityComponent = ({ eventId }) => {
                         id={`description-${index}`}
                         placeholder="This event is amazing"
                         rows={6}
-                        className="h-42 w-52 mt-1 block bg-lighter-white placeholder:text-sm text-sm resize-y placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
+                        className="h-42 w-52 mt-1 block bg-lighter-white text-lighter-green placeholder:text-sm text-sm resize-y placeholder:text-lighter-green rounded-md px-3 py-2 focus:outline-none focus:border-dark-green"
                         {...register(`activity.${index}.description`)}
                       ></textarea>
                       {errors?.activity?.[index]?.description && (

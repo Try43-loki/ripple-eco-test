@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { fileUploadAction } from "./FileUploadAction";
 import { postActivityService } from "@/service/PostActivityService";
 
@@ -24,6 +25,7 @@ export const insertPostActivityAction = async (data, id) => {
       summaryList,
     };
     await postActivityService(result, id);
+    revalidateTag(`post-activity-${id}`);
     return { success: true, result };
   } catch (error) {
     return { success: false, message: error.message };

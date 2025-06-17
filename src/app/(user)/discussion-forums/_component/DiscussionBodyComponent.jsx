@@ -7,7 +7,6 @@ import PostComponent from "./PostComponent";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import CreateDiscussionComponent from "@/components/CreateDiscussionComponent";
 import { useState } from "react";
-import { getUserProfileService } from "@/service/auth/user-service";
 import { usePathname } from "next/navigation";
 
 const DiscussionBodyComponent = ({

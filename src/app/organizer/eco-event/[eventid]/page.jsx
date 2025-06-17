@@ -12,15 +12,23 @@ import Link from "next/link";
 import { RequestFormComponent } from "@/components/RequesFormComponent";
 import DonationComponent from "@/app/(user)/eco-event/[eventid]/_component/DonateComponent";
 import RatingDialog from "@/components/RateComponent";
+import { getPostActivityService } from "@/service/PostActivityService";
+import { getUserProfileService } from "@/service/auth/user-service";
+import PostActivityComponent from "./_component/PostActivityComponent";
+import ActivityDisplayComponent from "./_component/ActivityDisplayComponent";
 
 export default async function EcoEventDetailPage({ params }) {
   const { eventid } = await params;
   const res = await getEcoEventByIdService(eventid);
+
+  // Post activity service
+  const activityEvent = await getPostActivityService(eventid);
+  const userData = await getUserProfileService();
   const event = res?.data;
-  // console.log("Event : ", event);
+  const eventId = event?.eventId;
 
   if (!eventid) {
-    return <p className="p-6 text-red-600">Event not found.</p>;
+    return <p className="p-6 text-red">Event not found.</p>;
   }
   const userId = "current-user-id";
   const participation = await checkUserJoinedEventService(eventid, userId);
@@ -31,12 +39,25 @@ export default async function EcoEventDetailPage({ params }) {
     current: event?.title,
     link: "/organizer/eco-event",
   };
-
   const isEventFinished = event?.eventStatus === "Finished";
   const isEventActive =
     event?.eventStatus === "Ongoing" || event?.eventStatus === "Upcoming";
 
   const isOrganizer = userId === event?.appUserResponse?.id;
+
+  // post activity condition
+  const summaryList = activityEvent?.data?.summaryList;
+  const isOwner =
+    userData?.data?.appUserId === event?.appUserResponse?.appUserId;
+  const shouldRenderPostActivity =
+    isOwner &&
+    event?.eventStatus === "Finished" &&
+    (!Array.isArray(summaryList) || summaryList.length === 0);
+  const shouldRenderActivityDisplay =
+    isOwner &&
+    event?.eventStatus === "Finished" &&
+    Array.isArray(summaryList) &&
+    summaryList.length > 0;
 
   return (
     <main className="w-full">
@@ -165,9 +186,16 @@ export default async function EcoEventDetailPage({ params }) {
               {/* You did not join this event and cannot rate it. */}
             </p>
           )}
+          {shouldRenderPostActivity && (
+            <PostActivityComponent eventId={eventId} />
+          )}
+          {shouldRenderActivityDisplay && (
+            <ActivityDisplayComponent
+              data={activityEvent?.data}
+              userData={userData?.data}
+            />
+          )}
         </div>
-        {/* </div> */}
-        {/* </article> */}
       </article>
     </main>
   );
