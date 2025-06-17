@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 
 export function SelectComponent({ operator, values, onChange, value }) {
-  console.log("values", values);
+  // console.log("values", values);
   const getValue = (item) =>
     item.provinceName ||
     item.eventType || //  here

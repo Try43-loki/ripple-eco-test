@@ -91,7 +91,7 @@ const VerifyOrganizerComponent = ({ text, profile }) => {
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <div className="relative w-full">
                 <Input
-                  placeholder="ជា៉ង ស្រីភា"
+                  placeholder="ថោង ស្រីភា"
                   className="bg-light-gray border-none pr-10 placeholder:text-lighter-green"
                   id="khmerName"
                   {...register("khmerName")}

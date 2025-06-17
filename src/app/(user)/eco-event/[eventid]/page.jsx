@@ -19,7 +19,7 @@ import StatusButtonComponent from "@/components/StatusButtonComponent";
 export default async function EcoEventDetailPage({ params }) {
   const { eventid } = params;
   const res = await getEcoEventByIdService(eventid);
-  const event = res?.data ?? [];
+  const event = res?.data;
 
   const userId = "current-user-id";
   const participation = await checkUserJoinedEventService(userId);

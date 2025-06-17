@@ -129,7 +129,7 @@ const FilterEcoEventComponent = () => {
   };
 
   const handleSlotChange = (operator, value) => {
-    console.log("valueee", value);
+    // console.log("valueee", value);
     const updated = {
       ...filters,
       slotStatus: value === "all" ? "" : value,
