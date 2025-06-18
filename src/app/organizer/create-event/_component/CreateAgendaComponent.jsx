@@ -102,15 +102,8 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
     const currentDayCount = dayFields.length;
     const requiredDayCount = maxDays;
 
-    console.log("Validation check:", {
-      currentDayCount,
-      requiredDayCount,
-      watchedDays,
-    });
-
     if (currentDayCount < requiredDayCount) {
       const missingDays = requiredDayCount - currentDayCount;
-      console.log("Missing days detected, showing toast...");
 
       const toastId = toast.error(
         `Please add all days for your event! You're missing ${missingDays} day${
@@ -191,8 +184,6 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
 
   // Form handlers
   const onSubmit = async (data) => {
-    console.log("Form submission started...");
-
     try {
       // Mark that user has attempted to submit
       setHasSubmitAttempt(true);
@@ -200,17 +191,12 @@ function CreateAgendaComponent({ setFormData, formData, onBack }) {
       // Add a small delay to ensure state is updated
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // Validate that all required days are present
-      console.log("Running validation...");
       const isValid = validateAllDaysRequired();
-      console.log("Validation result:", isValid);
 
       if (!isValid) {
         console.log("Validation failed, stopping submission");
         return;
       }
-
-      console.log("Validation passed, proceeding with submission...");
 
       // Show loading toast
       const loadingToast = toast.loading("Creating your event agenda...", {

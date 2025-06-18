@@ -1,6 +1,4 @@
-import { redirect } from "next/navigation";
 import { baseUrl } from "../constants";
-import headerToken from "@/utils/headerToken";
 import { apiRequest } from "@/utils/api";
 
 export const loginService = async (email, password) => {

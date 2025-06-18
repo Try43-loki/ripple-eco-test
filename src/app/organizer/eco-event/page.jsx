@@ -9,6 +9,7 @@ import {
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
 import { getUserProfileService } from "@/service/auth/user-service";
+import { getUserProfileAction } from "@/action/user-action";
 
 export default async function EcoEventPage({ searchParams: ParamsPromise }) {
   let cardData = [];

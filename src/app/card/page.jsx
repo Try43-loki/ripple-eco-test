@@ -1,17 +1,12 @@
 "use client";
-import NotificationItem from "@/components/NotificationItem";
-import { KnockProvider } from "@knocklabs/react";
 
 import React from "react";
+import { ListComponent } from "../organizer/eco-event/_component/ListComponent";
 
 function page() {
   return (
     <>
-      <KnockProvider apiKey={process.env.NEXT_PUBLIC_KNOCK_API_KEY} userId={3}>
-        <div className="mt-1">
-          <NotificationItem />
-        </div>
-      </KnockProvider>
+      <ListComponent />
     </>
   );
 }

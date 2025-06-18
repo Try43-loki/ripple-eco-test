@@ -39,19 +39,18 @@ const TakeActionCard = async ({ cardData, isOwner, isOrganizer, layout }) => {
               />
               {isOwner && currentUserId == ottherUserId ? (
                 <div className="absolute top-0 left-0 flex justify-between items-center p-3 w-full">
-                <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
-                  {data?.anonymous ? "Anonymous" : "Public"}
-                </p>
+                  <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
+                    {data?.anonymous ? "Anonymous" : "Public"}
+                  </p>
                   <DeleteComponent cardId={data?.takeActionId} />
-              </div>
-              ):
-              <div className="absolute top-0 left-0 flex justify-end items-center p-3 w-full">
-                <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
-                  {data?.anonymous ? "Anonymous" : "Public"}
-                </p>
-              </div>
-              }
-              
+                </div>
+              ) : (
+                <div className="absolute top-0 left-0 flex justify-end items-center p-3 w-full">
+                  <p className="text-[12px] px-3 text-dark-green bg-white  py-1 rounded-2xl font-medium">
+                    {data?.anonymous ? "Anonymous" : "Public"}
+                  </p>
+                </div>
+              )}
             </CardContent>
 
             {layout === "col" ? (

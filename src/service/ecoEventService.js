@@ -61,7 +61,6 @@ export const getAllContributeTypesService = async () => {
   try {
     const res = await fetch(`${baseUrl}/contribute-types/all`);
     const data = await res.json();
-    console.log("data : ", data);
     return data;
   } catch (e) {
     console.log(e);
@@ -217,3 +216,10 @@ export const getAllEcoEventByUserIDService = async (userID) => {
     console.log(e);
   }
 };
+
+// export const cancelEventByEventId  = async (eventId)=>{
+//   const token = await getAuthToken();
+//   try{
+//     const data = await apiRequest(``)
+//   }
+// }

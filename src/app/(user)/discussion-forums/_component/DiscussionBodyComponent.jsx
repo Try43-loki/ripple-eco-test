@@ -25,7 +25,11 @@ const DiscussionBodyComponent = ({
   return (
     <main className="min-h-screen flex flex-col">
       {/* Top Search + Create Button */}
-      <article className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center px-6 md:px-20 lg:px-[150px] my-6 w-full">
+      <article
+        className={`flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-center  my-6 w-full${
+          path !== "organizer" ? "px-6 md:px-20 lg:px-[150px]" : ""
+        }`}
+      >
         <SearchBarComponent
           placeholder="Search Title or Tag"
           pagePath={`${
@@ -40,7 +44,11 @@ const DiscussionBodyComponent = ({
       </article>
 
       {/* Scrollable layout */}
-      <article className="flex flex-1 overflow-hidden px-6 md:px-20 lg:px-[150px] gap-6">
+      <article
+        className={`flex flex-1 overflow-hidden  gap-6 ${
+          path !== "organizer" ? "px-6 md:px-20 lg:px-[150px]" : ""
+        }`}
+      >
         {/* Scrollable card list */}
         <div className="flex-1 overflow-y-auto pr-4 h-[160vh] scrollbar-hide">
           <h2 className="text-sm md:text-base lg:text-xl font-bold text-dark-green">

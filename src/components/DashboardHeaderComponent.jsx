@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import CreateDiscussionComponent from "./CreateDiscussionComponent";
+import React from "react";
+import { usePathname } from "next/navigation";
 import VerifyOrganizerComponent from "./VerifyOrganizerComponent";
 import Image from "next/image";
 
+import { Button } from "./ui/button";
 import CreateTakeActionFormComponent from "./CreateTakeActionFormComponent";
-import PopupTakeActionForm from "@/app/(user)/take-action/_component/PopupTakeActionForm";
+import Link from "next/link";
 
-const DashboardHeaderComponent = ({ title, text, buttonAction, profile }) => {
-  const [showDiscussionModal, setShowDiscussionModal] = useState(false);
-  const [showTakeActionModal, setShowTakeActionModal] = useState(false);
-  const router = useRouter();
+const DashboardHeaderComponent = ({ title, profile }) => {
   const currentPath = usePathname();
   const path = currentPath.split("/")[2];
+  const isVerifyOrganizer = profile?.data?.isVerifiedOrganizer;
 
   let type =
     path === "eco-event"
@@ -24,6 +22,7 @@ const DashboardHeaderComponent = ({ title, text, buttonAction, profile }) => {
       : path === "take-action"
       ? "Create Take-Action"
       : "";
+
   return (
     <>
       <section className="w-full">
@@ -37,7 +36,20 @@ const DashboardHeaderComponent = ({ title, text, buttonAction, profile }) => {
           </p>
 
           <div>
-            <VerifyOrganizerComponent text={type} profile={profile} />
+            {type === "Create Take-Action" ? (
+              <CreateTakeActionFormComponent
+                isVerify={isVerifyOrganizer}
+                type={type}
+              />
+            ) : type === "Create Eco-Event" ? (
+              <Link href={"/organizer/create-event"}>
+                <Button className="bg-green cursor-pointer text-white rounded-xl px-6 py-3 hover:bg-green/80 border-none hover:text-white">
+                  {type}
+                </Button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
           <Image
             src="/badges/hero-section-dashboard.png"
@@ -48,23 +60,22 @@ const DashboardHeaderComponent = ({ title, text, buttonAction, profile }) => {
             className="absolute rounded-2xl right-0 bottom-0"
           />
         </article>
+        {isVerifyOrganizer ? (
+          ""
+        ) : (
+          <section>
+            <h4 className="text-orange-300 my-2 text-xl">Warning!</h4>
+            <div className="flex justify-between items-center mt-3 bg-orange-100 rounded-3xl p-4 ">
+              <p className="text-gray-800 text-md">
+                If you want to have full interact in our platform please verify
+                with your National ID Card
+              </p>
+
+              <VerifyOrganizerComponent />
+            </div>
+          </section>
+        )}
       </section>
-
-      {/* Modal for Create Discussion */}
-      {showDiscussionModal && (
-        <CreateDiscussionComponent
-          open={showDiscussionModal}
-          onOpenChange={setShowDiscussionModal}
-        />
-      )}
-
-      {/* Modal for take action */}
-      {showTakeActionModal && (
-        <CreateTakeActionFormComponent
-          open={showTakeActionModal}
-          onOpenChange={setShowTakeActionModal}
-        />
-      )}
     </>
   );
 };

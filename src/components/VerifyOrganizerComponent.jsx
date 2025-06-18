@@ -18,9 +18,9 @@ import { verifyOrganizerSchema } from "@/lib/zod/VerifyOrganizerSchema";
 import { verifyOrganizerAction } from "@/action/user-action";
 import { useRouter } from "next/navigation";
 
-const VerifyOrganizerComponent = ({ text, profile }) => {
+const VerifyOrganizerComponent = () => {
   const [open, setOpen] = useState(false);
-  const isVerifyOrganizer = profile?.data?.isVerifiedOrganizer;
+
   const rounter = useRouter();
   const {
     register,
@@ -30,17 +30,7 @@ const VerifyOrganizerComponent = ({ text, profile }) => {
   } = useForm({
     resolver: zodResolver(verifyOrganizerSchema),
   });
-  // handle check verify Organizer
-  const handleCheckVerifyOrganizer = () => {
-    if (isVerifyOrganizer) {
-      setOpen(false);
-      if (text === "eco-event") {
-        rounter.push("/organizer/create-event");
-      }
-    } else {
-      setOpen(true);
-    }
-  };
+
   const handleVerify = async (formData) => {
     const data = await verifyOrganizerAction(formData);
     if (data?.success) {
@@ -49,13 +39,13 @@ const VerifyOrganizerComponent = ({ text, profile }) => {
     reset();
   };
   return (
-    <Dialog open={open}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button
-          onClick={handleCheckVerifyOrganizer}
-          className="bg-green cursor-pointer text-white rounded-xl px-6 py-3 hover:bg-green/80"
+          variant="outline"
+          className="bg-green cursor-pointer border-none hover:text-white text-white rounded-xl px-6 py-3 hover:bg-green/80"
         >
-          {text}
+          Verify!
         </Button>
       </DialogTrigger>
 

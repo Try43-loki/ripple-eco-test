@@ -23,7 +23,7 @@ export function ListComponent() {
         <UpdateEventComponent />
         <Button className="shadow-none  hover:bg-white border w-full bg-white text-strong-gray font-light cursor-pointer border-light-gray hover:border-red-400  hover:text-red  transition-all ease-in-out duration-100">
           <OctagonX size={20} />
-          Delete Event
+          Cancel Event
         </Button>
       </PopoverContent>
     </Popover>

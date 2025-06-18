@@ -28,7 +28,7 @@ const TakeActionPage = async () => {
           profile={profile}
         />
       </section>
-      <section>
+      <section className="w-full">
         <TakeActionBodyComponent
           cardData={cardData}
           ownCardData={ownCardData}

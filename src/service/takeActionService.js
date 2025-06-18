@@ -12,17 +12,27 @@ export const getAllTakeActionService = async () => {
 };
 export const getTakeActionByIDService = async (takeActionID) => {
   const token = await getAuthToken();
-    try {
-      const data = await apiRequest(`/takeActions/${takeActionID}`, "GET", null, token);
-      return data;
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
+  try {
+    const data = await apiRequest(
+      `/takeActions/${takeActionID}`,
+      "GET",
+      null,
+      token
+    );
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};
 export const getTakeActionByTitleService = async (title) => {
   const token = await getAuthToken();
   try {
-    const data = await apiRequest(`/takeActions/search/${title}`, "GET", null, token);
+    const data = await apiRequest(
+      `/takeActions/search/${title}`,
+      "GET",
+      null,
+      token
+    );
     return data;
   } catch (e) {
     console.log("error", e);
@@ -77,6 +87,8 @@ export const createTakeActionService = async (takeActionData) => {
       takeActionData,
       token
     );
+    console.log("take action ", data);
+    console.log("take formdata ", takeActionData);
     return data;
   } catch (e) {
     console.log("error", e);
@@ -101,7 +113,12 @@ export const submitTakeActionAnswerService = async (answerData) => {
 export const getTakeActionByUserIdService = async (userId) => {
   const token = await getAuthToken();
   try {
-    const data = await apiRequest(`/takeActions/${userId}/all`, "GET", null, token);
+    const data = await apiRequest(
+      `/takeActions/${userId}/all`,
+      "GET",
+      null,
+      token
+    );
     return data;
   } catch (e) {
     console.log("error", e);
