@@ -1,7 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
-import { getAllOrganizerRankingService } from "@/service/leaderboardService";
+import { getAllOrganizerRankingService, getOrgRankingFilterService } from "@/service/leaderboardService";
 import FilterPanelComponent from "@/app/(user)/leaderboard/_component/FilterPanelComponent";
 
 const yellow400 = "#FF8C00";
@@ -38,10 +38,10 @@ const StarRating = ({ score }) => {
 
 export const TopRankingOrgComponent = async ({searchQuery}) => {
   const {provinceId,categoryId} = searchQuery;
-  const organizerData = await getAllOrganizerRankingService();
-  const orgData = organizerData.data;
+  const filterOrg = await getOrgRankingFilterService(provinceId, categoryId);
+  // const orgData = organizerData.data;
 
-  const rankData = orgData.map((organizer) => {
+  const rankData = filterOrg?.data?.map((organizer) => {
     let leftIcon = null;
     let rightIcon = null;
     let textColor = "text-dark-green";
@@ -65,7 +65,6 @@ export const TopRankingOrgComponent = async ({searchQuery}) => {
       image: organizer.appUserResponse.profileImageUrl,
       username: `${organizer.appUserResponse.firstName.trim()} ${organizer.appUserResponse.lastName.trim()}`,
       score: organizer.averageRating,
-      hashtag: "#Tree planting",
       leftIcon,
       rightIcon,
       textColor,
@@ -85,42 +84,39 @@ export const TopRankingOrgComponent = async ({searchQuery}) => {
 
       <section className="pt-10 bg-white mb-15">
         <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2">
-          {rankData.map((org) => (
-            <article className="flex gap-4" key={org.rank}>
+          {rankData?.map((data,index) => (
+            <article className="flex gap-4" key={index}>
               <div className="flex gap-2 items-center justify-center">
-                {org.leftIcon && (
-                  <Image src={org.leftIcon} alt="left-icon" width={20} height={20} />
+                {data?.leftIcon && (
+                  <Image src={data?.leftIcon} alt="left-icon" width={20} height={20} />
                 )}
-                <p className={`text-xl lg:text-3xl font-bold ${org.textColor} ${!org.leftIcon ? "ml-7" : ""}`}>
-                  {org.rank}
+                <p className={`text-xl lg:text-3xl font-bold ${data?.textColor} ${!data.leftIcon ? "ml-7" : ""}`}>
+                  {data?.rank}
                 </p>
-                {org.rightIcon && (
-                  <Image src={org.rightIcon} alt="right-icon" width={20} height={20} />
+                {data?.rightIcon && (
+                  <Image src={data?.rightIcon} alt="right-icon" width={20} height={20} />
                 )}
               </div>
 
               <article className="flex flex-row justify-between w-full bg-white border border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
                 <div className="flex items-center gap-4">
                   <Image
-                    src={org.image}
+                    src={data?.image}
                     alt="org image"
                     width={40}
                     height={40}
-                    className="rounded-full"
+                    className="rounded-full h-[40px] w-[40px]"
                   />
                   <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
-                    {org.username}
+                    {data?.username}
                   </h2>
                 </div>
 
                 <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                   <div className="flex justify-center items-center flex-col">
-                    <p className="font-bold">{org.score}</p>
-                    <StarRating score={org.score} />
+                    <p className="font-bold">{data?.score}</p>
+                    <StarRating score={data?.score} />
                   </div>
-                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
-                    {org.hashtag}
-                  </p>
                 </div>
               </article>
             </article>

@@ -6,9 +6,9 @@ import FilterPanelComponent from "./FilterPanelComponent";
 
 const TopRankingComponent = async ({searchQuery}) => {
   const {provinceId,categoryId} = searchQuery;
-  const response = await getAllUserRankingService();
+  // const response = await getAllUserRankingService();
   const filterUser = await getUserRankingFilterService(provinceId,categoryId);
-   const rawUsers = response.data;
+  //  const rawUsers = response.data;
 
   const rankData = filterUser?.data?.map((user) => {
     let leftIcon = null;
@@ -33,7 +33,6 @@ const TopRankingComponent = async ({searchQuery}) => {
       image:user.appUserResponse.profileImageUrl,
       username: `${user.appUserResponse.firstName.trim()} ${user.appUserResponse.lastName.trim()}`,
       score: user.totalEvents,
-      hashtag: "#Tree planting",
       leftIcon,
       rightIcon,
       textColor,
@@ -95,7 +94,7 @@ const TopRankingComponent = async ({searchQuery}) => {
                     width={40}
                     height={40}
                     objectFit="cover"
-                    className="rounded-full h-[40px]"
+                    className="rounded-full h-[40px] w-[40px]"
                   />
                   <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
                     {data?.username}
@@ -105,9 +104,7 @@ const TopRankingComponent = async ({searchQuery}) => {
 
                 <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
                   <p className="font-bold">{data?.score}</p>
-                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
-                    {data?.hashtag}
-                  </p>
+                 
                 </div>
               </article>
             </article>
