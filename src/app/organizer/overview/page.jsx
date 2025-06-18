@@ -8,6 +8,7 @@ import ProgressComponent from "./_component/ProgressComponent";
 import ListVolunteerComponent from "./_component/ListVolunteerComponent";
 import { getDashboardDataService } from "@/service/dashboardService";
 import { getUserProfileAction } from "@/action/user-action";
+import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 
 export default async function OverviewPage() {
   const data = await getDashboardDataService();
@@ -22,10 +23,10 @@ export default async function OverviewPage() {
       <section className="flex w-full justify-center  items-start gap-x-5">
         {/* content */}
         <section className="grow">
-          <HeaderComponent
-            title={headerSection?.title}
-            text={headerSection?.text}
-            buttonAction={headerSection?.buttonAction}
+          <DashboardHeaderComponent
+            title={headerSection.title}
+            text={headerSection.text}
+            buttonAction={headerSection.buttonAction}
             profile={profile}
           />
           {/* total statistic */}

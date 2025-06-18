@@ -15,7 +15,7 @@ const DashboardHeaderComponent = ({ title, profile }) => {
   const isVerifyOrganizer = profile?.data?.isVerifiedOrganizer;
 
   let type =
-    path === "eco-event"
+    path === "eco-event" || path === "overview"
       ? "Create Eco-Event"
       : path === "discussion-forums"
       ? "Create Discussion"
