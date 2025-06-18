@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { volunteerRequestSchema } from "@/lib/zod/volunteerRequestSchema";
 import { createVolunteerAction } from "@/action/VolunteerAction";
+import { HandHeart } from "lucide-react";
 
 export function RequestFormComponent({ contribute, eventId }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,6 @@ export function RequestFormComponent({ contribute, eventId }) {
       answer: data.answer,
     };
     const result = await createVolunteerAction(formData);
-    console.table(formData);
     if (result?.data?.status === 201) {
       reset();
       setIsOpen(false);
@@ -47,13 +47,7 @@ export function RequestFormComponent({ contribute, eventId }) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <div className="py-2 cursor-pointer px-8 md:px-11 lg:px-10 bg-light-gray rounded-md w-full flex justify-center items-center gap-2">
-          <Image
-            src="/assets/volunteer-hand.png" // Update with your volunteer icon
-            alt="volunteer-icon"
-            width={20}
-            height={10}
-            className="h-5"
-          />
+          <HandHeart size={15} />
           <p className="text-sm text-dark-green font-bold cursor-pointer">
             Volunteer
           </p>

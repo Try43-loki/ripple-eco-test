@@ -40,7 +40,7 @@ export function ProfileDropdownComponent({ operator, profile }) {
       <PopoverContent className="w-50 mr-10 p-0 mt-3 rounded-2xl px-2 py-2 bg-white border border-light-strok">
         <div className="flex justify-center items-start flex-col w-full rounded-xl">
           <Link
-            href={"/profile"}
+            href={operator === "organizer" ? "/organizer/profile" : "/profile"}
             className="flex justify-start items-center gap-x-2 hover:bg-light-gray w-full rounded-md px-2 py-1 "
           >
             <User className="text-lighter-green" />

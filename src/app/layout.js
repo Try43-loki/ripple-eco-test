@@ -34,9 +34,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={gabarito.className}>
-        <Provider>{children}</Provider>
-      </body>
+      <body className={gabarito.className}>{children}</body>
     </html>
   );
 }

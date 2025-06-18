@@ -5,11 +5,9 @@ import Link from "next/link";
 import React from "react";
 
 const CardSceduleComponent = ({ cardData }) => {
-  console.log("card data", cardData);
-  const upcomingEvent = cardData?.data?.filter(
+  const upcomingEvent = cardData?.filter(
     (item) => item?.eventStatus === "Upcoming"
   );
-  console.log("upcoming event", upcomingEvent);
   return (
     <>
       {upcomingEvent?.map((data, index) => (

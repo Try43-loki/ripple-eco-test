@@ -17,6 +17,7 @@ const CardEcoEventComponent = ({
 }) => {
   const status = event?.eventStatus || eventStatus;
   const eventType = event?.eventType?.eventType;
+  const eventId = event?.eventId;
 
   const availableContributeTypes =
     event?.eventType?.contributeTypes ||
@@ -29,7 +30,7 @@ const CardEcoEventComponent = ({
         <span className="bg-white/90 text-xs text-darker-gray px-2 py-1 rounded-2xl shadow">
           {`${event?.eventType?.eventType} | ${event?.category?.categoryName}`}
         </span>
-        {role === "organizer" && <ListComponent />}
+        <ListComponent eventId={eventId} />
       </div>
 
       <Link

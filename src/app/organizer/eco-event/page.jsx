@@ -5,6 +5,7 @@ import CardEcoEventComponent from "@/components/CardEcoEventComponent";
 import {
   fetchFilteredEventsService,
   getAllEcoEventService,
+  getAllOwnEventService,
   getEcoEventByTitleService,
 } from "@/service/ecoEventService";
 import SearchBarComponent from "@/components/SearchBarComponent";
@@ -47,7 +48,7 @@ export default async function EcoEventPage({ searchParams: ParamsPromise }) {
     });
     cardData = response?.data ?? [];
   } else {
-    const response = await getAllEcoEventService();
+    const response = await getAllOwnEventService();
     cardData = response?.data ?? [];
   }
 
@@ -91,7 +92,7 @@ export default async function EcoEventPage({ searchParams: ParamsPromise }) {
           {cardData?.length > 0 ? (
             cardData.map((event) => (
               <div key={event?.eventId}>
-                <CardEcoEventComponent event={event} role={profileData} />
+                <CardEcoEventComponent event={event} />
               </div>
             ))
           ) : (

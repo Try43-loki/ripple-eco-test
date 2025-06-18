@@ -197,10 +197,30 @@ export const getAllEventHistoryService = async () => {
   }
 };
 
+// export const getAllOwnEventService = async () => {
+//   const token = await getAuthToken();
+//   try {
+//     const data = await apiRequest("/event/own", "GET", null, token);
+//     return data;
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 export const getAllOwnEventService = async () => {
   const token = await getAuthToken();
   try {
-    const data = await apiRequest("/event/own", "GET", null, token);
+    const res = await fetch(`${baseUrl}/event/own`, {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      next: {
+        tags: ["getOwnEvent"],
+      },
+    });
+    const data = await res.json();
     return data;
   } catch (e) {
     console.log(e);
@@ -217,9 +237,13 @@ export const getAllEcoEventByUserIDService = async (userID) => {
   }
 };
 
-// export const cancelEventByEventId  = async (eventId)=>{
-//   const token = await getAuthToken();
-//   try{
-//     const data = await apiRequest(``)
-//   }
-// }
+export const cancelEventByEventIdService = async (eventId) => {
+  const token = await getAuthToken();
+  try {
+    const data = await apiRequest(`/event/${eventId}`, "PATCH", null, token);
+    console.log("data cancle", data);
+    return data;
+  } catch (e) {
+    console.log("error", e);
+  }
+};

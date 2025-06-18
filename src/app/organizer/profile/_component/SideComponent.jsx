@@ -2,18 +2,21 @@ import React, { use } from "react";
 import CardOrgLeaderComponent from "./CardOrgLeaderComponent";
 import { DatePickComponent } from "./DatePickComponent";
 import CardSceduleComponent from "./CardSceduleComponent";
-import { getAllEcoEventByUserIDService, getOwnUpComingEventService } from "@/service/ecoEventService";
+import {
+  getAllEcoEventByUserIDService,
+  getOwnUpComingEventService,
+} from "@/service/ecoEventService";
 
-const SideComponent =async ({ operator, userId, isViewProfile }) => {
+const SideComponent = async ({ operator, userId, isViewProfile }) => {
   const upcoming = await getOwnUpComingEventService();
   const upcomingOther = await getAllEcoEventByUserIDService(userId?.appUserId);
   let upcomingData = [];
-  if (isViewProfile === true) {
+  if (isViewProfile) {
     upcomingData = upcomingOther;
   } else {
     upcomingData = upcoming?.data;
   }
-  
+
   return (
     <>
       <section className="rounded-2xl bg-light-gray p-3.75 border-none w-full h-full flex flex-col gap-y-5">
@@ -28,7 +31,7 @@ const SideComponent =async ({ operator, userId, isViewProfile }) => {
               <DatePickComponent />
             </div>
             <div className="flex flex-col gap-y-4 overflow-y-scroll h-120">
-                <CardSceduleComponent cardData={upcomingData}/>
+              <CardSceduleComponent cardData={upcomingData} />
             </div>
           </div>
         )}

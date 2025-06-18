@@ -1,3 +1,4 @@
+import CancelEventComponent from "@/components/CancelEventComponent";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -8,7 +9,7 @@ import UpdateEventComponent from "@/components/UpdateEventComponent";
 // import { UpdateEventComponent } from "@/components/UpdateEventComponent";
 import { Edit, Ellipsis, OctagonX, Settings } from "lucide-react";
 
-export function ListComponent() {
+export function ListComponent({ eventId }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -20,11 +21,8 @@ export function ListComponent() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="  border-none shadow-none p-0 flex justify-center items-start flex-col mr-30 space-y-1.5 mt-1 w-36">
-        <UpdateEventComponent />
-        <Button className="shadow-none  hover:bg-white border w-full bg-white text-strong-gray font-light cursor-pointer border-light-gray hover:border-red-400  hover:text-red  transition-all ease-in-out duration-100">
-          <OctagonX size={20} />
-          Cancel Event
-        </Button>
+        <UpdateEventComponent eventId={eventId} />
+        <CancelEventComponent eventId={eventId} />
       </PopoverContent>
     </Popover>
   );

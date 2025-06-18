@@ -12,6 +12,7 @@ import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
 
 export default async function OverviewPage() {
   const data = await getDashboardDataService();
+  console.log("datadashboard", data);
   const profile = await getUserProfileAction();
   const headerSection = {
     title: "Welcome back, Earth Hero!",

@@ -1,6 +1,7 @@
 import { Award, CalendarDays, CircleDollarSign, Users } from "lucide-react";
 import React from "react";
 function TotalStatisticComponent({ total }) {
+  console.log("total : ", total);
   const totalStatisticData = [
     {
       title: "Total Badge",

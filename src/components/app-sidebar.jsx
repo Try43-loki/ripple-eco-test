@@ -27,6 +27,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import Link from "next/link";
+import Image from "next/image";
 
 // Menu items
 const items = [
@@ -98,11 +99,16 @@ export function AppSidebar() {
       <SidebarContent>
         {/* Header Section */}
         <SidebarGroup>
-          <div className="px-4 mt-2 mb-2 border-green-200">
-            <h1 className="text-2xl text-center font-bold text-amber-800">
-              Ripple<span className="text-strong-green">Eco</span>
-            </h1>
-          </div>
+          <figure className="px-4 mt-2 mb-2 border-green-200 flex justify-center items-center">
+            <Link href={"/organizer/overview"} className="cursor-pointer">
+              <Image
+                height={50}
+                width={140}
+                src="/assets/RippleEco-ractangle.png"
+                alt="Ripple Eco Logo"
+              />
+            </Link>
+          </figure>
 
           <SidebarGroupContent className="px-2 mt-2">
             {/* Main Navigation */}

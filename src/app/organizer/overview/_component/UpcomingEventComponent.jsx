@@ -55,7 +55,7 @@ function UpcomingEventComponent({ upcomingEvent }) {
         <h1 className="text-md font-semibold  text-dark-green my-3">
           Upcoming Event
         </h1>
-        <div className="my-2">
+        {/* <div className="my-2">
           {firstCard && (
             <CardEcoEventInOverviewComponent
               key={firstCard.eventId}
@@ -76,12 +76,16 @@ function UpcomingEventComponent({ upcomingEvent }) {
               }}
             />
           )}
+        </div> */}
+        <div className="my-2">
+          {firstCard && <CardEcoEventComponent event={upcomingEvent} />}
         </div>
         {transformUpcomingEvents(nextCards)?.map((event, index) => {
           const isOdd = index % 2 !== 0;
 
           return (
             <Link
+              key={index}
               href={`/organizer/eco-event/${event?.id}`}
               className="w-full cursor-pointer"
             >

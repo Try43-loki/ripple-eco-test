@@ -5,7 +5,10 @@ import {
   inviteFriendService,
   updateEventService,
 } from "@/service/createEventService";
-import { rateFeedbackService } from "@/service/ecoEventService";
+import {
+  cancelEventByEventIdService,
+  rateFeedbackService,
+} from "@/service/ecoEventService";
 import {
   categories,
   contributeType,
@@ -89,6 +92,7 @@ export const updateEventAction = async (data, eventId) => {
   console.log("formData", formData); // tod
   try {
     const res = await updateEventService(formData, eventId);
+    revalidateTag("getOwnEvent");
     console.log("update ", res);
   } catch (err) {
     console.error("updateEventAction", err);
@@ -141,5 +145,14 @@ export const rateFeedbackAction = async (rateData, eventId) => {
     return { success: false, message: "Failed to submit feedback." };
   } catch (e) {
     console.log("errors", e);
+  }
+};
+
+export const cancelEventByEventIdAction = async (eventId) => {
+  try {
+    const data = await cancelEventByEventIdService(eventId);
+    revalidateTag("getOwnEvent");
+  } catch (e) {
+    console.log("error", e);
   }
 };

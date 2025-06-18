@@ -1,15 +1,16 @@
-import React from "react";
-import SearchComponent from "./SearchComponent";
-import { SelectComponent } from "./SelectComponent";
+
 import Image from "next/image";
-import { getAllUserRankingService } from "@/service/leaderboardService";
+import { getAllUserRankingService, getUserRankingFilterService } from "@/service/leaderboardService";
+import FilterPanelComponent from "./FilterPanelComponent";
 
-const TopRankingComponent = async () => {
-  const response = await getAllUserRankingService();
 
-  const rawUsers = response.data;
+const TopRankingComponent = async ({searchQuery}) => {
+  const {provinceId,categoryId} = searchQuery;
+  // const response = await getAllUserRankingService();
+  const filterUser = await getUserRankingFilterService(provinceId,categoryId);
+  //  const rawUsers = response.data;
 
-  const rankData = rawUsers?.map((user) => {
+  const rankData = filterUser?.data?.map((user) => {
     let leftIcon = null;
     let rightIcon = null;
     let textColor = "text-dark-green";
@@ -27,21 +28,21 @@ const TopRankingComponent = async () => {
       rightIcon = "/assets/leaderboard/laurel-wreath-right-03.png";
       textColor = "text-red";
     }
-
     return {
       rank: user.ranking,
-      username: `${user.firstName} ${user.lastName}`,
+      image:user.appUserResponse.profileImageUrl,
+      username: `${user.appUserResponse.firstName.trim()} ${user.appUserResponse.lastName.trim()}`,
       score: user.totalEvents,
-      hashtag: "#Tree planting",
       leftIcon,
       rightIcon,
       textColor,
     };
   });
 
+  
   return (
     <>
-      <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between bg-white ">
+      <section className="flex w-full gap-5 flex-col md:flex-row lg:flex-row justify-between ">
         {/* Header */}
         <div>
           <h2 className="text-lg lg:text-xl xl:text-2xl text-dark-green font-bold">
@@ -49,40 +50,35 @@ const TopRankingComponent = async () => {
           </h2>
         </div>
 
-        <article className="flex gap-3 text-md md:text-lg lg:text-xl items-center justify-start">
-          <div className="w-full">
-            <p className="text-green">Filter by:</p>
-          </div>
-          <SearchComponent />
-          <SelectComponent operator={"Categories"} />
-        </article>
+        <FilterPanelComponent/>
+        
       </section>
 
       <section className="pt-10 bg-white mb-15">
         <div className="max-h-[500px] overflow-y-auto space-y-4 pr-2 s[-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none]">
-          {rankData.map((data) => (
-            <article className="flex gap-4" key={data.rank}>
+          {rankData?.map((data,index) => (
+            <article className="flex gap-4" key={index}>
               {/* Rank Icon + Number */}
               <div className="flex gap-2 items-center justify-center">
                 {data.leftIcon && (
                   <Image
-                    src={data.leftIcon}
-                    alt={`left-icon-${data.rank}`}
+                    src={data?.leftIcon}
+                    alt={`left-icon-${data?.rank}`}
                     width={20}
                     height={20}
                   />
                 )}
                 <p
-                  className={`text-xl lg:text-3xl font-bold ${data.textColor} ${
-                    !data.leftIcon ? "ml-7" : ""
+                  className={`text-xl lg:text-3xl font-bold ${data?.textColor} ${
+                    !data?.leftIcon ? "ml-7" : ""
                   }`}
                 >
-                  {data.rank}
+                  {data?.rank}
                 </p>
-                {data.rightIcon && (
+                {data?.rightIcon && (
                   <Image
-                    src={data.rightIcon}
-                    alt={`right-icon-${data.rank}`}
+                    src={data?.rightIcon}
+                    alt={`right-icon-${data?.rank}`}
                     width={20}
                     height={20}
                   />
@@ -93,22 +89,22 @@ const TopRankingComponent = async () => {
               <article className="flex flex-row justify-between w-full bg-white border border-light-gray rounded-2xl p-2 md:p-3 lg:p-5">
                 <div className="flex items-center gap-4">
                   <Image
-                    src="/assets/leaderboard/image.jpg"
+                    src={data?.image}
                     alt="user image"
                     width={40}
                     height={40}
-                    className="rounded-full"
+                    objectFit="cover"
+                    className="rounded-full h-[40px] w-[40px]"
                   />
                   <h2 className="text-sm md:text-lg lg:text-2xl text-dark-green font-medium">
-                    {data.username}
+                    {data?.username}
+                    
                   </h2>
                 </div>
 
                 <div className="flex gap-6 md:gap-20 lg:gap-15 xl:gap-45 items-center text-sm md:text-lg lg:text-2xl text-dark-green">
-                  <p className="font-bold">{data.score}</p>
-                  <p className="bg-meduim-white text-lg px-2 py-1 lg:px-5 lg:py-2 rounded-full">
-                    {data.hashtag}
-                  </p>
+                  <p className="font-bold">{data?.score}</p>
+                 
                 </div>
               </article>
             </article>

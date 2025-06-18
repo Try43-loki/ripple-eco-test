@@ -17,43 +17,6 @@ import {
   locations,
 } from "@/utils/data";
 export function SelectComponent({ operator }) {
-  let data = [];
-  switch (operator) {
-    case "Event_type":
-      data = eventTypes;
-      break;
-    case "Categories":
-      data = categories;
-
-      break;
-    case "Certificate":
-      data = certificates;
-      break;
-    case "Location":
-      data = locations;
-
-      break;
-    case "Contribute_type":
-      data = contributeType;
-
-      break;
-    default:
-      break;
-  }
-  return (
-    <Select>
-      <SelectTrigger className="w-full border-none bg-lighter-white !text-gray-600">
-        <SelectValue placeholder={`Choose ${operator}`} />
-      </SelectTrigger>
-      <SelectContent className="bg-white  border border-light-strok text-gray-600">
-        <SelectGroup>
-          {data?.map((item, index) => (
-            <SelectItem key={index} value={item.value}>
-              {item.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
+  
+  
 }
