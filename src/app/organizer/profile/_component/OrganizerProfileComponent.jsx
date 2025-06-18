@@ -6,11 +6,21 @@ import Image from "next/image";
 import React from "react";
 import ArchivesComponent from "./ArchivesComponent";
 import EditprofileComponent from "./EditprofileComponent";
-import { getAllBagdeService, getBadgeByUserIDService } from "@/service/badgeService";
+import {
+  getAllBagdeService,
+  getBadgeByUserIDService,
+} from "@/service/badgeService";
 import BadgeComponent from "./BadgeComponent";
-import { getAllEcoEventByUserIDService, getAllOwnEventService } from "@/service/ecoEventService";
+import {
+  getAllEcoEventByUserIDService,
+  getAllOwnEventService,
+} from "@/service/ecoEventService";
 
-const OrganizerProfileComponent = async ({ operator, organizerData, isViewProfile}) => {
+const OrganizerProfileComponent = async ({
+  operator,
+  organizerData,
+  isViewProfile,
+}) => {
   const badgeData = await getAllBagdeService();
   const userID = organizerData?.appUserId;
   const totalBadges = await getBadgeByUserIDService(userID);
@@ -18,12 +28,12 @@ const OrganizerProfileComponent = async ({ operator, organizerData, isViewProfil
   let cardData = [];
   const archivementData = await getAllOwnEventService();
   const archivementOther = await getAllEcoEventByUserIDService(userID);
-  if(isViewProfile === true){
+  if (isViewProfile === true) {
     cardData = archivementOther?.data;
   } else {
     cardData = archivementData?.data;
   }
-  
+
   return (
     <>
       <section className="w-full flex flex-col">
@@ -31,19 +41,22 @@ const OrganizerProfileComponent = async ({ operator, organizerData, isViewProfil
           <div className="flex w-full items-start justify-between">
             <div className="w-25 h-25">
               <Image
-              src={
-                organizerData?.profileImageUrl?.includes('temp-file')
-                  ? organizerData.profileImageUrl.replace('temp-file', 'permanent-file')
-                  : organizerData?.profileImageUrl
-              }
-              alt={`${organizerData?.firstName} ${organizerData?.lastName}`}
-              width={110}
-              height={110}
-              className="rounded-full w-full h-full"
-            />
+                src={
+                  organizerData?.profileImageUrl?.includes("temp-file")
+                    ? organizerData.profileImageUrl.replace(
+                        "temp-file",
+                        "permanent-file"
+                      )
+                    : organizerData?.profileImageUrl
+                }
+                alt={`${organizerData?.firstName} ${organizerData?.lastName}`}
+                width={110}
+                height={110}
+                className="rounded-full w-full h-full"
+              />
             </div>
-            
-            {operator ==true && isViewProfile == false  ? (
+
+            {operator == true && isViewProfile == false ? (
               <EditprofileComponent operator={operator} title={""} />
             ) : (
               ""
@@ -111,12 +124,9 @@ const OrganizerProfileComponent = async ({ operator, organizerData, isViewProfil
             <TabsContent value="archive-post" className="mt-5 w-full">
               <ArchivesComponent cardData={cardData} />
             </TabsContent>
-            <TabsContent
-              value="earned-badge"
-              className="mt-5 w-full p-3.5"
-            >
+            <TabsContent value="earned-badge" className="mt-5 w-full p-3.5">
               <div className="w-full">
-                <BadgeComponent badge={badge} totalBadges={totalBadges}/>
+                <BadgeComponent badge={badge} totalBadges={totalBadges} />
               </div>
             </TabsContent>
           </Tabs>

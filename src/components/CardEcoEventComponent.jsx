@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 
-import { RequestFormComponent } from "./RequesFormComponent";
+import { RequestFormComponent } from "./RequestFormComponent";
 import DonationFormComponent from "./DonationFormComponent";
 import InviteFirendFormComponent from "./InviteFirendFormComponent";
 import { ListComponent } from "@/app/organizer/eco-event/_component/ListComponent";
@@ -118,14 +118,12 @@ const CardEcoEventComponent = ({
             (ct) => ct.contributeTypeName === "donation"
           ) && (
             <button className="p-2 bg-light-gray rounded-md">
-              <DonationFormComponent />
+              <DonationFormComponent eventId={event?.eventId} />
             </button>
           )}
-          <div className="p-2 bg-light-gray rounded-md">
-            <InviteFirendFormComponent
-              eventId={event?.eventId || "bc941419-995f-4ab7-bf73-9a3f19e5e27a"}
-            />
-          </div>
+          <button className="p-2 bg-light-gray rounded-md">
+            <InviteFirendFormComponent eventId={event?.eventId} />
+          </button>
         </div>
       )}
     </div>

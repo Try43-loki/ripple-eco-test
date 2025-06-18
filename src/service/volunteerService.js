@@ -49,3 +49,15 @@ export const rejectVolunteerRequestService = async (requestId) => {
     console.log(e);
   }
 };
+
+// create volunteer request
+export const createVolunteerRequestService = async (formData) => {
+  try {
+    const token = await getAuthToken();
+    const data = await apiRequest(`/volunteer`, "POST", formData, token);
+    return data;
+  } catch (e) {
+    console.error("Error creating volunteer request:", e);
+    throw e; // Re-throw to handle in action
+  }
+};

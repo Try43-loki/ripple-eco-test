@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 
-import { RequestFormComponent } from "./RequesFormComponent";
+import { RequestFormComponent } from "./RequestFormComponent";
 import DonationFormComponent from "./DonationFormComponent";
 import InviteFirendFormComponent from "./InviteFirendFormComponent";
 import { ListComponent } from "@/app/organizer/eco-event/_component/ListComponent";
