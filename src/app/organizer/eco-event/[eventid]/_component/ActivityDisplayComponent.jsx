@@ -10,8 +10,10 @@ import {
   DialogImage,
   DialogClose,
 } from "@/components/ui/linearCardComponent";
+import { useTimeFormat } from "@/hooks/dayjs";
 
 export default function ActivityDisplayComponent({ data, userData }) {
+  const formatTime = useTimeFormat();
   return (
     <section className="mt-10 w-full bg-white p-6 rounded-3xl">
       <h3 className="text-lg font-semibold text-dark-green mb-4">
@@ -33,7 +35,9 @@ export default function ActivityDisplayComponent({ data, userData }) {
             <p className="text-lg font-medium text-dark-green">
               {userData?.firstName} {userData?.lastName}
             </p>
-            <p className="text-sm text-lighter-green">Just now</p>
+            <p className="text-sm text-lighter-green">
+              {formatTime(data?.createdAt)}
+            </p>
           </div>
         </div>
 
@@ -41,7 +45,7 @@ export default function ActivityDisplayComponent({ data, userData }) {
         <div className="text-dark-green text-lg mb-4">
           <h2>{data?.title}</h2>
         </div>
-        <div className="flex flex-wrap gap-6 justify-start">
+        <div className="flex flex-wrap w-full gap-12.5 justify-start">
           {data?.summaryList.map((item, index) => (
             <div
               key={item?.postId || index}
@@ -54,7 +58,7 @@ export default function ActivityDisplayComponent({ data, userData }) {
                     alt={`Activity ${index + 1}`}
                     width={768}
                     height={400}
-                    className="rounded-xl w-full object-cover"
+                    className="rounded-xl w-full h-[300px] object-cover border border-lightes-white"
                   />
                 </DialogTrigger>
 

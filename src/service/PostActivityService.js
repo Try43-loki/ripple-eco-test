@@ -8,7 +8,12 @@ export const getPostActivityService = async (eventId) => {
       `/event/ended-event/${eventId}`,
       "GET",
       null,
-      token
+      token,
+      {
+        next: {
+          tags: [`post-activity-${eventId}`],
+        },
+      }
     );
     return data;
   } catch (e) {
