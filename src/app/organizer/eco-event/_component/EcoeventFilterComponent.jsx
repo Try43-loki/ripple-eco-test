@@ -128,7 +128,7 @@ const EcoEventFilterComponent = () => {
   };
 
   const handleSlotChange = (operator, value) => {
-    console.log("valueee", value);
+    // console.log("valueee", value);
     const updated = {
       ...filters,
       slotStatus: value === "all" ? "" : value,
@@ -164,59 +164,64 @@ const EcoEventFilterComponent = () => {
   };
 
   return (
-    <section className="w-full py-4 flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
+    <section className="w-full py-4 flex md:flex-wrap flex-col gap-4 md:flex-row md:items-center md:gap-6">
       {/* Search bar */}
       <div className="flex w-full items-center justify-between gap-x-7">
         {/* <div className="grid w-[500px] gap-1.5">
           <SearchBarComponent className="grow" />
         </div> */}
         <div className="flex items-center w-full justify-between">
-          <div className="grid w-[200px] gap-1.5">
+          <div className="grid w-[100px] md:w-[150px] lg:w-[200px] gap-1.5">
             <SelectComponent
-              className="w-[200px]"
+              // className="w-[100px] md:w-[150px] lg:w-[200px]"
               values={provinceList}
               operator="province"
               onChange={handleFilterChange}
+              value={filters.provinceId}
             />
           </div>
 
-          <div className="grid w-[200px] gap-1.5">
+          <div className="grid w-[100px] md:w-[150px] lg:w-[200px] gap-1.5">
             <SelectComponent
-              className="w-[235px]"
+              // className="w-[235px]"
               values={eventTypeList}
               operator="eventType"
               onChange={handleFilterChange}
+              value={filters.eventTypeId}
             />
           </div>
 
-          <div className="grid w-[200px] gap-1.5">
+          <div className="grid w-[100px] md:w-[150px] lg:w-[200px] gap-1.5">
             <SelectComponent
-              className="w-[235px]"
+              // className="w-[235px]"
               values={contributeTypeList}
               operator="contributeType"
               onChange={handleFilterChange}
+              value={filters.contributeTypeId}
             />
           </div>
 
-          <div className="grid w-[200px] gap-1.5">
+          <div className="grid w-[100px] md:w-[150px] lg:w-[200px] gap-1.5">
             <SelectComponent
-              className="w-[235px]"
+              // className="w-[235px]"
               values={categories}
               operator="category"
               onChange={handleFilterChange}
+              value={filters.categoryId}
             />
           </div>
 
-          <div className="grid w-[200px] gap-1.5">
+          <div className="grid w-[100px] md:w-[150px] lg:w-[200px] gap-1.5">
             <SelectComponent
-              className="w-[235px]"
-              values={[]}
+              // className="w-[235px]"
+              values={slots}
               operator="slot"
               onChange={handleSlotChange}
+              value={filters.slotStatus}
             />
           </div>
 
-          <div className="grid  gap-1.5">
+          <div className="grid gap-1.5">
             <DateRangComponent onDateChange={handleDateChange} />
           </div>
         </div>

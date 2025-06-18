@@ -50,7 +50,7 @@ const SearchBarComponent = ({
         placeholder={placeholder}
         className="flex-1 outline-none bg-transparent text-green 
              text-xs md:text-sm lg:text-base ml-3 
-             placeholder:text-lighters-green py-1"
+             placeholder:text-lighters-green "
         aria-label="Search input"
         // value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

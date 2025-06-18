@@ -16,7 +16,7 @@ function HomePage() {
       <MarqueeComponent />
 
       {/* Air Quality Section */}
-      {/* <AirQualitySectionComponent /> */}
+      <AirQualitySectionComponent />
 
       {/* Eco Event Section */}
       <EcoEventSectionComponent />
